@@ -5,9 +5,7 @@
 This is App with Auth Function like Login and Register. All API using [reqres.in](https://reqres.in/).
 <br>This app also implementing **Flutter Clean Architecture with TDD.**
 
-<video src="demo.mp4" width="350"></video>
-
-
+<video src="https://github.com/lazycatlabs/flutter_auth_app/blob/main/demo.mp4" width="350">
 
 ## Get Started 🚀
 

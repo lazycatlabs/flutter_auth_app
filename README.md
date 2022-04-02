@@ -3,9 +3,14 @@
 # Flutter App Auth 📱
 
 This is App with Auth Function like Login and Register. All API using [reqres.in](https://reqres.in/).
-<br>This app also implementing **Flutter Clean Architecture with TDD**
+<br>This app also implementing **Flutter Clean Architecture with TDD.**
+
+<video src="demo.mp4" width="350"></video>
+
+
 
 ## Get Started 🚀
+
 - Clone this project
 - Run `flutter run`
 - Run Test `flutter test`
@@ -13,18 +18,17 @@ This is App with Auth Function like Login and Register. All API using [reqres.in
 ## Feature ✅
 
 - [x] **Clean Architecture with TDD**
-  - [x] Unit Test
-  - [x] Widget Test
+    - [x] Unit Test
+    - [x] Widget Test
 - [x] Theme Configuration : `System, Light, Dark`
 - [x] Multi Language : `English, Bahasa`
 - [x] Login, Register Example
 - [x] Pagination Example
 
 ## TODO 📝
+
 - [ ] Integration Testing
 - [ ] Implement multi flavor
-
-<br>![Demo](./demo.gif)
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 

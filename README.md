@@ -18,10 +18,11 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 - Run Test `flutter test`
 
 ## Feature ✅
-
+- [x] BLoC State Management
 - [x] **Clean Architecture with TDD**
     - [x] Unit Test
     - [x] Widget Test
+    - [x] BLoC test
 - [x] Theme Configuration : `System, Light, Dark`
 - [x] Multi Language : `English, Bahasa`
 - [x] Login, Register Example
@@ -29,7 +30,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 
 ## TODO 📝
 
-- [ ] Integration Testing
+- [ ] Integration Test
 - [ ] Implement multi flavor
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)

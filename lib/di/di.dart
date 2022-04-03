@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/domain/domain.dart';
-import 'package:flutter_auth_app/presentation/page/auth/auth.dart';
-import 'package:flutter_auth_app/presentation/page/main/cubit/cubit.dart';
-import 'package:flutter_auth_app/presentation/page/main/dashboard/cubit/cubit.dart';
+import 'package:flutter_auth_app/presentation/pages/pages.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

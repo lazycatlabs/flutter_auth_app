@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/di/di.dart';
-import 'package:flutter_auth_app/presentation/page/pages.dart';
+import 'package:flutter_auth_app/presentation/pages/pages.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRoute {

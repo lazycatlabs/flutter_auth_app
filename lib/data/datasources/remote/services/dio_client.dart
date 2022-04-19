@@ -3,17 +3,21 @@ import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/di/di.dart';
 
 class DioClient {
-  late Dio _dio;
   String baseUrl = "https://reqres.in";
 
   String? _auth;
+  bool _isUnitTest = false;
 
   DioClient({bool isUnitTest = false}) {
+    _isUnitTest = isUnitTest;
+  }
+
+  Dio get dio {
     try {
       _auth = sl<PrefManager>().token;
     } catch (_) {}
 
-    _dio = Dio(
+    final _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
         headers: {
@@ -30,17 +34,18 @@ class DioClient {
         },
       ),
     );
-    if (!isUnitTest) _dio.interceptors.add(DioInterceptor());
-  }
 
-  Dio get dio => _dio;
+    if (!_isUnitTest) _dio.interceptors.add(DioInterceptor());
+
+    return _dio;
+  }
 
   Future<Response> getRequest(
     String url, {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      return await _dio.get(url, queryParameters: queryParameters);
+      return await dio.get(url, queryParameters: queryParameters);
     } on DioError catch (e) {
       throw Exception(e.message);
     }
@@ -51,7 +56,7 @@ class DioClient {
     Map<String, dynamic>? data,
   }) async {
     try {
-      return await _dio.post(url, data: data);
+      return await dio.post(url, data: data);
     } on DioError catch (e) {
       throw Exception(e.message);
     }

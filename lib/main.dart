@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
           designSize: const Size(375, 667),
           minTextAdapt: true,
           splitScreenMode: true,
-          builder: () => BlocBuilder<SettingsCubit, int>(
+          builder: (_) => BlocBuilder<SettingsCubit, int>(
             builder: (_, __) => MaterialApp(
               localizationsDelegates: const [
                 Strings.delegate,
@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               builder: (BuildContext context, Widget? child) {
                 final MediaQueryData data = MediaQuery.of(context);
-                ScreenUtil.setContext(context);
 
                 return MediaQuery(
                   data: data.copyWith(

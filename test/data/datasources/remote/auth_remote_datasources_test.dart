@@ -51,6 +51,7 @@ void main() {
       'should return register unsuccessful model when response code is 400',
       () async {
         /// arrange
+
         dioAdapter.onPost(
           ListApi.register,
           (server) => server.reply(

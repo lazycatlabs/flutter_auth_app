@@ -56,7 +56,7 @@ dependencies:
   oktoast: ^3.1.5
 
   # Use for responsive UI, set default size base on Mock Up
-  flutter_screenutil: ^5.3.1
+  flutter_screenutil: ^5.5.1
 
 
   cached_network_image: ^3.2.0
@@ -71,10 +71,10 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.9.2
   #Remove unused files
-  dart_code_metrics: ^4.12.0
+  dart_code_metrics: ^4.15.0
   lint: ^1.8.2
   bloc_test: ^9.0.3
-  build_runner: ^2.1.8
+  build_runner: ^2.1.10
   http_mock_adapter: ^0.3.2
   mockito: ^5.1.0
 

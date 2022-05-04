@@ -7,38 +7,55 @@ class DioClient {
 
   String? _auth;
   bool _isUnitTest = false;
+  late Dio _dio;
 
   DioClient({bool isUnitTest = false}) {
     _isUnitTest = isUnitTest;
-  }
 
-  Dio get dio {
     try {
       _auth = sl<PrefManager>().token;
     } catch (_) {}
 
-    final _dio = Dio(
-      BaseOptions(
-        baseUrl: baseUrl,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          if (_auth != null) ...{
-            'Authorization': _auth,
-          },
-        },
-        receiveTimeout: 60000,
-        connectTimeout: 60000,
-        validateStatus: (int? status) {
-          return status! > 0;
-        },
-      ),
-    );
+    _dio = _createDio();
 
     if (!_isUnitTest) _dio.interceptors.add(DioInterceptor());
-
-    return _dio;
   }
+
+  Dio get dio {
+    if (_isUnitTest) {
+      /// Return static dio if is unit test
+      return _dio;
+    } else {
+      /// We need to recreate dio to avoid token issue after login
+      try {
+        _auth = sl<PrefManager>().token;
+      } catch (_) {}
+
+      final _dio = _createDio();
+
+      if (!_isUnitTest) _dio.interceptors.add(DioInterceptor());
+
+      return _dio;
+    }
+  }
+
+  Dio _createDio() => Dio(
+        BaseOptions(
+          baseUrl: baseUrl,
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            if (_auth != null) ...{
+              'Authorization': _auth,
+            },
+          },
+          receiveTimeout: 60000,
+          connectTimeout: 60000,
+          validateStatus: (int? status) {
+            return status! > 0;
+          },
+        ),
+      );
 
   Future<Response> getRequest(
     String url, {

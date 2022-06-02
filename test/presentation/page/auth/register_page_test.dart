@@ -39,7 +39,7 @@ void main() {
         designSize: const Size(375, 667),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (_) => MaterialApp(
+        builder: (_, __) => MaterialApp(
           localizationsDelegates: const [
             Strings.delegate,
             GlobalMaterialLocalizations.delegate,

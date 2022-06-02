@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
           designSize: const Size(375, 667),
           minTextAdapt: true,
           splitScreenMode: true,
-          builder: (_) => BlocBuilder<SettingsCubit, int>(
+          builder: (_, __) => BlocBuilder<SettingsCubit, int>(
             builder: (_, __) => MaterialApp(
               localizationsDelegates: const [
                 Strings.delegate,

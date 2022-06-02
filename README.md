@@ -27,6 +27,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 - [x] Multi Language : `English, Bahasa`
 - [x] Login, Register Example
 - [x] Pagination Example
+- [x] [Autofill Username and Password](https://github.com/lazycatlabs/flutter_auth_app/pull/3) 
 
 ## TODO 📝
 

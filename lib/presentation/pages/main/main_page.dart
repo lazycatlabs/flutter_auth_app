@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/data/data.dart';
+import 'package:flutter_auth_app/di/di.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,9 @@ class _MainPageState extends State<MainPage> {
       ),
       DataHelper(
         title: Strings.of(context)!.settings,
+      ),
+      DataHelper(
+        title: Strings.of(context)!.logout,
       ),
     ];
   }
@@ -75,13 +79,55 @@ class _MainPageState extends State<MainPage> {
           child: MenuDrawer(
             dataMenu: _dataMenus,
             currentIndex: (int index) {
-              /// Update title based on selected drawer
-              setState(() {
-                _currentIndex = index;
-              });
+              /// don't update when index is logout
+              if (index != 2) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              }
 
               /// hide navigation drawer
               _scaffoldKey.currentState?.openEndDrawer();
+            },
+            onLogoutPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text(
+                    Strings.of(context)!.logout,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  content: Text(
+                    Strings.of(context)!.logoutDesc,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => context.back(),
+                      child: Text(
+                        Strings.of(context)!.cancel,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            ?.copyWith(color: Palette.hint),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        sl<PrefManager>().logout();
+                        context.goToClearStack(AppRoute.login);
+                      },
+                      child: Text(
+                        Strings.of(context)!.yes,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            ?.copyWith(color: Palette.red),
+                      ),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
         ),

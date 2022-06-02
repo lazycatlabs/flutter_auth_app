@@ -10,9 +10,11 @@ class MenuDrawer extends StatefulWidget {
     Key? key,
     required this.dataMenu,
     required this.currentIndex,
+    this.onLogoutPressed,
   }) : super(key: key);
   final List<DataHelper> dataMenu;
   final Function(int) currentIndex;
+  final VoidCallback? onLogoutPressed;
 
   @override
   _MenuDrawerState createState() => _MenuDrawerState();
@@ -23,6 +25,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             width: context.widthInPercent(100),
@@ -65,50 +68,35 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           const SpacerV(),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: widget.dataMenu
                 .map<Widget>(
-                  (value) => InkWell(
-                    onTap: () {
-                      for (final menu in widget.dataMenu) {
-                        menu.isSelected = menu.title == value.title;
+                  (value) => SizedBox(
+                    width: double.maxFinite,
+                    child: InkWell(
+                      onTap: () {
+                        for (final menu in widget.dataMenu) {
+                          menu.isSelected = menu.title == value.title;
 
-                        if (value.title != null) {
-                          widget.currentIndex(
-                            widget.dataMenu.indexOf(value),
-                          );
+                          if (value.title != null) {
+                            widget.currentIndex(
+                              widget.dataMenu.indexOf(value),
+                            );
+                          }
                         }
-                      }
 
-                      _selectedPage(value.title!);
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: Dimens.space12,
-                            horizontal: Dimens.space16,
-                          ),
-                          child: Row(
-                            children: [
-                              // if (value.icon != null)
-                              //   Icon(
-                              //     value.icon,
-                              //     color: Palette.hint,
-                              //   )
-                              // else
-                              //   SvgPicture.asset(
-                              //     value.iconPath!,
-                              //     color: Palette.hint,
-                              //   ),
-                              const SpacerH(),
-                              Text(
-                                value.title!,
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ],
-                          ),
+                        _selectedPage(value.title!);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: Dimens.space12,
+                          horizontal: Dimens.space24,
                         ),
-                      ],
+                        child: Text(
+                          value.title!,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ),
                     ),
                   ),
                 )
@@ -127,6 +115,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
       context.read<NavDrawerCubit>().openDrawer(Navigation.settingsPage);
     } else if (title == Strings.of(context)!.dashboard) {
       context.read<NavDrawerCubit>().openDrawer(Navigation.dashboardPage);
+    } else if (title == Strings.of(context)!.logout) {
+      widget.onLogoutPressed?.call();
     }
   }
 }

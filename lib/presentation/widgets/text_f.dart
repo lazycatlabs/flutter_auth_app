@@ -31,6 +31,7 @@ class TextF extends StatefulWidget {
     this.isHintVisible = true,
     this.prefixText,
     this.hintText,
+    this.autofillHints,
   }) : super(key: key);
 
   final FocusNode? curFocusNode;
@@ -53,6 +54,7 @@ class TextF extends StatefulWidget {
   final Widget prefixIcon;
   final String? prefixText;
   final String? hintText;
+  final Iterable<String>? autofillHints;
 
   @override
   _TextFState createState() => _TextFState();
@@ -84,6 +86,7 @@ class _TextFState extends State<TextF> {
             margin: EdgeInsets.symmetric(vertical: Dimens.space8),
             child: TextFormField(
               key: widget.key,
+              autofillHints: widget.autofillHints,
               enabled: widget.enable,
               obscureText: widget.obscureText ?? false,
               focusNode: widget.curFocusNode,

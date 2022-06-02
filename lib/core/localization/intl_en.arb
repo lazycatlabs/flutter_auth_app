@@ -21,5 +21,8 @@
   "themeSystem": "Theme System",
   "chooseTheme": "Choose Theme",
   "chooseLanguage": "Choose Language",
-  "errorNoData": "No data"
+  "errorNoData": "No data",
+  "logout": "Logout",
+  "logoutDesc": "Do you want to logout from the app?",
+  "yes": "Yes"
 }

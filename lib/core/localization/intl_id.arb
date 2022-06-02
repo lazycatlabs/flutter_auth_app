@@ -21,5 +21,8 @@
   "themeSystem": "Tema Sistem",
   "chooseTheme": "Pilih tema",
   "chooseLanguage": "Pilih bahasa",
-  "errorNoData": "Data Kosong"
+  "errorNoData": "Data Kosong",
+  "logout": "Keluar",
+  "logoutDesc": "Apakah anda ingin keluar dari aplikasi?",
+  "yes": "Ya"
 }

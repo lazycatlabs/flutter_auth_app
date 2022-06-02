@@ -20,8 +20,24 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription </key>
+	<string>Apple Music Description</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Calendar description</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Contact description</string>
+	<key>NSLocationAlwaysUsageDescription </key>
+	<string>NSLocationAlwaysUsageDescription </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>NSLocationWhenInUseUsageDescription</string>
+	<key>NSMotionUsageDescription</key>
+	<string>NSMotionUsageDescription</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>NSSpeechRecognitionUsageDescription</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,21 +57,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSContactsUsageDescription</key>
-	<string>Contact description</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Calendar description</string>
-	<key>NSAppleMusicUsageDescription </key>
-	<string>Apple Music Description</string>
-	<key>NSMotionUsageDescription</key>
-	<string>NSMotionUsageDescription</string>
-	<key>NSLocationAlwaysUsageDescription </key>
-	<string>NSLocationAlwaysUsageDescription </string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>NSSpeechRecognitionUsageDescription</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>

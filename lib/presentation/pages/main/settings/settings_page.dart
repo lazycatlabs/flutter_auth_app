@@ -97,7 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                     /// Update theme status in sharedPref
 
-                    sl<PrefManager>().theme = describeEnum(activeTheme);
+                    sl<PrefManager>().theme = activeTheme.description;
 
                     /// Reload theme
                     _settingsCubit.reloadWidget();

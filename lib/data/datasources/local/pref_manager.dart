@@ -2,9 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ActiveTheme {
-  light,
-  dark,
-  system,
+  light("light"),
+  dark("dark"),
+  system("system");
+
+  final String description;
+
+  const ActiveTheme(this.description);
 }
 
 class PrefManager {

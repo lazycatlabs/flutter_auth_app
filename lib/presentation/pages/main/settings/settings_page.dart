@@ -45,9 +45,9 @@ class _SettingsPageState extends State<SettingsPage> {
     ];
 
     /// Set selected by sharedPreferences
-    if (sl<PrefManager>().theme == describeEnum(ActiveTheme.system)) {
+    if (sl<PrefManager>().theme == ActiveTheme.system.description) {
       _selectedTheme = Strings.of(context)!.themeSystem;
-    } else if (sl<PrefManager>().theme == describeEnum(ActiveTheme.light)) {
+    } else if (sl<PrefManager>().theme == ActiveTheme.light.description) {
       _selectedTheme = Strings.of(context)!.themeLight;
     } else {
       _selectedTheme = Strings?.of(context)!.themeDark;
@@ -67,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             children: [
               DropDown(
-                key:const Key("dropdown_theme"),
+                key: const Key("dropdown_theme"),
                 hint: Strings.of(context)!.chooseTheme,
                 value: _selectedTheme,
                 prefixIcon: const Icon(Icons.light),
@@ -107,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
               /// Language
               DropDown(
-                key:const Key("dropdown_language"),
+                key: const Key("dropdown_language"),
                 hint: Strings.of(context)!.chooseLanguage,
                 value: _selectedLanguage,
                 prefixIcon: const Icon(Icons.language_outlined),

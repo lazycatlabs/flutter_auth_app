@@ -27,12 +27,7 @@ class UsersCubit extends Cubit<UsersState> {
     _data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(
-            state.copyWith(
-              status: UsersStatus.failure,
-              message: l.message,
-            ),
-          );
+          emit(state.copyWith(status: UsersStatus.failure, message: l.message));
         } else if (l is NoDataFailure) {
           emit(state.copyWith(status: UsersStatus.empty));
         }

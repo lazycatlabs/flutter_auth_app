@@ -19,21 +19,14 @@ class LoginCubit extends Cubit<LoginState> {
     _data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(
-            state.copyWith(
-              status: LoginStatus.failure,
-              message: l.message,
-            ),
-          );
+          emit(state.copyWith(status: LoginStatus.failure, message: l.message));
         }
       },
       (r) {
         /// Set isLogin true
         sl<PrefManager>().isLogin = true;
         sl<PrefManager>().token = r.token;
-        emit(
-          state.copyWith(status: LoginStatus.success, login: r),
-        );
+        emit(state.copyWith(status: LoginStatus.success, login: r));
       },
     );
   }

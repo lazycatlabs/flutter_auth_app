@@ -1,8 +1,10 @@
 part of 'login_cubit.dart';
 
-enum LoginStatus { loading, success, failure }
+enum LoginStatus {
+  loading,
+  success,
+  failure;
 
-extension LoginStatusX on LoginStatus {
   bool get isLoading => this == LoginStatus.loading;
 
   bool get isSuccess => this == LoginStatus.success;

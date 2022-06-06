@@ -1,8 +1,10 @@
 part of 'register_cubit.dart';
 
-enum RegisterStatus { loading, success, failure }
+enum RegisterStatus {
+  loading,
+  success,
+  failure;
 
-extension RegisterStatusX on RegisterStatus {
   bool get isLoading => this == RegisterStatus.loading;
 
   bool get isSuccess => this == RegisterStatus.success;
@@ -34,5 +36,5 @@ class RegisterState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status,register,message];
+  List<Object?> get props => [status, register, message];
 }

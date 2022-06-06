@@ -1,8 +1,11 @@
 part of 'users_cubit.dart';
 
-enum UsersStatus { loading, success, failure, empty }
+enum UsersStatus {
+  loading,
+  success,
+  failure,
+  empty;
 
-extension UsersStatusX on UsersStatus {
   bool get isLoading => this == UsersStatus.loading;
 
   bool get isSuccess => this == UsersStatus.success;

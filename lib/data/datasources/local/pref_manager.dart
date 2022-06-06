@@ -1,10 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ActiveTheme {
-  light,
-  dark,
-  system,
+  light("light"),
+  dark("dark"),
+  system("system");
+
+  final String description;
+
+  const ActiveTheme(this.description);
 }
 
 class PrefManager {
@@ -61,10 +64,10 @@ class PrefManager {
 
   /// Default locale set to English
   set theme(String? value) =>
-      preferences.setString(kTheme, value ?? describeEnum(ActiveTheme.system));
+      preferences.setString(kTheme, value ?? ActiveTheme.system.description);
 
   String get theme =>
-      preferences.getString(kTheme) ?? describeEnum(ActiveTheme.system);
+      preferences.getString(kTheme) ?? ActiveTheme.system.description;
 
   void logout() => preferences.clear();
 }

@@ -17,10 +17,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       (l) {
         if (l is ServerFailure) {
           emit(
-            state.copyWith(
-              status: RegisterStatus.failure,
-              message: l.message,
-            ),
+            state.copyWith(status: RegisterStatus.failure, message: l.message),
           );
         }
       },

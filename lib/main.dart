@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
@@ -90,10 +89,9 @@ class MyApp extends StatelessWidget {
               themeMode:
 
                   /// Check if theme is light or dark first
-                  sl<PrefManager>().theme == describeEnum(ActiveTheme.light)
+                  sl<PrefManager>().theme == ActiveTheme.light.description
                       ? ThemeMode.light
-                      : sl<PrefManager>().theme ==
-                              describeEnum(ActiveTheme.dark)
+                      : sl<PrefManager>().theme == ActiveTheme.dark.description
                           ? ThemeMode.dark
 
                           /// Set default theme is System

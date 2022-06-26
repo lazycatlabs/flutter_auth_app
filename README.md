@@ -16,6 +16,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 - Clone this project
 - Run `flutter run`
 - Run Test `flutter test`
+- To generate launcher icon based on Flavor `flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*`
 
 ## Feature ✅
 - [x] BLoC State Management
@@ -32,7 +33,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 ## TODO 📝
 
 - [ ] Integration Test
-- [ ] Implement multi flavor
+- [x] Implement multi flavor
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 

@@ -73,10 +73,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      Images.icLogo,
+                    Image.asset(
+                      Images.icLogoPng,
                       width: context.widthInPercent(50),
-                      color: Theme.of(context).textTheme.bodyText1?.color,
                     ),
                     const SpacerV(),
                     TextF(

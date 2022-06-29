@@ -5,7 +5,6 @@ import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 ///*********************************************
 ///  flutter_auth_app |
@@ -74,10 +73,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(
-                        Images.icLogo,
+                      Image.asset(
+                        Images.icLogoPng,
                         width: context.widthInPercent(50),
-                        color: Theme.of(context).textTheme.bodyText1?.color,
                       ),
                       const SpacerV(),
                       TextF(

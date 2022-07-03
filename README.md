@@ -5,20 +5,25 @@
 This is App with Auth Function like Login and Register. All API using [reqres.in](https://reqres.in/).
 <br>This app also implementing **Flutter Clean Architecture with TDD.**
 
-
-
 https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-83a7-c031f9e5d2d9.mp4?width=350
 
+## Pre-requisites 📐
 
+| Technology | Recommended Version | Installation Guide                                                    |
+|------------|---------------------|-----------------------------------------------------------------------|
+| Flutter    | v3.0.4              | [Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
+| Dart       | v2.17.5             | Installed automatically with Flutter                                  |
 
 ## Get Started 🚀
 
 - Clone this project
-- Run `flutter run`
+- Run `flutter run --flavor stg -t lib/main_stg.dart` for **staging** or
+- Run `flutter run --flavor prd -t lib/main_prd.dart` for **production**
 - Run Test `flutter test`
 - To generate launcher icon based on Flavor `flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*`
 
 ## Feature ✅
+
 - [x] BLoC State Management
 - [x] **Clean Architecture with TDD**
     - [x] Unit Test
@@ -28,7 +33,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 - [x] Multi Language : `English, Bahasa`
 - [x] Login, Register Example
 - [x] Pagination Example
-- [x] [Autofill Username and Password](https://github.com/lazycatlabs/flutter_auth_app/pull/3) 
+- [x] [Autofill Username and Password](https://github.com/lazycatlabs/flutter_auth_app/pull/3)
 
 ## TODO 📝
 

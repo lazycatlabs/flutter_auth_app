@@ -41,9 +41,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       child: Container(
         color: Palette.white,
         child: Center(
-          child: Image.asset(
-            Images.icLogoPng,
-            width: context.widthInPercent(60),
+          child: CircleAvatar(
+            backgroundColor: Palette.primary,
+            radius: Dimens.profilePicture + Dimens.space4,
+            child: CircleAvatar(
+              backgroundImage: AssetImage(Images.icLauncher),
+              radius: Dimens.profilePicture,
+            ),
           ),
         ),
       ),

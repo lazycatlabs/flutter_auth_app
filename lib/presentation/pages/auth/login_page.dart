@@ -73,9 +73,13 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        Images.icLogoPng,
-                        width: context.widthInPercent(50),
+                      CircleAvatar(
+                        backgroundColor: Palette.primary,
+                        radius: Dimens.profilePicture + Dimens.space4,
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(Images.icLauncher),
+                          radius: Dimens.profilePicture,
+                        ),
                       ),
                       const SpacerV(),
                       TextF(

@@ -4,7 +4,6 @@ import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 ///*********************************************
 ///  flutter_auth_app |
@@ -73,9 +72,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      Images.icLogoPng,
-                      width: context.widthInPercent(50),
+                    CircleAvatar(
+                      backgroundColor: Palette.primary,
+                      radius: Dimens.profilePicture + Dimens.space4,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(Images.icLauncher),
+                        radius: Dimens.profilePicture,
+                      ),
                     ),
                     const SpacerV(),
                     TextF(

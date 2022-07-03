@@ -35,10 +35,15 @@ class _MenuDrawerState extends State<MenuDrawer> {
             child: SafeArea(
               child: Row(
                 children: [
-                  Image.asset(
-                    Images.icLogoPng,
-                    width: Dimens.imageW,
+                  CircleAvatar(
+                    backgroundColor: Palette.hint,
+                    radius: Dimens.space36 + Dimens.space2,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(Images.icLauncher),
+                      radius: Dimens.space36,
+                    ),
                   ),
+                  const SpacerH(),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,0 +1,6 @@
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/ic_launcher_staging.jpg"
+  adaptive_icon_background: "#28435B"
+  adaptive_icon_foreground: "assets/images/ic_logo_staging.png"

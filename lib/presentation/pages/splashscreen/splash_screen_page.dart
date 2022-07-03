@@ -3,7 +3,6 @@ import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/di/di.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 ///*********************************************
 /// Created by ukietux on 24/08/20 with ♥
@@ -42,9 +41,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       child: Container(
         color: Palette.white,
         child: Center(
-          child: SvgPicture.asset(
-            Images.icLogo,
-            width: context.widthInPercent(60),
+          child: CircleAvatar(
+            backgroundColor: Palette.primary,
+            radius: Dimens.profilePicture + Dimens.space4,
+            child: CircleAvatar(
+              backgroundImage: AssetImage(Images.icLauncher),
+              radius: Dimens.profilePicture,
+            ),
           ),
         ),
       ),

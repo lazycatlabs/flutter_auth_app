@@ -35,9 +35,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
             child: SafeArea(
               child: Row(
                 children: [
-                  CircleImage(
-                    size: Dimens.profilePicture,
-                    url: Constants.get.imagePlaceHolder,
+                  CircleAvatar(
+                    backgroundColor: Palette.hint,
+                    radius: Dimens.space36 + Dimens.space2,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(Images.icLauncher),
+                      radius: Dimens.space36,
+                    ),
                   ),
                   const SpacerH(),
                   Expanded(

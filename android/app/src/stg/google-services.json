@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "520881115656",
+    "project_id": "sample-49e7c",
+    "storage_bucket": "sample-49e7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520881115656:android:2ccc910b48e53ef3fd77bd",
+        "android_client_info": {
+          "package_name": "com.lazycatlabs.auth.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDLxYlgYywHeVs8Ch8uOq2t2BmtjOM0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "520881115656-c82m945c9cc483231hmgn0g8nke7c3q8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lazycatlabs.base.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520881115656:android:5cfc03a06988cdfdfd77bd",
+        "android_client_info": {
+          "package_name": "com.lazycatlabs.base.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520881115656-f6flpcn2p16h87t3aq78tnlrrrmcgm4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazycatlabs.base.stg",
+            "certificate_hash": "9818aa85a4c2dbc1bf9b9901c52142410e929530"
+          }
+        },
+        {
+          "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDLxYlgYywHeVs8Ch8uOq2t2BmtjOM0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "520881115656-c82m945c9cc483231hmgn0g8nke7c3q8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lazycatlabs.base.stg"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

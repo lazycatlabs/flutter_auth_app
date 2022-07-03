@@ -5,6 +5,6 @@ class MyAppBar {
 
   PreferredSize call() => PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: AppBar(),
+        child: AppBar(elevation: 0),
       );
 }

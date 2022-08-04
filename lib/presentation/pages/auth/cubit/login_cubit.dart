@@ -14,9 +14,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login(LoginParams params) async {
     emit(state.copyWith(status: LoginStatus.loading));
-    final _data = await _postLogin.call(params);
+    final data = await _postLogin.call(params);
 
-    _data.fold(
+    data.fold(
       (l) {
         if (l is ServerFailure) {
           emit(state.copyWith(status: LoginStatus.failure, message: l.message));

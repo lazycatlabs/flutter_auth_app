@@ -18,7 +18,7 @@ class Button extends StatelessWidget {
   final Color? splashColor;
 
   const Button({
-    Key? key,
+    super.key,
     required this.title,
     required this.onPressed,
     this.width,
@@ -26,7 +26,7 @@ class Button extends StatelessWidget {
     this.titleColor,
     this.fontSize,
     this.splashColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

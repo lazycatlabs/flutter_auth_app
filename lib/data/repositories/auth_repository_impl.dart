@@ -12,9 +12,9 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, Login>> login(LoginParams loginParams) async {
     try {
-      final _response = await authRemoteDatasource.login(loginParams);
+      final response = await authRemoteDatasource.login(loginParams);
 
-      return Right(_response.toEntity());
+      return Right(response.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }
@@ -25,9 +25,9 @@ class AuthRepositoryImpl implements AuthRepository {
     RegisterParams registerParams,
   ) async {
     try {
-      final _response = await authRemoteDatasource.register(registerParams);
+      final response = await authRemoteDatasource.register(registerParams);
 
-      return Right(_response.toEntity());
+      return Right(response.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }
@@ -36,14 +36,14 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, Users>> users(UsersParams usersParams) async {
     try {
-      final _response = await authRemoteDatasource.users(usersParams);
+      final response = await authRemoteDatasource.users(usersParams);
 
       /// Throw error when data is empty
-      if (_response.data?.isEmpty ?? true) {
+      if (response.data?.isEmpty ?? true) {
         return Left(NoDataFailure());
       }
 
-      return Right(_response.toEntity());
+      return Right(response.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }

@@ -12,7 +12,7 @@ class CircleImage extends StatelessWidget {
   final String url;
   final double? size;
 
-  const CircleImage({Key? key, required this.url, this.size}) : super(key: key);
+  const CircleImage({super.key, required this.url, this.size});
 
   @override
   Widget build(BuildContext context) {

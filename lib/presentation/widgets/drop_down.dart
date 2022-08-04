@@ -9,14 +9,14 @@ import 'package:flutter_auth_app/presentation/presentation.dart';
 /// © 2020 | All Right Reserved
 class DropDown<T> extends StatefulWidget {
   const DropDown({
-    Key? key,
+    super.key,
     required this.value,
     required this.items,
     this.hint,
     required this.onChanged,
     this.hintIsVisible = true,
     this.prefixIcon,
-  }) : super(key: key);
+  });
   final T value;
   final List<DropdownMenuItem<T>> items;
   final bool hintIsVisible;
@@ -53,7 +53,6 @@ class _DropDownState extends State<DropDown> {
               alignedDropdown: true,
               padding: EdgeInsets.zero,
               child: DropdownButtonFormField(
-                isDense: true,
                 isExpanded: true,
                 icon: const Icon(Icons.arrow_drop_down),
                 decoration: InputDecoration(

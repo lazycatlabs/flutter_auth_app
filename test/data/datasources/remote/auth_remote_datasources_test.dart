@@ -21,9 +21,9 @@ void main() {
   });
 
   group('register', () {
-    final _registerParams =
+    final registerParams =
         RegisterParams(email: "eve.holt@reqres.in", password: "pistol");
-    final _registerModel =
+    final registerModel =
         RegisterResponse.fromJson(json.decode(jsonReader(successRegisterPath)));
 
     test(
@@ -36,14 +36,14 @@ void main() {
             200,
             json.decode(jsonReader(successRegisterPath)),
           ),
-          data: _registerParams.toJson(),
+          data: registerParams.toJson(),
         );
 
         /// act
-        final _result = await dataSource.register(_registerParams);
+        final result = await dataSource.register(registerParams);
 
         /// assert
-        expect(_registerModel, equals(_result));
+        expect(registerModel, equals(result));
       },
     );
 
@@ -58,22 +58,22 @@ void main() {
             400,
             json.decode(jsonReader(unSuccessRegisterPath)),
           ),
-          data: _registerParams.toJson(),
+          data: registerParams.toJson(),
         );
 
         /// act
-        final _result = dataSource.register(_registerParams);
+        final result = dataSource.register(registerParams);
 
         /// assert
-        expect(_result, throwsA(isA<ServerException>()));
+        expect(result, throwsA(isA<ServerException>()));
       },
     );
   });
 
   group('login', () {
-    final _loginParams =
+    final loginParams =
         LoginParams(email: "eve.holt@reqres.in", password: "cityslicka");
-    final _loginModel =
+    final loginModel =
         LoginResponse.fromJson(json.decode(jsonReader(successLoginPath)));
 
     test(
@@ -86,14 +86,14 @@ void main() {
             200,
             json.decode(jsonReader(successLoginPath)),
           ),
-          data: _loginParams.toJson(),
+          data: loginParams.toJson(),
         );
 
         /// act
-        final _result = await dataSource.login(_loginParams);
+        final result = await dataSource.login(loginParams);
 
         /// assert
-        expect(_loginModel, equals(_result));
+        expect(loginModel, equals(result));
       },
     );
 
@@ -107,23 +107,23 @@ void main() {
             400,
             json.decode(jsonReader(unSuccessfulLoginPath)),
           ),
-          data: _loginParams.toJson(),
+          data: loginParams.toJson(),
         );
 
         /// act
-        final _result = dataSource.login(_loginParams);
+        final result = dataSource.login(loginParams);
 
         /// assert
-        expect(_result, throwsA(isA<ServerException>()));
+        expect(result, throwsA(isA<ServerException>()));
       },
     );
   });
 
   group('user', () {
-    final _usersParams = UsersParams();
-    final _usersModel =
+    final usersParams = UsersParams();
+    final usersModel =
         UsersResponse.fromJson(json.decode(jsonReader(successUserPath)));
-    final _usersEmptyModel =
+    final usersEmptyModel =
         UsersResponse.fromJson(json.decode(jsonReader(emptyUserPath)));
 
     test(
@@ -136,14 +136,14 @@ void main() {
             200,
             json.decode(jsonReader(successUserPath)),
           ),
-          queryParameters: _usersParams.toJson(),
+          queryParameters: usersParams.toJson(),
         );
 
         /// act
-        final _result = await dataSource.users(_usersParams);
+        final result = await dataSource.users(usersParams);
 
         /// assert
-        expect(_usersModel, equals(_result));
+        expect(usersModel, equals(result));
       },
     );
 
@@ -157,14 +157,14 @@ void main() {
             200,
             json.decode(jsonReader(emptyUserPath)),
           ),
-          queryParameters: _usersParams.toJson(),
+          queryParameters: usersParams.toJson(),
         );
 
         /// act
-        final _result = await dataSource.users(_usersParams);
+        final result = await dataSource.users(usersParams);
 
         /// assert
-        expect(_usersEmptyModel, equals(_result));
+        expect(usersEmptyModel, equals(result));
       },
     );
 
@@ -178,14 +178,14 @@ void main() {
             400,
             json.decode(jsonReader(successUserPath)),
           ),
-          queryParameters: _usersParams.toJson(),
+          queryParameters: usersParams.toJson(),
         );
 
         /// act
-        final _result = dataSource.users(_usersParams);
+        final result = dataSource.users(usersParams);
 
         /// assert
-        expect(_result, throwsA(isA<ServerException>()));
+        expect(result, throwsA(isA<ServerException>()));
       },
     );
   });

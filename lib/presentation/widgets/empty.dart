@@ -12,7 +12,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 class Empty extends StatelessWidget {
   final String? errorMessage;
 
-  const Empty({Key? key, this.errorMessage}) : super(key: key);
+  const Empty({super.key, this.errorMessage});
 
   @override
   Widget build(BuildContext context) {

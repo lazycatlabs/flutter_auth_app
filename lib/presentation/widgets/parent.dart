@@ -19,7 +19,7 @@ class Parent extends StatefulWidget {
   final bool extendBodyBehindAppBar;
 
   const Parent({
-    Key? key,
+    super.key,
     this.child,
     this.appBar,
     this.avoidBottomInset = true,
@@ -30,7 +30,7 @@ class Parent extends StatefulWidget {
     this.scaffoldKey,
     this.endDrawer,
     this.extendBodyBehindAppBar = false,
-  }) : super(key: key);
+  });
 
   @override
   _ParentState createState() => _ParentState();

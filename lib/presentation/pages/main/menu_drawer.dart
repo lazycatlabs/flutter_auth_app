@@ -7,11 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MenuDrawer extends StatefulWidget {
   const MenuDrawer({
-    Key? key,
+    super.key,
     required this.dataMenu,
     required this.currentIndex,
     this.onLogoutPressed,
-  }) : super(key: key);
+  });
   final List<DataHelper> dataMenu;
   final Function(int) currentIndex;
   final VoidCallback? onLogoutPressed;

@@ -20,16 +20,16 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     RegisterParams registerParams,
   ) async {
     try {
-      final _response = await _client.postRequest(
+      final response = await _client.postRequest(
         ListApi.register,
         data: registerParams.toJson(),
       );
 
-      final _result = RegisterResponse.fromJson(_response.data);
-      if (_response.statusCode == 200) {
-        return _result;
+      final result = RegisterResponse.fromJson(response.data);
+      if (response.statusCode == 200) {
+        return result;
       } else {
-        throw ServerException(_result.error);
+        throw ServerException(result.error);
       }
     } on ServerException catch (e) {
       throw ServerException(e.message);
@@ -39,16 +39,16 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   @override
   Future<LoginResponse> login(LoginParams loginParams) async {
     try {
-      final _response = await _client.postRequest(
+      final response = await _client.postRequest(
         ListApi.login,
         data: loginParams.toJson(),
       );
-      final _result = LoginResponse.fromJson(_response.data);
+      final result = LoginResponse.fromJson(response.data);
 
-      if (_response.statusCode == 200) {
-        return _result;
+      if (response.statusCode == 200) {
+        return result;
       } else {
-        throw ServerException(_result.error);
+        throw ServerException(result.error);
       }
     } on ServerException catch (e) {
       throw ServerException(e.message);
@@ -58,16 +58,16 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   @override
   Future<UsersResponse> users(UsersParams userParams) async {
     try {
-      final _response = await _client.getRequest(
+      final response = await _client.getRequest(
         ListApi.users,
         queryParameters: userParams.toJson(),
       );
-      final _result = UsersResponse.fromJson(_response.data);
+      final result = UsersResponse.fromJson(response.data);
 
-      if (_response.statusCode == 200) {
-        return _result;
+      if (response.statusCode == 200) {
+        return result;
       } else {
-        throw ServerException(_result.error);
+        throw ServerException(result.error);
       }
     } on ServerException catch (e) {
       throw ServerException(e.message);

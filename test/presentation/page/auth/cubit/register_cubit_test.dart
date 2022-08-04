@@ -26,7 +26,7 @@ void main() {
     password: "dummyPassword",
   );
 
-  const _errorMessage = "Invalid data";
+  const errorMessage = "Invalid data";
 
   /// Initialize data
   setUp(() async {
@@ -71,7 +71,7 @@ void main() {
     "When repo success get data should be return ServerFailure",
     build: () {
       when(mockPostRegister.call(registerParams))
-          .thenAnswer((_) async => const Left(ServerFailure(_errorMessage)));
+          .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
 
       return registerCubit;
     },
@@ -82,7 +82,7 @@ void main() {
       const RegisterState(),
       const RegisterState(
         status: RegisterStatus.failure,
-        message: _errorMessage,
+        message: errorMessage,
       ),
     ],
   );

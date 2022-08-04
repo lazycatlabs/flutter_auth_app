@@ -32,8 +32,8 @@ Future<void> serviceLocator({bool isUnitTest = false}) async {
 }
 
 // Register prefManager
-void initPrefManager(SharedPreferences _initPrefManager) {
-  sl.registerLazySingleton<PrefManager>(() => PrefManager(_initPrefManager));
+void initPrefManager(SharedPreferences initPrefManager) {
+  sl.registerLazySingleton<PrefManager>(() => PrefManager(initPrefManager));
 }
 
 /// Register repositories

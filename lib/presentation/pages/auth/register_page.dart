@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///*********************************************
 /// © 2021 | All Right Reserved
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();

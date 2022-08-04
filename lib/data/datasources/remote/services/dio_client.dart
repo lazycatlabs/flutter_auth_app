@@ -31,11 +31,11 @@ class DioClient {
         _auth = sl<PrefManager>().token;
       } catch (_) {}
 
-      final _dio = _createDio();
+      final dio = _createDio();
 
-      if (!_isUnitTest) _dio.interceptors.add(DioInterceptor());
+      if (!_isUnitTest) dio.interceptors.add(DioInterceptor());
 
-      return _dio;
+      return dio;
     }
   }
 

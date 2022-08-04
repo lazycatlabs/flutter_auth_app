@@ -18,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///*********************************************
 /// © 2021 | All Right Reserved
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();

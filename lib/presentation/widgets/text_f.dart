@@ -10,7 +10,7 @@ import 'package:flutter_auth_app/presentation/presentation.dart';
 /// © 2020 | All Right Reserved
 class TextF extends StatefulWidget {
   const TextF({
-    Key? key,
+    super.key,
     this.curFocusNode,
     this.nextFocusNode,
     this.hint,
@@ -32,7 +32,7 @@ class TextF extends StatefulWidget {
     this.prefixText,
     this.hintText,
     this.autofillHints,
-  }) : super(key: key);
+  });
 
   final FocusNode? curFocusNode;
   final FocusNode? nextFocusNode;

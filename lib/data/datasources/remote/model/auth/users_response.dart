@@ -62,7 +62,7 @@ class UsersResponse extends Equatable {
   }
 
   Users toEntity() {
-    final _listUser = data!
+    final listUser = data!
         .map<User>(
           (model) => User(
             name: "${model.firstName} ${model.lastName}",
@@ -72,7 +72,7 @@ class UsersResponse extends Equatable {
         )
         .toList();
 
-    return Users(_listUser, page ?? 1, totalPages ?? 1);
+    return Users(listUser, page ?? 1, totalPages ?? 1);
   }
 
   @override

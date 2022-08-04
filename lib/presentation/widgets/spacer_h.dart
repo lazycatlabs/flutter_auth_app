@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 
 class SpacerH extends StatelessWidget {
-  const SpacerH({Key? key, this.value}) : super(key: key);
+  const SpacerH({super.key, this.value});
   final double? value;
 
   @override

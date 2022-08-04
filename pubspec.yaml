@@ -31,7 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   # Use as default SVG image loader, prefer use SVG as image asset
-  flutter_svg: ^1.1.0
+  flutter_svg: ^1.1.2
 
   # Functional programming thingies
   dartz: ^0.10.1
@@ -66,21 +66,21 @@ dependencies:
   logger: ^1.1.0
 
   # Firebase
-  firebase_core: ^1.18.0
-  firebase_analytics: ^9.1.10
-  firebase_crashlytics: ^2.8.2
+  firebase_core: ^1.20.0
+  firebase_analytics: ^9.3.0
+  firebase_crashlytics: ^2.8.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.9.3
   #Remove unused files
-  dart_code_metrics: ^4.16.0
-  lint: ^1.8.2
+  dart_code_metrics: ^4.17.0
+  lint: ^1.10.0
   bloc_test: ^9.0.3
-  build_runner: ^2.1.11
+  build_runner: ^2.2.0
   http_mock_adapter: ^0.3.3
-  mockito: ^5.2.0
+  mockito: ^5.3.0
 
 
 

@@ -3,20 +3,20 @@ import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  late SettingsCubit _settingsCubit;
+  late SettingsCubit settingsCubit;
 
   setUp(() {
-    _settingsCubit = SettingsCubit();
+    settingsCubit = SettingsCubit();
   });
 
   tearDown(() {
-    _settingsCubit.close();
+    settingsCubit.close();
   });
 
   blocTest(
     "Return random int to reload main widget",
     build: () {
-      return _settingsCubit;
+      return settingsCubit;
     },
     act: (SettingsCubit settingsCubit) => settingsCubit.reloadWidget(),
     expect: () => [

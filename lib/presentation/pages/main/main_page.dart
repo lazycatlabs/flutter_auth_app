@@ -14,8 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// © 2020 | All Right Reserved
 class MainPage extends StatefulWidget {
   const MainPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _MainPageState createState() => _MainPageState();

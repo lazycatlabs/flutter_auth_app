@@ -23,8 +23,8 @@ class UsersCubit extends Cubit<UsersState> {
       emit(state.copyWith(status: UsersStatus.loading));
     }
 
-    final _data = await _getUser.call(usersParams);
-    _data.fold(
+    final data = await _getUser.call(usersParams);
+    data.fold(
       (l) {
         if (l is ServerFailure) {
           emit(state.copyWith(status: UsersStatus.failure, message: l.message));

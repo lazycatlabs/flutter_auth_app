@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// © 2020 | All Right Reserved
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({super.key});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -61,9 +61,9 @@ class _DashboardPageState extends State<DashboardPage> {
               case UsersStatus.loading:
                 return const Center(child: Loading());
               case UsersStatus.success:
-                final _data = state.users!;
-                _users.addAll(_data.users);
-                _lastPage = _data.lastPage;
+                final data = state.users!;
+                _users.addAll(data.users);
+                _lastPage = data.lastPage;
 
                 return ListView.builder(
                   controller: _scrollController,

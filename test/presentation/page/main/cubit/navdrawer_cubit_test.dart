@@ -4,20 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  late NavDrawerCubit _navDrawerCubit;
+  late NavDrawerCubit navDrawerCubit;
 
   setUp(() {
-    _navDrawerCubit = NavDrawerCubit();
+    navDrawerCubit = NavDrawerCubit();
   });
 
   tearDown(() {
-    _navDrawerCubit.close();
+    navDrawerCubit.close();
   });
 
   blocTest(
     "When user openDrawer it's should be dashboardPage",
     build: () {
-      return _navDrawerCubit;
+      return navDrawerCubit;
     },
     act: (NavDrawerCubit navDrawerCubit) =>
         navDrawerCubit.openDrawer(Navigation.dashboardPage),
@@ -29,7 +29,7 @@ void main() {
   blocTest(
     "When user openDrawer it's should be SettingsPage",
     build: () {
-      return _navDrawerCubit;
+      return navDrawerCubit;
     },
     act: (NavDrawerCubit navDrawerCubit) =>
         navDrawerCubit.openDrawer(Navigation.settingsPage),

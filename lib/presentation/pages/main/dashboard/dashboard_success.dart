@@ -5,13 +5,13 @@ import 'package:flutter_auth_app/presentation/presentation.dart';
 
 class DashboardSuccess extends StatelessWidget {
   const DashboardSuccess({
-    Key? key,
+    super.key,
     required this.currentPage,
     required this.lastPage,
     required this.users,
     required this.onRefresh,
     required this.controller,
-  }) : super(key: key);
+  });
   final int currentPage;
   final int lastPage;
   final List<User> users;

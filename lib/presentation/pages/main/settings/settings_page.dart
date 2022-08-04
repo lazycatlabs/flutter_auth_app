@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/data/data.dart';
@@ -14,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///*********************************************
 /// © 2020 | All Right Reserved
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -84,12 +83,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     .toList(),
                 onChanged: (value) {
                   if (value != null) {
-                    final _theme = value as String;
+                    final theme = value as String;
                     ActiveTheme activeTheme;
 
-                    if (_theme == Strings.of(context)!.themeLight) {
+                    if (theme == Strings.of(context)!.themeLight) {
                       activeTheme = ActiveTheme.light;
-                    } else if (_theme == Strings.of(context)!.themeDark) {
+                    } else if (theme == Strings.of(context)!.themeDark) {
                       activeTheme = ActiveTheme.dark;
                     } else {
                       activeTheme = ActiveTheme.system;

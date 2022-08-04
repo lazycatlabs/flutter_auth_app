@@ -13,7 +13,7 @@ import 'package:flutter_auth_app/presentation/presentation.dart';
 ///*********************************************
 /// © 2022 | All Right Reserved
 class ButtonNotification extends StatelessWidget {
-  const ButtonNotification({Key? key}) : super(key: key);
+  const ButtonNotification({super.key});
 
   @override
   Widget build(BuildContext context) {

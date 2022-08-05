@@ -13,27 +13,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockLoginCubit extends MockCubit<LoginState> implements LoginCubit {}
+class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
-class FakeLoginState extends Fake implements LoginState {}
+class FakeAuthCubit extends Fake implements AuthCubit {}
 
 void main() {
-  late LoginCubit loginCubit;
+  late AuthCubit authCubit;
 
   setUpAll(() {
     HttpOverrides.global = null;
-    registerFallbackValue(FakeLoginState());
+    registerFallbackValue(FakeAuthCubit());
     registerFallbackValue(LoginParams());
   });
 
   setUp(() async {
     await serviceLocator(isUnitTest: true);
-    loginCubit = MockLoginCubit();
+    authCubit = MockAuthCubit();
   });
 
   Widget _rootWidget(Widget body) {
-    return BlocProvider<LoginCubit>.value(
-      value: loginCubit,
+    return BlocProvider<AuthCubit>.value(
+      value: authCubit,
       child: ScreenUtilInit(
         designSize: const Size(375, 667),
         minTextAdapt: true,
@@ -55,8 +55,8 @@ void main() {
   testWidgets(
     'renders LoginPage for form validation blank',
     (tester) async {
-      when(() => loginCubit.state)
-          .thenReturn(const LoginState(status: LoginStatus.success));
+      when(() => authCubit.state)
+          .thenReturn(const AuthState(status: AuthStatus.success));
       await tester.pumpWidget(_rootWidget(const LoginPage()));
       await tester.dragUntilVisible(
         find.byType(Button), // what you want to find
@@ -77,8 +77,8 @@ void main() {
     (tester) async {
       const email = "test@gmail.com";
 
-      when(() => loginCubit.state)
-          .thenReturn(const LoginState(status: LoginStatus.success));
+      when(() => authCubit.state)
+          .thenReturn(const AuthState(status: AuthStatus.success));
 
       await tester.pumpWidget(_rootWidget(const LoginPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
@@ -102,9 +102,9 @@ void main() {
       const email = "test@gmail.com";
       const password = "password";
 
-      when(() => loginCubit.state)
-          .thenReturn(const LoginState(status: LoginStatus.success));
-      when(() => loginCubit.login(any())).thenAnswer((_) async {});
+      when(() => authCubit.state)
+          .thenReturn(const AuthState(status: AuthStatus.success));
+      when(() => authCubit.login(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(_rootWidget(const LoginPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
@@ -126,7 +126,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 100));
       }
 
-      verify(() => loginCubit.login(any())).called(1);
+      verify(() => authCubit.login(any())).called(1);
     },
   );
 }

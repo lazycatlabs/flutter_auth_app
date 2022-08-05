@@ -70,6 +70,9 @@ dependencies:
   firebase_analytics: ^9.3.0
   firebase_crashlytics: ^2.8.6
 
+  # router
+  go_router: ^4.2.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -80,7 +83,9 @@ dev_dependencies:
   bloc_test: ^9.0.3
   build_runner: ^2.2.0
   http_mock_adapter: ^0.3.3
-  mockito: ^5.3.0
+
+  #Temporary using old version because error when generate build_runner
+  mockito: 5.2.0
 
 
 

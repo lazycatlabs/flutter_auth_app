@@ -4,6 +4,7 @@ import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 ///*********************************************
 ///  flutter_auth_app |
@@ -175,6 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     SpacerV(value: Dimens.space24),
                     Button(
+                      key: const Key("btn_register"),
                       title: Strings.of(context)!.register,
                       onPressed: () {
                         /// Validate form first
@@ -186,6 +188,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               );
                         }
+                      },
+                    ),
+                    Button(
+                      key: const Key("btn_login"),
+                      title: Strings.of(context)!.login,
+                      onPressed: () {
+                        context.goNamed(Routes.login.name);
                       },
                     ),
                   ],

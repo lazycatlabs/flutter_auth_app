@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/di/di.dart';
+import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,9 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///*********************************************
 /// © 2020 | All Right Reserved
 class MainPage extends StatefulWidget {
-  const MainPage({
-    super.key,
-  });
+  const MainPage({super.key, required this.screen});
+
+  final String screen;
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -59,8 +60,6 @@ class _MainPageState extends State<MainPage> {
             //hide navigation drawer
             _scaffoldKey.currentState!.openDrawer();
           } else {
-            context.read<NavDrawerCubit>().openDrawer(Navigation.dashboardPage);
-
             for (final menu in _dataMenus) {
               setState(() {
                 menu.isSelected = menu.title == Strings.of(context)!.dashboard;
@@ -114,8 +113,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        sl<PrefManager>().logout();
-                        context.goToClearStack(AppRoute.login);
+                        context.read<AuthCubit>().logout();
                       },
                       child: Text(
                         Strings.of(context)!.yes,
@@ -131,13 +129,22 @@ class _MainPageState extends State<MainPage> {
             },
           ),
         ),
-        child: BlocBuilder<NavDrawerCubit, Widget>(
-          builder: (context, navigationState) {
-            return navigationState;
-          },
-        ),
+        child: pages,
       ),
     );
+  }
+
+  Widget get pages {
+    if (widget.screen == Routes.dashboard.name) {
+      return BlocProvider(
+        create: (_) => sl<UsersCubit>()..fetchUsers(UsersParams()),
+        child: const DashboardPage(),
+      );
+    } else if (widget.screen == Routes.settings.name) {
+      return const SettingsPage();
+    }
+
+    return Container();
   }
 
   PreferredSize _appBar() {

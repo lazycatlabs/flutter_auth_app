@@ -5,6 +5,7 @@ import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 ///*********************************************
 ///  flutter_auth_app |
@@ -41,23 +42,21 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Parent(
-      child: BlocListener<LoginCubit, LoginState>(
+      child: BlocListener<AuthCubit, AuthState>(
         listener: (_, state) {
           log.d("loginState $state");
           switch (state.status) {
-            case LoginStatus.loading:
+            case AuthStatus.loading:
               context.show();
               break;
-            case LoginStatus.success:
+            case AuthStatus.success:
               context.dismiss();
               state.login?.token.toString().toToastSuccess();
 
               TextInput.finishAutofillContext();
 
-              /// Go To main page
-              context.goToReplace(AppRoute.mainScreen);
               break;
-            case LoginStatus.failure:
+            case AuthStatus.failure:
               context.dismiss();
               state.message.toString().toToastError();
               break;
@@ -144,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                         title: Strings.of(context)!.login,
                         onPressed: () {
                           if (_keyForm.currentState?.validate() ?? false) {
-                            context.read<LoginCubit>().login(
+                            context.read<AuthCubit>().login(
                                   LoginParams(
                                     email: _conEmail.text,
                                     password: _conPassword.text,
@@ -157,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                         title: Strings.of(context)!.askRegister,
                         onPressed: () {
                           /// Direct to register page
-                          context.goTo(AppRoute.register);
+                          context.goNamed(Routes.register.name);
                         },
                       ),
                     ],

@@ -58,6 +58,6 @@ void useCase() {
 void cubit() {
   sl.registerFactory(() => UsersCubit(sl()));
   sl.registerFactory(() => RegisterCubit(sl()));
-  sl.registerFactory(() => LoginCubit(sl()));
-  sl.registerFactory(() => NavDrawerCubit());
+  sl.registerFactory(() => AuthCubit(sl()));
+  sl.registerFactory(() => SettingsCubit());
 }

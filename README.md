@@ -39,7 +39,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 
 - [ ] Integration Test
 - [x] Implement multi flavor
-- [ ] Implement [Go Router](https://pub.dev/packages/go_router)
+- [x] Implement [Go Router](https://pub.dev/packages/go_router)
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 

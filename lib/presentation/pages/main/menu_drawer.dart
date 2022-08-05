@@ -3,18 +3,19 @@ import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MenuDrawer extends StatefulWidget {
   const MenuDrawer({
     super.key,
     required this.dataMenu,
     required this.currentIndex,
-    this.onLogoutPressed,
+    required this.onLogoutPressed,
   });
+
   final List<DataHelper> dataMenu;
   final Function(int) currentIndex;
-  final VoidCallback? onLogoutPressed;
+  final VoidCallback onLogoutPressed;
 
   @override
   _MenuDrawerState createState() => _MenuDrawerState();
@@ -112,15 +113,14 @@ class _MenuDrawerState extends State<MenuDrawer> {
     );
   }
 
-  //TODO : Update page from selected Page
   void _selectedPage(String title) {
     //TODO : Update page from selected Page
     if (title == Strings.of(context)!.settings) {
-      context.read<NavDrawerCubit>().openDrawer(Navigation.settingsPage);
+      context.go(Routes.settings.path);
     } else if (title == Strings.of(context)!.dashboard) {
-      context.read<NavDrawerCubit>().openDrawer(Navigation.dashboardPage);
+      context.go(Routes.dashboard.path);
     } else if (title == Strings.of(context)!.logout) {
-      widget.onLogoutPressed?.call();
+      widget.onLogoutPressed.call();
     }
   }
 }

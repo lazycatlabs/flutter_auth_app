@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_app/data/data.dart';
-import 'package:flutter_auth_app/di/di.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:go_router/go_router.dart';
 
 ///*********************************************
 /// Created by ukietux on 24/08/20 with ♥
@@ -20,25 +18,14 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      _initData();
+      context.goNamed(Routes.root.name);
     });
-  }
-
-  void _initData() {
-    /// Check if user already login or not
-    if (sl<PrefManager>().isLogin) {
-      /// Direct to main screen
-      context.goToReplace(AppRoute.mainScreen);
-    } else {
-      /// Direct to login page
-      context.goToReplace(AppRoute.login);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Parent(
-      child: Container(
+      child: ColoredBox(
         color: Palette.white,
         child: Center(
           child: CircleAvatar(

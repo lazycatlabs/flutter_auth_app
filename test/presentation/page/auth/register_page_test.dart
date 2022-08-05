@@ -60,13 +60,13 @@ void main() {
           .thenReturn(const RegisterState(status: RegisterStatus.success));
       await tester.pumpWidget(_rootWidget(const RegisterPage()));
       await tester.dragUntilVisible(
-        find.byType(Button), // what you want to find
+        find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
         const Offset(0, 50), // delta to move
       );
 
       /// validate email
-      await tester.tap(find.byType(Button));
+      await tester.tap(find.byKey(const Key('btn_register')));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsOneWidget);
       expect(find.text("Can't be empty"), findsOneWidget);
@@ -84,13 +84,13 @@ void main() {
       await tester.pumpWidget(_rootWidget(const RegisterPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
       await tester.dragUntilVisible(
-        find.byType(Button), // what you want to find
+        find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
         const Offset(0, 50), // delta to move
       );
 
       /// validate email
-      await tester.tap(find.byType(Button));
+      await tester.tap(find.byKey(const Key('btn_register')));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
       expect(find.text("Can't be empty"), findsOneWidget);
@@ -110,13 +110,13 @@ void main() {
       await tester.enterText(find.byKey(const Key('password')), password);
 
       await tester.dragUntilVisible(
-        find.byType(Button), // what you want to find
+        find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
         const Offset(0, 50), // delta to move
       );
 
       /// validate email
-      await tester.tap(find.byType(Button));
+      await tester.tap(find.byKey(const Key('btn_register')));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
       expect(find.text("Can't be empty"), findsNothing);
@@ -139,13 +139,13 @@ void main() {
       await tester.enterText(find.byKey(const Key('repeat_password')), '');
 
       await tester.dragUntilVisible(
-        find.byType(Button), // what you want to find
+        find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
         const Offset(0, 50), // delta to move
       );
 
       /// validate email
-      await tester.tap(find.byType(Button));
+      await tester.tap(find.byKey(const Key('btn_register')));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
       expect(find.text("Can't be empty"), findsNothing);
@@ -172,13 +172,13 @@ void main() {
       );
 
       await tester.dragUntilVisible(
-        find.byType(Button), // what you want to find
+        find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
         const Offset(0, 50), // delta to move
       );
 
       /// validate email
-      await tester.tap(find.byType(Button));
+      await tester.tap(find.byKey(const Key('btn_register')));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
       expect(find.text("Can't be empty"), findsNothing);

@@ -13,11 +13,11 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
-import 'login_cubit_test.mocks.dart';
+import 'auth_cubit_test.mocks.dart';
 
 @GenerateMocks([PostLogin])
 void main() {
-  late LoginCubit loginCubit;
+  late AuthCubit authCubit;
   late Login login;
   late MockPostLogin mockPostLogin;
 
@@ -34,48 +34,48 @@ void main() {
       json.decode(jsonReader(successLoginPath)),
     ).toEntity();
     mockPostLogin = MockPostLogin();
-    loginCubit = LoginCubit(mockPostLogin);
+    authCubit = AuthCubit(mockPostLogin);
   });
 
   /// Dispose bloc
   tearDown(() {
-    loginCubit.close();
+    authCubit.close();
   });
 
   ///  Initial data should be loading
-  test("Initial data should be LoginStatus.loading", () {
-    expect(loginCubit.state.status, LoginStatus.loading);
+  test("Initial data should be AuthStatus.loading", () {
+    expect(authCubit.state.status, AuthStatus.loading);
   });
 
-  blocTest<LoginCubit, LoginState>(
-    "When repo success get data should be return LoginState",
+  blocTest<AuthCubit, AuthState>(
+    "When repo success get data should be return AuthState",
     build: () {
       when(mockPostLogin.call(loginParams))
           .thenAnswer((_) async => Right(login));
 
-      return loginCubit;
+      return authCubit;
     },
     act: (cubit) => cubit.login(loginParams),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const LoginState(),
-      LoginState(status: LoginStatus.success, login: login),
+      const AuthState(),
+      AuthState(status: AuthStatus.success, login: login),
     ],
   );
 
-  blocTest<LoginCubit, LoginState>(
+  blocTest<AuthCubit, AuthState>(
     "When user input wrong credential should be return ServerFailure",
     build: () {
       when(mockPostLogin.call(loginParams))
           .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
 
-      return loginCubit;
+      return authCubit;
     },
-    act: (LoginCubit loginCubit) => loginCubit.login(loginParams),
+    act: (AuthCubit authCubit) => authCubit.login(loginParams),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const LoginState(),
-      const LoginState(status: LoginStatus.failure, message: errorMessage),
+      const AuthState(),
+      const AuthState(status: AuthStatus.failure, message: errorMessage),
     ],
   );
 }

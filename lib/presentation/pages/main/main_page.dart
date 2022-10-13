@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/data/data.dart';
-import 'package:flutter_auth_app/di/di.dart';
-import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/presentation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///*********************************************
 /// © 2020 | All Right Reserved
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.screen});
+  const MainPage({super.key, required this.child});
 
-  final String screen;
+  final Widget child;
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -129,23 +127,23 @@ class _MainPageState extends State<MainPage> {
             },
           ),
         ),
-        child: pages,
+        child: widget.child,
       ),
     );
   }
 
-  Widget get pages {
-    if (widget.screen == Routes.dashboard.name) {
-      return BlocProvider(
-        create: (_) => sl<UsersCubit>()..fetchUsers(UsersParams()),
-        child: const DashboardPage(),
-      );
-    } else if (widget.screen == Routes.settings.name) {
-      return const SettingsPage();
-    }
-
-    return Container();
-  }
+  // Widget get pages {
+  //   if (widget.screen == Routes.dashboard.name) {
+  //     return BlocProvider(
+  //       create: (_) => sl<UsersCubit>()..fetchUsers(UsersParams()),
+  //       child: const DashboardPage(),
+  //     );
+  //   } else if (widget.screen == Routes.settings.name) {
+  //     return const SettingsPage();
+  //   }
+  //
+  //   return Container();
+  // }
 
   PreferredSize _appBar() {
     return PreferredSize(

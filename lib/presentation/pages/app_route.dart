@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_app/data/datasources/datasources.dart';
+import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/di/di.dart';
+import 'package:flutter_auth_app/domain/domain.dart';
 import 'package:flutter_auth_app/presentation/pages/pages.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,9 +13,9 @@ enum Routes {
   splashScreen("/splashscreen"),
 
   /// Home Page
-  mainScreen("/home/:screen(dashboard|settings)"),
-  dashboard("/home/dashboard"),
-  settings("/home/settings"),
+  dashboard("/dashboard"),
+  settings("/settings"),
+
   // Auth Page
   login("/auth/login"),
   register("/auth/register"),
@@ -41,16 +43,7 @@ class AppRoute {
       GoRoute(
         path: Routes.root.path,
         name: Routes.root.name,
-        redirect: (_) => Routes.dashboard.path,
-      ),
-      GoRoute(
-        path: Routes.mainScreen.path,
-        name: Routes.mainScreen.name,
-        builder: (_, state) {
-          final screen = state.params['screen'] ?? "";
-
-          return MainPage(key: state.pageKey, screen: screen);
-        },
+        redirect: (_, __) => Routes.dashboard.path,
       ),
       GoRoute(
         path: Routes.login.path,
@@ -65,13 +58,32 @@ class AppRoute {
           child: const RegisterPage(),
         ),
       ),
+      ShellRoute(
+        builder: (_, __, child) => MainPage(child: child),
+        routes: [
+          GoRoute(
+            path: Routes.dashboard.path,
+            name: Routes.dashboard.name,
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<UsersCubit>()..fetchUsers(UsersParams()),
+              child: const DashboardPage(),
+            ),
+          ),
+          GoRoute(
+            path: Routes.settings.path,
+            name: Routes.settings.name,
+            builder: (_, __) => const SettingsPage(),
+          ),
+        ],
+      ),
     ],
     initialLocation: Routes.splashScreen.path,
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
     refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
-    redirect: (GoRouterState state) {
-      final bool isLoginPage = state.subloc == Routes.login.path;
+    redirect: (_, GoRouterState state) {
+      final bool isLoginPage = state.subloc == Routes.login.path ||
+          state.subloc == Routes.register.path;
 
       ///  Check if not login
       ///  if current page is login page we don't need to direct user

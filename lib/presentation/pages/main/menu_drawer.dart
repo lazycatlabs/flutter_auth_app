@@ -116,9 +116,9 @@ class _MenuDrawerState extends State<MenuDrawer> {
   void _selectedPage(String title) {
     //TODO : Update page from selected Page
     if (title == Strings.of(context)!.settings) {
-      context.go(Routes.settings.path);
+      context.goNamed(Routes.settings.name);
     } else if (title == Strings.of(context)!.dashboard) {
-      context.go(Routes.dashboard.path);
+      context.goNamed(Routes.dashboard.name);
     } else if (title == Strings.of(context)!.logout) {
       widget.onLogoutPressed.call();
     }

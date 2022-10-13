@@ -56,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
               context.dismiss();
 
               /// back to login page after register success
-              context.back();
+              context.pop();
               break;
             case RegisterStatus.failure:
               context.dismiss();
@@ -188,13 +188,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               );
                         }
-                      },
-                    ),
-                    Button(
-                      key: const Key("btn_login"),
-                      title: Strings.of(context)!.login,
-                      onPressed: () {
-                        context.goNamed(Routes.login.name);
                       },
                     ),
                   ],

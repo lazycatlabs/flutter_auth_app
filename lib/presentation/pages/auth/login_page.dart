@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                         title: Strings.of(context)!.askRegister,
                         onPressed: () {
                           /// Direct to register page
-                          context.goNamed(Routes.register.name);
+                          context.pushNamed(Routes.register.name);
                         },
                       ),
                     ],

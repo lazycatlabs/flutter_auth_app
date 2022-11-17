@@ -17,10 +17,14 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 ## Get Started 🚀
 
 - Clone this project
+- Run `flutter pub get`
+- Run `flutter gen-l10n` to generate localization files
 - Run `flutter run --flavor stg -t lib/main_stg.dart` for **staging** or
 - Run `flutter run --flavor prd -t lib/main_prd.dart` for **production**
 - Run Test `flutter test`
 - To generate launcher icon based on Flavor `flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*`
+- To generate mock class `flutter pub run build_runner build`
+
 
 ## Feature ✅
 

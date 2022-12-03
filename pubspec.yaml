@@ -31,7 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   # Use as default SVG image loader, prefer use SVG as image asset
-  flutter_svg: ^1.1.5
+  flutter_svg: ^1.1.6
 
   # Functional programming thingies
   dartz: ^0.10.1
@@ -56,30 +56,30 @@ dependencies:
   oktoast: ^3.3.1
 
   # Use for responsive UI, set default size base on Mock Up
-  flutter_screenutil: ^5.5.4
+  flutter_screenutil: ^5.6.0
 
 
-  cached_network_image: ^3.2.2
-  table_calendar: ^3.0.7
+  cached_network_image: ^3.2.3
+  table_calendar: ^3.0.8
 
   # logger
   logger: ^1.1.0
 
   # Firebase
-  firebase_core: ^1.24.0
-  firebase_analytics: ^9.3.8
-  firebase_crashlytics: ^2.9.0
+  firebase_core: ^2.3.0
+  firebase_analytics: ^10.0.6
+  firebase_crashlytics: ^3.0.6
 
   # router
-  go_router: ^5.0.5
+  go_router: ^5.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: ^0.11.0
   #Remove unused files
 #  dart_code_metrics: ^4.21.0
-  lint: ^1.10.0
+  lint: ^2.0.1
   bloc_test: ^9.1.0
   build_runner: ^2.3.0
   http_mock_adapter: ^0.3.3

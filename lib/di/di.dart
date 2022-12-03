@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_auth_app/data/data.dart';
-import 'package:flutter_auth_app/domain/domain.dart';
-import 'package:flutter_auth_app/presentation/pages/pages.dart';
+import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/features/features.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,12 +52,18 @@ void useCase() {
   /// Auth
   sl.registerLazySingleton(() => PostLogin(sl()));
   sl.registerLazySingleton(() => PostRegister(sl()));
+
+  /// Users
   sl.registerLazySingleton(() => GetUsers(sl()));
 }
 
 void cubit() {
-  sl.registerFactory(() => UsersCubit(sl()));
+  /// Auth
   sl.registerFactory(() => RegisterCubit(sl()));
   sl.registerFactory(() => AuthCubit(sl()));
+
+  /// Users
+  sl.registerFactory(() => UsersCubit(sl()));
+
   sl.registerFactory(() => SettingsCubit());
 }

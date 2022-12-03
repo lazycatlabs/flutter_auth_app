@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/di/di.dart';
+import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 
 class DioClient {

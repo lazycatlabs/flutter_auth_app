@@ -4,7 +4,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/config.dart';
-import 'package:flutter_auth_app/di/di.dart';
+import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/my_app.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';

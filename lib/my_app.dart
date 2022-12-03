@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/data/data.dart';
 import 'package:flutter_auth_app/di/di.dart';
-import 'package:flutter_auth_app/presentation/presentation.dart';
+import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/helper/helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -39,12 +39,16 @@ void initPrefManager(SharedPreferences initPrefManager) {
 /// Register repositories
 void repositories() {
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
+  sl.registerLazySingleton<UsersRepository>(() => UsersRepositoryImpl(sl()));
 }
 
 /// Register dataSources
 void dataSources() {
   sl.registerLazySingleton<AuthRemoteDatasource>(
     () => AuthRemoteDatasourceImpl(sl()),
+  );
+  sl.registerLazySingleton<UsersRemoteDatasource>(
+    () => UsersRemoteDatasourceImpl(sl()),
   );
 }
 

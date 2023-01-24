@@ -29,9 +29,9 @@ void main() {
   /// Initialize data
   setUp(() async {
     await serviceLocator(isUnitTest: true);
-    register =
-        RegisterResponse.fromJson(json.decode(jsonReader(successRegisterPath)))
-            .toEntity();
+    register = RegisterResponse.fromJson(
+      json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+    ).toEntity();
     mockPostRegister = MockPostRegister();
     registerCubit = RegisterCubit(mockPostRegister);
   });
@@ -43,7 +43,7 @@ void main() {
 
   /// Test init data should be loading
   test("Initial state should be RegisterStatus.loading", () {
-    expect(registerCubit.state.status, RegisterStatus.loading);
+    expect(registerCubit.state, const RegisterState.loading());
   });
 
   blocTest<RegisterCubit, RegisterState>(
@@ -60,8 +60,8 @@ void main() {
     ),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const RegisterState(),
-      RegisterState(status: RegisterStatus.success, register: register),
+      const RegisterState.loading(),
+      RegisterState.success(register),
     ],
   );
 
@@ -76,12 +76,7 @@ void main() {
     act: (RegisterCubit registerCubit) => registerCubit.register(
       registerParams,
     ),
-    expect: () => [
-      const RegisterState(),
-      const RegisterState(
-        status: RegisterStatus.failure,
-        message: errorMessage,
-      ),
-    ],
+    expect: () =>
+        const [RegisterState.loading(), RegisterState.failure(errorMessage)],
   );
 }

@@ -1,10 +1,8 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Login extends Equatable {
-  final String? token;
+part 'login.freezed.dart';
 
-  const Login(this.token);
-
-  @override
-  List<Object?> get props => [token];
+@freezed
+class Login with _$Login {
+  const factory Login({String? token}) = _Login;
 }

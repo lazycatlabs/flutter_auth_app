@@ -25,10 +25,10 @@ class DropDown<T> extends StatefulWidget {
   final Widget? prefixIcon;
 
   @override
-  _DropDownState createState() => _DropDownState();
+  _DropDownState<T> createState() => _DropDownState();
 }
 
-class _DropDownState extends State<DropDown> {
+class _DropDownState<T> extends State<DropDown<T>> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,56 +46,52 @@ class _DropDownState extends State<DropDown> {
                   ?.copyWith(color: Theme.of(context).hintColor),
             ),
           ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: Dimens.space8),
-            child: ButtonTheme(
-              key: widget.key,
-              alignedDropdown: true,
-              padding: EdgeInsets.zero,
-              child: DropdownButtonFormField(
-                isExpanded: true,
-                icon: const Icon(Icons.arrow_drop_down),
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  isDense: true,
-                  isCollapsed: true,
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.only(left: Dimens.space12),
-                    child: widget.prefixIcon,
-                  ),
-                  prefixIconConstraints: BoxConstraints(
-                    minHeight: Dimens.space24,
-                    maxHeight: Dimens.space24,
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: Dimens.space12),
-                  enabledBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: const BorderSide(color: Palette.disable),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: const BorderSide(color: Palette.red),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: const BorderSide(color: Palette.red),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: const BorderSide(color: Palette.primary),
-                  ),
+          ButtonTheme(
+            key: widget.key,
+            alignedDropdown: true,
+            padding: EdgeInsets.zero,
+            child: DropdownButtonFormField<T>(
+              isExpanded: true,
+              icon: const Icon(Icons.arrow_drop_down),
+              decoration: InputDecoration(
+                alignLabelWithHint: true,
+                isDense: true,
+                isCollapsed: true,
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: Dimens.space12),
+                  child: widget.prefixIcon,
                 ),
-                value: widget.value,
-                items: widget.items,
-                onChanged: widget.onChanged,
+                prefixIconConstraints: BoxConstraints(
+                  minHeight: Dimens.space24,
+                  maxHeight: Dimens.space24,
+                ),
+                contentPadding: EdgeInsets.symmetric(vertical: Dimens.space12),
+                enabledBorder: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: BorderRadius.circular(Dimens.space4),
+                  borderSide: const BorderSide(color: Palette.disable),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: BorderRadius.circular(Dimens.space4),
+                  borderSide: const BorderSide(color: Palette.red),
+                ),
+                errorBorder: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: BorderRadius.circular(Dimens.space4),
+                  borderSide: const BorderSide(color: Palette.red),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: BorderRadius.circular(Dimens.space4),
+                  borderSide: const BorderSide(color: Palette.primary),
+                ),
               ),
+              value: widget.value,
+              items: widget.items,
+              onChanged: widget.onChanged,
             ),
-          ),
+          )
         ],
       ),
     );

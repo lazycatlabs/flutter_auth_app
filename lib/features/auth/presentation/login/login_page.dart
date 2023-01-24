@@ -44,22 +44,19 @@ class _LoginPageState extends State<LoginPage> {
       child: BlocListener<AuthCubit, AuthState>(
         listener: (_, state) {
           log.d("loginState $state");
-          switch (state.status) {
-            case AuthStatus.loading:
-              context.show();
-              break;
-            case AuthStatus.success:
+          state.when(
+            loading: () => context.show(),
+            success: (data) {
               context.dismiss();
-              state.login?.token.toString().toToastSuccess();
+              data.toString().toToastSuccess();
 
               TextInput.finishAutofillContext();
-
-              break;
-            case AuthStatus.failure:
+            },
+            failure: (message) {
               context.dismiss();
-              state.message.toString().toToastError();
-              break;
-          }
+              message.toToastError();
+            },
+          );
         },
         child: Center(
           child: SingleChildScrollView(

@@ -1,10 +1,8 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Register extends Equatable {
-  final String? token;
+part 'register.freezed.dart';
 
-  const Register(this.token);
-
-  @override
-  List<Object?> get props => [token];
+@freezed
+class Register with _$Register {
+  const factory Register({String? token}) = _Register;
 }

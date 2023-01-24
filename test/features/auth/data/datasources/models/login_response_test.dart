@@ -14,7 +14,7 @@ void main() {
     final jsonMap = json.decode(jsonReader(successLoginPath));
 
     /// act
-    final result = LoginResponse.fromJson(jsonMap);
+    final result = LoginResponse.fromJson(jsonMap as Map<String, dynamic>);
 
     /// assert
     expect(result, equals(loginResponse));

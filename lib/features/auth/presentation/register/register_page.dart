@@ -47,21 +47,19 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: const MyAppBar().call(),
       child: BlocListener<RegisterCubit, RegisterState>(
         listener: (_, state) {
-          switch (state.status) {
-            case RegisterStatus.loading:
-              context.show();
-              break;
-            case RegisterStatus.success:
+          state.when(
+            loading: () => context.show(),
+            success: (data) {
               context.dismiss();
 
               /// back to login page after register success
               context.pop();
-              break;
-            case RegisterStatus.failure:
+            },
+            failure: (message) {
               context.dismiss();
-              state.message.toString().toToastError();
-              break;
-          }
+              message.toToastError();
+            },
+          );
         },
         child: Center(
           child: SingleChildScrollView(

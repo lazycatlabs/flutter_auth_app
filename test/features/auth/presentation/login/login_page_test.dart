@@ -54,8 +54,7 @@ void main() {
   testWidgets(
     'renders LoginPage for form validation blank',
     (tester) async {
-      when(() => authCubit.state)
-          .thenReturn(const AuthState(status: AuthStatus.success));
+      when(() => authCubit.state).thenReturn(const AuthState.success(null));
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.dragUntilVisible(
         find.byType(Button), // what you want to find
@@ -76,8 +75,7 @@ void main() {
     (tester) async {
       const email = "test@gmail.com";
 
-      when(() => authCubit.state)
-          .thenReturn(const AuthState(status: AuthStatus.success));
+      when(() => authCubit.state).thenReturn(const AuthState.success(null));
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
@@ -101,8 +99,7 @@ void main() {
       const email = "test@gmail.com";
       const password = "password";
 
-      when(() => authCubit.state)
-          .thenReturn(const AuthState(status: AuthStatus.success));
+      when(() => authCubit.state).thenReturn(const AuthState.success(null));
       when(() => authCubit.login(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const LoginPage()));

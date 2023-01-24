@@ -16,15 +16,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseServices().init();
 
-  /// Set status bar icon color
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
-    ),
-  );
-
   /// Set env as staging
   environment = Environment.staging;
 

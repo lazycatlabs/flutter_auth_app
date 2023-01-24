@@ -7,57 +7,57 @@ import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 
 void main() {
-  const listUser = [
-    DataUser(
-      id: 7,
-      email: "michael.lawson@reqres.in",
-      firstName: "Michael",
-      lastName: "Lawson",
-      avatar: "https://reqres.in/img/faces/7-image.jpg",
-    ),
-    DataUser(
-      id: 8,
-      email: "lindsay.ferguson@reqres.in",
-      firstName: "Lindsay",
-      lastName: "Ferguson",
-      avatar: "https://reqres.in/img/faces/8-image.jpg",
-    ),
-    DataUser(
-      id: 9,
-      email: "tobias.funke@reqres.in",
-      firstName: "Tobias",
-      lastName: "Funke",
-      avatar: "https://reqres.in/img/faces/9-image.jpg",
-    ),
-    DataUser(
-      id: 10,
-      email: "byron.fields@reqres.in",
-      firstName: "Byron",
-      lastName: "Fields",
-      avatar: "https://reqres.in/img/faces/10-image.jpg",
-    ),
-    DataUser(
-      id: 11,
-      email: "george.edwards@reqres.in",
-      firstName: "George",
-      lastName: "Edwards",
-      avatar: "https://reqres.in/img/faces/11-image.jpg",
-    ),
-    DataUser(
-      id: 12,
-      email: "rachel.howell@reqres.in",
-      firstName: "Rachel",
-      lastName: "Howell",
-      avatar: "https://reqres.in/img/faces/12-image.jpg",
-    ),
+  final listUser = [
+    DataUser.fromJson({
+      "id": 7,
+      "email": "michael.lawson@reqres.in",
+      "first_name": "Michael",
+      "last_name": "Lawson",
+      "avatar": "https://reqres.in/img/faces/7-image.jpg",
+    }),
+    DataUser.fromJson({
+      "id": 8,
+      "email": "lindsay.ferguson@reqres.in",
+      "first_name": "Lindsay",
+      "last_name": "Ferguson",
+      "avatar": "https://reqres.in/img/faces/8-image.jpg"
+    }),
+    DataUser.fromJson({
+      "id": 9,
+      "email": "tobias.funke@reqres.in",
+      "first_name": "Tobias",
+      "last_name": "Funke",
+      "avatar": "https://reqres.in/img/faces/9-image.jpg"
+    }),
+    DataUser.fromJson({
+      "id": 10,
+      "email": "byron.fields@reqres.in",
+      "first_name": "Byron",
+      "last_name": "Fields",
+      "avatar": "https://reqres.in/img/faces/10-image.jpg"
+    }),
+    DataUser.fromJson({
+      "id": 11,
+      "email": "george.edwards@reqres.in",
+      "first_name": "George",
+      "last_name": "Edwards",
+      "avatar": "https://reqres.in/img/faces/11-image.jpg"
+    }),
+    DataUser.fromJson({
+      "id": 12,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg"
+    }),
   ];
-  const userResponse = UsersResponse(
+  final userResponse = UsersResponse(
     page: 2,
     perPage: 6,
     total: 12,
     totalPages: 2,
     data: listUser,
-    support: SupportUser(
+    support: const SupportUser(
       url: "https://reqres.in/#support-heading",
       text:
           "To keep ReqRes free, contributions towards server costs are appreciated!",
@@ -69,7 +69,7 @@ void main() {
     final jsonMap = json.decode(jsonReader(successUserPath));
 
     /// act
-    final result = UsersResponse.fromJson(jsonMap);
+    final result = UsersResponse.fromJson(jsonMap as Map<String, dynamic>);
 
     /// assert
     expect(result, equals(userResponse));
@@ -86,54 +86,56 @@ void main() {
       "total": 12,
       "total_pages": 2,
       "data": [
-        {
+        DataUser.fromJson({
           "id": 7,
           "email": "michael.lawson@reqres.in",
           "first_name": "Michael",
           "last_name": "Lawson",
           "avatar": "https://reqres.in/img/faces/7-image.jpg",
-        },
-        {
+        }),
+        DataUser.fromJson({
           "id": 8,
           "email": "lindsay.ferguson@reqres.in",
           "first_name": "Lindsay",
           "last_name": "Ferguson",
-          "avatar": "https://reqres.in/img/faces/8-image.jpg",
-        },
-        {
+          "avatar": "https://reqres.in/img/faces/8-image.jpg"
+        }),
+        DataUser.fromJson({
           "id": 9,
           "email": "tobias.funke@reqres.in",
           "first_name": "Tobias",
           "last_name": "Funke",
-          "avatar": "https://reqres.in/img/faces/9-image.jpg",
-        },
-        {
+          "avatar": "https://reqres.in/img/faces/9-image.jpg"
+        }),
+        DataUser.fromJson({
           "id": 10,
           "email": "byron.fields@reqres.in",
           "first_name": "Byron",
           "last_name": "Fields",
-          "avatar": "https://reqres.in/img/faces/10-image.jpg",
-        },
-        {
+          "avatar": "https://reqres.in/img/faces/10-image.jpg"
+        }),
+        DataUser.fromJson({
           "id": 11,
           "email": "george.edwards@reqres.in",
           "first_name": "George",
           "last_name": "Edwards",
-          "avatar": "https://reqres.in/img/faces/11-image.jpg",
-        },
-        {
+          "avatar": "https://reqres.in/img/faces/11-image.jpg"
+        }),
+        DataUser.fromJson({
           "id": 12,
           "email": "rachel.howell@reqres.in",
           "first_name": "Rachel",
           "last_name": "Howell",
-          "avatar": "https://reqres.in/img/faces/12-image.jpg",
-        },
+          "avatar": "https://reqres.in/img/faces/12-image.jpg"
+        }),
       ],
-      "support": {
-        "url": "https://reqres.in/#support-heading",
-        "text":
-            "To keep ReqRes free, contributions towards server costs are appreciated!",
-      },
+      "support": SupportUser.fromJson(
+        {
+          "url": "https://reqres.in/#support-heading",
+          "text":
+              "To keep ReqRes free, contributions towards server costs are appreciated!",
+        },
+      ),
       "error": null,
     };
 

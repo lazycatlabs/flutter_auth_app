@@ -14,7 +14,7 @@ void main() {
     final jsonMap = json.decode(jsonReader(successRegisterPath));
 
     /// act
-    final result = RegisterResponse.fromJson(jsonMap);
+    final result = RegisterResponse.fromJson(jsonMap as Map<String, dynamic>);
 
     /// assert
     expect(result, equals(registerResponse));

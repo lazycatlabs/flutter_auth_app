@@ -21,11 +21,12 @@ void main() {
     await serviceLocator(isUnitTest: true);
     mockAuthRemoteDatasource = MockAuthRemoteDatasource();
     authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource);
-    login = LoginResponse.fromJson(json.decode(jsonReader(successLoginPath)))
-        .toEntity();
-    register =
-        RegisterResponse.fromJson(json.decode(jsonReader(successRegisterPath)))
-            .toEntity();
+    login = LoginResponse.fromJson(
+      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+    ).toEntity();
+    register = RegisterResponse.fromJson(
+      json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+    ).toEntity();
   });
 
   group("login", () {
@@ -34,7 +35,7 @@ void main() {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
         (_) async => LoginResponse.fromJson(
-          json.decode(jsonReader(successLoginPath)),
+          json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
         ),
       );
 
@@ -69,7 +70,7 @@ void main() {
       // arrange
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(
         (_) async => RegisterResponse.fromJson(
-          json.decode(jsonReader(successRegisterPath)),
+          json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
         ),
       );
 

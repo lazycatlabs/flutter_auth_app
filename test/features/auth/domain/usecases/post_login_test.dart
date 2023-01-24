@@ -17,7 +17,8 @@ void main() {
       LoginParams(email: 'test@gmail.com', password: 'password');
 
   setUp(() {
-    login = LoginResponse.fromJson(json.decode(jsonReader(successLoginPath)))
+    login = LoginResponse.fromJson(
+            json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>)
         .toEntity();
     mockAuthRepository = MockAuthRepository();
     postLogin = PostLogin(mockAuthRepository);

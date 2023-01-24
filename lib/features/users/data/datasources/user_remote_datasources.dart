@@ -17,7 +17,8 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
         ListAPI.users,
         queryParameters: userParams.toJson(),
       );
-      final result = UsersResponse.fromJson(response.data);
+      final result =
+          UsersResponse.fromJson(response.data as Map<String, dynamic>);
 
       if (response.statusCode == 200) {
         return result;

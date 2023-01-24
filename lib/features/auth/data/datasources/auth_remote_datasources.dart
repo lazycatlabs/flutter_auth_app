@@ -22,7 +22,8 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         data: registerParams.toJson(),
       );
 
-      final result = RegisterResponse.fromJson(response.data);
+      final result =
+          RegisterResponse.fromJson(response.data as Map<String, dynamic>);
       if (response.statusCode == 200) {
         return result;
       } else {
@@ -40,7 +41,8 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         ListAPI.login,
         data: loginParams.toJson(),
       );
-      final result = LoginResponse.fromJson(response.data);
+      final result =
+          LoginResponse.fromJson(response.data as Map<String, dynamic>);
 
       if (response.statusCode == 200) {
         return result;

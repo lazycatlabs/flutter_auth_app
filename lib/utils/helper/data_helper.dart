@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class DataHelper {
-  final String? title;
-  final String? desc;
-  bool isSelected;
-  final String? iconPath;
-  final IconData? icon;
-  final String? url;
-  final String? type;
-  final int? id;
+part 'data_helper.freezed.dart';
 
-  DataHelper({
-    this.title,
-    this.desc,
-    this.isSelected = false,
-    this.iconPath,
-    this.icon,
-    this.url,
-    this.type,
-    this.id,
-  });
+@unfreezed
+class DataHelper with _$DataHelper {
+  factory DataHelper({
+    String? title,
+    String? desc,
+    String? iconPath,
+    IconData? icon,
+    String? url,
+    String? type,
+    int? id,
+    @Default(false) bool isSelected,
+    @Default(ActiveTheme.light) ActiveTheme activeTheme,
+  }) = _DataHelper;
 }

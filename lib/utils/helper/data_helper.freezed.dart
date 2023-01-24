@@ -32,6 +32,8 @@ mixin _$DataHelper {
   set id(int? value) => throw _privateConstructorUsedError;
   bool get isSelected => throw _privateConstructorUsedError;
   set isSelected(bool value) => throw _privateConstructorUsedError;
+  ActiveTheme get activeTheme => throw _privateConstructorUsedError;
+  set activeTheme(ActiveTheme value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DataHelperCopyWith<DataHelper> get copyWith =>
@@ -52,7 +54,8 @@ abstract class $DataHelperCopyWith<$Res> {
       String? url,
       String? type,
       int? id,
-      bool isSelected});
+      bool isSelected,
+      ActiveTheme activeTheme});
 }
 
 /// @nodoc
@@ -76,6 +79,7 @@ class _$DataHelperCopyWithImpl<$Res, $Val extends DataHelper>
     Object? type = freezed,
     Object? id = freezed,
     Object? isSelected = null,
+    Object? activeTheme = null,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -110,6 +114,10 @@ class _$DataHelperCopyWithImpl<$Res, $Val extends DataHelper>
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
+      activeTheme: null == activeTheme
+          ? _value.activeTheme
+          : activeTheme // ignore: cast_nullable_to_non_nullable
+              as ActiveTheme,
     ) as $Val);
   }
 }
@@ -130,7 +138,8 @@ abstract class _$$_DataHelperCopyWith<$Res>
       String? url,
       String? type,
       int? id,
-      bool isSelected});
+      bool isSelected,
+      ActiveTheme activeTheme});
 }
 
 /// @nodoc
@@ -152,6 +161,7 @@ class __$$_DataHelperCopyWithImpl<$Res>
     Object? type = freezed,
     Object? id = freezed,
     Object? isSelected = null,
+    Object? activeTheme = null,
   }) {
     return _then(_$_DataHelper(
       title: freezed == title
@@ -186,6 +196,10 @@ class __$$_DataHelperCopyWithImpl<$Res>
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
+      activeTheme: null == activeTheme
+          ? _value.activeTheme
+          : activeTheme // ignore: cast_nullable_to_non_nullable
+              as ActiveTheme,
     ));
   }
 }
@@ -201,7 +215,8 @@ class _$_DataHelper implements _DataHelper {
       this.url,
       this.type,
       this.id,
-      this.isSelected = false});
+      this.isSelected = false,
+      this.activeTheme = ActiveTheme.light});
 
   @override
   String? title;
@@ -220,10 +235,13 @@ class _$_DataHelper implements _DataHelper {
   @override
   @JsonKey()
   bool isSelected;
+  @override
+  @JsonKey()
+  ActiveTheme activeTheme;
 
   @override
   String toString() {
-    return 'DataHelper(title: $title, desc: $desc, iconPath: $iconPath, icon: $icon, url: $url, type: $type, id: $id, isSelected: $isSelected)';
+    return 'DataHelper(title: $title, desc: $desc, iconPath: $iconPath, icon: $icon, url: $url, type: $type, id: $id, isSelected: $isSelected, activeTheme: $activeTheme)';
   }
 
   @JsonKey(ignore: true)
@@ -242,7 +260,8 @@ abstract class _DataHelper implements DataHelper {
       String? url,
       String? type,
       int? id,
-      bool isSelected}) = _$_DataHelper;
+      bool isSelected,
+      ActiveTheme activeTheme}) = _$_DataHelper;
 
   @override
   String? get title;
@@ -268,6 +287,9 @@ abstract class _DataHelper implements DataHelper {
   @override
   bool get isSelected;
   set isSelected(bool value);
+  @override
+  ActiveTheme get activeTheme;
+  set activeTheme(ActiveTheme value);
   @override
   @JsonKey(ignore: true)
   _$$_DataHelperCopyWith<_$_DataHelper> get copyWith =>

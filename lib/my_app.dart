@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
@@ -12,6 +12,12 @@ import 'package:oktoast/oktoast.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()),
@@ -29,8 +35,8 @@ class MyApp extends StatelessWidget {
             /// Pass context to appRoute
             AppRoute.setStream(context);
 
-            return BlocBuilder<SettingsCubit, int>(
-              builder: (_, __) => MaterialApp.router(
+            return BlocBuilder<SettingsCubit, DataHelper>(
+              builder: (_, data) => MaterialApp.router(
                 routeInformationProvider:
                     AppRoute.router.routeInformationProvider,
                 routeInformationParser: AppRoute.router.routeInformationParser,
@@ -58,17 +64,7 @@ class MyApp extends StatelessWidget {
                 darkTheme: themeDark,
                 locale: Locale(sl<PrefManager>().locale),
                 supportedLocales: L10n.all,
-                themeMode:
-
-                    /// Check if theme is light or dark first
-                    sl<PrefManager>().theme == describeEnum(ActiveTheme.light)
-                        ? ThemeMode.light
-                        : sl<PrefManager>().theme ==
-                                describeEnum(ActiveTheme.dark)
-                            ? ThemeMode.dark
-
-                            /// Set default theme is System
-                            : ThemeMode.system,
+                themeMode: data.activeTheme.mode,
               ),
             );
           },

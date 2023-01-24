@@ -19,6 +19,7 @@ https://user-images.githubusercontent.com/1531684/161389636-9802a444-2fac-41b2-8
 - Clone this project
 - Run `flutter pub get`
 - Run `flutter gen-l10n` to generate localization files
+- Run `flutter pub run build_runner build --delete-conflicting-outputs` to generate freezes files
 - Run `flutter run --flavor stg -t lib/main_stg.dart` for **staging** or
 - Run `flutter run --flavor prd -t lib/main_prd.dart` for **production**
 - Run Test `flutter test`

@@ -19,42 +19,14 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late List<String> _themeList;
+  late final ActiveTheme _selectedTheme = sl<SettingsCubit>().getActiveTheme();
 
-  late List<DataHelper> _languageList;
-
-  String _selectedTheme = "";
-  late DataHelper _selectedLanguage;
-  late SettingsCubit _settingsCubit;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _settingsCubit = BlocProvider.of(context);
-    _themeList = [
-      Strings.of(context)!.themeLight,
-      Strings.of(context)!.themeDark,
-      Strings.of(context)!.themeSystem,
-    ];
-
-    _languageList = [
-      DataHelper(title: Constants.get.english, type: "en"),
-      DataHelper(title: Constants.get.bahasa, type: "id"),
-    ];
-
-    /// Set selected by sharedPreferences
-    if (sl<PrefManager>().theme == ActiveTheme.system.description) {
-      _selectedTheme = Strings.of(context)!.themeSystem;
-    } else if (sl<PrefManager>().theme == ActiveTheme.light.description) {
-      _selectedTheme = Strings.of(context)!.themeLight;
-    } else {
-      _selectedTheme = Strings.of(context)!.themeDark;
-    }
-
-    /// Filter if selected locale is EN
-    _selectedLanguage =
-        sl<PrefManager>().locale == "en" ? _languageList[0] : _languageList[1];
-  }
+  late final List<DataHelper> _listLanguage = [
+    DataHelper(title: Constants.get.english, type: "en"),
+    DataHelper(title: Constants.get.bahasa, type: "id"),
+  ];
+  late DataHelper _selectedLanguage =
+      sl<PrefManager>().locale == "en" ? _listLanguage[0] : _listLanguage[1];
 
   @override
   Widget build(BuildContext context) {
@@ -64,52 +36,37 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: EdgeInsets.all(Dimens.space16),
           child: Column(
             children: [
-              DropDown(
+              DropDown<ActiveTheme>(
                 key: const Key("dropdown_theme"),
                 hint: Strings.of(context)!.chooseTheme,
                 value: _selectedTheme,
                 prefixIcon: const Icon(Icons.light),
-                items: _themeList
+                items: ActiveTheme.values
                     .map(
                       (data) => DropdownMenuItem(
                         value: data,
                         child: Text(
-                          data,
+                          _getThemeName(data, context),
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ),
                     )
                     .toList(),
                 onChanged: (value) {
-                  if (value != null) {
-                    final theme = value;
-                    ActiveTheme activeTheme;
-
-                    if (theme == Strings.of(context)!.themeLight) {
-                      activeTheme = ActiveTheme.light;
-                    } else if (theme == Strings.of(context)!.themeDark) {
-                      activeTheme = ActiveTheme.dark;
-                    } else {
-                      activeTheme = ActiveTheme.system;
-                    }
-
-                    /// Update theme status in sharedPref
-
-                    sl<PrefManager>().theme = activeTheme.description;
-
-                    /// Reload theme
-                    _settingsCubit.reloadWidget();
-                  }
+                  /// Reload theme
+                  context
+                      .read<SettingsCubit>()
+                      .updateTheme(value ?? ActiveTheme.system);
                 },
               ),
 
               /// Language
-              DropDown(
+              DropDown<DataHelper>(
                 key: const Key("dropdown_language"),
                 hint: Strings.of(context)!.chooseLanguage,
                 value: _selectedLanguage,
                 prefixIcon: const Icon(Icons.language_outlined),
-                items: _languageList
+                items: _listLanguage
                     .map(
                       (data) => DropdownMenuItem(
                         value: data,
@@ -120,17 +77,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     )
                     .toList(),
-                onChanged: (value) async {
-                  if (value != null) {
-                    _selectedLanguage = value;
+                onChanged: (DataHelper? value) async {
+                  _selectedLanguage = value ?? _listLanguage[0];
 
-                    /// Update locale code
-                    sl<PrefManager>().locale = _selectedLanguage.type;
-
-                    /// Reload theme
-                    if (!mounted) return;
-                    _settingsCubit.reloadWidget();
-                  }
+                  /// Reload theme
+                  if (!mounted) return;
+                  context
+                      .read<SettingsCubit>()
+                      .updateLanguage(value?.type ?? "en");
                 },
               ),
             ],
@@ -138,5 +92,15 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
+  }
+
+  String _getThemeName(ActiveTheme activeTheme, BuildContext context) {
+    if (activeTheme == ActiveTheme.system) {
+      return Strings.of(context)!.themeSystem;
+    } else if (activeTheme == ActiveTheme.dark) {
+      return Strings.of(context)!.themeDark;
+    } else {
+      return Strings.of(context)!.themeLight;
+    }
   }
 }

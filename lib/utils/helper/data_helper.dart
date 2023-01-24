@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'data_helper.freezed.dart';
@@ -14,5 +15,6 @@ class DataHelper with _$DataHelper {
     String? type,
     int? id,
     @Default(false) bool isSelected,
+    @Default(ActiveTheme.light) ActiveTheme activeTheme,
   }) = _DataHelper;
 }

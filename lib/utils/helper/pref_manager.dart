@@ -1,13 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ActiveTheme {
-  light("light"),
-  dark("dark"),
-  system("system");
+  light(ThemeMode.light),
+  dark(ThemeMode.dark),
+  system(ThemeMode.system);
 
-  final String description;
+  final ThemeMode mode;
 
-  const ActiveTheme(this.description);
+  const ActiveTheme(this.mode);
 }
 
 class PrefManager {
@@ -64,10 +65,9 @@ class PrefManager {
 
   /// Default locale set to English
   set theme(String? value) =>
-      preferences.setString(kTheme, value ?? ActiveTheme.system.description);
+      preferences.setString(kTheme, value ?? ActiveTheme.system.name);
 
-  String get theme =>
-      preferences.getString(kTheme) ?? ActiveTheme.system.description;
+  String get theme => preferences.getString(kTheme) ?? ActiveTheme.system.name;
 
   void logout() => preferences.clear();
 }

@@ -82,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     .toList(),
                 onChanged: (value) {
                   if (value != null) {
-                    final theme = value as String;
+                    final theme = value;
                     ActiveTheme activeTheme;
 
                     if (theme == Strings.of(context)!.themeLight) {
@@ -122,7 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     .toList(),
                 onChanged: (value) async {
                   if (value != null) {
-                    _selectedLanguage = value as DataHelper;
+                    _selectedLanguage = value;
 
                     /// Update locale code
                     sl<PrefManager>().locale = _selectedLanguage.type;

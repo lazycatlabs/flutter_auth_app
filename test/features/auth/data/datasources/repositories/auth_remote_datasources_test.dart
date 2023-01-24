@@ -22,8 +22,8 @@ void main() {
   group('register', () {
     final registerParams =
         RegisterParams(email: "eve.holt@reqres.in", password: "pistol");
-    final registerModel =
-        RegisterResponse.fromJson(json.decode(jsonReader(successRegisterPath)));
+    final registerModel = RegisterResponse.fromJson(
+        json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>);
 
     test(
       'should return register success model when response code is 200',
@@ -72,8 +72,8 @@ void main() {
   group('login', () {
     final loginParams =
         LoginParams(email: "eve.holt@reqres.in", password: "cityslicka");
-    final loginModel =
-        LoginResponse.fromJson(json.decode(jsonReader(successLoginPath)));
+    final loginModel = LoginResponse.fromJson(
+        json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>);
 
     test(
       'should return login success model when response code is 200',

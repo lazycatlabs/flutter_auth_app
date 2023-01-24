@@ -71,6 +71,10 @@ dependencies:
   # router
   go_router: ^6.0.1
 
+  # Freezed
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -85,6 +89,10 @@ dev_dependencies:
 
   #Temporary using old version because error when generate build_runner
   mockito: ^5.3.2
+
+  # Freezed
+  freezed: ^2.3.2
+  json_serializable: ^6.6.0
 
 dependency_overrides:
   test_api: 0.4.18

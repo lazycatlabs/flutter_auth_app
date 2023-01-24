@@ -1,33 +1,21 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_auth_app/features/features.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoginResponse extends Equatable {
-  final int? id;
-  final String? token;
-  final String? error;
+part 'login_response.freezed.dart';
+part 'login_response.g.dart';
 
-  const LoginResponse({this.id, this.token, this.error});
+@freezed
+class LoginResponse with _$LoginResponse {
+  const factory LoginResponse({
+    int? id,
+    String? token,
+    String? error,
+  }) = _LoginResponse;
 
-  LoginResponse.fromJson(dynamic json)
-      : id = json['id'] as int?,
-        token = json['token'] as String?,
-        error = json['error'] as String?;
+  const LoginResponse._();
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['token'] = token;
-    map['error'] = error;
+  factory LoginResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoginResponseFromJson(json);
 
-    return map;
-  }
-
-  Login toEntity() => Login(token);
-
-  @override
-  List<Object?> get props => [
-        id,
-        token,
-        error,
-      ];
+  Login toEntity() => Login(token: token);
 }

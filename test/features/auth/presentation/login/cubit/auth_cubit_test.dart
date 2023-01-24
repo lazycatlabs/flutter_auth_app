@@ -29,7 +29,7 @@ void main() {
   setUp(() async {
     await serviceLocator(isUnitTest: true);
     login = LoginResponse.fromJson(
-      json.decode(jsonReader(successLoginPath)),
+      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
     ).toEntity();
     mockPostLogin = MockPostLogin();
     authCubit = AuthCubit(mockPostLogin);
@@ -42,7 +42,7 @@ void main() {
 
   ///  Initial data should be loading
   test("Initial data should be AuthStatus.loading", () {
-    expect(authCubit.state.status, AuthStatus.loading);
+    expect(authCubit.state, const AuthState.loading());
   });
 
   blocTest<AuthCubit, AuthState>(
@@ -56,8 +56,8 @@ void main() {
     act: (cubit) => cubit.login(loginParams),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const AuthState(),
-      AuthState(status: AuthStatus.success, login: login),
+      const AuthState.loading(),
+      AuthState.success(login.token),
     ],
   );
 
@@ -71,9 +71,9 @@ void main() {
     },
     act: (AuthCubit authCubit) => authCubit.login(loginParams),
     wait: const Duration(milliseconds: 100),
-    expect: () => [
-      const AuthState(),
-      const AuthState(status: AuthStatus.failure, message: errorMessage),
+    expect: () => const [
+      AuthState.loading(),
+      AuthState.failure(errorMessage),
     ],
   );
 }

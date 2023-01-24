@@ -1,37 +1,21 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_auth_app/features/features.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class RegisterResponse extends Equatable {
-  final int? id;
-  final String? token;
-  final String? error;
+part 'register_response.freezed.dart';
+part 'register_response.g.dart';
 
-  const RegisterResponse({
-    this.id,
-    this.token,
-    this.error,
-  });
+@freezed
+class RegisterResponse with _$RegisterResponse {
+  const factory RegisterResponse({
+    int? id,
+    String? token,
+    String? error,
+  }) = _RegisterResponse;
 
-  RegisterResponse.fromJson(dynamic json)
-      : id = json['id'] as int?,
-        token = json['token'] as String?,
-        error = json['error'] as String?;
+  const RegisterResponse._();
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['token'] = token;
-    map['error'] = error;
+  factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
+      _$RegisterResponseFromJson(json);
 
-    return map;
-  }
-
-  Register toEntity() => Register(token);
-
-  @override
-  List<Object?> get props => [
-        id,
-        token,
-        error,
-      ];
+  Register toEntity() => Register(token: token);
 }

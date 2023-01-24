@@ -17,9 +17,9 @@ void main() {
       RegisterParams(email: 'test@gmail.com', password: 'password');
 
   setUp(() {
-    register =
-        RegisterResponse.fromJson(json.decode(jsonReader(successRegisterPath)))
-            .toEntity();
+    register = RegisterResponse.fromJson(json
+            .decode(jsonReader(successRegisterPath)) as Map<String, dynamic>)
+        .toEntity();
     mockAuthRepository = MockAuthRepository();
     postRegister = PostRegister(mockAuthRepository);
   });

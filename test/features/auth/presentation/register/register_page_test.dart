@@ -56,7 +56,7 @@ void main() {
     'renders RegisterPage for form validation blank',
     (tester) async {
       when(() => registerCubit.state)
-          .thenReturn(const RegisterState(status: RegisterStatus.success));
+          .thenReturn(const RegisterState.success(null));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
@@ -78,7 +78,7 @@ void main() {
       const email = "test@gmail.com";
 
       when(() => registerCubit.state)
-          .thenReturn(const RegisterState(status: RegisterStatus.success));
+          .thenReturn(const RegisterState.success(null));
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
@@ -103,7 +103,7 @@ void main() {
       const password = "password";
 
       when(() => registerCubit.state)
-          .thenReturn(const RegisterState(status: RegisterStatus.success));
+          .thenReturn(const RegisterState.success(null));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
       await tester.enterText(find.byKey(const Key('password')), password);
@@ -131,7 +131,7 @@ void main() {
       const password = "password";
 
       when(() => registerCubit.state)
-          .thenReturn(const RegisterState(status: RegisterStatus.success));
+          .thenReturn(const RegisterState.success(null));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.enterText(find.byKey(const Key('email')), email);
       await tester.enterText(find.byKey(const Key('password')), password);
@@ -159,7 +159,7 @@ void main() {
       const email = "test@gmail.com";
       const password = "password";
 
-      when(() => registerCubit.state).thenReturn(const RegisterState());
+      when(() => registerCubit.state).thenReturn(const RegisterState.loading());
       when(() => registerCubit.register(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));

@@ -4,34 +4,22 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('UsersStatusX', () {
     test('returns correct values for UsersStatus.loading', () {
-      const status = UsersStatus.loading;
-      expect(status.isLoading, isTrue);
-      expect(status.isSuccess, isFalse);
-      expect(status.isFailure, isFalse);
-      expect(status.isEmpty, isFalse);
+      const status = UsersState.loading();
+      expect(status, const UsersState.loading());
     });
 
     test('returns correct values for UsersStatus.success', () {
-      const status = UsersStatus.success;
-      expect(status.isLoading, isFalse);
-      expect(status.isSuccess, isTrue);
-      expect(status.isFailure, isFalse);
-      expect(status.isEmpty, isFalse);
+      const status = UsersState.success(Users());
+      expect(status, const UsersState.success(Users()));
     });
 
     test('returns correct values for UsersStatus.failure', () {
-      const status = UsersStatus.failure;
-      expect(status.isLoading, isFalse);
-      expect(status.isSuccess, isFalse);
-      expect(status.isFailure, isTrue);
-      expect(status.isEmpty, isFalse);
+      const status = UsersState.failure("");
+      expect(status, const UsersState.failure(""));
     });
     test('returns correct values for UsersStatus.empty', () {
-      const status = UsersStatus.empty;
-      expect(status.isLoading, isFalse);
-      expect(status.isSuccess, isFalse);
-      expect(status.isFailure, isFalse);
-      expect(status.isEmpty, isTrue);
+      const status = UsersState.empty();
+      expect(status, const UsersState.empty());
     });
   });
 }

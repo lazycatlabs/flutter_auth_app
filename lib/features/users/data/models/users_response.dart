@@ -1,65 +1,25 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class UsersResponse extends Equatable {
-  const UsersResponse({
-    this.page,
-    this.perPage,
-    this.total,
-    this.totalPages,
-    this.data,
-    this.support,
-    this.error,
-  });
+part 'users_response.freezed.dart';
+part 'users_response.g.dart';
 
-  factory UsersResponse.fromJson(dynamic json) {
-    final page = json['page'] as int?;
-    final perPage = json['per_page'] as int?;
-    final total = json['total'] as int?;
-    final totalPages = json['total_pages'] as int?;
-    final error = json['error'] as String?;
-    final dataTemp = json['data'] as List<dynamic>?;
-    final data = dataTemp != null
-        ? dataTemp.map((v) => DataUser.fromJson(v)).toList()
-        : <DataUser>[];
-    final support =
-        json['support'] != null ? SupportUser.fromJson(json['support']) : null;
+@freezed
+class UsersResponse with _$UsersResponse {
+  const factory UsersResponse({
+    int? page,
+    @JsonKey(name: 'per_page') int? perPage,
+    int? total,
+    @JsonKey(name: 'total_pages') int? totalPages,
+    List<DataUser>? data,
+    SupportUser? support,
+    String? error,
+  }) = _UsersResponse;
 
-    return UsersResponse(
-      page: page,
-      perPage: perPage,
-      total: total,
-      totalPages: totalPages,
-      data: data,
-      support: support,
-      error: error,
-    );
-  }
+  const UsersResponse._();
 
-  final int? page;
-  final int? perPage;
-  final int? total;
-  final int? totalPages;
-  final List<DataUser>? data;
-  final SupportUser? support;
-  final String? error;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['page'] = page;
-    map['per_page'] = perPage;
-    map['total'] = total;
-    map['total_pages'] = totalPages;
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
-    }
-    if (support != null) {
-      map['support'] = support?.toJson();
-    }
-    map['error'] = error;
-
-    return map;
-  }
+  factory UsersResponse.fromJson(Map<String, dynamic> json) =>
+      _$UsersResponseFromJson(json);
 
   Users toEntity() {
     final listUser = data!
@@ -72,88 +32,35 @@ class UsersResponse extends Equatable {
         )
         .toList();
 
-    return Users(listUser, page ?? 1, totalPages ?? 1);
+    return Users(
+      users: listUser,
+      currentPage: page ?? 1,
+      lastPage: totalPages ?? 1,
+    );
   }
-
-  @override
-  List<Object?> get props => [
-        page,
-        perPage,
-        total,
-        totalPages,
-        data,
-        support,
-        error,
-      ];
 }
 
-class SupportUser extends Equatable {
-  const SupportUser({
-    this.url,
-    this.text,
-  });
+@freezed
+class SupportUser with _$SupportUser {
+  const factory SupportUser({
+    String? url,
+    String? text,
+  }) = _SupportUser;
 
-  SupportUser.fromJson(dynamic json)
-      : url = json['url'] as String?,
-        text = json['text'] as String?;
-
-  final String? url;
-  final String? text;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['url'] = url;
-    map['text'] = text;
-
-    return map;
-  }
-
-  @override
-  List<Object?> get props => [
-        url,
-        text,
-      ];
+  factory SupportUser.fromJson(Map<String, dynamic> json) =>
+      _$SupportUserFromJson(json);
 }
 
-class DataUser extends Equatable {
-  const DataUser({
-    this.id,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.avatar,
-  });
+@freezed
+class DataUser with _$DataUser {
+  const factory DataUser({
+    int? id,
+    String? email,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
+    String? avatar,
+  }) = _DataUser;
 
-  DataUser.fromJson(dynamic json)
-      : id = json['id'] as int?,
-        email = json['email'] as String?,
-        firstName = json['first_name'] as String?,
-        lastName = json['last_name'] as String?,
-        avatar = json['avatar'] as String?;
-
-  final int? id;
-  final String? email;
-  final String? firstName;
-  final String? lastName;
-  final String? avatar;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['email'] = email;
-    map['first_name'] = firstName;
-    map['last_name'] = lastName;
-    map['avatar'] = avatar;
-
-    return map;
-  }
-
-  @override
-  List<Object?> get props => [
-        id,
-        email,
-        firstName,
-        lastName,
-        avatar,
-      ];
+  factory DataUser.fromJson(Map<String, dynamic> json) =>
+      _$DataUserFromJson(json);
 }

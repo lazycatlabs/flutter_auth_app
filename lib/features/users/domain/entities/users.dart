@@ -1,27 +1,21 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Users extends Equatable {
-  final List<User> users;
-  final int currentPage;
-  final int lastPage;
+part 'users.freezed.dart';
 
-  const Users(this.users, this.currentPage, this.lastPage);
-
-  @override
-  List<Object?> get props => [users];
+@freezed
+class Users with _$Users {
+  const factory Users({
+    List<User>? users,
+    int? currentPage,
+    int? lastPage,
+  }) = _Users;
 }
 
-class User extends Equatable {
-  final String? name;
-  final String? avatar;
-  final String? email;
-
-  const User({
-    this.name,
-    this.avatar,
-    this.email,
-  });
-
-  @override
-  List<Object?> get props => [name, avatar, email];
+@freezed
+class User with _$User {
+  const factory User({
+    String? name,
+    String? avatar,
+    String? email,
+  }) = _User;
 }

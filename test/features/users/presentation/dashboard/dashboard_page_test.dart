@@ -33,8 +33,9 @@ void main() {
   setUp(() async {
     await serviceLocator(isUnitTest: true);
     usersCubit = MockUsersCubit();
-    users = UsersResponse.fromJson(json.decode(jsonReader(successUserPath)))
-        .toEntity();
+    users = UsersResponse.fromJson(
+      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+    ).toEntity();
   });
 
   Widget rootWidget(Widget body) {
@@ -61,7 +62,7 @@ void main() {
   testWidgets(
     'renders DashboardPage for UsersStatus.loading',
     (tester) async {
-      when(() => usersCubit.state).thenReturn(const UsersState());
+      when(() => usersCubit.state).thenReturn(const UsersState.loading());
       await tester.pumpWidget(rootWidget(const DashboardPage()));
       expect(find.byType(Loading), findsOneWidget);
     },
@@ -70,8 +71,7 @@ void main() {
   testWidgets(
     'renders DashboardPage for UsersStatus.empty',
     (tester) async {
-      when(() => usersCubit.state)
-          .thenReturn(const UsersState(status: UsersStatus.empty));
+      when(() => usersCubit.state).thenReturn(const UsersState.empty());
       await tester.pumpWidget(rootWidget(const DashboardPage()));
       expect(find.byType(Empty), findsOneWidget);
     },
@@ -80,8 +80,7 @@ void main() {
   testWidgets(
     'renders DashboardPage for UsersStatus.failure',
     (tester) async {
-      when(() => usersCubit.state)
-          .thenReturn(const UsersState(status: UsersStatus.failure));
+      when(() => usersCubit.state).thenReturn(const UsersState.failure(""));
       await tester.pumpWidget(rootWidget(const DashboardPage()));
       expect(find.byType(Empty), findsOneWidget);
     },
@@ -91,10 +90,7 @@ void main() {
     'renders DashboardPage for UsersStatus.success',
     (tester) async {
       when(() => usersCubit.state).thenReturn(
-        UsersState(
-          status: UsersStatus.success,
-          users: users,
-        ),
+        UsersState.success(users),
       );
       await tester.pumpWidget(rootWidget(const DashboardPage()));
       expect(find.byType(ListView), findsOneWidget);
@@ -105,10 +101,7 @@ void main() {
     'trigger refresh when pull to refresh',
     (tester) async {
       when(() => usersCubit.state).thenReturn(
-        UsersState(
-          status: UsersStatus.success,
-          users: users,
-        ),
+        UsersState.success(users),
       );
       when(() => usersCubit.refreshUsers(any())).thenAnswer((_) async {});
 

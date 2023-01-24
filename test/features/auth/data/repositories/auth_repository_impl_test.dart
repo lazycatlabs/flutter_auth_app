@@ -22,11 +22,11 @@ void main() {
     mockAuthRemoteDatasource = MockAuthRemoteDatasource();
     authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource);
     login = LoginResponse.fromJson(
-            json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>)
-        .toEntity();
-    register = RegisterResponse.fromJson(json
-            .decode(jsonReader(successRegisterPath)) as Map<String, dynamic>)
-        .toEntity();
+      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+    ).toEntity();
+    register = RegisterResponse.fromJson(
+      json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+    ).toEntity();
   });
 
   group("login", () {

@@ -47,7 +47,6 @@ dependencies:
 
   # Use for State Management with BLoC pattern
   flutter_bloc: ^8.1.1
-  equatable: ^2.0.5
 
   # Use for Time/Date Format
   intl: any

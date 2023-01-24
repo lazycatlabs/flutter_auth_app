@@ -20,7 +20,8 @@ void main() {
     await serviceLocator(isUnitTest: true);
     mockUsersRemoteDatasource = MockUsersRemoteDatasource();
     authRepositoryImpl = UsersRepositoryImpl(mockUsersRemoteDatasource);
-    users = UsersResponse.fromJson(json.decode(jsonReader(successUserPath)))
+    users = UsersResponse.fromJson(
+            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>)
         .toEntity();
   });
 
@@ -31,8 +32,8 @@ void main() {
     test('should return list user when call data is successful', () async {
       // arrange
       when(mockUsersRemoteDatasource.users(userParams)).thenAnswer(
-        (_) async =>
-            UsersResponse.fromJson(json.decode(jsonReader(successUserPath))),
+        (_) async => UsersResponse.fromJson(
+            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>),
       );
 
       // act
@@ -49,7 +50,7 @@ void main() {
         // arrange
         when(mockUsersRemoteDatasource.users(userParamsEmpty)).thenAnswer(
           (_) async => UsersResponse.fromJson(
-            json.decode(jsonReader(emptyUserPath)),
+            json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,
           ),
         );
 

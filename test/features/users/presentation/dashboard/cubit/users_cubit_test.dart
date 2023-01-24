@@ -27,8 +27,9 @@ void main() {
   setUp(() async {
     await serviceLocator(isUnitTest: true);
 
-    users = UsersResponse.fromJson(json.decode(jsonReader(successUserPath)))
-        .toEntity();
+    users = UsersResponse.fromJson(
+      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+    ).toEntity();
     mockGetUsers = MockGetUsers();
     userCubit = UsersCubit(mockGetUsers);
   });
@@ -40,7 +41,7 @@ void main() {
 
   ///  Initial data should be loading
   test("Initial data should be UsersStatus.loading", () {
-    expect(userCubit.state.status, UsersStatus.loading);
+    expect(userCubit.state, const UsersState.loading());
   });
 
   blocTest<UsersCubit, UsersState>(
@@ -54,8 +55,8 @@ void main() {
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest1),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const UsersState(),
-      UsersState(status: UsersStatus.success, users: users),
+      const UsersState.loading(),
+      UsersState.success(users),
     ],
   );
 
@@ -69,9 +70,7 @@ void main() {
     },
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
-    expect: () => [
-      UsersState(status: UsersStatus.success, users: users),
-    ],
+    expect: () => [UsersState.success(users)],
   );
 
   blocTest<UsersCubit, UsersState>(
@@ -85,9 +84,9 @@ void main() {
     },
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest1),
     wait: const Duration(milliseconds: 100),
-    expect: () => [
-      const UsersState(),
-      const UsersState(status: UsersStatus.failure, message: errorMessage),
+    expect: () => const [
+      UsersState.loading(),
+      UsersState.failure(errorMessage),
     ],
   );
 
@@ -102,7 +101,7 @@ void main() {
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const UsersState(status: UsersStatus.empty),
+      const UsersState.empty(),
     ],
   );
 
@@ -117,8 +116,8 @@ void main() {
     act: (UsersCubit usersCubit) => usersCubit.refreshUsers(dummyUsersRequest1),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const UsersState(),
-      UsersState(status: UsersStatus.success, users: users),
+      const UsersState.loading(),
+      UsersState.success(users),
     ],
   );
 }

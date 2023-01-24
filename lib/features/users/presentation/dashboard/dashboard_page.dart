@@ -57,13 +57,11 @@ class _DashboardPageState extends State<DashboardPage> {
         },
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (_, state) {
-            switch (state.status) {
-              case UsersStatus.loading:
-                return const Center(child: Loading());
-              case UsersStatus.success:
-                final data = state.users!;
-                _users.addAll(data.users);
-                _lastPage = data.lastPage;
+            return state.when(
+              loading: () => const Center(child: Loading()),
+              success: (data) {
+                _users.addAll(data.users ?? []);
+                _lastPage = data.lastPage ?? 1;
 
                 return ListView.builder(
                   controller: _scrollController,
@@ -126,12 +124,10 @@ class _DashboardPageState extends State<DashboardPage> {
                           );
                   },
                 );
-              case UsersStatus.failure:
-                return Center(child: Empty(errorMessage: state.message ?? ""));
-
-              case UsersStatus.empty:
-                return const Center(child: Empty());
-            }
+              },
+              failure: (message) => Center(child: Empty(errorMessage: message)),
+              empty: () => const Center(child: Empty()),
+            );
           },
         ),
       ),

@@ -13,7 +13,7 @@ void main() {
   late MockAuthRepository mockAuthRepository;
   late PostRegister postRegister;
   late Register register;
-  final registerParams =
+  const registerParams =
       RegisterParams(email: 'test@gmail.com', password: 'password');
 
   setUp(() {

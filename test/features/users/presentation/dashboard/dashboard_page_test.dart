@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+// ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../helpers/json_reader.dart';
@@ -27,7 +28,7 @@ void main() {
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeUserState());
-    registerFallbackValue(UsersParams());
+    registerFallbackValue(const UsersParams());
   });
 
   setUp(() async {

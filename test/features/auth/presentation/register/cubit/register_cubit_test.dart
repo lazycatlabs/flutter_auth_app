@@ -19,7 +19,7 @@ void main() {
   late MockPostRegister mockPostRegister;
   late Register register;
 
-  final registerParams = RegisterParams(
+  const registerParams = RegisterParams(
     email: "dummy@gmail.com",
     password: "dummyPassword",
   );

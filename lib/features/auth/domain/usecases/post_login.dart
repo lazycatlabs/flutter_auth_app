@@ -1,6 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'post_login.freezed.dart';
+part 'post_login.g.dart';
 
 class PostLogin extends UseCase<Login, LoginParams> {
   final AuthRepository _repo;
@@ -12,17 +16,13 @@ class PostLogin extends UseCase<Login, LoginParams> {
       _repo.login(params);
 }
 
-class LoginParams {
-  final String email;
-  final String password;
+@freezed
+class LoginParams with _$LoginParams {
+  const factory LoginParams({
+    @Default("") String email,
+    @Default("") String password,
+  }) = _LoginParams;
 
-  LoginParams({
-    this.email = "",
-    this.password = "",
-  });
-
-  Map<String, dynamic> toJson() => {
-        "email": email,
-        "password": password,
-      };
+  factory LoginParams.fromJson(Map<String, dynamic> json) =>
+      _$LoginParamsFromJson(json);
 }

@@ -1,6 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'post_register.freezed.dart';
+part 'post_register.g.dart';
 
 class PostRegister extends UseCase<Register, RegisterParams> {
   final AuthRepository _repo;
@@ -12,17 +16,13 @@ class PostRegister extends UseCase<Register, RegisterParams> {
       _repo.register(params);
 }
 
-class RegisterParams {
-  final String email;
-  final String password;
+@freezed
+class RegisterParams with _$RegisterParams {
+  const factory RegisterParams({
+    @Default("") String email,
+    @Default("") String password,
+  }) = _RegisterParams;
 
-  RegisterParams({
-    this.email = "",
-    this.password = "",
-  });
-
-  Map<String, dynamic> toJson() => {
-        "email": email,
-        "password": password,
-      };
+  factory RegisterParams.fromJson(Map<String, dynamic> json) =>
+      _$RegisterParamsFromJson(json);
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/config.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
-import 'package:flutter_auth_app/my_app.dart';
+import 'package:flutter_auth_app/lzyct_app.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +30,7 @@ Future<void> main() async {
       /// Load SharedPref before load My App Widget
       SharedPreferences.getInstance().then((value) {
         initPrefManager(value);
-        runApp(MyApp());
+        runApp(LzyctApp());
       });
     }),
     (error, stackTrace) async {

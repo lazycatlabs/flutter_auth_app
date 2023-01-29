@@ -13,12 +13,12 @@ void main() {
   late MockUsersRepository mockUsersRepository;
   late GetUsers getUsers;
   late Users users;
-  final usersParams = UsersParams();
+  final usersParams = const UsersParams();
 
   setUp(() {
     users = UsersResponse.fromJson(
-            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>)
-        .toEntity();
+      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+    ).toEntity();
     mockUsersRepository = MockUsersRepository();
     getUsers = GetUsers(mockUsersRepository);
   });

@@ -20,7 +20,7 @@ void main() {
   });
 
   group('user', () {
-    final usersParams = UsersParams();
+    final usersParams = const UsersParams();
     final usersModel = UsersResponse.fromJson(
         json.decode(jsonReader(successUserPath)) as Map<String, dynamic>);
     final usersEmptyModel = UsersResponse.fromJson(

@@ -19,8 +19,8 @@ void main() {
   late MockGetUsers mockGetUsers;
   late Users users;
 
-  final dummyUsersRequest1 = UsersParams();
-  final dummyUsersRequest2 = UsersParams(page: 2);
+  const dummyUsersRequest1 = UsersParams();
+  const dummyUsersRequest2 = UsersParams(page: 2);
   const errorMessage = "";
 
   /// Initialize data

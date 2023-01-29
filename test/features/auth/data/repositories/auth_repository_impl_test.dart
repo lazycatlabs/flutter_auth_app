@@ -30,7 +30,7 @@ void main() {
   });
 
   group("login", () {
-    final loginParams = LoginParams(email: "email", password: "password");
+    const loginParams = LoginParams(email: "email", password: "password");
     test('should return login when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
@@ -65,7 +65,7 @@ void main() {
   });
 
   group("register", () {
-    final registerParams = RegisterParams(email: "email", password: "password");
+    const registerParams = RegisterParams(email: "email", password: "password");
     test('should return register when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(

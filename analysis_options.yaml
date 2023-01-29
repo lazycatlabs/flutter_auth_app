@@ -8,6 +8,8 @@ linter:
 analyzer:
   plugins:
     - dart_code_metrics
+  errors:
+    invalid_annotation_target: ignore
 
 dart_code_metrics:
   anti-patterns:

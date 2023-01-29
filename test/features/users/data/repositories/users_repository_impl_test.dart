@@ -21,19 +21,20 @@ void main() {
     mockUsersRemoteDatasource = MockUsersRemoteDatasource();
     authRepositoryImpl = UsersRepositoryImpl(mockUsersRemoteDatasource);
     users = UsersResponse.fromJson(
-            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>)
-        .toEntity();
+      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+    ).toEntity();
   });
 
   group("user", () {
-    final userParams = UsersParams();
-    final userParamsEmpty = UsersParams(page: 3);
+    const userParams = UsersParams();
+    const userParamsEmpty = UsersParams(page: 3);
 
     test('should return list user when call data is successful', () async {
       // arrange
       when(mockUsersRemoteDatasource.users(userParams)).thenAnswer(
         (_) async => UsersResponse.fromJson(
-            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>),
+          json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+        ),
       );
 
       // act

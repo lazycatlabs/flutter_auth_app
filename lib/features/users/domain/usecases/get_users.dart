@@ -1,6 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'get_users.freezed.dart';
+part 'get_users.g.dart';
 
 class GetUsers extends UseCase<Users, UsersParams> {
   final UsersRepository _repo;
@@ -12,12 +16,10 @@ class GetUsers extends UseCase<Users, UsersParams> {
       _repo.users(params);
 }
 
-class UsersParams {
-  int page;
+@freezed
+class UsersParams with _$UsersParams {
+  const factory UsersParams({@Default(1) int page}) = _UsersParams;
 
-  UsersParams({this.page = 1});
-
-  Map<String, dynamic> toJson() => {
-        "page": page,
-      };
+  factory UsersParams.fromJson(Map<String, dynamic> json) =>
+      _$UsersParamsFromJson(json);
 }

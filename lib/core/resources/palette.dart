@@ -59,6 +59,7 @@ class Palette {
   static const Color accent = primary;
   static const Color white = Color(0xffffffff);
   static const Color background = white;
+  static const Color backgroundDark = Color(0xff171717);
   static const Color text = Color(0xff303030);
   static const Color textAlt = Color(0xff3D3D3D);
   static const Color hint = Color(0xff7E7E7E);

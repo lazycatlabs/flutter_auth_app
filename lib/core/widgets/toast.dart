@@ -42,7 +42,7 @@ class Toast extends StatelessWidget {
                   message!,
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText2
+                      .bodyMedium
                       ?.copyWith(color: textColor),
                   textAlign: TextAlign.start,
                   maxLines: 5,

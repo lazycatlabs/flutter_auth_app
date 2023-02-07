@@ -36,16 +36,16 @@ class _DropDownState<T> extends State<DropDown<T>> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(
-            visible: widget.hintIsVisible,
-            child: Text(
+          if (widget.hintIsVisible) ...{
+            Text(
               widget.hint ?? "",
               style: Theme.of(context)
                   .textTheme
-                  .caption
+                  .bodySmall
                   ?.copyWith(color: Theme.of(context).hintColor),
             ),
-          ),
+            SpacerV(value: Dimens.space4),
+          },
           ButtonTheme(
             key: widget.key,
             alignedDropdown: true,

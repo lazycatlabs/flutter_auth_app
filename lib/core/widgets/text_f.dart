@@ -76,7 +76,7 @@ class _TextFState extends State<TextF> {
             visible: widget.isHintVisible,
             child: Text(
               widget.hint ?? "",
-              style: Theme.of(context).textTheme.overline?.copyWith(
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: Palette.hint,
                     height: 0.1,
                   ),
@@ -98,7 +98,7 @@ class _TextFState extends State<TextF> {
               maxLines: widget.maxLine ?? 10,
               inputFormatters: widget.inputFormatter,
               textAlignVertical: TextAlignVertical.center,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
               cursorColor: Palette.text,
               decoration: InputDecoration(
                 prefixText: widget.prefixText,
@@ -107,7 +107,7 @@ class _TextFState extends State<TextF> {
                 hintText: widget.hintText,
                 hintStyle: Theme.of(context)
                     .textTheme
-                    .bodyText2
+                    .bodyMedium
                     ?.copyWith(color: Palette.disable),
                 suffixIcon: widget.suffixIcon,
                 prefixIcon: Padding(
@@ -134,7 +134,7 @@ class _TextFState extends State<TextF> {
                 ),
                 errorStyle: Theme.of(context)
                     .textTheme
-                    .overline
+                    .labelSmall
                     ?.copyWith(color: Palette.red),
                 focusedErrorBorder: OutlineInputBorder(
                   gapPadding: 0,

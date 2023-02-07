@@ -88,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       keyboardType: TextInputType.emailAddress,
                       prefixIcon: Icon(
                         Icons.alternate_email,
-                        color: Theme.of(context).textTheme.bodyText1?.color,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       hintText: 'johndoe@gmail.com',
                       hint: Strings.of(context)!.email,
@@ -107,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       keyboardType: TextInputType.text,
                       prefixIcon: Icon(
                         Icons.lock_outline,
-                        color: Theme.of(context).textTheme.bodyText1?.color,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       obscureText: _isPasswordHide,
                       hintText: '••••••••••••',
@@ -143,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       keyboardType: TextInputType.text,
                       prefixIcon: Icon(
                         Icons.lock_outline,
-                        color: Theme.of(context).textTheme.bodyText1?.color,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       obscureText: _isPasswordRepeatHide,
                       hintText: '••••••••••••',

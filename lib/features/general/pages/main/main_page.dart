@@ -91,11 +91,11 @@ class _MainPageState extends State<MainPage> {
                 builder: (_) => AlertDialog(
                   title: Text(
                     Strings.of(context)!.logout,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   content: Text(
                     Strings.of(context)!.logoutDesc,
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   actions: [
                     TextButton(
@@ -104,7 +104,7 @@ class _MainPageState extends State<MainPage> {
                         Strings.of(context)!.cancel,
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText2
+                            .bodyMedium
                             ?.copyWith(color: Palette.hint),
                       ),
                     ),
@@ -116,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                         Strings.of(context)!.yes,
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText2
+                            .bodyMedium
                             ?.copyWith(color: Palette.red),
                       ),
                     ),
@@ -152,6 +152,7 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
         title: Text(
           _dataMenus[_currentIndex].title ?? "-",
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         leading: IconButton(
           icon: Icon(

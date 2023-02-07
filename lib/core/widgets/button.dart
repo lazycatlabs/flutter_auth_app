@@ -53,7 +53,7 @@ class Button extends StatelessWidget {
           title.toUpperCase(),
           style: Theme.of(context)
               .textTheme
-              .button
+              .labelLarge
               ?.copyWith(color: Palette.white),
           textAlign: TextAlign.center,
         ),

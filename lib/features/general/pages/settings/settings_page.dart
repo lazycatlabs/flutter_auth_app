@@ -47,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         value: data,
                         child: Text(
                           _getThemeName(data, context),
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     )
@@ -72,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         value: data,
                         child: Text(
                           data.title ?? "-",
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     )

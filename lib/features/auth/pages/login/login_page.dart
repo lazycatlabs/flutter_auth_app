@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                         keyboardType: TextInputType.emailAddress,
                         prefixIcon: Icon(
                           Icons.alternate_email,
-                          color: Theme.of(context).textTheme.bodyText1?.color,
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
                         ),
                         hintText: "eve.holt@reqres.in",
                         hint: Strings.of(context)!.email,
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                         keyboardType: TextInputType.text,
                         prefixIcon: Icon(
                           Icons.lock_outline,
-                          color: Theme.of(context).textTheme.bodyText1?.color,
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
                         ),
                         obscureText: _isPasswordHide,
                         hintText: '••••••••••••',

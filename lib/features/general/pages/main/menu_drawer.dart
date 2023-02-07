@@ -52,14 +52,14 @@ class _MenuDrawerState extends State<MenuDrawer> {
                           "LazyCat Labs",
                           style: Theme.of(context)
                               .textTheme
-                              .headline6
+                              .titleLarge
                               ?.copyWith(color: Palette.white),
                         ),
                         Text(
                           "lazycatlabs@gmail.com",
                           style: Theme.of(context)
                               .textTheme
-                              .caption
+                              .bodySmall
                               ?.copyWith(color: Theme.of(context).hintColor),
                         ),
                       ],
@@ -97,7 +97,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                         ),
                         child: Text(
                           value.title!,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                     ),

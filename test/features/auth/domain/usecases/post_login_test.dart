@@ -13,12 +13,12 @@ void main() {
   late MockAuthRepository mockAuthRepository;
   late PostLogin postLogin;
   late Login login;
-  final loginParams =
+  const loginParams =
       LoginParams(email: 'test@gmail.com', password: 'password');
 
   setUp(() {
     login = LoginResponse.fromJson(
-            json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>)
+            json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,)
         .toEntity();
     mockAuthRepository = MockAuthRepository();
     postLogin = PostLogin(mockAuthRepository);

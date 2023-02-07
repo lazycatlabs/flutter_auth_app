@@ -20,11 +20,11 @@ void main() {
   });
 
   group('user', () {
-    final usersParams = const UsersParams();
+    const usersParams = UsersParams();
     final usersModel = UsersResponse.fromJson(
-        json.decode(jsonReader(successUserPath)) as Map<String, dynamic>);
+        json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,);
     final usersEmptyModel = UsersResponse.fromJson(
-        json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>);
+        json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,);
 
     test(
       'should return list user success model when response code is 200',

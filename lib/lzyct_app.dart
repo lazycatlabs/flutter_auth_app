@@ -20,7 +20,7 @@ class LzyctApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => sl<SettingsCubit>()),
+        BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),
         BlocProvider(create: (_) => sl<AuthCubit>()),
       ],
       child: OKToast(
@@ -60,8 +60,8 @@ class LzyctApp extends StatelessWidget {
                   );
                 },
                 title: Constants.get.appName,
-                theme: themeLight,
-                darkTheme: themeDark,
+                theme: themeLight(context),
+                darkTheme: themeDark(context),
                 locale: Locale(sl<PrefManager>().locale),
                 supportedLocales: L10n.all,
                 themeMode: data.activeTheme.mode,

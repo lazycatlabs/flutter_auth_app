@@ -97,7 +97,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       _users[index].name ?? "",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1
+                                          .bodyLarge
                                           ?.copyWith(
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -106,7 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       _users[index].email ?? "",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText2
+                                          .bodyMedium
                                           ?.copyWith(
                                             color: Theme.of(context).hintColor,
                                           ),

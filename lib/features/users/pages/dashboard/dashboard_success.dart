@@ -54,14 +54,14 @@ class DashboardSuccess extends StatelessWidget {
                           Text(
                             users[index].name ?? "",
                             style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       fontWeight: FontWeight.w500,
                                     ),
                           ),
                           Text(
                             users[index].email ?? "",
                             style:
-                                Theme.of(context).textTheme.bodyText2?.copyWith(
+                                Theme.of(context).textTheme.bodyMedium?.copyWith(
                                       color: Theme.of(context).hintColor,
                                     ),
                           ),

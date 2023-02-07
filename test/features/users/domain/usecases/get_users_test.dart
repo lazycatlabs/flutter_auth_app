@@ -13,7 +13,7 @@ void main() {
   late MockUsersRepository mockUsersRepository;
   late GetUsers getUsers;
   late Users users;
-  final usersParams = const UsersParams();
+  const usersParams = UsersParams();
 
   setUp(() {
     users = UsersResponse.fromJson(

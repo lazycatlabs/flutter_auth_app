@@ -1,183 +1,180 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
 /// Light theme
-ThemeData themeLight = ThemeData(
-  fontFamily: 'Poppins',
-  primaryColor: Palette.primary,
-  disabledColor: Palette.disable,
-  hintColor: Palette.hint,
-  cardColor: Palette.white,
-  backgroundColor: Palette.background,
-  scaffoldBackgroundColor: Palette.background,
-  colorScheme: const ColorScheme.light().copyWith(primary: Palette.primary),
-  textTheme: TextTheme(
-    headline1: TextStyles.h1,
-    headline2: TextStyles.h2,
-    headline3: TextStyles.h3,
-    headline4: TextStyles.h4,
-    headline5: TextStyles.h5,
-    headline6: TextStyles.h6,
-    subtitle1: TextStyles.subtitle1,
-    subtitle2: TextStyles.subtitle2,
-    bodyText1: TextStyles.body1,
-    bodyText2: TextStyles.body2,
-    caption: TextStyles.caption,
-    overline: TextStyles.overline,
-    button: TextStyles.button,
-  ),
-  appBarTheme: const AppBarTheme().copyWith(
-    titleTextStyle: TextStyles.body1,
-    color: Palette.white,
-    iconTheme: const IconThemeData(color: Palette.primary),
-  ),
-  brightness: Brightness.light,
-  iconTheme: const IconThemeData(color: Palette.primary),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-);
+ThemeData themeLight(BuildContext context) => ThemeData(
+      fontFamily: 'Poppins',
+      useMaterial3: true,
+      primaryColor: Palette.primary,
+      disabledColor: Palette.divider,
+      hintColor: Palette.hint,
+      cardColor: Palette.white,
+      scaffoldBackgroundColor: Palette.background,
+      colorScheme: const ColorScheme.light().copyWith(
+        primary: Palette.primary,
+        background: Palette.background,
+      ),
+      textTheme: TextTheme(
+        displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
+              fontSize: Dimens.displayLarge,
+              color: Palette.text,
+            ),
+        displayMedium: Theme.of(context).textTheme.displayMedium?.copyWith(
+              fontSize: Dimens.displayMedium,
+              color: Palette.text,
+            ),
+        displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
+              fontSize: Dimens.displaySmall,
+              color: Palette.text,
+            ),
+        headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontSize: Dimens.headlineMedium,
+              color: Palette.text,
+            ),
+        headlineSmall: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontSize: Dimens.headlineSmall,
+              color: Palette.text,
+            ),
+        titleLarge: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontSize: Dimens.titleLarge,
+              color: Palette.text,
+            ),
+        titleMedium: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: Dimens.titleMedium,
+              color: Palette.text,
+            ),
+        titleSmall: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontSize: Dimens.titleSmall,
+              color: Palette.text,
+            ),
+        bodyLarge: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontSize: Dimens.bodyLarge,
+              color: Palette.text,
+            ),
+        bodyMedium: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: Dimens.bodyMedium,
+              color: Palette.text,
+            ),
+        bodySmall: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: Dimens.bodySmall,
+              color: Palette.text,
+            ),
+        labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
+              fontSize: Dimens.labelLarge,
+              color: Palette.text,
+            ),
+        labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
+              fontSize: Dimens.labelSmall,
+              letterSpacing: 0.25,
+              color: Palette.text,
+            ),
+      ),
+      appBarTheme: const AppBarTheme().copyWith(
+        titleTextStyle: Theme.of(context).textTheme.bodyLarge,
+        color: Palette.white,
+        iconTheme: const IconThemeData(color: Palette.primary),
+        systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: Colors.transparent,
+        ),
+        surfaceTintColor: Palette.white,
+        shadowColor: Palette.divider,
+      ),
+      drawerTheme: const DrawerThemeData().copyWith(
+        elevation: 0,
+        surfaceTintColor: Palette.white,
+        backgroundColor: Palette.white,
+      ),
+      brightness: Brightness.light,
+      iconTheme: const IconThemeData(color: Palette.primary),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    );
 
 /// Dark theme
-ThemeData themeDark = ThemeData(
-  fontFamily: 'Poppins',
-  primaryColor: Palette.primary,
-  hintColor: Palette.white.withOpacity(0.75),
-  colorScheme: const ColorScheme.dark().copyWith(primary: Palette.primary),
-  textTheme: TextTheme(
-    headline1: TextStyles.h1.copyWith(color: Palette.white),
-    headline2: TextStyles.h2.copyWith(color: Palette.white),
-    headline3: TextStyles.h3.copyWith(color: Palette.white),
-    headline4: TextStyles.h4.copyWith(color: Palette.white),
-    headline5: TextStyles.h5.copyWith(color: Palette.white),
-    headline6: TextStyles.h6.copyWith(color: Palette.white),
-    subtitle1: TextStyles.subtitle1.copyWith(color: Palette.white),
-    subtitle2: TextStyles.subtitle2.copyWith(color: Palette.white),
-    bodyText1: TextStyles.body1.copyWith(color: Palette.white),
-    bodyText2: TextStyles.body2.copyWith(color: Palette.white),
-    caption: TextStyles.caption.copyWith(color: Palette.white),
-    overline: TextStyles.overline.copyWith(color: Palette.white),
-    button: TextStyles.button.copyWith(color: Palette.white),
-  ),
-  appBarTheme: const AppBarTheme().copyWith(
-    titleTextStyle: TextStyles.body1.copyWith(color: Palette.white),
-    iconTheme: const IconThemeData(color: Palette.white),
-    color: Palette.primary,
-  ),
-  brightness: Brightness.dark,
-  iconTheme: const IconThemeData(color: Palette.primaryLight),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  cardColor: Palette.primary.withOpacity(0.75),
-);
+ThemeData themeDark(BuildContext context) => ThemeData(
+      fontFamily: 'Poppins',
+      useMaterial3: true,
+      primaryColor: Palette.primary,
+      disabledColor: Palette.divider,
+      hintColor: Palette.white.withOpacity(0.75),
+      cardColor: Palette.primary.withOpacity(0.75),
+      scaffoldBackgroundColor: Palette.backgroundDark,
+      colorScheme: const ColorScheme.dark().copyWith(primary: Palette.primary),
+      textTheme: TextTheme(
+        displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
+              fontSize: Dimens.displayLarge,
+              color: Palette.white,
+            ),
+        displayMedium: Theme.of(context).textTheme.displayMedium?.copyWith(
+              fontSize: Dimens.displayMedium,
+              color: Palette.white,
+            ),
+        displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
+              fontSize: Dimens.displaySmall,
+              color: Palette.white,
+            ),
+        headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontSize: Dimens.headlineMedium,
+              color: Palette.white,
+            ),
+        headlineSmall: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontSize: Dimens.headlineSmall,
+              color: Palette.white,
+            ),
+        titleLarge: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontSize: Dimens.titleLarge,
+              color: Palette.white,
+            ),
+        titleMedium: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: Dimens.titleMedium,
+              color: Palette.white,
+            ),
+        titleSmall: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontSize: Dimens.titleSmall,
+              color: Palette.white,
+            ),
+        bodyLarge: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontSize: Dimens.bodyLarge,
+              color: Palette.white,
+            ),
+        bodyMedium: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: Dimens.bodyMedium,
+              color: Palette.white,
+            ),
+        bodySmall: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontSize: Dimens.bodySmall,
+              color: Palette.white,
+            ),
+        labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
+              fontSize: Dimens.labelLarge,
+              color: Palette.white,
+            ),
+        labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
+              fontSize: Dimens.labelSmall,
+              letterSpacing: 0.25,
+              color: Palette.white,
+            ),
+      ),
+      appBarTheme: const AppBarTheme().copyWith(
+        titleTextStyle: Theme.of(context).textTheme.bodyLarge,
+        iconTheme: const IconThemeData(color: Palette.white),
+        color: Palette.primary,
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+          statusBarColor: Colors.transparent,
+        ),
+        surfaceTintColor: Palette.primary,
+      ),
+      drawerTheme: const DrawerThemeData().copyWith(
+        elevation: 0,
+        surfaceTintColor: Palette.backgroundDark,
+        backgroundColor: Palette.backgroundDark,
+        shadowColor: Palette.divider,
+      ),
+      brightness: Brightness.dark,
+      iconTheme: const IconThemeData(color: Palette.primary),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    );
 
-// TextStyles class
-class TextStyles {
-  TextStyles._();
-
-  static TextStyle h1 = TextStyle(
-    fontSize: Dimens.h1,
-    fontWeight: FontWeight.w300,
-    decoration: TextDecoration.none,
-    letterSpacing: -1.5,
-    color: Palette.text,
-  );
-
-  static TextStyle h2 = TextStyle(
-    fontSize: Dimens.h2,
-    fontWeight: FontWeight.w300,
-    decoration: TextDecoration.none,
-    letterSpacing: -0.5,
-    color: Palette.text,
-  );
-
-  static TextStyle h3 = TextStyle(
-    fontSize: Dimens.h3,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0,
-    color: Palette.text,
-  );
-
-  static TextStyle h4 = TextStyle(
-    fontSize: Dimens.h4,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.25,
-    color: Palette.text,
-  );
-
-  static TextStyle h5 = TextStyle(
-    fontSize: Dimens.h5,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0,
-    color: Palette.text,
-  );
-
-  static TextStyle h6 = TextStyle(
-    fontSize: Dimens.h6,
-    fontWeight: FontWeight.w500,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.15,
-    color: Palette.text,
-  );
-
-  static TextStyle body1 = TextStyle(
-    fontSize: Dimens.body1,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.5,
-    color: Palette.text,
-  );
-
-  static TextStyle body2 = TextStyle(
-    fontSize: Dimens.body2,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.25,
-    color: Palette.text,
-  );
-
-  static TextStyle subtitle1 = TextStyle(
-    fontSize: Dimens.subtitle1,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.15,
-    color: Palette.text,
-  );
-
-  static TextStyle subtitle2 = TextStyle(
-    fontSize: Dimens.subtitle2,
-    fontWeight: FontWeight.w500,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.1,
-    color: Palette.text,
-  );
-
-  static TextStyle button = TextStyle(
-    fontSize: Dimens.button,
-    fontWeight: FontWeight.w500,
-    decoration: TextDecoration.none,
-    letterSpacing: 1.25,
-    color: Palette.text,
-  );
-
-  static TextStyle caption = TextStyle(
-    fontSize: Dimens.caption,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 0.4,
-    color: Palette.text,
-  );
-
-  static TextStyle overline = TextStyle(
-    fontSize: Dimens.overline,
-    fontWeight: FontWeight.normal,
-    decoration: TextDecoration.none,
-    letterSpacing: 1.5,
-    color: Palette.text,
-  );
-}
-
-//
 class BoxDecorations {
   BoxDecorations._();
 

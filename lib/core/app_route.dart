@@ -63,7 +63,7 @@ class AppRoute {
             path: Routes.dashboard.path,
             name: Routes.dashboard.name,
             builder: (_, __) => BlocProvider(
-              create: (_) => sl<UsersCubit>()..fetchUsers(UsersParams()),
+              create: (_) => sl<UsersCubit>()..fetchUsers(const UsersParams()),
               child: const DashboardPage(),
             ),
           ),

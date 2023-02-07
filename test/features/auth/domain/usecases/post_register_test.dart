@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     register = RegisterResponse.fromJson(json
-            .decode(jsonReader(successRegisterPath)) as Map<String, dynamic>)
+            .decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,)
         .toEntity();
     mockAuthRepository = MockAuthRepository();
     postRegister = PostRegister(mockAuthRepository);

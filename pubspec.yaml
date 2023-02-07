@@ -82,7 +82,7 @@ dev_dependencies:
 #  dart_code_metrics: ^4.21.0
   lint: ^2.0.1
   flutter_lints: ^2.0.1
-  bloc_test: ^9.1.0
+  bloc_test: ^9.1.1
   build_runner: ^2.3.3
   http_mock_adapter: ^0.3.3
 

@@ -163,6 +163,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
           statusBarColor: Colors.transparent,
         ),
         surfaceTintColor: Palette.primary,
+        shadowColor: Palette.divider,
       ),
       drawerTheme: const DrawerThemeData().copyWith(
         elevation: 0,

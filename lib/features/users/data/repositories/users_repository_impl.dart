@@ -10,17 +10,16 @@ class UsersRepositoryImpl implements UsersRepository {
 
   @override
   Future<Either<Failure, Users>> users(UsersParams usersParams) async {
-    try {
-      final response = await usersRemoteDatasource.users(usersParams);
+    final response = await usersRemoteDatasource.users(usersParams);
 
-      /// Throw error when data is empty
-      if (response.data?.isEmpty ?? true) {
-        return Left(NoDataFailure());
-      }
-
-      return Right(response.toEntity());
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
-    }
+    return response.fold(
+      (failure) => Left(failure),
+      (usersResponse) {
+        if (usersResponse.data?.isEmpty ?? true) {
+          return Left(NoDataFailure());
+        }
+        return Right(usersResponse.toEntity());
+      },
+    );
   }
 }

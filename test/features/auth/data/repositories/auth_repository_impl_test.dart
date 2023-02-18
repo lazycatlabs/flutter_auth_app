@@ -34,8 +34,10 @@ void main() {
     test('should return login when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
-        (_) async => LoginResponse.fromJson(
-          json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+        (_) async => Right(
+          LoginResponse.fromJson(
+            json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+          ),
         ),
       );
 
@@ -44,7 +46,8 @@ void main() {
 
       // assert
       verify(mockAuthRemoteDatasource.login(loginParams));
-      expect(result, equals(Right(login)));
+
+      expect(result, Right(login));
     });
 
     test(
@@ -52,14 +55,14 @@ void main() {
       () async {
         // arrange
         when(mockAuthRemoteDatasource.login(loginParams))
-            .thenThrow(ServerException(''));
+            .thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.login(loginParams);
 
         // assert
         verify(mockAuthRemoteDatasource.login(loginParams));
-        expect(result, equals(const Left(ServerFailure(''))));
+        expect(result, const Left(ServerFailure('')));
       },
     );
   });
@@ -69,8 +72,11 @@ void main() {
     test('should return register when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(
-        (_) async => RegisterResponse.fromJson(
-          json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+        (_) async => Right(
+          RegisterResponse.fromJson(
+            json.decode(jsonReader(successRegisterPath))
+                as Map<String, dynamic>,
+          ),
         ),
       );
 
@@ -87,14 +93,14 @@ void main() {
       () async {
         // arrange
         when(mockAuthRemoteDatasource.register(registerParams))
-            .thenThrow(ServerException(''));
+            .thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.register(registerParams);
 
         // assert
         verify(mockAuthRemoteDatasource.register(registerParams));
-        expect(result, equals(const Left(ServerFailure(''))));
+        expect(result, const Left(ServerFailure('')));
       },
     );
   });

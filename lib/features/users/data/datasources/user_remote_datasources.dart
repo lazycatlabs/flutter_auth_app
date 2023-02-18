@@ -1,8 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 
 abstract class UsersRemoteDatasource {
-  Future<UsersResponse> users(UsersParams userParams);
+  Future<Either<Failure, UsersResponse>> users(UsersParams userParams);
 }
 
 class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
@@ -11,22 +12,14 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
   UsersRemoteDatasourceImpl(this._client);
 
   @override
-  Future<UsersResponse> users(UsersParams userParams) async {
-    try {
-      final response = await _client.getRequest(
-        ListAPI.users,
-        queryParameters: userParams.toJson(),
-      );
-      final result =
-          UsersResponse.fromJson(response.data as Map<String, dynamic>);
+  Future<Either<Failure, UsersResponse>> users(UsersParams userParams) async {
+    final response = await _client.getRequest(
+      ListAPI.users,
+      queryParameters: userParams.toJson(),
+      converter: (response) =>
+          UsersResponse.fromJson(response as Map<String, dynamic>),
+    );
 
-      if (response.statusCode == 200) {
-        return result;
-      } else {
-        throw ServerException(result.error);
-      }
-    } on ServerException catch (e) {
-      throw ServerException(e.message);
-    }
+    return response;
   }
 }

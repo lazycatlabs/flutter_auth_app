@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+
+typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient {
   String baseUrl = "https://reqres.in";
@@ -58,25 +61,51 @@ class DioClient {
         ),
       );
 
-  Future<Response> getRequest(
+  Future<Either<Failure, T>> getRequest<T>(
     String url, {
     Map<String, dynamic>? queryParameters,
+    required ResponseConverter<T> converter,
   }) async {
     try {
-      return await dio.get(url, queryParameters: queryParameters);
+      final response = await dio.get(url, queryParameters: queryParameters);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Right(converter(response.data));
+      }
+
+      throw DioError(
+        requestOptions: response.requestOptions,
+        response: response,
+      );
     } on DioError catch (e) {
-      throw Exception(e.message);
+      return Left(
+        ServerFailure(
+          e.response?.data['meta']['description'] as String? ?? e.message,
+        ),
+      );
     }
   }
 
-  Future<Response> postRequest(
+  Future<Either<Failure, T>> postRequest<T>(
     String url, {
     Map<String, dynamic>? data,
+    required ResponseConverter<T> converter,
   }) async {
     try {
-      return await dio.post(url, data: data);
+      final response = await dio.post(url, data: data);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Right(converter(response.data));
+      }
+
+      throw DioError(
+        requestOptions: response.requestOptions,
+        response: response,
+      );
     } on DioError catch (e) {
-      throw Exception(e.message);
+      return Left(
+        ServerFailure(
+          e.response?.data['meta']['description'] as String? ?? e.message,
+        ),
+      );
     }
   }
 }

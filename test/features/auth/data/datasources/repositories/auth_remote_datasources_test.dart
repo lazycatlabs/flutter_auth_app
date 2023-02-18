@@ -43,7 +43,10 @@ void main() {
         final result = await dataSource.register(registerParams);
 
         /// assert
-        expect(registerModel, equals(result));
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, registerModel),
+        );
       },
     );
 
@@ -62,10 +65,13 @@ void main() {
         );
 
         /// act
-        final result = dataSource.register(registerParams);
+        final result = await dataSource.register(registerParams);
 
         /// assert
-        expect(result, throwsA(isA<ServerException>()));
+        result.fold(
+          (l) => expect(l, isA<ServerFailure>()),
+          (r) => expect(r, null),
+        );
       },
     );
   });
@@ -94,7 +100,10 @@ void main() {
         final result = await dataSource.login(loginParams);
 
         /// assert
-        expect(loginModel, equals(result));
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, loginModel),
+        );
       },
     );
 
@@ -112,10 +121,13 @@ void main() {
         );
 
         /// act
-        final result = dataSource.login(loginParams);
+        final result = await dataSource.login(loginParams);
 
         /// assert
-        expect(result, throwsA(isA<ServerException>()));
+        result.fold(
+          (l) => expect(l, isA<ServerFailure>()),
+          (r) => expect(r, null),
+        );
       },
     );
   });

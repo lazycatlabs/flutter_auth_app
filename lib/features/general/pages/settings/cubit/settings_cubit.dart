@@ -8,7 +8,6 @@ class SettingsCubit extends Cubit<DataHelper> {
   void updateTheme(ActiveTheme activeTheme) {
     sl<PrefManager>().theme = activeTheme.name;
 
-    log.d(sl<PrefManager>().theme);
     emit(DataHelper(activeTheme: activeTheme, type: sl<PrefManager>().locale));
   }
 

@@ -3,12 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:flutter_auth_app/core/core.dart' as _i6;
+import 'package:flutter_auth_app/core/core.dart' as _i5;
 import 'package:flutter_auth_app/features/auth/auth.dart' as _i3;
-import 'package:flutter_auth_app/features/users/users.dart' as _i4;
+import 'package:flutter_auth_app/features/users/users.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -32,37 +32,6 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-class _FakeRegisterResponse_1 extends _i1.SmartFake
-    implements _i3.RegisterResponse {
-  _FakeRegisterResponse_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeLoginResponse_2 extends _i1.SmartFake implements _i3.LoginResponse {
-  _FakeLoginResponse_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUsersResponse_3 extends _i1.SmartFake implements _i4.UsersResponse {
-  _FakeUsersResponse_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -72,39 +41,39 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
   }
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i3.Login>> login(
+  _i4.Future<_i2.Either<_i5.Failure, _i3.Login>> login(
           _i3.LoginParams? loginParams) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [loginParams],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i3.Login>>.value(
-            _FakeEither_0<_i6.Failure, _i3.Login>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i3.Login>>.value(
+            _FakeEither_0<_i5.Failure, _i3.Login>(
           this,
           Invocation.method(
             #login,
             [loginParams],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i3.Login>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i3.Login>>);
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i3.Register>> register(
+  _i4.Future<_i2.Either<_i5.Failure, _i3.Register>> register(
           _i3.RegisterParams? registerParams) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
           [registerParams],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i3.Register>>.value(
-            _FakeEither_0<_i6.Failure, _i3.Register>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i3.Register>>.value(
+            _FakeEither_0<_i5.Failure, _i3.Register>(
           this,
           Invocation.method(
             #register,
             [registerParams],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i3.Register>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i3.Register>>);
 }
 
 /// A class which mocks [AuthRemoteDatasource].
@@ -117,7 +86,7 @@ class MockAuthRemoteDatasource extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i3.RegisterResponse> register(
+  _i4.Future<_i2.Either<_i5.Failure, _i3.RegisterResponse>> register(
           _i3.RegisterParams? registerParams) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -125,80 +94,87 @@ class MockAuthRemoteDatasource extends _i1.Mock
           [registerParams],
         ),
         returnValue:
-            _i5.Future<_i3.RegisterResponse>.value(_FakeRegisterResponse_1(
+            _i4.Future<_i2.Either<_i5.Failure, _i3.RegisterResponse>>.value(
+                _FakeEither_0<_i5.Failure, _i3.RegisterResponse>(
           this,
           Invocation.method(
             #register,
             [registerParams],
           ),
         )),
-      ) as _i5.Future<_i3.RegisterResponse>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i3.RegisterResponse>>);
   @override
-  _i5.Future<_i3.LoginResponse> login(_i3.LoginParams? loginParams) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i3.LoginResponse>> login(
+          _i3.LoginParams? loginParams) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [loginParams],
         ),
-        returnValue: _i5.Future<_i3.LoginResponse>.value(_FakeLoginResponse_2(
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i3.LoginResponse>>.value(
+                _FakeEither_0<_i5.Failure, _i3.LoginResponse>(
           this,
           Invocation.method(
             #login,
             [loginParams],
           ),
         )),
-      ) as _i5.Future<_i3.LoginResponse>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i3.LoginResponse>>);
 }
 
 /// A class which mocks [UsersRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUsersRepository extends _i1.Mock implements _i4.UsersRepository {
+class MockUsersRepository extends _i1.Mock implements _i6.UsersRepository {
   MockUsersRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i4.Users>> users(
-          _i4.UsersParams? usersParams) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Users>> users(
+          _i6.UsersParams? usersParams) =>
       (super.noSuchMethod(
         Invocation.method(
           #users,
           [usersParams],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i4.Users>>.value(
-            _FakeEither_0<_i6.Failure, _i4.Users>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Users>>.value(
+            _FakeEither_0<_i5.Failure, _i6.Users>(
           this,
           Invocation.method(
             #users,
             [usersParams],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i4.Users>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Users>>);
 }
 
 /// A class which mocks [UsersRemoteDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersRemoteDatasource extends _i1.Mock
-    implements _i4.UsersRemoteDatasource {
+    implements _i6.UsersRemoteDatasource {
   MockUsersRemoteDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i4.UsersResponse> users(_i4.UsersParams? userParams) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.UsersResponse>> users(
+          _i6.UsersParams? userParams) =>
       (super.noSuchMethod(
         Invocation.method(
           #users,
           [userParams],
         ),
-        returnValue: _i5.Future<_i4.UsersResponse>.value(_FakeUsersResponse_3(
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.UsersResponse>>.value(
+                _FakeEither_0<_i5.Failure, _i6.UsersResponse>(
           this,
           Invocation.method(
             #users,
             [userParams],
           ),
         )),
-      ) as _i5.Future<_i4.UsersResponse>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UsersResponse>>);
 }

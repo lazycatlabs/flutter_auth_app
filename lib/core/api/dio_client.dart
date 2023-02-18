@@ -79,7 +79,7 @@ class DioClient {
     } on DioError catch (e) {
       return Left(
         ServerFailure(
-          e.response?.data['meta']['description'] as String? ?? e.message,
+          e.response?.data['description'] as String? ?? e.message,
         ),
       );
     }
@@ -103,7 +103,7 @@ class DioClient {
     } on DioError catch (e) {
       return Left(
         ServerFailure(
-          e.response?.data['meta']['description'] as String? ?? e.message,
+          e.response?.data['description'] as String? ?? e.message,
         ),
       );
     }

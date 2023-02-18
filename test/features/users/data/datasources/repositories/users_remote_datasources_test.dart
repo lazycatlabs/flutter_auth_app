@@ -22,9 +22,11 @@ void main() {
   group('user', () {
     const usersParams = UsersParams();
     final usersModel = UsersResponse.fromJson(
-        json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,);
+      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+    );
     final usersEmptyModel = UsersResponse.fromJson(
-        json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,);
+      json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,
+    );
 
     test(
       'should return list user success model when response code is 200',
@@ -43,7 +45,10 @@ void main() {
         final result = await dataSource.users(usersParams);
 
         /// assert
-        expect(usersModel, equals(result));
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, usersModel),
+        );
       },
     );
 
@@ -64,7 +69,10 @@ void main() {
         final result = await dataSource.users(usersParams);
 
         /// assert
-        expect(usersEmptyModel, equals(result));
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, usersEmptyModel),
+        );
       },
     );
 
@@ -82,10 +90,13 @@ void main() {
         );
 
         /// act
-        final result = dataSource.users(usersParams);
+        final result = await dataSource.users(usersParams);
 
         /// assert
-        expect(result, throwsA(isA<ServerException>()));
+        result.fold(
+          (l) => expect(l, isA<ServerFailure>()),
+          (r) => expect(r, null),
+        );
       },
     );
   });

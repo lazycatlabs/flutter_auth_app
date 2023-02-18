@@ -32,8 +32,10 @@ void main() {
     test('should return list user when call data is successful', () async {
       // arrange
       when(mockUsersRemoteDatasource.users(userParams)).thenAnswer(
-        (_) async => UsersResponse.fromJson(
-          json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+        (_) async => Right(
+          UsersResponse.fromJson(
+            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+          ),
         ),
       );
 
@@ -50,9 +52,7 @@ void main() {
       () async {
         // arrange
         when(mockUsersRemoteDatasource.users(userParamsEmpty)).thenAnswer(
-          (_) async => UsersResponse.fromJson(
-            json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,
-          ),
+          (_) async => Left(NoDataFailure()),
         );
 
         // act
@@ -69,7 +69,7 @@ void main() {
       () async {
         // arrange
         when(mockUsersRemoteDatasource.users(userParams))
-            .thenThrow(ServerException(''));
+            .thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.users(userParams);

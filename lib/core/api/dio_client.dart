@@ -53,8 +53,8 @@ class DioClient {
               'Authorization': _auth,
             },
           },
-          receiveTimeout: 60000,
-          connectTimeout: 60000,
+          receiveTimeout: const Duration(minutes: 1),
+          connectTimeout: const Duration(minutes: 1),
           validateStatus: (int? status) {
             return status! > 0;
           },

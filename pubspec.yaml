@@ -31,16 +31,16 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   # Use as default SVG image loader, prefer use SVG as image asset
-  flutter_svg: ^2.0.0+1
+  flutter_svg: ^2.0.5
 
   # Functional programming thingies
   dartz: ^0.10.1
 
   # Use as Network Client
-  dio: ^4.0.6
+  dio: ^5.1.1
 
   # Use as sharedPreferences to save local data
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.1.0
 
   # Use for Dependencies Injection
   get_it: ^7.2.0
@@ -55,20 +55,20 @@ dependencies:
   oktoast: ^3.3.1
 
   # Use for responsive UI, set default size base on Mock Up
-  flutter_screenutil: ^5.6.1
+  flutter_screenutil: ^5.7.0
 
   cached_network_image: ^3.2.3
 
   # logger
-  logger: ^1.1.0
+  logger: ^1.3.0
 
   # Firebase
-  firebase_core: ^2.4.1
-  firebase_analytics: ^10.1.0
-  firebase_crashlytics: ^3.0.11
+  firebase_core: ^2.10.0
+  firebase_analytics: ^10.2.1
+  firebase_crashlytics: ^3.1.1
 
   # router
-  go_router: ^6.0.4
+  go_router: ^6.5.7
 
   # Freezed
   freezed_annotation: ^2.2.0
@@ -77,17 +77,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.11.0
+  flutter_launcher_icons: ^0.13.1
   #Remove unused files
 #  dart_code_metrics: ^4.21.0
   lint: ^2.0.1
   flutter_lints: ^2.0.1
   bloc_test: ^9.1.1
   build_runner: ^2.3.3
-  http_mock_adapter: ^0.3.3
+  http_mock_adapter: ^0.4.2
 
   #Temporary using old version because error when generate build_runner
-  mockito: ^5.3.2
+  mockito: ^5.4.0
 
   # Freezed
   freezed: ^2.3.2

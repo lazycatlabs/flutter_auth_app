@@ -81,9 +81,19 @@ ThemeData themeLight(BuildContext context) => ThemeData(
         shadowColor: Palette.divider,
       ),
       drawerTheme: const DrawerThemeData().copyWith(
-        elevation: 0,
+        elevation: Dimens.zero,
         surfaceTintColor: Palette.white,
         backgroundColor: Palette.white,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData().copyWith(
+        backgroundColor: Palette.white,
+        surfaceTintColor: Colors.transparent,
+        elevation: Dimens.zero,
+      ),
+      dialogTheme: const DialogTheme().copyWith(
+        backgroundColor: Palette.white,
+        surfaceTintColor: Colors.transparent,
+        elevation: Dimens.zero,
       ),
       brightness: Brightness.light,
       iconTheme: const IconThemeData(color: Palette.primary),
@@ -166,10 +176,20 @@ ThemeData themeDark(BuildContext context) => ThemeData(
         shadowColor: Palette.divider,
       ),
       drawerTheme: const DrawerThemeData().copyWith(
-        elevation: 0,
+        elevation: Dimens.zero,
         surfaceTintColor: Palette.backgroundDark,
         backgroundColor: Palette.backgroundDark,
         shadowColor: Palette.divider,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData().copyWith(
+        backgroundColor: Palette.backgroundDark,
+        surfaceTintColor: Colors.transparent,
+        elevation: Dimens.zero,
+      ),
+      dialogTheme: const DialogTheme().copyWith(
+        backgroundColor: Palette.backgroundDark,
+        surfaceTintColor: Colors.transparent,
+        elevation: Dimens.zero,
       ),
       brightness: Brightness.dark,
       iconTheme: const IconThemeData(color: Palette.primary),

@@ -37,10 +37,7 @@ class LzyctApp extends StatelessWidget {
 
             return BlocBuilder<SettingsCubit, DataHelper>(
               builder: (_, data) => MaterialApp.router(
-                routeInformationProvider:
-                    AppRoute.router.routeInformationProvider,
-                routeInformationParser: AppRoute.router.routeInformationParser,
-                routerDelegate: AppRoute.router.routerDelegate,
+                routerConfig: AppRoute.router,
                 localizationsDelegates: const [
                   Strings.delegate,
                   GlobalMaterialLocalizations.delegate,

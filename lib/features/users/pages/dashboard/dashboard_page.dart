@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 ///*********************************************
@@ -97,10 +98,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       _users[index].name ?? "",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                          .bodyLarge500,
                                     ),
                                     Text(
                                       _users[index].email ?? "",

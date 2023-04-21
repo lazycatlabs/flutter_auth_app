@@ -28,7 +28,7 @@ apply plugin: 'com.google.gms.google-services'
 
 
 android {
-    compileSdkVersion 33
+    compileSdk 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -50,7 +50,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.lazycatlabs.auth"
-        minSdkVersion 19
+        minSdkVersion 20
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -82,7 +82,7 @@ android {
         }
     }
 
-    flavorDimensions "env"
+    flavorDimensions = ["env"]
     productFlavors {
         stg {
             dimension 'env'

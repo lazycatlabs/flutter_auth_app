@@ -46,13 +46,9 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        log.d("onBackPress");
         if (_dataMenus[_currentIndex].title == Strings.of(context)!.dashboard) {
-          log.d("true");
-
           return true;
         } else {
-          log.d("false");
           if (_scaffoldKey.currentState!.isEndDrawerOpen) {
             //hide navigation drawer
             _scaffoldKey.currentState!.openDrawer();

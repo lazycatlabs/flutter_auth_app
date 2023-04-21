@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 
 class DashboardSuccess extends StatelessWidget {
   const DashboardSuccess({
@@ -53,17 +54,16 @@ class DashboardSuccess extends StatelessWidget {
                         children: [
                           Text(
                             users[index].name ?? "",
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            style: Theme.of(context).textTheme.bodyLarge500,
                           ),
                           Text(
                             users[index].email ?? "",
-                            style:
-                                Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).hintColor,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: Theme.of(context).hintColor,
+                                ),
                           ),
                         ],
                       ),

@@ -43,7 +43,6 @@ class _LoginPageState extends State<LoginPage> {
     return Parent(
       child: BlocListener<AuthCubit, AuthState>(
         listener: (_, state) {
-          log.d("loginState $state");
           state.when(
             loading: () => context.show(),
             success: (data) {

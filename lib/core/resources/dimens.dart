@@ -17,6 +17,7 @@ class Dimens {
   static double bodySmall = 12.sp;
   static double labelSmall = 10.sp;
 
+  static double zero = 0;
   static double space2 = 2.w;
   static double space3 = 3.w;
   static double space4 = 4.w;

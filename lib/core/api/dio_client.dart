@@ -65,17 +65,27 @@ class DioClient {
     String url, {
     Map<String, dynamic>? queryParameters,
     required ResponseConverter<T> converter,
+    bool isIsolate = true,
   }) async {
     try {
       final response = await dio.get(url, queryParameters: queryParameters);
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return Right(converter(response.data));
+      if ((response.statusCode ?? 0) < 200 ||
+          (response.statusCode ?? 0) > 201) {
+        throw DioError(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
       }
 
-      throw DioError(
-        requestOptions: response.requestOptions,
-        response: response,
+      if (!isIsolate) {
+        return Right(converter(response.data));
+      }
+      final isolateParse = IsolateParser<T>(
+        response.data as Map<String, dynamic>,
+        converter,
       );
+      final result = await isolateParse.parseInBackground();
+      return Right(result);
     } on DioError catch (e) {
       return Left(
         ServerFailure(
@@ -89,17 +99,27 @@ class DioClient {
     String url, {
     Map<String, dynamic>? data,
     required ResponseConverter<T> converter,
+    bool isIsolate = true,
   }) async {
     try {
       final response = await dio.post(url, data: data);
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return Right(converter(response.data));
+      if ((response.statusCode ?? 0) < 200 ||
+          (response.statusCode ?? 0) > 201) {
+        throw DioError(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
       }
 
-      throw DioError(
-        requestOptions: response.requestOptions,
-        response: response,
+      if (!isIsolate) {
+        return Right(converter(response.data));
+      }
+      final isolateParse = IsolateParser<T>(
+        response.data as Map<String, dynamic>,
+        converter,
       );
+      final result = await isolateParse.parseInBackground();
+      return Right(result);
     } on DioError catch (e) {
       return Left(
         ServerFailure(

@@ -1,26 +1,37 @@
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SettingsCubit extends Cubit<DataHelper> {
+class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
   SettingsCubit() : super(DataHelper(type: "en"));
 
   void updateTheme(ActiveTheme activeTheme) {
-    sl<PrefManager>().theme = activeTheme.name;
-
-    emit(DataHelper(activeTheme: activeTheme, type: sl<PrefManager>().locale));
+    addData(MainBoxKeys.theme, activeTheme.name);
+    emit(
+      DataHelper(
+        activeTheme: activeTheme,
+        type: getData(MainBoxKeys.locale),
+      ),
+    );
   }
 
   void updateLanguage(String type) {
     /// Update locale code
-    sl<PrefManager>().locale = type;
+    addData(MainBoxKeys.locale, type);
     emit(DataHelper(type: type, activeTheme: getActiveTheme()));
   }
 
   ActiveTheme getActiveTheme() {
-    final activeTheme = ActiveTheme.values
-        .singleWhere((element) => element.name == sl<PrefManager>().theme);
-    emit(DataHelper(activeTheme: activeTheme, type: sl<PrefManager>().locale));
+    final activeTheme = ActiveTheme.values.singleWhere(
+      (element) =>
+          element.name ==
+          (getData(MainBoxKeys.theme) ?? ActiveTheme.system.name),
+    );
+    emit(
+      DataHelper(
+        activeTheme: activeTheme,
+        type: getData(MainBoxKeys.locale) ?? "en",
+      ),
+    );
     return activeTheme;
   }
 }

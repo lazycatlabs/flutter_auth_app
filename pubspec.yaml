@@ -42,8 +42,9 @@ dependencies:
   # Use as Network Client
   dio: ^5.2.1+1
 
-  # Use as sharedPreferences to save local data
-  shared_preferences: ^2.2.0
+  # Use hive to save local data
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
   # Use for Dependencies Injection
   get_it: ^7.6.0
@@ -94,7 +95,8 @@ dev_dependencies:
   freezed: ^2.4.1
   json_serializable: ^6.7.1
 
-
+  # hive generator
+  hive_generator: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

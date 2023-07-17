@@ -59,7 +59,7 @@ class LzyctApp extends StatelessWidget {
                 title: Constants.get.appName,
                 theme: themeLight(context),
                 darkTheme: themeDark(context),
-                locale: Locale(sl<PrefManager>().locale),
+                locale: Locale(data.type ?? "en"),
                 supportedLocales: L10n.all,
                 themeMode: data.activeTheme.mode,
               ),

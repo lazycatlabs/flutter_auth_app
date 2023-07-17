@@ -7,7 +7,6 @@ import 'package:flutter_auth_app/config.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/lzyct_app.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runZonedGuarded(
@@ -17,7 +16,7 @@ void main() {
 
       /// Register Service locator
       await serviceLocator();
-      await FirebaseServices().init();
+      await FirebaseServices.init();
 
       /// Set env as staging
       environment = Environment.staging;
@@ -27,13 +26,7 @@ void main() {
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
         ],
-      ).then((_) async {
-        /// Load SharedPref before load My App Widget
-        SharedPreferences.getInstance().then((value) {
-          initPrefManager(value);
-          runApp(LzyctApp());
-        });
-      });
+      ).then((_) => runApp(LzyctApp()));
     },
     (error, stackTrace) async {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);

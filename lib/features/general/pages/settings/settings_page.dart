@@ -18,7 +18,7 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
   late final ActiveTheme _selectedTheme = sl<SettingsCubit>().getActiveTheme();
 
   late final List<DataHelper> _listLanguage = [
@@ -26,7 +26,9 @@ class _SettingsPageState extends State<SettingsPage> {
     DataHelper(title: Constants.get.bahasa, type: "id"),
   ];
   late DataHelper _selectedLanguage =
-      sl<PrefManager>().locale == "en" ? _listLanguage[0] : _listLanguage[1];
+      (getData(MainBoxKeys.locale) ?? "en") == "en"
+          ? _listLanguage[0]
+          : _listLanguage[1];
 
   @override
   Widget build(BuildContext context) {

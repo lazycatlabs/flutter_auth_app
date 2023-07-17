@@ -6,7 +6,9 @@ import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
 import '../../../../helpers/test_mock.mocks.dart';
@@ -18,9 +20,11 @@ void main() {
   late Register register;
 
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     mockAuthRemoteDatasource = MockAuthRemoteDatasource();
-    authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource);
+    authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource, sl());
     login = LoginResponse.fromJson(
       json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
     ).toEntity();

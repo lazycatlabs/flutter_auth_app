@@ -8,7 +8,9 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 import 'auth_cubit_test.mocks.dart';
@@ -27,6 +29,8 @@ void main() {
 
   /// Initialize data
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     login = LoginResponse.fromJson(
       json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,

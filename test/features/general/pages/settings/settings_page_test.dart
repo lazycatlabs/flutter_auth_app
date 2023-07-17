@@ -10,11 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-// ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
+// ignore: depend_on_referenced_packages
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
-class MockSettingsCubit extends MockCubit<DataHelper> implements SettingsCubit {
-}
+import '../../../../helpers/fake_path_provider_platform.dart';
+
+class MockSettingsCubit extends MockCubit<DataHelper>
+    implements SettingsCubit {}
 
 void main() {
   late SettingsCubit settingsCubit;
@@ -24,6 +27,8 @@ void main() {
   });
 
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     settingsCubit = MockSettingsCubit();
   });
@@ -42,7 +47,7 @@ void main() {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          locale: Locale(sl<PrefManager>().locale),
+          locale: const Locale("en"),
           home: body,
         ),
       ),

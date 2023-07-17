@@ -80,8 +80,8 @@ class AppRoute {
     debugLogDiagnostics: kDebugMode,
     refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
     redirect: (_, GoRouterState state) {
-      final bool isLoginPage = state.subloc == Routes.login.path ||
-          state.subloc == Routes.register.path;
+      final bool isLoginPage = state.matchedLocation == Routes.login.path ||
+          state.matchedLocation == Routes.register.path;
 
       ///  Check if not login
       ///  if current page is login page we don't need to direct user

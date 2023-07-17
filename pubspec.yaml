@@ -18,7 +18,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.6 <3.0.0'
+  sdk: ^3.0.0
+
+dependency_overrides:
+  intl: ^0.18.1
 
 dependencies:
   flutter:
@@ -31,48 +34,46 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   # Use as default SVG image loader, prefer use SVG as image asset
-  flutter_svg: ^2.0.5
+  flutter_svg: ^2.0.7
 
   # Functional programming thingies
   dartz: ^0.10.1
 
   # Use as Network Client
-  dio: ^5.1.1
+  dio: ^5.2.1+1
 
   # Use as sharedPreferences to save local data
-  shared_preferences: ^2.1.0
+  shared_preferences: ^2.2.0
 
   # Use for Dependencies Injection
-  get_it: ^7.2.0
+  get_it: ^7.6.0
 
   # Use for State Management with BLoC pattern
-  flutter_bloc: ^8.1.2
+  flutter_bloc: ^8.1.3
 
-  # Use for Time/Date Format
-  intl: any
 
   # Use for custom toast with Status, ex : Loading,Success,Failed
   oktoast: ^3.3.1
 
   # Use for responsive UI, set default size base on Mock Up
-  flutter_screenutil: ^5.7.0
+  flutter_screenutil: ^5.8.4
 
   cached_network_image: ^3.2.3
 
   # logger
-  logger: ^1.3.0
+  logger: ^1.4.0
 
   # Firebase
-  firebase_core: ^2.10.0
-  firebase_analytics: ^10.2.1
-  firebase_crashlytics: ^3.1.1
+  firebase_core: ^2.15.0
+  firebase_analytics: ^10.4.4
+  firebase_crashlytics: ^3.3.4
 
   # router
-  go_router: ^6.5.7
+  go_router: ^9.0.3
 
   # Freezed
-  freezed_annotation: ^2.2.0
-  json_annotation: ^4.8.0
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
@@ -80,18 +81,18 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   #Remove unused files
 #  dart_code_metrics: ^4.21.0
-  lint: ^2.0.1
-  flutter_lints: ^2.0.1
-  bloc_test: ^9.1.1
-  build_runner: ^2.3.3
-  http_mock_adapter: ^0.4.2
+  lint: ^2.1.2
+  flutter_lints: ^2.0.2
+  bloc_test: ^9.1.3
+  build_runner: ^2.4.6
+  http_mock_adapter: ^0.4.4
 
   #Temporary using old version because error when generate build_runner
-  mockito: ^5.4.0
+  mockito: ^5.4.2
 
   # Freezed
-  freezed: ^2.3.2
-  json_serializable: ^6.6.1
+  freezed: ^2.4.1
+  json_serializable: ^6.7.1
 
 
 

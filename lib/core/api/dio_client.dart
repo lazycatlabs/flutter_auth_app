@@ -5,7 +5,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 
 typedef ResponseConverter<T> = T Function(dynamic response);
 
-class DioClient with MainBoxMixin {
+class DioClient with MainBoxMixin, FirebaseCrashLogger {
   String baseUrl = "https://reqres.in";
 
   String? _auth;
@@ -86,6 +86,7 @@ class DioClient with MainBoxMixin {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
+      nonFatalError(error: e, stackTrace: stackTrace);
       return Left(
         ServerFailure(
           e.response?.data['description'] as String? ?? e.message,
@@ -120,6 +121,7 @@ class DioClient with MainBoxMixin {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
+      nonFatalError(error: e, stackTrace: stackTrace);
       return Left(
         ServerFailure(
           e.response?.data['description'] as String? ?? e.message,

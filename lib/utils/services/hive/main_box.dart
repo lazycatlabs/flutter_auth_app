@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 enum ActiveTheme {
@@ -56,6 +57,8 @@ mixin class MainBoxMixin {
         await mainBox?.close();
         await mainBox?.deleteFromDisk();
       }
-    } catch (_) {}
+    } catch (e, stackTrace) {
+      FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+    }
   }
 }

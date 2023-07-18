@@ -57,7 +57,7 @@ extension ContextExtensions on BuildContext {
                   ),
                   margin: EdgeInsets.symmetric(horizontal: Dimens.space30),
                   padding: EdgeInsets.all(Dimens.space24),
-                  child: Wrap(children: const [Loading()]),
+                  child: const Loading(),
                 ),
               ),
             ),

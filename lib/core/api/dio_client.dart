@@ -70,7 +70,7 @@ class DioClient with MainBoxMixin {
       final response = await dio.get(url, queryParameters: queryParameters);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
-        throw DioError(
+        throw DioException(
           requestOptions: response.requestOptions,
           response: response,
         );
@@ -85,7 +85,7 @@ class DioClient with MainBoxMixin {
       );
       final result = await isolateParse.parseInBackground();
       return Right(result);
-    } on DioError catch (e) {
+    } on DioException catch (e, stackTrace) {
       return Left(
         ServerFailure(
           e.response?.data['description'] as String? ?? e.message,
@@ -104,7 +104,7 @@ class DioClient with MainBoxMixin {
       final response = await dio.post(url, data: data);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
-        throw DioError(
+        throw DioException(
           requestOptions: response.requestOptions,
           response: response,
         );
@@ -119,7 +119,7 @@ class DioClient with MainBoxMixin {
       );
       final result = await isolateParse.parseInBackground();
       return Right(result);
-    } on DioError catch (e) {
+    } on DioException catch (e, stackTrace) {
       return Left(
         ServerFailure(
           e.response?.data['description'] as String? ?? e.message,

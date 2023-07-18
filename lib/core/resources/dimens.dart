@@ -28,6 +28,7 @@ class Dimens {
   static double space24 = 24.w;
   static double space30 = 30.w;
   static double space36 = 36.w;
+  static double space40 = 40.w;
   static double space46 = 46.w;
   static double space50 = 50.w;
 
@@ -40,10 +41,10 @@ class Dimens {
   static double carousel = 167.w;
   static double newsHeight = 185.w;
 
-  static double header = 160.w;
+  static double header = 200.w;
   static double minLabel = 116.w;
   static double bottomBar = 80.w;
-  static double profilePicture = 72.w;
+  static double profilePicture = 110.w;
   static double birthdayCalendar = 120.w;
 
   static double buttonH = 40.w;

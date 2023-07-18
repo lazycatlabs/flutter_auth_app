@@ -77,7 +77,8 @@ class _TextFState extends State<TextF> {
             child: Text(
               widget.hint ?? "",
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: Palette.hint,
+                    color:
+                        Theme.of(context).extension<LzyctColors>()!.background,
                     height: 0.1,
                   ),
             ),
@@ -105,10 +106,9 @@ class _TextFState extends State<TextF> {
                 alignLabelWithHint: true,
                 isDense: true,
                 hintText: widget.hintText,
-                hintStyle: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: Palette.disable),
+                hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).hintColor,
+                    ),
                 suffixIcon: widget.suffixIcon,
                 prefixIcon: Padding(
                   padding: EdgeInsets.symmetric(horizontal: Dimens.space12),
@@ -125,31 +125,36 @@ class _TextFState extends State<TextF> {
                 enabledBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.disable),
+                  borderSide: BorderSide(color: Theme.of(context).cardColor),
                 ),
                 disabledBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.disable),
+                  borderSide: BorderSide(color: Theme.of(context).cardColor),
                 ),
-                errorStyle: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(color: Palette.red),
+                errorStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).extension<LzyctColors>()!.red,
+                    ),
                 focusedErrorBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.red),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.red!,
+                  ),
                 ),
                 errorBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.red),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.red!,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.primary),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.pink!,
+                  ),
                 ),
               ),
               validator: widget.validator as String? Function(String?)?,

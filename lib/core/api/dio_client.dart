@@ -89,7 +89,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       nonFatalError(error: e, stackTrace: stackTrace);
       return Left(
         ServerFailure(
-          e.response?.data['description'] as String? ?? e.message,
+          e.response?.data['error'] as String? ?? e.message,
         ),
       );
     }
@@ -124,7 +124,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       nonFatalError(error: e, stackTrace: stackTrace);
       return Left(
         ServerFailure(
-          e.response?.data['description'] as String? ?? e.message,
+          e.response?.data['error'] as String? ?? e.message,
         ),
       );
     }

@@ -34,7 +34,7 @@ class ButtonText extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          foregroundColor: Palette.primaryLight,
+          foregroundColor: Theme.of(context).extension<LzyctColors>()!.pink,
         ),
         child: Text(
           title.toUpperCase(),

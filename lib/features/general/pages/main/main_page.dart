@@ -98,10 +98,11 @@ class _MainPageState extends State<MainPage> {
                       onPressed: () => context.back(),
                       child: Text(
                         Strings.of(context)!.cancel,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: Palette.hint),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .extension<LzyctColors>()!
+                                  .subtitle,
+                            ),
                       ),
                     ),
                     TextButton(
@@ -110,10 +111,11 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: Text(
                         Strings.of(context)!.yes,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: Palette.red),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .extension<LzyctColors>()!
+                                  .red,
+                            ),
                       ),
                     ),
                   ],
@@ -126,19 +128,6 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
-
-  // Widget get pages {
-  //   if (widget.screen == Routes.dashboard.name) {
-  //     return BlocProvider(
-  //       create: (_) => sl<UsersCubit>()..fetchUsers(UsersParams()),
-  //       child: const DashboardPage(),
-  //     );
-  //   } else if (widget.screen == Routes.settings.name) {
-  //     return const SettingsPage();
-  //   }
-  //
-  //   return Container();
-  // }
 
   PreferredSize _appBar() {
     return PreferredSize(
@@ -154,6 +143,7 @@ class _MainPageState extends State<MainPage> {
           icon: Icon(
             Icons.sort,
             size: Dimens.space24,
+            color: Theme.of(context).extension<LzyctColors>()!.pink,
           ),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();

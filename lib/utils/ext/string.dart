@@ -10,7 +10,7 @@ extension StringExtension on String {
     ).hasMatch(this);
   }
 
-  void toToastError() {
+  void toToastError(BuildContext context) {
     try {
       final message = isEmpty ? "error" : this;
 
@@ -19,7 +19,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Palette.red,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.red,
           icon: Icons.error,
           message: message,
           textColor: Colors.white,
@@ -34,7 +34,7 @@ extension StringExtension on String {
     }
   }
 
-  void toToastSuccess() {
+  void toToastSuccess(BuildContext context) {
     try {
       final message = isEmpty ? "success" : this;
 
@@ -44,7 +44,7 @@ extension StringExtension on String {
       // showToast(msg)
       showToastWidget(
         Toast(
-          bgColor: Colors.green,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.green,
           icon: Icons.check_circle,
           message: message,
           textColor: Colors.white,
@@ -59,7 +59,7 @@ extension StringExtension on String {
     }
   }
 
-  void toToastLoading() {
+  void toToastLoading(BuildContext context) {
     try {
       final message = isEmpty ? "loading" : this;
       //dismiss before show toast
@@ -67,7 +67,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Colors.black,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.pink,
           icon: Icons.info,
           message: message,
           textColor: Colors.white,

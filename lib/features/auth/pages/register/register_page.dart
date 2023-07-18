@@ -57,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
             },
             failure: (message) {
               context.dismiss();
-              message.toToastError();
+              message.toToastError(context);
             },
           );
         },

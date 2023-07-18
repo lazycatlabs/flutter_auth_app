@@ -47,13 +47,13 @@ class _LoginPageState extends State<LoginPage> {
             loading: () => context.show(),
             success: (data) {
               context.dismiss();
-              data.toString().toToastSuccess();
+              data.toString().toToastSuccess(context);
 
               TextInput.finishAutofillContext();
             },
             failure: (message) {
               context.dismiss();
-              message.toToastError();
+              message.toToastError(context);
             },
           );
         },
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        backgroundColor: Palette.primary,
+                        backgroundColor: Theme.of(context).hintColor,
                         radius: Dimens.profilePicture + Dimens.space4,
                         child: CircleAvatar(
                           backgroundImage: AssetImage(Images.icLauncher),

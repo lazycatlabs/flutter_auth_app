@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
 
@@ -32,6 +33,8 @@ void main() {
   });
 
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     usersCubit = MockUsersCubit();
     users = UsersResponse.fromJson(
@@ -53,7 +56,7 @@ void main() {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          locale: Locale(sl<PrefManager>().locale),
+          locale: const Locale("en"),
           home: body,
         ),
       ),

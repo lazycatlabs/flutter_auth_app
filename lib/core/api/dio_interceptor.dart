@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 
-class DioInterceptor extends Interceptor {
+class DioInterceptor extends Interceptor with FirebaseCrashLogger {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     String headerMessage = "";
@@ -28,30 +28,23 @@ class DioInterceptor extends Interceptor {
         "❖ QueryParameters : \n"
         "Body: $prettyJson",
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       log.e("Failed to extract json request $e");
-      // Crashlytics.nonFatalError(
-      //   error: e,
-      //   reason: "Failed to extract json request",
-      // );
+      nonFatalError(error: e, stackTrace: stackTrace);
     }
 
     super.onRequest(options, handler);
   }
 
   @override
-  void onError(DioError dioError, ErrorInterceptorHandler handler) {
+  void onError(DioException dioException, ErrorInterceptorHandler handler) {
     log.e(
-      "<-- ${dioError.message} ${dioError.response?.requestOptions != null ? (dioError.response!.requestOptions.baseUrl + dioError.response!.requestOptions.path) : 'URL'}\n\n"
-      "${dioError.response != null ? dioError.response!.data : 'Unknown Error'}",
+      "<-- ${dioException.message} ${dioException.response?.requestOptions != null ? (dioException.response!.requestOptions.baseUrl + dioException.response!.requestOptions.path) : 'URL'}\n\n"
+      "${dioException.response != null ? dioException.response!.data : 'Unknown Error'}",
     );
 
-    // Crashlytics.nonFatalError(
-    //   error: dioError.error,
-    //   stackTrace: dioError.stackTrace,
-    //   reason: "Failed to fetch data",
-    // );
-    super.onError(dioError, handler);
+    nonFatalError(error: dioException, stackTrace: dioException.stackTrace);
+    super.onError(dioException, handler);
   }
 
   @override

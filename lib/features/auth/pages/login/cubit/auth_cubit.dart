@@ -1,5 +1,4 @@
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,18 +22,13 @@ class AuthCubit extends Cubit<AuthState> {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) {
-        /// Set isAuth true
-        sl<PrefManager>().isLogin = true;
-        sl<PrefManager>().token = r.token;
-        emit(_Success(r.token));
-      },
+      (r) => emit(_Success(r.token)),
     );
   }
 
   Future<void> logout() async {
     emit(const _Loading());
-    sl<PrefManager>().logout();
+    await MainBoxMixin().logoutBox();
     emit(const _Success(null));
   }
 }

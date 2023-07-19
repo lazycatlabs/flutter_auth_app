@@ -1,49 +1,41 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt sl = GetIt.instance;
 
-Future<void> serviceLocator({bool isUnitTest = false}) async {
+Future<void> serviceLocator({
+  bool isUnitTest = false,
+  bool isHiveEnable = true,
+}) async {
   /// For unit testing only
   if (isUnitTest) {
-    WidgetsFlutterBinding.ensureInitialized();
-    sl.reset();
-    // ignore: invalid_use_of_visible_for_testing_member
-    SharedPreferences.setMockInitialValues({});
-    await SharedPreferences.getInstance().then((value) {
-      initPrefManager(value);
-    });
-    sl.registerSingleton<DioClient>(DioClient(isUnitTest: true));
-    dataSources();
-    repositories();
-    useCase();
-    cubit();
-  } else {
-    sl.registerSingleton<DioClient>(DioClient());
-    dataSources();
-    repositories();
-    useCase();
-    cubit();
+    await sl.reset();
   }
+  sl.registerSingleton<DioClient>(DioClient(isUnitTest: isUnitTest));
+  _dataSources();
+  _repositories();
+  _useCase();
+  _cubit();
+  if (isHiveEnable) await _initHiveBoxes(isUnitTest: isUnitTest);
 }
 
-// Register prefManager
-void initPrefManager(SharedPreferences initPrefManager) {
-  sl.registerLazySingleton<PrefManager>(() => PrefManager(initPrefManager));
+Future<void> _initHiveBoxes({bool isUnitTest = false}) async {
+  await MainBoxMixin.initHive();
+  sl.registerSingleton<MainBoxMixin>(MainBoxMixin());
 }
 
 /// Register repositories
-void repositories() {
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
+void _repositories() {
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(sl(), sl()),
+  );
   sl.registerLazySingleton<UsersRepository>(() => UsersRepositoryImpl(sl()));
 }
 
 /// Register dataSources
-void dataSources() {
+void _dataSources() {
   sl.registerLazySingleton<AuthRemoteDatasource>(
     () => AuthRemoteDatasourceImpl(sl()),
   );
@@ -52,7 +44,7 @@ void dataSources() {
   );
 }
 
-void useCase() {
+void _useCase() {
   /// Auth
   sl.registerLazySingleton(() => PostLogin(sl()));
   sl.registerLazySingleton(() => PostRegister(sl()));
@@ -61,13 +53,12 @@ void useCase() {
   sl.registerLazySingleton(() => GetUsers(sl()));
 }
 
-void cubit() {
+void _cubit() {
   /// Auth
   sl.registerFactory(() => RegisterCubit(sl()));
   sl.registerFactory(() => AuthCubit(sl()));
 
   /// Users
   sl.registerFactory(() => UsersCubit(sl()));
-
   sl.registerFactory(() => SettingsCubit());
 }

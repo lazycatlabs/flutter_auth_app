@@ -44,7 +44,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
                   .bodySmall
                   ?.copyWith(color: Theme.of(context).hintColor),
             ),
-            SpacerV(value: Dimens.space4),
+            SpacerV(value: Dimens.space6),
           },
           ButtonTheme(
             key: widget.key,
@@ -52,11 +52,14 @@ class _DropDownState<T> extends State<DropDown<T>> {
             padding: EdgeInsets.zero,
             child: DropdownButtonFormField<T>(
               isExpanded: true,
+              dropdownColor: Theme.of(context).extension<LzyctColors>()!.card,
               icon: const Icon(Icons.arrow_drop_down),
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 isDense: true,
                 isCollapsed: true,
+                filled: true,
+                fillColor: Theme.of(context).extension<LzyctColors>()!.card,
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(left: Dimens.space12),
                   child: widget.prefixIcon,
@@ -69,22 +72,40 @@ class _DropDownState<T> extends State<DropDown<T>> {
                 enabledBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.disable),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.card!,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: BorderRadius.circular(Dimens.space4),
+                  borderSide: BorderSide(color: Theme.of(context).cardColor),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: BorderRadius.circular(Dimens.space4),
+                  borderSide: BorderSide(color: Theme.of(context).cardColor),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.red),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.red!,
+                  ),
                 ),
                 errorBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.red),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.red!,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: const BorderSide(color: Palette.primary),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.pink!,
+                  ),
                 ),
               ),
               value: widget.value,

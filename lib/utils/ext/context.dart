@@ -52,12 +52,12 @@ extension ContextExtensions on BuildContext {
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Palette.white,
+                    color: Theme.of(this).extension<LzyctColors>()!.background,
                     borderRadius: BorderRadius.circular(Dimens.cornerRadius),
                   ),
                   margin: EdgeInsets.symmetric(horizontal: Dimens.space30),
                   padding: EdgeInsets.all(Dimens.space24),
-                  child: Wrap(children: const [Loading()]),
+                  child: const Loading(),
                 ),
               ),
             ),

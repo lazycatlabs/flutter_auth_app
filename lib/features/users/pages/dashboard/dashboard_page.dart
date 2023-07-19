@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
@@ -46,7 +47,8 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Parent(
       child: RefreshIndicator(
-        color: Theme.of(context).iconTheme.color,
+        color: Theme.of(context).extension<LzyctColors>()!.pink,
+        backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
         onRefresh: () {
           _currentPage = 1;
           _lastPage = 1;
@@ -73,24 +75,26 @@ class _DashboardPageState extends State<DashboardPage> {
                   itemBuilder: (_, index) {
                     return index < _users.length
                         ? Container(
-                            decoration: BoxDecorations.card.copyWith(
-                              color: Theme.of(context).cardColor,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: Dimens.space16,
-                              horizontal: Dimens.space24,
-                            ),
+                            decoration: BoxDecorations(context).card,
                             margin: EdgeInsets.symmetric(
-                              vertical: Dimens.space8,
+                              vertical: Dimens.space12,
                               horizontal: Dimens.space16,
                             ),
                             child: Row(
                               children: [
-                                CircleImage(
-                                  url: _users[index].avatar ?? "",
-                                  size: Dimens.profilePicture,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(Dimens.space8),
+                                    bottomLeft: Radius.circular(Dimens.space8),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _users[index].avatar ?? "",
+                                    width: Dimens.profilePicture,
+                                    height: Dimens.profilePicture,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                const SpacerH(),
+                                SpacerH(value: Dimens.space16),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -98,15 +102,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                       _users[index].name ?? "",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyLarge500,
+                                          .titleLargeBold,
                                     ),
                                     Text(
                                       _users[index].email ?? "",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyMedium
+                                          .bodySmall
                                           ?.copyWith(
-                                            color: Theme.of(context).hintColor,
+                                            color: Theme.of(context)
+                                                .extension<LzyctColors>()!
+                                                .subtitle,
                                           ),
                                     ),
                                   ],

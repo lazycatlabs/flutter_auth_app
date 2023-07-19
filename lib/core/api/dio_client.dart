@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 
 typedef ResponseConverter<T> = T Function(dynamic response);
 
-class DioClient {
+class DioClient with MainBoxMixin, FirebaseCrashLogger {
   String baseUrl = "https://reqres.in";
 
   String? _auth;
@@ -17,7 +16,7 @@ class DioClient {
     _isUnitTest = isUnitTest;
 
     try {
-      _auth = sl<PrefManager>().token;
+      _auth = getData(MainBoxKeys.token);
     } catch (_) {}
 
     _dio = _createDio();
@@ -32,7 +31,7 @@ class DioClient {
     } else {
       /// We need to recreate dio to avoid token issue after login
       try {
-        _auth = sl<PrefManager>().token;
+        _auth = getData(MainBoxKeys.token);
       } catch (_) {}
 
       final dio = _createDio();
@@ -71,7 +70,7 @@ class DioClient {
       final response = await dio.get(url, queryParameters: queryParameters);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
-        throw DioError(
+        throw DioException(
           requestOptions: response.requestOptions,
           response: response,
         );
@@ -86,10 +85,11 @@ class DioClient {
       );
       final result = await isolateParse.parseInBackground();
       return Right(result);
-    } on DioError catch (e) {
+    } on DioException catch (e, stackTrace) {
+      nonFatalError(error: e, stackTrace: stackTrace);
       return Left(
         ServerFailure(
-          e.response?.data['description'] as String? ?? e.message,
+          e.response?.data['error'] as String? ?? e.message,
         ),
       );
     }
@@ -105,7 +105,7 @@ class DioClient {
       final response = await dio.post(url, data: data);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
-        throw DioError(
+        throw DioException(
           requestOptions: response.requestOptions,
           response: response,
         );
@@ -120,10 +120,11 @@ class DioClient {
       );
       final result = await isolateParse.parseInBackground();
       return Right(result);
-    } on DioError catch (e) {
+    } on DioException catch (e, stackTrace) {
+      nonFatalError(error: e, stackTrace: stackTrace);
       return Left(
         ServerFailure(
-          e.response?.data['description'] as String? ?? e.message,
+          e.response?.data['error'] as String? ?? e.message,
         ),
       );
     }

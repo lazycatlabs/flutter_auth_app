@@ -8,4 +8,8 @@ extension TextThemeExtension on TextTheme {
   TextStyle? get bodyLarge500 => bodyLarge?.copyWith(
         fontWeight: FontWeight.w500,
       );
+
+  TextStyle? get titleLargeBold => titleLarge?.copyWith(
+        fontWeight: FontWeight.bold,
+      );
 }

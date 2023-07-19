@@ -8,7 +8,9 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 import 'register_cubit_test.mocks.dart';
@@ -28,6 +30,8 @@ void main() {
 
   /// Initialize data
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     register = RegisterResponse.fromJson(
       json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,

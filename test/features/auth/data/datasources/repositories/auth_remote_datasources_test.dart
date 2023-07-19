@@ -5,7 +5,9 @@ import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 
@@ -14,6 +16,8 @@ void main() {
   late AuthRemoteDatasourceImpl dataSource;
 
   setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     dioAdapter = DioAdapter(dio: sl<DioClient>().dio);
     dataSource = AuthRemoteDatasourceImpl(sl<DioClient>());

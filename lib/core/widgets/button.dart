@@ -35,13 +35,16 @@ class Button extends StatelessWidget {
           BoxConstraints(minWidth: width ?? context.widthInPercent(100)),
       margin: EdgeInsets.symmetric(vertical: Dimens.space8),
       height: Dimens.buttonH,
-      decoration:
-          BoxDecorations.button.copyWith(color: color ?? Palette.primary),
+      decoration: BoxDecorations(context).button.copyWith(
+            color: color ?? Theme.of(context).extension<LzyctColors>()!.pink,
+          ),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: color ?? Palette.primary,
-          foregroundColor: Palette.hint,
+          backgroundColor:
+              color ?? Theme.of(context).extension<LzyctColors>()!.pink,
+          foregroundColor:
+              Theme.of(context).extension<LzyctColors>()!.buttonText,
           padding: EdgeInsets.symmetric(horizontal: Dimens.space24),
           shape: const BeveledRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -51,10 +54,9 @@ class Button extends StatelessWidget {
         ),
         child: Text(
           title.toUpperCase(),
-          style: Theme.of(context)
-              .textTheme
-              .labelLarge
-              ?.copyWith(color: Palette.white),
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: Theme.of(context).extension<LzyctColors>()!.background,
+              ),
           textAlign: TextAlign.center,
         ),
       ),

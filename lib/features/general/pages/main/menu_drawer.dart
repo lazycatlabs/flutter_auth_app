@@ -30,15 +30,15 @@ class _MenuDrawerState extends State<MenuDrawer> {
             width: context.widthInPercent(100),
             height: Dimens.header,
             padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).extension<LzyctColors>()!.card,
             child: SafeArea(
               child: Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: Palette.hint,
-                    radius: Dimens.space36 + Dimens.space2,
+                    backgroundColor: Theme.of(context).hintColor,
+                    radius: Dimens.space40,
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(Images.icLauncher),
+                      backgroundImage: AssetImage(Images.icLogo),
                       radius: Dimens.space36,
                     ),
                   ),
@@ -49,18 +49,20 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "LazyCat Labs",
+                          "Lazycat Labs",
                           style: Theme.of(context)
                               .textTheme
-                              .titleLarge
-                              ?.copyWith(color: Palette.white),
+                              .titleLargeBold
+                              ?.copyWith(color: Theme.of(context).primaryColor),
                         ),
                         Text(
-                          "lazycatlabs@gmail.com",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Theme.of(context).hintColor),
+                          "lzyct@lazycatlabs.com",
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context)
+                                        .extension<LzyctColors>()!
+                                        .shadow,
+                                  ),
                         ),
                       ],
                     ),
@@ -112,7 +114,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   }
 
   void _selectedPage(String title) {
-    //TODO : Update page from selected Page
+    //Update page from selected Page
     if (title == Strings.of(context)!.settings) {
       context.goNamed(Routes.settings.name);
     } else if (title == Strings.of(context)!.dashboard) {

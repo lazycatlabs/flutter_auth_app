@@ -117,7 +117,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Palette.red,
+                    color: Theme.of(context).extension<LzyctColors>()!.red,
                   ),
                 ),
                 Transform.translate(
@@ -127,7 +127,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Palette.yellow,
+                    color: Theme.of(context).extension<LzyctColors>()!.yellow,
                   ),
                 ),
                 Transform.translate(
@@ -137,7 +137,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Palette.green,
+                    color: Theme.of(context).extension<LzyctColors>()!.green,
                   ),
                 ),
                 Transform.translate(
@@ -147,7 +147,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Palette.green,
+                    color: Theme.of(context).extension<LzyctColors>()!.flamingo,
                   ),
                 ),
                 Transform.translate(
@@ -155,14 +155,20 @@ class _ColorLoaderState extends State<ColorLoader>
                     radius! * cos(0.0 + 6 * pi / 4),
                     radius! * sin(0.0 + 6 * pi / 4),
                   ),
-                  child: Dot(radius: dotRadius, color: Palette.primaryLight),
+                  child: Dot(
+                    radius: dotRadius,
+                    color: Theme.of(context).extension<LzyctColors>()!.lavender,
+                  ),
                 ),
                 Transform.translate(
                   offset: Offset(
                     radius! * cos(0.0 + 7 * pi / 4),
                     radius! * sin(0.0 + 7 * pi / 4),
                   ),
-                  child: Dot(radius: dotRadius, color: Palette.primary),
+                  child: Dot(
+                    radius: dotRadius,
+                    color: Theme.of(context).extension<LzyctColors>()!.pink,
+                  ),
                 ),
               ],
             ),

@@ -26,14 +26,14 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   Widget build(BuildContext context) {
     return Parent(
       child: ColoredBox(
-        color: Palette.white,
+        color: Theme.of(context).extension<LzyctColors>()!.background!,
         child: Center(
           child: CircleAvatar(
-            backgroundColor: Palette.primary,
-            radius: Dimens.profilePicture + Dimens.space4,
+            backgroundColor: Theme.of(context).hintColor,
+            radius: Dimens.menu + Dimens.space6,
             child: CircleAvatar(
-              backgroundImage: AssetImage(Images.icLauncher),
-              radius: Dimens.profilePicture,
+              backgroundImage: AssetImage(Images.icLogo),
+              radius: Dimens.menu,
             ),
           ),
         ),

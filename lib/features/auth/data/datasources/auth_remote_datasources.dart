@@ -17,7 +17,8 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
 
   @override
   Future<Either<Failure, RegisterResponse>> register(
-      RegisterParams registerParams) async {
+    RegisterParams registerParams,
+  ) async {
     final response = await _client.postRequest(
       ListAPI.register,
       data: registerParams.toJson(),

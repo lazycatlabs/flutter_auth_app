@@ -42,13 +42,9 @@ mixin class MainBoxMixin {
   T getData<T>(MainBoxKeys key) => mainBox?.get(key.name) as T;
 
   Future<void> logoutBox() async {
-    final fcm = getData(MainBoxKeys.fcm);
-
     /// Clear the box
-    await mainBox?.clear();
-
-    /// Add back the data
-    await addData(MainBoxKeys.fcm, fcm);
+    removeData(MainBoxKeys.isLogin);
+    removeData(MainBoxKeys.token);
   }
 
   Future<void> close() async {

@@ -7,6 +7,12 @@ This is an App with Auth Functions like Login and Register. All API using [reqre
 
 
 
+https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/7a81b477-3c22-4788-9cf2-b5a034a5af50 
+
+https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/53f880ed-d51e-4bc4-8dd9-606efc3bb1e9
+
+
+
 ## Pre-requisites 📐
 
 | Technology | Recommended Version | Installation Guide                                                    |
@@ -43,7 +49,7 @@ This is an App with Auth Functions like Login and Register. All API using [reqre
 ## TODO 📝
 
 - [ ] Integration Test
-- [x] Implement multi flavor
+- [x] Implement multi-flavor
 - [x] Implement [Go Router](https://pub.dev/packages/go_router)
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)

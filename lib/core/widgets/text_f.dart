@@ -125,7 +125,9 @@ class _TextFState extends State<TextF> {
                 enabledBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
-                  borderSide: BorderSide(color: Theme.of(context).cardColor),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).extension<LzyctColors>()!.card!,
+                  ),
                 ),
                 disabledBorder: OutlineInputBorder(
                   gapPadding: 0,

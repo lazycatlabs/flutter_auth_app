@@ -6,7 +6,7 @@ import 'package:flutter_auth_app/core/core.dart';
 ThemeData themeLight(BuildContext context) => ThemeData(
       fontFamily: 'Poppins',
       useMaterial3: true,
-      primaryColor: Palette.primary,
+      primaryColor: Palette.pinkLatte,
       disabledColor: Palette.shadowDark,
       hintColor: Palette.subText,
       cardColor: Palette.background,
@@ -73,7 +73,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
         color: Palette.background,
-        iconTheme: const IconThemeData(color: Palette.primary),
+        iconTheme: const IconThemeData(color: Palette.pinkLatte),
         systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: Colors.transparent,
         ),
@@ -127,7 +127,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
 ThemeData themeDark(BuildContext context) => ThemeData(
       fontFamily: 'Poppins',
       useMaterial3: true,
-      primaryColor: Palette.primary,
+      primaryColor: Palette.pinkMocha,
       disabledColor: Palette.shadowDark,
       hintColor: Palette.subTextDark,
       cardColor: Palette.backgroundDark,
@@ -190,7 +190,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       ),
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
-        iconTheme: const IconThemeData(color: Palette.textDark),
+        iconTheme: const IconThemeData(color: Palette.pinkMocha),
         color: Palette.backgroundDark,
         systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.transparent,

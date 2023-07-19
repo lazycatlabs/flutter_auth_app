@@ -71,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      backgroundColor: Palette.primary,
+                      backgroundColor: Theme.of(context).hintColor,
                       radius: Dimens.profilePicture + Dimens.space4,
                       child: CircleAvatar(
                         backgroundImage: AssetImage(Images.icLauncher),

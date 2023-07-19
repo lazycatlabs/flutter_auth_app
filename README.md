@@ -340,7 +340,7 @@ test
 <br><br>
 
 <h3 align="center">Buy me coffee if you love my works ☕️</h3>
-<p>
+<p align="center>
   <a href="https://www.buymeacoffee.com/Lzyct" target="_blank">
     <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" alt="buymeacoffe" style="vertical-align:top; margin:8px" height="36">
   </a>&nbsp;&nbsp;&nbsp;&nbsp;

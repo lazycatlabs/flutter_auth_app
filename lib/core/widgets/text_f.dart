@@ -87,6 +87,7 @@ class _TextFState extends State<TextF> {
             margin: EdgeInsets.symmetric(vertical: Dimens.space8),
             child: TextFormField(
               key: widget.key,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               autofillHints: widget.autofillHints,
               enabled: widget.enable,
               obscureText: widget.obscureText ?? false,

@@ -112,8 +112,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     .bodyLarge
                                     ?.color,
                               ),
-                              obscureText:
-                                  context.read<RegisterCubit>().isPasswordHide,
+                              obscureText: context
+                                      .read<RegisterCubit>()
+                                      .isPasswordHide ??
+                                  false,
                               hintText: '••••••••••••',
                               maxLine: 1,
                               hint: Strings.of(context)!.password,
@@ -124,7 +126,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     .read<RegisterCubit>()
                                     .showHidePassword(),
                                 icon: Icon(
-                                  context.read<RegisterCubit>().isPasswordHide
+                                  (context
+                                              .read<RegisterCubit>()
+                                              .isPasswordHide ??
+                                          false)
                                       ? Icons.visibility_off
                                       : Icons.visibility,
                                 ),
@@ -149,8 +154,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                     ?.color,
                               ),
                               obscureText: context
-                                  .read<RegisterCubit>()
-                                  .isPasswordRepeatHide,
+                                      .read<RegisterCubit>()
+                                      .isPasswordRepeatHide ??
+                                  false,
                               hintText: '••••••••••••',
                               maxLine: 1,
                               hint: Strings.of(context)!.passwordRepeat,
@@ -161,9 +167,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     .read<RegisterCubit>()
                                     .showHidePasswordRepeat(),
                                 icon: Icon(
-                                  context
-                                          .read<RegisterCubit>()
-                                          .isPasswordRepeatHide
+                                  (context
+                                              .read<RegisterCubit>()
+                                              .isPasswordRepeatHide ??
+                                          false)
                                       ? Icons.visibility_off
                                       : Icons.visibility,
                                 ),

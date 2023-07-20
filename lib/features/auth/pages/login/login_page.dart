@@ -109,7 +109,8 @@ class _LoginPageState extends State<LoginPage> {
                                   Theme.of(context).textTheme.bodyLarge?.color,
                             ),
                             obscureText:
-                                context.read<AuthCubit>().isPasswordHide,
+                                context.read<AuthCubit>().isPasswordHide ??
+                                    false,
                             hintText: '••••••••••••',
                             maxLine: 1,
                             hint: Strings.of(context)!.password,
@@ -119,7 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () =>
                                   context.read<AuthCubit>().showHidePassword(),
                               icon: Icon(
-                                context.read<AuthCubit>().isPasswordHide
+                                (context.read<AuthCubit>().isPasswordHide ??
+                                        false)
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                               ),

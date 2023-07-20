@@ -10,20 +10,20 @@ class RegisterCubit extends Cubit<RegisterState> {
   final PostRegister _postRegister;
 
   /// Handle state visibility password
-  bool isPasswordHide = true;
-  bool isPasswordRepeatHide = true;
+  bool? isPasswordHide = true;
+  bool? isPasswordRepeatHide = true;
 
   RegisterCubit(this._postRegister) : super(const _Loading());
 
   void showHidePassword() {
     emit(const _Init());
-    isPasswordHide = !isPasswordHide;
+    isPasswordHide = !(isPasswordHide ?? false);
     emit(const _ShowHidePassword());
   }
 
   void showHidePasswordRepeat() {
     emit(const _Init());
-    isPasswordRepeatHide = !isPasswordRepeatHide;
+    isPasswordRepeatHide = !(isPasswordRepeatHide ?? false);
     emit(const _ShowHidePassword());
   }
 

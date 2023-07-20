@@ -12,11 +12,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   final PostLogin _postLogin;
 
-  bool isPasswordHide = true;
+  bool? isPasswordHide = true;
 
   void showHidePassword() {
     emit(const _Init());
-    isPasswordHide = !isPasswordHide;
+    isPasswordHide = !(isPasswordHide ?? false);
     emit(const _ShowHide());
   }
 

@@ -57,7 +57,10 @@ class AppRoute {
         ),
       ),
       ShellRoute(
-        builder: (_, __, child) => MainPage(child: child),
+        builder: (_, __, child) => BlocProvider(
+          create: (context) => sl<MainCubit>(),
+          child: MainPage(child: child),
+        ),
         routes: [
           GoRoute(
             path: Routes.dashboard.path,

@@ -21,6 +21,8 @@ mixin _$AuthState {
     required TResult Function() loading,
     required TResult Function(String? data) success,
     required TResult Function(String message) failure,
+    required TResult Function() showHide,
+    required TResult Function() init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,8 @@ mixin _$AuthState {
     TResult? Function()? loading,
     TResult? Function(String? data)? success,
     TResult? Function(String message)? failure,
+    TResult? Function()? showHide,
+    TResult? Function()? init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +39,8 @@ mixin _$AuthState {
     TResult Function()? loading,
     TResult Function(String? data)? success,
     TResult Function(String message)? failure,
+    TResult Function()? showHide,
+    TResult Function()? init,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,8 @@ mixin _$AuthState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_ShowHide value) showHide,
+    required TResult Function(_Init value) init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +58,8 @@ mixin _$AuthState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_ShowHide value)? showHide,
+    TResult? Function(_Init value)? init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,8 @@ mixin _$AuthState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_ShowHide value)? showHide,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +131,8 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function(String? data) success,
     required TResult Function(String message) failure,
+    required TResult Function() showHide,
+    required TResult Function() init,
   }) {
     return loading();
   }
@@ -129,6 +143,8 @@ class _$_Loading implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String? data)? success,
     TResult? Function(String message)? failure,
+    TResult? Function()? showHide,
+    TResult? Function()? init,
   }) {
     return loading?.call();
   }
@@ -139,6 +155,8 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function(String? data)? success,
     TResult Function(String message)? failure,
+    TResult Function()? showHide,
+    TResult Function()? init,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -153,6 +171,8 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_ShowHide value) showHide,
+    required TResult Function(_Init value) init,
   }) {
     return loading(this);
   }
@@ -163,6 +183,8 @@ class _$_Loading implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_ShowHide value)? showHide,
+    TResult? Function(_Init value)? init,
   }) {
     return loading?.call(this);
   }
@@ -173,6 +195,8 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_ShowHide value)? showHide,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -252,6 +276,8 @@ class _$_Success implements _Success {
     required TResult Function() loading,
     required TResult Function(String? data) success,
     required TResult Function(String message) failure,
+    required TResult Function() showHide,
+    required TResult Function() init,
   }) {
     return success(data);
   }
@@ -262,6 +288,8 @@ class _$_Success implements _Success {
     TResult? Function()? loading,
     TResult? Function(String? data)? success,
     TResult? Function(String message)? failure,
+    TResult? Function()? showHide,
+    TResult? Function()? init,
   }) {
     return success?.call(data);
   }
@@ -272,6 +300,8 @@ class _$_Success implements _Success {
     TResult Function()? loading,
     TResult Function(String? data)? success,
     TResult Function(String message)? failure,
+    TResult Function()? showHide,
+    TResult Function()? init,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -286,6 +316,8 @@ class _$_Success implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_ShowHide value) showHide,
+    required TResult Function(_Init value) init,
   }) {
     return success(this);
   }
@@ -296,6 +328,8 @@ class _$_Success implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_ShowHide value)? showHide,
+    TResult? Function(_Init value)? init,
   }) {
     return success?.call(this);
   }
@@ -306,6 +340,8 @@ class _$_Success implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_ShowHide value)? showHide,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -390,6 +426,8 @@ class _$_Failure implements _Failure {
     required TResult Function() loading,
     required TResult Function(String? data) success,
     required TResult Function(String message) failure,
+    required TResult Function() showHide,
+    required TResult Function() init,
   }) {
     return failure(message);
   }
@@ -400,6 +438,8 @@ class _$_Failure implements _Failure {
     TResult? Function()? loading,
     TResult? Function(String? data)? success,
     TResult? Function(String message)? failure,
+    TResult? Function()? showHide,
+    TResult? Function()? init,
   }) {
     return failure?.call(message);
   }
@@ -410,6 +450,8 @@ class _$_Failure implements _Failure {
     TResult Function()? loading,
     TResult Function(String? data)? success,
     TResult Function(String message)? failure,
+    TResult Function()? showHide,
+    TResult Function()? init,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -424,6 +466,8 @@ class _$_Failure implements _Failure {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_ShowHide value) showHide,
+    required TResult Function(_Init value) init,
   }) {
     return failure(this);
   }
@@ -434,6 +478,8 @@ class _$_Failure implements _Failure {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_ShowHide value)? showHide,
+    TResult? Function(_Init value)? init,
   }) {
     return failure?.call(this);
   }
@@ -444,6 +490,8 @@ class _$_Failure implements _Failure {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_ShowHide value)? showHide,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -460,4 +508,241 @@ abstract class _Failure implements AuthState {
   @JsonKey(ignore: true)
   _$$_FailureCopyWith<_$_Failure> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowHideCopyWith<$Res> {
+  factory _$$_ShowHideCopyWith(
+          _$_ShowHide value, $Res Function(_$_ShowHide) then) =
+      __$$_ShowHideCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowHideCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_ShowHide>
+    implements _$$_ShowHideCopyWith<$Res> {
+  __$$_ShowHideCopyWithImpl(
+      _$_ShowHide _value, $Res Function(_$_ShowHide) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ShowHide implements _ShowHide {
+  const _$_ShowHide();
+
+  @override
+  String toString() {
+    return 'AuthState.showHide()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ShowHide);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String? data) success,
+    required TResult Function(String message) failure,
+    required TResult Function() showHide,
+    required TResult Function() init,
+  }) {
+    return showHide();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(String? data)? success,
+    TResult? Function(String message)? failure,
+    TResult? Function()? showHide,
+    TResult? Function()? init,
+  }) {
+    return showHide?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String? data)? success,
+    TResult Function(String message)? failure,
+    TResult Function()? showHide,
+    TResult Function()? init,
+    required TResult orElse(),
+  }) {
+    if (showHide != null) {
+      return showHide();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_ShowHide value) showHide,
+    required TResult Function(_Init value) init,
+  }) {
+    return showHide(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_ShowHide value)? showHide,
+    TResult? Function(_Init value)? init,
+  }) {
+    return showHide?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_ShowHide value)? showHide,
+    TResult Function(_Init value)? init,
+    required TResult orElse(),
+  }) {
+    if (showHide != null) {
+      return showHide(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowHide implements AuthState {
+  const factory _ShowHide() = _$_ShowHide;
+}
+
+/// @nodoc
+abstract class _$$_InitCopyWith<$Res> {
+  factory _$$_InitCopyWith(_$_Init value, $Res Function(_$_Init) then) =
+      __$$_InitCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InitCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res, _$_Init>
+    implements _$$_InitCopyWith<$Res> {
+  __$$_InitCopyWithImpl(_$_Init _value, $Res Function(_$_Init) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Init implements _Init {
+  const _$_Init();
+
+  @override
+  String toString() {
+    return 'AuthState.init()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Init);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String? data) success,
+    required TResult Function(String message) failure,
+    required TResult Function() showHide,
+    required TResult Function() init,
+  }) {
+    return init();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(String? data)? success,
+    TResult? Function(String message)? failure,
+    TResult? Function()? showHide,
+    TResult? Function()? init,
+  }) {
+    return init?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String? data)? success,
+    TResult Function(String message)? failure,
+    TResult Function()? showHide,
+    TResult Function()? init,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_ShowHide value) showHide,
+    required TResult Function(_Init value) init,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_ShowHide value)? showHide,
+    TResult? Function(_Init value)? init,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_ShowHide value)? showHide,
+    TResult Function(_Init value)? init,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Init implements AuthState {
+  const factory _Init() = _$_Init;
 }

@@ -21,47 +21,18 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  late List<DataHelper> _dataMenus;
-  int _currentIndex = 0;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    _dataMenus = [
-      DataHelper(
-        title: Strings.of(context)!.dashboard,
-        isSelected: true,
-      ),
-      DataHelper(
-        title: Strings.of(context)!.settings,
-      ),
-      DataHelper(
-        title: Strings.of(context)!.logout,
-      ),
-    ];
+    context.read<MainCubit>().initMenu(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_dataMenus[_currentIndex].title == Strings.of(context)!.dashboard) {
-          return true;
-        } else {
-          if (_scaffoldKey.currentState!.isEndDrawerOpen) {
-            //hide navigation drawer
-            _scaffoldKey.currentState!.openDrawer();
-          } else {
-            for (final menu in _dataMenus) {
-              setState(() {
-                menu.isSelected = menu.title == Strings.of(context)!.dashboard;
-              });
-            }
-          }
-
-          return false;
-        }
+        return context.read<MainCubit>().onBackPressed(context, _scaffoldKey);
       },
       child: Parent(
         scaffoldKey: _scaffoldKey,
@@ -69,13 +40,11 @@ class _MainPageState extends State<MainPage> {
         drawer: SizedBox(
           width: context.widthInPercent(80),
           child: MenuDrawer(
-            dataMenu: _dataMenus,
+            dataMenu: context.read<MainCubit>().dataMenus,
             currentIndex: (int index) {
               /// don't update when index is logout
               if (index != 2) {
-                setState(() {
-                  _currentIndex = index;
-                });
+                context.read<MainCubit>().updateIndex(index);
               }
 
               /// hide navigation drawer
@@ -135,9 +104,16 @@ class _MainPageState extends State<MainPage> {
       child: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
-          _dataMenus[_currentIndex].title ?? "-",
-          style: Theme.of(context).textTheme.titleLarge,
+        title: BlocBuilder<MainCubit, MainState>(
+          builder: (_, state) {
+            return Text(
+              state.when(
+                loading: () => "-",
+                success: (data) => data?.title ?? "-",
+              ),
+              style: Theme.of(context).textTheme.titleLarge,
+            );
+          },
         ),
         leading: IconButton(
           icon: Icon(

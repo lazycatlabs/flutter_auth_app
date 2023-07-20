@@ -17,12 +17,8 @@ void main() {
     settingsCubit = SettingsCubit();
   });
 
-  tearDown(() {
-    settingsCubit.close();
-  });
-
   blocTest(
-    "Return random int to reload main widget",
+    "The theme should be system",
     build: () {
       return settingsCubit;
     },

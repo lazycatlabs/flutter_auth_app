@@ -14,6 +14,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../helpers/fake_path_provider_platform.dart';
+import '../../../../helpers/test_mock.mocks.dart';
 
 class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
@@ -50,6 +51,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale("en"),
+          theme: themeLight(MockBuildContext()),
           home: body,
         ),
       ),

@@ -17,6 +17,7 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
+import '../../../../helpers/test_mock.mocks.dart';
 
 class MockUsersCubit extends MockCubit<UsersState> implements UsersCubit {}
 
@@ -57,6 +58,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale("en"),
+          theme: themeLight(MockBuildContext()),
           home: body,
         ),
       ),

@@ -86,7 +86,9 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
-      nonFatalError(error: e, stackTrace: stackTrace);
+      if (!_isUnitTest) {
+        nonFatalError(error: e, stackTrace: stackTrace);
+      }
       return Left(
         ServerFailure(
           e.response?.data['error'] as String? ?? e.message,
@@ -121,7 +123,9 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
-      nonFatalError(error: e, stackTrace: stackTrace);
+      if (!_isUnitTest) {
+        nonFatalError(error: e, stackTrace: stackTrace);
+      }
       return Left(
         ServerFailure(
           e.response?.data['error'] as String? ?? e.message,

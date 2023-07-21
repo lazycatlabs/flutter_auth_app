@@ -15,6 +15,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../helpers/fake_path_provider_platform.dart';
+import '../../../../helpers/test_mock.mocks.dart';
 
 class MockSettingsCubit extends MockCubit<DataHelper>
     implements SettingsCubit {}
@@ -48,6 +49,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale("en"),
+          theme: themeLight(MockBuildContext()),
           home: body,
         ),
       ),
@@ -60,18 +62,18 @@ void main() {
       when(() => settingsCubit.state).thenReturn(DataHelper());
 
       await tester.pumpWidget(rootWidget(const SettingsPage()));
-      // final dropdown = find.byKey(const Key("dropdown_theme")).last;
-      //
-      // await tester.tap(dropdown);
-      // await tester.pumpAndSettle();
-      //
-      // /// Tap  the first Item
-      // final dropdownItem = find.text('Theme Dark').last;
-      //
-      // await tester.tap(dropdownItem);
-      // await tester.pumpAndSettle();
-      //
-      // verify(() => settingsCubit.updateTheme(ActiveTheme.dark)).called(1);
+      final dropdown = find.byKey(const Key("dropdown_theme")).last;
+
+      await tester.tap(dropdown);
+      await tester.pumpAndSettle();
+
+      /// Tap  the first Item
+      final dropdownItem = find.text('Theme Dark').last;
+
+      await tester.tap(dropdownItem);
+      await tester.pumpAndSettle();
+
+      verify(() => settingsCubit.updateTheme(ActiveTheme.dark)).called(1);
     },
   );
 

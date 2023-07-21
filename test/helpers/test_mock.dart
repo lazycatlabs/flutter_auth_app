@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:mockito/annotations.dart';
 
@@ -7,4 +8,5 @@ import 'package:mockito/annotations.dart';
   UsersRepository,
   UsersRemoteDatasource,
 ])
+@GenerateNiceMocks([MockSpec<BuildContext>()])
 void main() {}

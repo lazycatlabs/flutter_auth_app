@@ -14,6 +14,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../helpers/fake_path_provider_platform.dart';
+import '../../../../helpers/test_mock.mocks.dart';
 
 class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
@@ -50,6 +51,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale("en"),
+          theme: themeLight(MockBuildContext()),
           home: body,
         ),
       ),
@@ -71,7 +73,10 @@ void main() {
       await tester.tap(find.byType(Button));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsOneWidget);
-      expect(find.text("Can't be empty"), findsOneWidget);
+      expect(
+        find.text("Password must be at least 6 characters"),
+        findsOneWidget,
+      );
     },
   );
 
@@ -94,7 +99,10 @@ void main() {
       await tester.tap(find.byType(Button));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
-      expect(find.text("Can't be empty"), findsOneWidget);
+      expect(
+        find.text("Password must be at least 6 characters"),
+        findsOneWidget,
+      );
     },
   );
 
@@ -121,7 +129,7 @@ void main() {
       await tester.tap(find.byType(Button));
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
-      expect(find.text("Can't be empty"), findsNothing);
+      expect(find.text("Password must be at least 6 characters"), findsNothing);
 
       for (int i = 0; i < 5; i++) {
         await tester.pump(const Duration(milliseconds: 100));

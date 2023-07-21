@@ -47,14 +47,16 @@ mixin class MainBoxMixin {
     removeData(MainBoxKeys.token);
   }
 
-  Future<void> close() async {
+  Future<void> closeBox({bool isUnitTest = false}) async {
     try {
       if (mainBox != null) {
         await mainBox?.close();
         await mainBox?.deleteFromDisk();
       }
     } catch (e, stackTrace) {
-      FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      if (!isUnitTest) {
+        FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      }
     }
   }
 }

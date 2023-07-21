@@ -27,8 +27,8 @@ Map<String, dynamic> _$$_UsersResponseToJson(_$_UsersResponse instance) =>
       'per_page': instance.perPage,
       'total': instance.total,
       'total_pages': instance.totalPages,
-      'data': instance.data,
-      'support': instance.support,
+      'data': instance.data?.map((e) => e.toJson()).toList(),
+      'support': instance.support?.toJson(),
       'error': instance.error,
     };
 

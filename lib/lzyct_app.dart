@@ -18,6 +18,7 @@ class LzyctApp extends StatelessWidget {
       ),
     );
 
+    log.d(const String.fromEnvironment('ENV'));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),

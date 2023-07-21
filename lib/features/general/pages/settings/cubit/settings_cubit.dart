@@ -9,7 +9,7 @@ class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
     emit(
       DataHelper(
         activeTheme: activeTheme,
-        type: getData(MainBoxKeys.locale),
+        type: getData(MainBoxKeys.locale) ?? "en",
       ),
     );
   }

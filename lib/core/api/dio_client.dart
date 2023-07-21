@@ -6,7 +6,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  String baseUrl = "https://reqres.in";
+  String baseUrl = const String.fromEnvironment("BASE_URL");
 
   String? _auth;
   bool _isUnitTest = false;

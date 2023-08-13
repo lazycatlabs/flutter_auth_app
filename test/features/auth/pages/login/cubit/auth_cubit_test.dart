@@ -31,7 +31,7 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(isUnitTest: true, prefixBox: 'auth_cubit_test_');
     login = LoginResponse.fromJson(
       json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
     ).toEntity();

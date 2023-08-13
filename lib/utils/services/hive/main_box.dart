@@ -23,12 +23,12 @@ enum MainBoxKeys {
 
 mixin class MainBoxMixin {
   static late Box? mainBox;
-  static const _boxName = 'yotta!mainBox';
+  static const _boxName = 'flutter_auth_app';
 
-  static Future<void> initHive() async {
+  static Future<void> initHive(String prefixBox) async {
     // Initialize hive (persistent database)
     await Hive.initFlutter();
-    mainBox = await Hive.openBox(_boxName);
+    mainBox = await Hive.openBox("$prefixBox$_boxName");
   }
 
   Future<void> addData<T>(MainBoxKeys key, T value) async {

@@ -22,7 +22,10 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(
+      isUnitTest: true,
+      prefixBox: 'auth_repository_impl_test_',
+    );
     mockAuthRemoteDatasource = MockAuthRemoteDatasource();
     authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource, sl());
     login = LoginResponse.fromJson(

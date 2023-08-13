@@ -9,8 +9,7 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_test/flutter_test.dart';
-// ignore: depend_on_referenced_packages
+import 'package:flutter_test/flutter_test.dart'; // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -36,7 +35,7 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(isUnitTest: true, prefixBox: 'dashboard_page_test_');
     usersCubit = MockUsersCubit();
     users = UsersResponse.fromJson(
       json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,

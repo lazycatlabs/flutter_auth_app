@@ -120,6 +120,7 @@ class _MainPageState extends State<MainPage> {
             Icons.sort,
             size: Dimens.space24,
             color: Theme.of(context).extension<LzyctColors>()!.pink,
+            semanticLabel: "Menu",
           ),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();

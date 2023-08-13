@@ -32,7 +32,7 @@ jobs:
 
       # Formatting code
       - name: Running flutter format
-        run: flutter format lib/
+        run: dart format lib/
       # Get current branch
       - name: Get branch name
         id: branch-name
@@ -49,21 +49,22 @@ jobs:
           git config --global user.name 'Lzyct-Bot'
           git config --global user.email 'lazycatlabs@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git fetch
           git checkout ${{ steps.branch-name.outputs.current_branch }}
           git commit -am "clean: apply formatting changes"
           git push
 
 
       # Build apk.
-      - name: Build apk file
-        run: flutter build apk --flavor stg -t lib/main_stg.dart
-
-      # Upload generated apk to the artifacts.
-      - name: Uploading apk file
-        uses: actions/upload-artifact@v1
-        with:
-          name: staging-apk
-          path: build/app/outputs/flutter-apk/app-stg-release.apk
+      #      - name: Build apk file
+      #        run: flutter build apk --flavor stg -t lib/main_stg.dart
+      #
+      #      # Upload generated apk to the artifacts.
+      #      - name: Uploading apk file
+      #        uses: actions/upload-artifact@v1
+      #        with:
+      #          name: staging-apk
+      #          path: build/app/outputs/flutter-apk/app-stg-release.apk
 
       - name: Delete branch
         uses: SvanBoxel/delete-merged-branch@main

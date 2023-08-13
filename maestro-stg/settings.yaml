@@ -1,0 +1,14 @@
+appId: com.lazycatlabs.auths.stg
+---
+- tapOn: "Menu"
+- tapOn: "Settings"
+- tapOn: "Theme Light"
+- tapOn: "Theme Dark"
+- tapOn: "Theme Dark"
+- tapOn: "Theme System"
+- tapOn: "English"
+- tapOn: "Bahasa"
+- tapOn: "Bahasa"
+- tapOn: "English"
+- tapOn: "Theme System"
+- tapOn: "Theme Light"

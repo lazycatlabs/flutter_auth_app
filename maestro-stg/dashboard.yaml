@@ -1,0 +1,6 @@
+appId: com.lazycatlabs.auths.stg
+---
+- swipe:
+    direction: "UP"
+- swipe:
+    direction: "UP"

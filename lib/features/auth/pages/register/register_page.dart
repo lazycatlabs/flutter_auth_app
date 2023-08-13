@@ -139,6 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       ? Strings.of(context)!.errorPasswordLength
                                       : null)
                                   : null,
+                              semantic: "password",
                             ),
                             TextF(
                               key: const Key("repeat_password"),
@@ -181,6 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           ?.errorPasswordNotMatch
                                       : null)
                                   : null,
+                              semantic: "repeat_password",
                             ),
                           ],
                         );

@@ -32,7 +32,7 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(isUnitTest: true, prefixBox: 'register_cubit_test_');
     register = RegisterResponse.fromJson(
       json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
     ).toEntity();

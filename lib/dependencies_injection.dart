@@ -8,6 +8,7 @@ GetIt sl = GetIt.instance;
 Future<void> serviceLocator({
   bool isUnitTest = false,
   bool isHiveEnable = true,
+  String prefixBox = '',
 }) async {
   /// For unit testing only
   if (isUnitTest) {
@@ -18,11 +19,19 @@ Future<void> serviceLocator({
   _repositories();
   _useCase();
   _cubit();
-  if (isHiveEnable) await _initHiveBoxes(isUnitTest: isUnitTest);
+  if (isHiveEnable) {
+    await _initHiveBoxes(
+      isUnitTest: isUnitTest,
+      prefixBox: prefixBox,
+    );
+  }
 }
 
-Future<void> _initHiveBoxes({bool isUnitTest = false}) async {
-  await MainBoxMixin.initHive();
+Future<void> _initHiveBoxes({
+  bool isUnitTest = false,
+  String prefixBox = '',
+}) async {
+  await MainBoxMixin.initHive(prefixBox);
   sl.registerSingleton<MainBoxMixin>(MainBoxMixin());
 }
 

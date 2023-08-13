@@ -21,7 +21,10 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(
+      isUnitTest: true,
+      prefixBox: 'users_repository_impl_test_',
+    );
     mockUsersRemoteDatasource = MockUsersRemoteDatasource();
     authRepositoryImpl = UsersRepositoryImpl(mockUsersRemoteDatasource);
     users = UsersResponse.fromJson(

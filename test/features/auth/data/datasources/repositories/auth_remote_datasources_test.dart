@@ -18,7 +18,10 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(
+      isUnitTest: true,
+      prefixBox: 'auth_remote_datasource_test_',
+    );
     dioAdapter = DioAdapter(dio: sl<DioClient>().dio);
     dataSource = AuthRemoteDatasourceImpl(sl<DioClient>());
   });

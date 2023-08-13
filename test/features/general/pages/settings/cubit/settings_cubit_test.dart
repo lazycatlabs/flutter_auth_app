@@ -13,7 +13,7 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true);
+    await serviceLocator(isUnitTest: true, prefixBox: 'settings_cubit_test_');
     settingsCubit = SettingsCubit();
   });
 

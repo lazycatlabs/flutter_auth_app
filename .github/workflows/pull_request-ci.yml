@@ -34,4 +34,4 @@ jobs:
 
       # Run widget tests for our flutter project.
       - name: Run flutter test
-        run: flutter test -j1 # For now, just disable flutter test
+        run: flutter test # For now, just disable flutter test

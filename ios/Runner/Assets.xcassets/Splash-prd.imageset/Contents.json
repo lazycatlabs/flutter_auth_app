@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_launcher_foreground 2.png",
+      "filename" : "ic_splash.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_launcher_foreground 1.png",
+      "filename" : "ic_splash 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_launcher_foreground.png",
+      "filename" : "ic_splash 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

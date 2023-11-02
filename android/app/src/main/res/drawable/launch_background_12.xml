@@ -6,7 +6,7 @@
     <item
             android:height="350dp"
             android:width="350dp"
-            android:gravity="center">
+            android:gravity="fill_horizontal|fill_vertical">
         <bitmap
                 android:gravity="fill_horizontal|fill_vertical"
                 android:src="@drawable/ic_splash"/>

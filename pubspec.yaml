@@ -20,10 +20,6 @@ version: 1.0.0+1
 environment:
   sdk: ^3.0.0
 
-dependency_overrides:
-  intl: ^0.18.1
-  analyzer: ^6.0.0
-
 dependencies:
   flutter:
     sdk: flutter

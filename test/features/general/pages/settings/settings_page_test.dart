@@ -62,6 +62,7 @@ void main() {
       when(() => settingsCubit.state).thenReturn(DataHelper());
 
       await tester.pumpWidget(rootWidget(const SettingsPage()));
+      await tester.pumpAndSettle();
       final dropdown = find.byKey(const Key("dropdown_theme")).last;
 
       await tester.tap(dropdown);
@@ -83,6 +84,7 @@ void main() {
       when(() => settingsCubit.state).thenReturn(DataHelper());
 
       await tester.pumpWidget(rootWidget(const SettingsPage()));
+      await tester.pumpAndSettle();
       final dropdown = find.byKey(const Key("dropdown_language")).last;
 
       await tester.tap(dropdown);

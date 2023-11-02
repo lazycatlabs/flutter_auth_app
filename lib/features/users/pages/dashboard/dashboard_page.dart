@@ -95,27 +95,30 @@ class _DashboardPageState extends State<DashboardPage> {
                                   ),
                                 ),
                                 SpacerH(value: Dimens.space16),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      _users[index].name ?? "",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLargeBold,
-                                    ),
-                                    Text(
-                                      _users[index].email ?? "",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .extension<LzyctColors>()!
-                                                .subtitle,
-                                          ),
-                                    ),
-                                  ],
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        _users[index].name ?? "",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLargeBold,
+                                      ),
+                                      Text(
+                                        _users[index].email ?? "",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .extension<LzyctColors>()!
+                                                  .subtitle,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

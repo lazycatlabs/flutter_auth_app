@@ -63,6 +63,7 @@ void main() {
     (tester) async {
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
       await tester.pumpWidget(rootWidget(const LoginPage()));
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byType(Button), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -88,7 +89,9 @@ void main() {
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byType(Button), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -116,9 +119,12 @@ void main() {
       when(() => authCubit.login(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('password')), password);
 
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byType(Button), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll

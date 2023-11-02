@@ -65,6 +65,7 @@ void main() {
       when(() => registerCubit.state)
           .thenReturn(const RegisterState.success(null));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -76,7 +77,9 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsOneWidget);
       expect(
-          find.text("Password must be at least 6 characters"), findsOneWidget,);
+        find.text("Password must be at least 6 characters"),
+        findsOneWidget,
+      );
     },
   );
 
@@ -89,7 +92,9 @@ void main() {
           .thenReturn(const RegisterState.success(null));
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -101,7 +106,9 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text("Email is not valid"), findsNothing);
       expect(
-          find.text("Password must be at least 6 characters"), findsOneWidget,);
+        find.text("Password must be at least 6 characters"),
+        findsOneWidget,
+      );
     },
   );
 
@@ -114,6 +121,7 @@ void main() {
       when(() => registerCubit.state)
           .thenReturn(const RegisterState.success(null));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('email')), email);
       await tester.enterText(find.byKey(const Key('password')), password);
 
@@ -142,10 +150,12 @@ void main() {
       when(() => registerCubit.state)
           .thenReturn(const RegisterState.success(null));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('email')), email);
       await tester.enterText(find.byKey(const Key('password')), password);
       await tester.enterText(find.byKey(const Key('repeat_password')), '');
 
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -172,13 +182,16 @@ void main() {
       when(() => registerCubit.register(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('password')), password);
+      await tester.pumpAndSettle();
       await tester.enterText(
         find.byKey(const Key('repeat_password')),
         password,
       );
-
+      await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll

@@ -69,6 +69,7 @@ void main() {
     (tester) async {
       when(() => usersCubit.state).thenReturn(const UsersState.loading());
       await tester.pumpWidget(rootWidget(const DashboardPage()));
+      await tester.pump();
       expect(find.byType(Loading), findsOneWidget);
     },
   );
@@ -78,6 +79,7 @@ void main() {
     (tester) async {
       when(() => usersCubit.state).thenReturn(const UsersState.empty());
       await tester.pumpWidget(rootWidget(const DashboardPage()));
+      await tester.pump();
       expect(find.byType(Empty), findsOneWidget);
     },
   );
@@ -87,6 +89,7 @@ void main() {
     (tester) async {
       when(() => usersCubit.state).thenReturn(const UsersState.failure(""));
       await tester.pumpWidget(rootWidget(const DashboardPage()));
+      await tester.pump();
       expect(find.byType(Empty), findsOneWidget);
     },
   );
@@ -98,6 +101,7 @@ void main() {
         UsersState.success(users),
       );
       await tester.pumpWidget(rootWidget(const DashboardPage()));
+      await tester.pumpAndSettle();
       expect(find.byType(ListView), findsOneWidget);
     },
   );
@@ -111,7 +115,7 @@ void main() {
       when(() => usersCubit.refreshUsers(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const DashboardPage()));
-
+      await tester.pumpAndSettle();
       await tester.fling(
         find.text('Michael Lawson'),
         const Offset(0.0, 500.0),

@@ -29,7 +29,7 @@ https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/53f880ed-d51e-4bc
 - Run `flutter run --flavor stg -t lib/main.dart --dart-define-from-file .env.stg.json` for **staging** or
 - Run `flutter run --flavor prd -t lib/main.dart --dart-define-from-file .env.prd.json` for **production**
 - Run Test `flutter test`
-- To generate launcher icon based on Flavor `dart pub run flutter_launcher_icons:main -f flutter_launcher_icons*`
+- To generate launcher icon based on Flavor `dart run flutter_launcher_icons`
 - To generate mock class `dart pub run build_runner build`
 
 

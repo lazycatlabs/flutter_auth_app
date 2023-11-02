@@ -112,7 +112,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
               items: widget.items,
               onChanged: widget.onChanged,
             ),
-          )
+          ),
         ],
       ),
     );

@@ -37,7 +37,7 @@ dependencies:
   dartz: ^0.10.1
 
   # Use as Network Client
-  dio: ^5.3.3
+  dio: ^5.4.0
 
   # Use hive to save local data
   hive: ^2.2.3
@@ -51,7 +51,7 @@ dependencies:
 
 
   # Use for custom toast with Status, ex : Loading,Success,Failed
-  oktoast: ^3.3.2+1
+  oktoast: ^3.4.0
 
   # Use for responsive UI, set default size base on Mock Up
   flutter_screenutil: ^5.9.0
@@ -62,9 +62,9 @@ dependencies:
   logger: ^2.0.2+1
 
   # Firebase
-  firebase_core: ^2.22.0
-  firebase_analytics: ^10.6.4
-  firebase_crashlytics: ^3.4.4
+  firebase_core: ^2.24.0
+  firebase_analytics: ^10.7.2
+  firebase_crashlytics: ^3.4.6
 
   # router
   go_router: ^12.1.1
@@ -82,11 +82,11 @@ dev_dependencies:
   lint: ^2.2.0
   flutter_lints: ^3.0.1
   bloc_test: ^9.1.5
-  build_runner: ^2.4.6
-  http_mock_adapter: ^0.6.0
+  build_runner: ^2.4.7
+  http_mock_adapter: ^0.6.1
 
   #Temporary using old version because error when generate build_runner
-  mockito: ^5.4.2
+  mockito: ^5.4.3
 
   # Freezed
   freezed: ^2.4.5

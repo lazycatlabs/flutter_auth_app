@@ -62,12 +62,12 @@ dependencies:
   logger: ^2.0.2+1
 
   # Firebase
-  firebase_core: ^2.24.0
-  firebase_analytics: ^10.7.2
-  firebase_crashlytics: ^3.4.6
+  firebase_core: ^2.24.2
+  firebase_analytics: ^10.7.4
+  firebase_crashlytics: ^3.4.8
 
   # router
-  go_router: ^12.1.1
+  go_router: ^12.1.3
 
   # Freezed
   freezed_annotation: ^2.4.1
@@ -86,10 +86,10 @@ dev_dependencies:
   http_mock_adapter: ^0.6.1
 
   #Temporary using old version because error when generate build_runner
-  mockito: ^5.4.3
+  mockito: ^5.4.4
 
   # Freezed
-  freezed: ^2.4.5
+  freezed: ^2.4.6
   json_serializable: ^6.7.1
 
   # hive generator

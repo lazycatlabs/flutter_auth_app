@@ -8,9 +8,7 @@ mixin FirebaseServices {
   static Future<void> init() async {
     /// Initialize Firebase
     await Firebase.initializeApp(
-      options: const String.fromEnvironment("ENV") == "staging"
-          ? DefaultFirebaseOptionsStg.currentPlatform
-          : DefaultFirebaseOptionsPrd.currentPlatform,
+      options: DefaultFirebaseOptions.currentPlatform,
     );
     // Pass all uncaught errors from the framework to Crashlytics.
     // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

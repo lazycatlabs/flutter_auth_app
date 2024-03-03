@@ -7,6 +7,78 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:520881115656:android:854b1e7d966a0555fd77bd",
+        "android_client_info": {
+          "package_name": "com.james.weighttracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDLxYlgYywHeVs8Ch8uOq2t2BmtjOM0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "520881115656-c82m945c9cc483231hmgn0g8nke7c3q8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lazycatlabs.base.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520881115656:android:5ce1808f01692ab2fd77bd",
+        "android_client_info": {
+          "package_name": "com.lazycatlabs.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDLxYlgYywHeVs8Ch8uOq2t2BmtjOM0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520881115656-b0iggeu3s5ophb4p94caa0h5jsmd9j7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "520881115656-c82m945c9cc483231hmgn0g8nke7c3q8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lazycatlabs.base.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:520881115656:android:2ccc910b48e53ef3fd77bd",
         "android_client_info": {
           "package_name": "com.lazycatlabs.auth.stg"

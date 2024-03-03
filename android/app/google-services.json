@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:933342696488:android:38f3c637080d914d87511d",
+        "android_client_info": {
+          "package_name": "com.james.weighttracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933342696488-65r3ei8hig6p8d4mhng670foqjr63ntt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdU1UveIWYwX-Lsmtl7pIigbu5lug-pTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933342696488-65r3ei8hig6p8d4mhng670foqjr63ntt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "933342696488-ekbqsc1q8pkvk61nj5p0f04061ivr0ug.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lazycatlabs.auths"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:933342696488:android:2a6b2649b130a09e87511d",
         "android_client_info": {
           "package_name": "com.lazycatlabs.auth"
@@ -31,10 +67,10 @@
               "client_type": 3
             },
             {
-              "client_id": "933342696488-vko2c10hpi09cvvkbpt9eeau6vfavpnq.apps.googleusercontent.com",
+              "client_id": "933342696488-ekbqsc1q8pkvk61nj5p0f04061ivr0ug.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.lazycatlabs.base"
+                "bundle_id": "com.lazycatlabs.auths"
               }
             }
           ]
@@ -67,10 +103,10 @@
               "client_type": 3
             },
             {
-              "client_id": "933342696488-vko2c10hpi09cvvkbpt9eeau6vfavpnq.apps.googleusercontent.com",
+              "client_id": "933342696488-ekbqsc1q8pkvk61nj5p0f04061ivr0ug.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.lazycatlabs.base"
+                "bundle_id": "com.lazycatlabs.auths"
               }
             }
           ]
@@ -111,10 +147,10 @@
               "client_type": 3
             },
             {
-              "client_id": "933342696488-vko2c10hpi09cvvkbpt9eeau6vfavpnq.apps.googleusercontent.com",
+              "client_id": "933342696488-ekbqsc1q8pkvk61nj5p0f04061ivr0ug.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.lazycatlabs.base"
+                "bundle_id": "com.lazycatlabs.auths"
               }
             }
           ]

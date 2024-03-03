@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
     id "com.google.gms.google-services"
+    id "com.google.firebase.crashlytics"
 }
 
 def localProperties = new Properties()
@@ -11,11 +12,6 @@ if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
         localProperties.load(reader)
     }
-}
-
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -28,9 +24,9 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
 android {
-    namespace "com.lazycatlabs.auth"
-    compileSdk 34
+    compileSdk 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -52,8 +48,8 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.lazycatlabs.auth"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdkVersion 20
+        targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -108,11 +104,8 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0"
     implementation platform('com.google.firebase:firebase-bom:32.5.0')
-    implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 }
-
-apply plugin: 'com.google.firebase.crashlytics'

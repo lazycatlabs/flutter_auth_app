@@ -6,12 +6,12 @@ part of 'get_users.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UsersParams _$$_UsersParamsFromJson(Map<String, dynamic> json) =>
-    _$_UsersParams(
-      page: json['page'] as int? ?? 1,
+_$UsersParamsImpl _$$UsersParamsImplFromJson(Map<String, dynamic> json) =>
+    _$UsersParamsImpl(
+      page: (json['page'] as num?)?.toInt() ?? 1,
     );
 
-Map<String, dynamic> _$$_UsersParamsToJson(_$_UsersParams instance) =>
+Map<String, dynamic> _$$UsersParamsImplToJson(_$UsersParamsImpl instance) =>
     <String, dynamic>{
       'page': instance.page,
     };

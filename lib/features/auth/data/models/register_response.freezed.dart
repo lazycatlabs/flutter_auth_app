@@ -12,7 +12,7 @@ part of 'register_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) {
   return _RegisterResponse.fromJson(json);
@@ -74,22 +74,22 @@ class _$RegisterResponseCopyWithImpl<$Res, $Val extends RegisterResponse>
 }
 
 /// @nodoc
-abstract class _$$_RegisterResponseCopyWith<$Res>
+abstract class _$$RegisterResponseImplCopyWith<$Res>
     implements $RegisterResponseCopyWith<$Res> {
-  factory _$$_RegisterResponseCopyWith(
-          _$_RegisterResponse value, $Res Function(_$_RegisterResponse) then) =
-      __$$_RegisterResponseCopyWithImpl<$Res>;
+  factory _$$RegisterResponseImplCopyWith(_$RegisterResponseImpl value,
+          $Res Function(_$RegisterResponseImpl) then) =
+      __$$RegisterResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, String? token, String? error});
 }
 
 /// @nodoc
-class __$$_RegisterResponseCopyWithImpl<$Res>
-    extends _$RegisterResponseCopyWithImpl<$Res, _$_RegisterResponse>
-    implements _$$_RegisterResponseCopyWith<$Res> {
-  __$$_RegisterResponseCopyWithImpl(
-      _$_RegisterResponse _value, $Res Function(_$_RegisterResponse) _then)
+class __$$RegisterResponseImplCopyWithImpl<$Res>
+    extends _$RegisterResponseCopyWithImpl<$Res, _$RegisterResponseImpl>
+    implements _$$RegisterResponseImplCopyWith<$Res> {
+  __$$RegisterResponseImplCopyWithImpl(_$RegisterResponseImpl _value,
+      $Res Function(_$RegisterResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_RegisterResponseCopyWithImpl<$Res>
     Object? token = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_RegisterResponse(
+    return _then(_$RegisterResponseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -118,11 +118,11 @@ class __$$_RegisterResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RegisterResponse extends _RegisterResponse {
-  const _$_RegisterResponse({this.id, this.token, this.error}) : super._();
+class _$RegisterResponseImpl extends _RegisterResponse {
+  const _$RegisterResponseImpl({this.id, this.token, this.error}) : super._();
 
-  factory _$_RegisterResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_RegisterResponseFromJson(json);
+  factory _$RegisterResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RegisterResponseImplFromJson(json);
 
   @override
   final int? id;
@@ -137,10 +137,10 @@ class _$_RegisterResponse extends _RegisterResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegisterResponse &&
+            other is _$RegisterResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.error, error) || other.error == error));
@@ -153,12 +153,13 @@ class _$_RegisterResponse extends _RegisterResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegisterResponseCopyWith<_$_RegisterResponse> get copyWith =>
-      __$$_RegisterResponseCopyWithImpl<_$_RegisterResponse>(this, _$identity);
+  _$$RegisterResponseImplCopyWith<_$RegisterResponseImpl> get copyWith =>
+      __$$RegisterResponseImplCopyWithImpl<_$RegisterResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RegisterResponseToJson(
+    return _$$RegisterResponseImplToJson(
       this,
     );
   }
@@ -168,11 +169,11 @@ abstract class _RegisterResponse extends RegisterResponse {
   const factory _RegisterResponse(
       {final int? id,
       final String? token,
-      final String? error}) = _$_RegisterResponse;
+      final String? error}) = _$RegisterResponseImpl;
   const _RegisterResponse._() : super._();
 
   factory _RegisterResponse.fromJson(Map<String, dynamic> json) =
-      _$_RegisterResponse.fromJson;
+      _$RegisterResponseImpl.fromJson;
 
   @override
   int? get id;
@@ -182,6 +183,6 @@ abstract class _RegisterResponse extends RegisterResponse {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_RegisterResponseCopyWith<_$_RegisterResponse> get copyWith =>
+  _$$RegisterResponseImplCopyWith<_$RegisterResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

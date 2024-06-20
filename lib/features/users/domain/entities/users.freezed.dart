@@ -12,7 +12,7 @@ part of 'users.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Users {
@@ -67,18 +67,21 @@ class _$UsersCopyWithImpl<$Res, $Val extends Users>
 }
 
 /// @nodoc
-abstract class _$$_UsersCopyWith<$Res> implements $UsersCopyWith<$Res> {
-  factory _$$_UsersCopyWith(_$_Users value, $Res Function(_$_Users) then) =
-      __$$_UsersCopyWithImpl<$Res>;
+abstract class _$$UsersImplCopyWith<$Res> implements $UsersCopyWith<$Res> {
+  factory _$$UsersImplCopyWith(
+          _$UsersImpl value, $Res Function(_$UsersImpl) then) =
+      __$$UsersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<User>? users, int? currentPage, int? lastPage});
 }
 
 /// @nodoc
-class __$$_UsersCopyWithImpl<$Res> extends _$UsersCopyWithImpl<$Res, _$_Users>
-    implements _$$_UsersCopyWith<$Res> {
-  __$$_UsersCopyWithImpl(_$_Users _value, $Res Function(_$_Users) _then)
+class __$$UsersImplCopyWithImpl<$Res>
+    extends _$UsersCopyWithImpl<$Res, _$UsersImpl>
+    implements _$$UsersImplCopyWith<$Res> {
+  __$$UsersImplCopyWithImpl(
+      _$UsersImpl _value, $Res Function(_$UsersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +91,7 @@ class __$$_UsersCopyWithImpl<$Res> extends _$UsersCopyWithImpl<$Res, _$_Users>
     Object? currentPage = freezed,
     Object? lastPage = freezed,
   }) {
-    return _then(_$_Users(
+    return _then(_$UsersImpl(
       users: freezed == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -107,8 +110,8 @@ class __$$_UsersCopyWithImpl<$Res> extends _$UsersCopyWithImpl<$Res, _$_Users>
 
 /// @nodoc
 
-class _$_Users implements _Users {
-  const _$_Users({final List<User>? users, this.currentPage, this.lastPage})
+class _$UsersImpl implements _Users {
+  const _$UsersImpl({final List<User>? users, this.currentPage, this.lastPage})
       : _users = users;
 
   final List<User>? _users;
@@ -132,10 +135,10 @@ class _$_Users implements _Users {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Users &&
+            other is _$UsersImpl &&
             const DeepCollectionEquality().equals(other._users, _users) &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
@@ -150,15 +153,15 @@ class _$_Users implements _Users {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsersCopyWith<_$_Users> get copyWith =>
-      __$$_UsersCopyWithImpl<_$_Users>(this, _$identity);
+  _$$UsersImplCopyWith<_$UsersImpl> get copyWith =>
+      __$$UsersImplCopyWithImpl<_$UsersImpl>(this, _$identity);
 }
 
 abstract class _Users implements Users {
   const factory _Users(
       {final List<User>? users,
       final int? currentPage,
-      final int? lastPage}) = _$_Users;
+      final int? lastPage}) = _$UsersImpl;
 
   @override
   List<User>? get users;
@@ -168,7 +171,7 @@ abstract class _Users implements Users {
   int? get lastPage;
   @override
   @JsonKey(ignore: true)
-  _$$_UsersCopyWith<_$_Users> get copyWith =>
+  _$$UsersImplCopyWith<_$UsersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -225,18 +228,20 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 }
 
 /// @nodoc
-abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
-      __$$_UserCopyWithImpl<$Res>;
+abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? name, String? avatar, String? email});
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
-    implements _$$_UserCopyWith<$Res> {
-  __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$UserCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -246,7 +251,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? avatar = freezed,
     Object? email = freezed,
   }) {
-    return _then(_$_User(
+    return _then(_$UserImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -265,8 +270,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 
 /// @nodoc
 
-class _$_User implements _User {
-  const _$_User({this.name, this.avatar, this.email});
+class _$UserImpl implements _User {
+  const _$UserImpl({this.name, this.avatar, this.email});
 
   @override
   final String? name;
@@ -281,10 +286,10 @@ class _$_User implements _User {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_User &&
+            other is _$UserImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.email, email) || other.email == email));
@@ -296,15 +301,15 @@ class _$_User implements _User {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserCopyWith<_$_User> get copyWith =>
-      __$$_UserCopyWithImpl<_$_User>(this, _$identity);
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
 }
 
 abstract class _User implements User {
   const factory _User(
       {final String? name,
       final String? avatar,
-      final String? email}) = _$_User;
+      final String? email}) = _$UserImpl;
 
   @override
   String? get name;
@@ -314,5 +319,6 @@ abstract class _User implements User {
   String? get email;
   @override
   @JsonKey(ignore: true)
-  _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

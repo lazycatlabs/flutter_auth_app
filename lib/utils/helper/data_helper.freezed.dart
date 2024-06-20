@@ -12,7 +12,7 @@ part of 'data_helper.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DataHelper {
@@ -123,11 +123,11 @@ class _$DataHelperCopyWithImpl<$Res, $Val extends DataHelper>
 }
 
 /// @nodoc
-abstract class _$$_DataHelperCopyWith<$Res>
+abstract class _$$DataHelperImplCopyWith<$Res>
     implements $DataHelperCopyWith<$Res> {
-  factory _$$_DataHelperCopyWith(
-          _$_DataHelper value, $Res Function(_$_DataHelper) then) =
-      __$$_DataHelperCopyWithImpl<$Res>;
+  factory _$$DataHelperImplCopyWith(
+          _$DataHelperImpl value, $Res Function(_$DataHelperImpl) then) =
+      __$$DataHelperImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -143,11 +143,11 @@ abstract class _$$_DataHelperCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DataHelperCopyWithImpl<$Res>
-    extends _$DataHelperCopyWithImpl<$Res, _$_DataHelper>
-    implements _$$_DataHelperCopyWith<$Res> {
-  __$$_DataHelperCopyWithImpl(
-      _$_DataHelper _value, $Res Function(_$_DataHelper) _then)
+class __$$DataHelperImplCopyWithImpl<$Res>
+    extends _$DataHelperCopyWithImpl<$Res, _$DataHelperImpl>
+    implements _$$DataHelperImplCopyWith<$Res> {
+  __$$DataHelperImplCopyWithImpl(
+      _$DataHelperImpl _value, $Res Function(_$DataHelperImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,7 +163,7 @@ class __$$_DataHelperCopyWithImpl<$Res>
     Object? isSelected = null,
     Object? activeTheme = null,
   }) {
-    return _then(_$_DataHelper(
+    return _then(_$DataHelperImpl(
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -206,8 +206,8 @@ class __$$_DataHelperCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataHelper implements _DataHelper {
-  _$_DataHelper(
+class _$DataHelperImpl implements _DataHelper {
+  _$DataHelperImpl(
       {this.title,
       this.desc,
       this.iconPath,
@@ -247,8 +247,8 @@ class _$_DataHelper implements _DataHelper {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataHelperCopyWith<_$_DataHelper> get copyWith =>
-      __$$_DataHelperCopyWithImpl<_$_DataHelper>(this, _$identity);
+  _$$DataHelperImplCopyWith<_$DataHelperImpl> get copyWith =>
+      __$$DataHelperImplCopyWithImpl<_$DataHelperImpl>(this, _$identity);
 }
 
 abstract class _DataHelper implements DataHelper {
@@ -261,7 +261,7 @@ abstract class _DataHelper implements DataHelper {
       String? type,
       int? id,
       bool isSelected,
-      ActiveTheme activeTheme}) = _$_DataHelper;
+      ActiveTheme activeTheme}) = _$DataHelperImpl;
 
   @override
   String? get title;
@@ -292,6 +292,6 @@ abstract class _DataHelper implements DataHelper {
   set activeTheme(ActiveTheme value);
   @override
   @JsonKey(ignore: true)
-  _$$_DataHelperCopyWith<_$_DataHelper> get copyWith =>
+  _$$DataHelperImplCopyWith<_$DataHelperImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

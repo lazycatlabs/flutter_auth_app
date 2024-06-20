@@ -6,12 +6,12 @@ part of 'users_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UsersResponse _$$_UsersResponseFromJson(Map<String, dynamic> json) =>
-    _$_UsersResponse(
-      page: json['page'] as int?,
-      perPage: json['per_page'] as int?,
-      total: json['total'] as int?,
-      totalPages: json['total_pages'] as int?,
+_$UsersResponseImpl _$$UsersResponseImplFromJson(Map<String, dynamic> json) =>
+    _$UsersResponseImpl(
+      page: (json['page'] as num?)?.toInt(),
+      perPage: (json['per_page'] as num?)?.toInt(),
+      total: (json['total'] as num?)?.toInt(),
+      totalPages: (json['total_pages'] as num?)?.toInt(),
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => DataUser.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -21,7 +21,7 @@ _$_UsersResponse _$$_UsersResponseFromJson(Map<String, dynamic> json) =>
       error: json['error'] as String?,
     );
 
-Map<String, dynamic> _$$_UsersResponseToJson(_$_UsersResponse instance) =>
+Map<String, dynamic> _$$UsersResponseImplToJson(_$UsersResponseImpl instance) =>
     <String, dynamic>{
       'page': instance.page,
       'per_page': instance.perPage,
@@ -32,27 +32,28 @@ Map<String, dynamic> _$$_UsersResponseToJson(_$_UsersResponse instance) =>
       'error': instance.error,
     };
 
-_$_SupportUser _$$_SupportUserFromJson(Map<String, dynamic> json) =>
-    _$_SupportUser(
+_$SupportUserImpl _$$SupportUserImplFromJson(Map<String, dynamic> json) =>
+    _$SupportUserImpl(
       url: json['url'] as String?,
       text: json['text'] as String?,
     );
 
-Map<String, dynamic> _$$_SupportUserToJson(_$_SupportUser instance) =>
+Map<String, dynamic> _$$SupportUserImplToJson(_$SupportUserImpl instance) =>
     <String, dynamic>{
       'url': instance.url,
       'text': instance.text,
     };
 
-_$_DataUser _$$_DataUserFromJson(Map<String, dynamic> json) => _$_DataUser(
-      id: json['id'] as int?,
+_$DataUserImpl _$$DataUserImplFromJson(Map<String, dynamic> json) =>
+    _$DataUserImpl(
+      id: (json['id'] as num?)?.toInt(),
       email: json['email'] as String?,
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
       avatar: json['avatar'] as String?,
     );
 
-Map<String, dynamic> _$$_DataUserToJson(_$_DataUser instance) =>
+Map<String, dynamic> _$$DataUserImplToJson(_$DataUserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'email': instance.email,

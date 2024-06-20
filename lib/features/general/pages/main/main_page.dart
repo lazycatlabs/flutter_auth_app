@@ -30,9 +30,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return context.read<MainCubit>().onBackPressed(context, _scaffoldKey);
+    return PopScope(
+      onPopInvoked: (isPop) {
+        context.read<MainCubit>().onBackPressed(context, _scaffoldKey);
       },
       child: Parent(
         scaffoldKey: _scaffoldKey,

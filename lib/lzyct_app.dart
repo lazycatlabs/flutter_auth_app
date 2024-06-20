@@ -51,7 +51,7 @@ class LzyctApp extends StatelessWidget {
 
                   return MediaQuery(
                     data: data.copyWith(
-                      textScaleFactor: 1,
+                      textScaler: TextScaler.noScaling,
                       alwaysUse24HourFormat: true,
                     ),
                     child: child!,

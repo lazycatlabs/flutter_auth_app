@@ -12,7 +12,7 @@ part of 'post_login.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LoginParams _$LoginParamsFromJson(Map<String, dynamic> json) {
   return _LoginParams.fromJson(json);
@@ -68,22 +68,22 @@ class _$LoginParamsCopyWithImpl<$Res, $Val extends LoginParams>
 }
 
 /// @nodoc
-abstract class _$$_LoginParamsCopyWith<$Res>
+abstract class _$$LoginParamsImplCopyWith<$Res>
     implements $LoginParamsCopyWith<$Res> {
-  factory _$$_LoginParamsCopyWith(
-          _$_LoginParams value, $Res Function(_$_LoginParams) then) =
-      __$$_LoginParamsCopyWithImpl<$Res>;
+  factory _$$LoginParamsImplCopyWith(
+          _$LoginParamsImpl value, $Res Function(_$LoginParamsImpl) then) =
+      __$$LoginParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$_LoginParamsCopyWithImpl<$Res>
-    extends _$LoginParamsCopyWithImpl<$Res, _$_LoginParams>
-    implements _$$_LoginParamsCopyWith<$Res> {
-  __$$_LoginParamsCopyWithImpl(
-      _$_LoginParams _value, $Res Function(_$_LoginParams) _then)
+class __$$LoginParamsImplCopyWithImpl<$Res>
+    extends _$LoginParamsCopyWithImpl<$Res, _$LoginParamsImpl>
+    implements _$$LoginParamsImplCopyWith<$Res> {
+  __$$LoginParamsImplCopyWithImpl(
+      _$LoginParamsImpl _value, $Res Function(_$LoginParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_LoginParamsCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$_LoginParams(
+    return _then(_$LoginParamsImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_LoginParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LoginParams implements _LoginParams {
-  const _$_LoginParams({this.email = "", this.password = ""});
+class _$LoginParamsImpl implements _LoginParams {
+  const _$LoginParamsImpl({this.email = "", this.password = ""});
 
-  factory _$_LoginParams.fromJson(Map<String, dynamic> json) =>
-      _$$_LoginParamsFromJson(json);
+  factory _$LoginParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoginParamsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -126,10 +126,10 @@ class _$_LoginParams implements _LoginParams {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginParams &&
+            other is _$LoginParamsImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -142,12 +142,12 @@ class _$_LoginParams implements _LoginParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginParamsCopyWith<_$_LoginParams> get copyWith =>
-      __$$_LoginParamsCopyWithImpl<_$_LoginParams>(this, _$identity);
+  _$$LoginParamsImplCopyWith<_$LoginParamsImpl> get copyWith =>
+      __$$LoginParamsImplCopyWithImpl<_$LoginParamsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoginParamsToJson(
+    return _$$LoginParamsImplToJson(
       this,
     );
   }
@@ -155,10 +155,10 @@ class _$_LoginParams implements _LoginParams {
 
 abstract class _LoginParams implements LoginParams {
   const factory _LoginParams({final String email, final String password}) =
-      _$_LoginParams;
+      _$LoginParamsImpl;
 
   factory _LoginParams.fromJson(Map<String, dynamic> json) =
-      _$_LoginParams.fromJson;
+      _$LoginParamsImpl.fromJson;
 
   @override
   String get email;
@@ -166,6 +166,6 @@ abstract class _LoginParams implements LoginParams {
   String get password;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginParamsCopyWith<_$_LoginParams> get copyWith =>
+  _$$LoginParamsImplCopyWith<_$LoginParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

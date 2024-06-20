@@ -13,7 +13,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       scaffoldBackgroundColor: Palette.background,
       colorScheme: const ColorScheme.light().copyWith(
         primary: Palette.primary,
-        background: Palette.background,
+        surface: Palette.background,
       ),
       textTheme: TextTheme(
         displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(

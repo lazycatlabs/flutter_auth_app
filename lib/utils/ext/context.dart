@@ -45,8 +45,8 @@ extension ContextExtensions on BuildContext {
         builder: (c) {
           ctx = c;
 
-          return WillPopScope(
-            onWillPop: () async => false,
+          return PopScope(
+            canPop: false,
             child: Material(
               color: Colors.transparent,
               child: Center(

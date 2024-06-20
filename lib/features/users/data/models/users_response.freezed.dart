@@ -12,7 +12,7 @@ part of 'users_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UsersResponse _$UsersResponseFromJson(Map<String, dynamic> json) {
   return _UsersResponse.fromJson(json);
@@ -121,11 +121,11 @@ class _$UsersResponseCopyWithImpl<$Res, $Val extends UsersResponse>
 }
 
 /// @nodoc
-abstract class _$$_UsersResponseCopyWith<$Res>
+abstract class _$$UsersResponseImplCopyWith<$Res>
     implements $UsersResponseCopyWith<$Res> {
-  factory _$$_UsersResponseCopyWith(
-          _$_UsersResponse value, $Res Function(_$_UsersResponse) then) =
-      __$$_UsersResponseCopyWithImpl<$Res>;
+  factory _$$UsersResponseImplCopyWith(
+          _$UsersResponseImpl value, $Res Function(_$UsersResponseImpl) then) =
+      __$$UsersResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -142,11 +142,11 @@ abstract class _$$_UsersResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UsersResponseCopyWithImpl<$Res>
-    extends _$UsersResponseCopyWithImpl<$Res, _$_UsersResponse>
-    implements _$$_UsersResponseCopyWith<$Res> {
-  __$$_UsersResponseCopyWithImpl(
-      _$_UsersResponse _value, $Res Function(_$_UsersResponse) _then)
+class __$$UsersResponseImplCopyWithImpl<$Res>
+    extends _$UsersResponseCopyWithImpl<$Res, _$UsersResponseImpl>
+    implements _$$UsersResponseImplCopyWith<$Res> {
+  __$$UsersResponseImplCopyWithImpl(
+      _$UsersResponseImpl _value, $Res Function(_$UsersResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +160,7 @@ class __$$_UsersResponseCopyWithImpl<$Res>
     Object? support = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_UsersResponse(
+    return _then(_$UsersResponseImpl(
       page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -195,8 +195,8 @@ class __$$_UsersResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UsersResponse extends _UsersResponse {
-  const _$_UsersResponse(
+class _$UsersResponseImpl extends _UsersResponse {
+  const _$UsersResponseImpl(
       {this.page,
       @JsonKey(name: 'per_page') this.perPage,
       this.total,
@@ -207,8 +207,8 @@ class _$_UsersResponse extends _UsersResponse {
       : _data = data,
         super._();
 
-  factory _$_UsersResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_UsersResponseFromJson(json);
+  factory _$UsersResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UsersResponseImplFromJson(json);
 
   @override
   final int? page;
@@ -241,10 +241,10 @@ class _$_UsersResponse extends _UsersResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsersResponse &&
+            other is _$UsersResponseImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.perPage, perPage) || other.perPage == perPage) &&
             (identical(other.total, total) || other.total == total) &&
@@ -263,12 +263,12 @@ class _$_UsersResponse extends _UsersResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsersResponseCopyWith<_$_UsersResponse> get copyWith =>
-      __$$_UsersResponseCopyWithImpl<_$_UsersResponse>(this, _$identity);
+  _$$UsersResponseImplCopyWith<_$UsersResponseImpl> get copyWith =>
+      __$$UsersResponseImplCopyWithImpl<_$UsersResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UsersResponseToJson(
+    return _$$UsersResponseImplToJson(
       this,
     );
   }
@@ -282,11 +282,11 @@ abstract class _UsersResponse extends UsersResponse {
       @JsonKey(name: 'total_pages') final int? totalPages,
       final List<DataUser>? data,
       final SupportUser? support,
-      final String? error}) = _$_UsersResponse;
+      final String? error}) = _$UsersResponseImpl;
   const _UsersResponse._() : super._();
 
   factory _UsersResponse.fromJson(Map<String, dynamic> json) =
-      _$_UsersResponse.fromJson;
+      _$UsersResponseImpl.fromJson;
 
   @override
   int? get page;
@@ -306,7 +306,7 @@ abstract class _UsersResponse extends UsersResponse {
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_UsersResponseCopyWith<_$_UsersResponse> get copyWith =>
+  _$$UsersResponseImplCopyWith<_$UsersResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -364,22 +364,22 @@ class _$SupportUserCopyWithImpl<$Res, $Val extends SupportUser>
 }
 
 /// @nodoc
-abstract class _$$_SupportUserCopyWith<$Res>
+abstract class _$$SupportUserImplCopyWith<$Res>
     implements $SupportUserCopyWith<$Res> {
-  factory _$$_SupportUserCopyWith(
-          _$_SupportUser value, $Res Function(_$_SupportUser) then) =
-      __$$_SupportUserCopyWithImpl<$Res>;
+  factory _$$SupportUserImplCopyWith(
+          _$SupportUserImpl value, $Res Function(_$SupportUserImpl) then) =
+      __$$SupportUserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? url, String? text});
 }
 
 /// @nodoc
-class __$$_SupportUserCopyWithImpl<$Res>
-    extends _$SupportUserCopyWithImpl<$Res, _$_SupportUser>
-    implements _$$_SupportUserCopyWith<$Res> {
-  __$$_SupportUserCopyWithImpl(
-      _$_SupportUser _value, $Res Function(_$_SupportUser) _then)
+class __$$SupportUserImplCopyWithImpl<$Res>
+    extends _$SupportUserCopyWithImpl<$Res, _$SupportUserImpl>
+    implements _$$SupportUserImplCopyWith<$Res> {
+  __$$SupportUserImplCopyWithImpl(
+      _$SupportUserImpl _value, $Res Function(_$SupportUserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -388,7 +388,7 @@ class __$$_SupportUserCopyWithImpl<$Res>
     Object? url = freezed,
     Object? text = freezed,
   }) {
-    return _then(_$_SupportUser(
+    return _then(_$SupportUserImpl(
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -403,11 +403,11 @@ class __$$_SupportUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SupportUser implements _SupportUser {
-  const _$_SupportUser({this.url, this.text});
+class _$SupportUserImpl implements _SupportUser {
+  const _$SupportUserImpl({this.url, this.text});
 
-  factory _$_SupportUser.fromJson(Map<String, dynamic> json) =>
-      _$$_SupportUserFromJson(json);
+  factory _$SupportUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SupportUserImplFromJson(json);
 
   @override
   final String? url;
@@ -420,10 +420,10 @@ class _$_SupportUser implements _SupportUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SupportUser &&
+            other is _$SupportUserImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.text, text) || other.text == text));
   }
@@ -435,12 +435,12 @@ class _$_SupportUser implements _SupportUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SupportUserCopyWith<_$_SupportUser> get copyWith =>
-      __$$_SupportUserCopyWithImpl<_$_SupportUser>(this, _$identity);
+  _$$SupportUserImplCopyWith<_$SupportUserImpl> get copyWith =>
+      __$$SupportUserImplCopyWithImpl<_$SupportUserImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SupportUserToJson(
+    return _$$SupportUserImplToJson(
       this,
     );
   }
@@ -448,10 +448,10 @@ class _$_SupportUser implements _SupportUser {
 
 abstract class _SupportUser implements SupportUser {
   const factory _SupportUser({final String? url, final String? text}) =
-      _$_SupportUser;
+      _$SupportUserImpl;
 
   factory _SupportUser.fromJson(Map<String, dynamic> json) =
-      _$_SupportUser.fromJson;
+      _$SupportUserImpl.fromJson;
 
   @override
   String? get url;
@@ -459,7 +459,7 @@ abstract class _SupportUser implements SupportUser {
   String? get text;
   @override
   @JsonKey(ignore: true)
-  _$$_SupportUserCopyWith<_$_SupportUser> get copyWith =>
+  _$$SupportUserImplCopyWith<_$SupportUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -541,10 +541,11 @@ class _$DataUserCopyWithImpl<$Res, $Val extends DataUser>
 }
 
 /// @nodoc
-abstract class _$$_DataUserCopyWith<$Res> implements $DataUserCopyWith<$Res> {
-  factory _$$_DataUserCopyWith(
-          _$_DataUser value, $Res Function(_$_DataUser) then) =
-      __$$_DataUserCopyWithImpl<$Res>;
+abstract class _$$DataUserImplCopyWith<$Res>
+    implements $DataUserCopyWith<$Res> {
+  factory _$$DataUserImplCopyWith(
+          _$DataUserImpl value, $Res Function(_$DataUserImpl) then) =
+      __$$DataUserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -556,11 +557,11 @@ abstract class _$$_DataUserCopyWith<$Res> implements $DataUserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DataUserCopyWithImpl<$Res>
-    extends _$DataUserCopyWithImpl<$Res, _$_DataUser>
-    implements _$$_DataUserCopyWith<$Res> {
-  __$$_DataUserCopyWithImpl(
-      _$_DataUser _value, $Res Function(_$_DataUser) _then)
+class __$$DataUserImplCopyWithImpl<$Res>
+    extends _$DataUserCopyWithImpl<$Res, _$DataUserImpl>
+    implements _$$DataUserImplCopyWith<$Res> {
+  __$$DataUserImplCopyWithImpl(
+      _$DataUserImpl _value, $Res Function(_$DataUserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -572,7 +573,7 @@ class __$$_DataUserCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? avatar = freezed,
   }) {
-    return _then(_$_DataUser(
+    return _then(_$DataUserImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -599,16 +600,16 @@ class __$$_DataUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DataUser implements _DataUser {
-  const _$_DataUser(
+class _$DataUserImpl implements _DataUser {
+  const _$DataUserImpl(
       {this.id,
       this.email,
       @JsonKey(name: 'first_name') this.firstName,
       @JsonKey(name: 'last_name') this.lastName,
       this.avatar});
 
-  factory _$_DataUser.fromJson(Map<String, dynamic> json) =>
-      _$$_DataUserFromJson(json);
+  factory _$DataUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataUserImplFromJson(json);
 
   @override
   final int? id;
@@ -629,10 +630,10 @@ class _$_DataUser implements _DataUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DataUser &&
+            other is _$DataUserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.firstName, firstName) ||
@@ -650,12 +651,12 @@ class _$_DataUser implements _DataUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataUserCopyWith<_$_DataUser> get copyWith =>
-      __$$_DataUserCopyWithImpl<_$_DataUser>(this, _$identity);
+  _$$DataUserImplCopyWith<_$DataUserImpl> get copyWith =>
+      __$$DataUserImplCopyWithImpl<_$DataUserImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataUserToJson(
+    return _$$DataUserImplToJson(
       this,
     );
   }
@@ -667,9 +668,10 @@ abstract class _DataUser implements DataUser {
       final String? email,
       @JsonKey(name: 'first_name') final String? firstName,
       @JsonKey(name: 'last_name') final String? lastName,
-      final String? avatar}) = _$_DataUser;
+      final String? avatar}) = _$DataUserImpl;
 
-  factory _DataUser.fromJson(Map<String, dynamic> json) = _$_DataUser.fromJson;
+  factory _DataUser.fromJson(Map<String, dynamic> json) =
+      _$DataUserImpl.fromJson;
 
   @override
   int? get id;
@@ -685,6 +687,6 @@ abstract class _DataUser implements DataUser {
   String? get avatar;
   @override
   @JsonKey(ignore: true)
-  _$$_DataUserCopyWith<_$_DataUser> get copyWith =>
+  _$$DataUserImplCopyWith<_$DataUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

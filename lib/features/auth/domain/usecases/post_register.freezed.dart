@@ -12,7 +12,7 @@ part of 'post_register.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RegisterParams _$RegisterParamsFromJson(Map<String, dynamic> json) {
   return _RegisterParams.fromJson(json);
@@ -68,22 +68,22 @@ class _$RegisterParamsCopyWithImpl<$Res, $Val extends RegisterParams>
 }
 
 /// @nodoc
-abstract class _$$_RegisterParamsCopyWith<$Res>
+abstract class _$$RegisterParamsImplCopyWith<$Res>
     implements $RegisterParamsCopyWith<$Res> {
-  factory _$$_RegisterParamsCopyWith(
-          _$_RegisterParams value, $Res Function(_$_RegisterParams) then) =
-      __$$_RegisterParamsCopyWithImpl<$Res>;
+  factory _$$RegisterParamsImplCopyWith(_$RegisterParamsImpl value,
+          $Res Function(_$RegisterParamsImpl) then) =
+      __$$RegisterParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$_RegisterParamsCopyWithImpl<$Res>
-    extends _$RegisterParamsCopyWithImpl<$Res, _$_RegisterParams>
-    implements _$$_RegisterParamsCopyWith<$Res> {
-  __$$_RegisterParamsCopyWithImpl(
-      _$_RegisterParams _value, $Res Function(_$_RegisterParams) _then)
+class __$$RegisterParamsImplCopyWithImpl<$Res>
+    extends _$RegisterParamsCopyWithImpl<$Res, _$RegisterParamsImpl>
+    implements _$$RegisterParamsImplCopyWith<$Res> {
+  __$$RegisterParamsImplCopyWithImpl(
+      _$RegisterParamsImpl _value, $Res Function(_$RegisterParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_RegisterParamsCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$_RegisterParams(
+    return _then(_$RegisterParamsImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_RegisterParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RegisterParams implements _RegisterParams {
-  const _$_RegisterParams({this.email = "", this.password = ""});
+class _$RegisterParamsImpl implements _RegisterParams {
+  const _$RegisterParamsImpl({this.email = "", this.password = ""});
 
-  factory _$_RegisterParams.fromJson(Map<String, dynamic> json) =>
-      _$$_RegisterParamsFromJson(json);
+  factory _$RegisterParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RegisterParamsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -126,10 +126,10 @@ class _$_RegisterParams implements _RegisterParams {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegisterParams &&
+            other is _$RegisterParamsImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -142,12 +142,13 @@ class _$_RegisterParams implements _RegisterParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegisterParamsCopyWith<_$_RegisterParams> get copyWith =>
-      __$$_RegisterParamsCopyWithImpl<_$_RegisterParams>(this, _$identity);
+  _$$RegisterParamsImplCopyWith<_$RegisterParamsImpl> get copyWith =>
+      __$$RegisterParamsImplCopyWithImpl<_$RegisterParamsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RegisterParamsToJson(
+    return _$$RegisterParamsImplToJson(
       this,
     );
   }
@@ -155,10 +156,10 @@ class _$_RegisterParams implements _RegisterParams {
 
 abstract class _RegisterParams implements RegisterParams {
   const factory _RegisterParams({final String email, final String password}) =
-      _$_RegisterParams;
+      _$RegisterParamsImpl;
 
   factory _RegisterParams.fromJson(Map<String, dynamic> json) =
-      _$_RegisterParams.fromJson;
+      _$RegisterParamsImpl.fromJson;
 
   @override
   String get email;
@@ -166,6 +167,6 @@ abstract class _RegisterParams implements RegisterParams {
   String get password;
   @override
   @JsonKey(ignore: true)
-  _$$_RegisterParamsCopyWith<_$_RegisterParams> get copyWith =>
+  _$$RegisterParamsImplCopyWith<_$RegisterParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

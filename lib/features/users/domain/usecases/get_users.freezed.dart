@@ -12,7 +12,7 @@ part of 'get_users.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UsersParams _$UsersParamsFromJson(Map<String, dynamic> json) {
   return _UsersParams.fromJson(json);
@@ -62,22 +62,22 @@ class _$UsersParamsCopyWithImpl<$Res, $Val extends UsersParams>
 }
 
 /// @nodoc
-abstract class _$$_UsersParamsCopyWith<$Res>
+abstract class _$$UsersParamsImplCopyWith<$Res>
     implements $UsersParamsCopyWith<$Res> {
-  factory _$$_UsersParamsCopyWith(
-          _$_UsersParams value, $Res Function(_$_UsersParams) then) =
-      __$$_UsersParamsCopyWithImpl<$Res>;
+  factory _$$UsersParamsImplCopyWith(
+          _$UsersParamsImpl value, $Res Function(_$UsersParamsImpl) then) =
+      __$$UsersParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page});
 }
 
 /// @nodoc
-class __$$_UsersParamsCopyWithImpl<$Res>
-    extends _$UsersParamsCopyWithImpl<$Res, _$_UsersParams>
-    implements _$$_UsersParamsCopyWith<$Res> {
-  __$$_UsersParamsCopyWithImpl(
-      _$_UsersParams _value, $Res Function(_$_UsersParams) _then)
+class __$$UsersParamsImplCopyWithImpl<$Res>
+    extends _$UsersParamsCopyWithImpl<$Res, _$UsersParamsImpl>
+    implements _$$UsersParamsImplCopyWith<$Res> {
+  __$$UsersParamsImplCopyWithImpl(
+      _$UsersParamsImpl _value, $Res Function(_$UsersParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_UsersParamsCopyWithImpl<$Res>
   $Res call({
     Object? page = null,
   }) {
-    return _then(_$_UsersParams(
+    return _then(_$UsersParamsImpl(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -96,11 +96,11 @@ class __$$_UsersParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UsersParams implements _UsersParams {
-  const _$_UsersParams({this.page = 1});
+class _$UsersParamsImpl implements _UsersParams {
+  const _$UsersParamsImpl({this.page = 1});
 
-  factory _$_UsersParams.fromJson(Map<String, dynamic> json) =>
-      _$$_UsersParamsFromJson(json);
+  factory _$UsersParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UsersParamsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -112,10 +112,10 @@ class _$_UsersParams implements _UsersParams {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsersParams &&
+            other is _$UsersParamsImpl &&
             (identical(other.page, page) || other.page == page));
   }
 
@@ -126,27 +126,27 @@ class _$_UsersParams implements _UsersParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsersParamsCopyWith<_$_UsersParams> get copyWith =>
-      __$$_UsersParamsCopyWithImpl<_$_UsersParams>(this, _$identity);
+  _$$UsersParamsImplCopyWith<_$UsersParamsImpl> get copyWith =>
+      __$$UsersParamsImplCopyWithImpl<_$UsersParamsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UsersParamsToJson(
+    return _$$UsersParamsImplToJson(
       this,
     );
   }
 }
 
 abstract class _UsersParams implements UsersParams {
-  const factory _UsersParams({final int page}) = _$_UsersParams;
+  const factory _UsersParams({final int page}) = _$UsersParamsImpl;
 
   factory _UsersParams.fromJson(Map<String, dynamic> json) =
-      _$_UsersParams.fromJson;
+      _$UsersParamsImpl.fromJson;
 
   @override
   int get page;
   @override
   @JsonKey(ignore: true)
-  _$$_UsersParamsCopyWith<_$_UsersParams> get copyWith =>
+  _$$UsersParamsImplCopyWith<_$UsersParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

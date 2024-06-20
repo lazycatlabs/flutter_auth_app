@@ -8,8 +8,10 @@ flutter_native_splash:
 
   android_12:
     image: assets/images/ic_launcher_foreground.png
-    icon_background_color: "#eff1f5"
+    icon_background_color: "#1e1e2e"
+    branding: assets/images/ic_branding_12.png
     image_dark: assets/images/ic_launcher_foreground.png
     icon_background_color_dark: "#1e1e2e"
+    branding_dark: assets/images/ic_branding_12.png
 
   web: false

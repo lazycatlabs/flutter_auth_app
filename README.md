@@ -17,8 +17,8 @@ https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/53f880ed-d51e-4bc
 
 | Technology | Recommended Version | Installation Guide                                                    |
 |------------|---------------------|-----------------------------------------------------------------------|
-| Flutter    | v3.10.x             | [Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
-| Dart       | v3.0.x              | Installed automatically with Flutter                                  |
+| Flutter    | v3.22.x             | [Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
+| Dart       | v3.4.x              | Installed automatically with Flutter                                  |
 
 ## Get Started 🚀
 

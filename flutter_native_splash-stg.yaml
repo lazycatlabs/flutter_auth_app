@@ -5,6 +5,7 @@ flutter_native_splash:
   color_dark: "#1e1e2e"
   image_dark: assets/images/ic_launcher_foreground_stg.png
   branding_dark: assets/images/ic_branding.png
+  branding_bottom_padding: 24
 
   android_12:
     image: assets/images/ic_launcher_foreground_stg.png

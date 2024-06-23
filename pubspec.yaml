@@ -79,8 +79,7 @@ dependencies:
   flutter_native_splash:
     git:
       url: https://github.com/Lzyct/flutter_native_splash.git
-      ref: fix/safe-area-branding-android
-#      ref: master
+      ref: master
 
 dev_dependencies:
   flutter_test:

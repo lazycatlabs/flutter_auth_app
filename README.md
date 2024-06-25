@@ -339,6 +339,23 @@ test
 
 </details>
 
+## Hire Me 🤝
+
+<table style="border:none; border-collapse:collapse; cellspacing:0; cellpadding:0">
+    <tr>
+        <td>
+           <a href="https://www.linkedin.com/in/lzyct/" target="_blank">
+              <img src="https://github.com/ukieTux/ukieTux/blob/master/assets/linkedin.svg" alt="LinkedIn" style="vertical-align:top; margin:4px" height=24>
+          </a>
+        </td>
+        <td>
+           <a href = "https://www.upwork.com/freelancers/~01913209d41be922f1?viewMode=1">
+              <img src="https://img.shields.io/badge/UpWork-6FDA44?logo=Upwork&logoColor=white" height=24/>
+           </a>
+        </td>
+    </tr>
+</table>
+
 
 <br><br>
 

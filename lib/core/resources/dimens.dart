@@ -21,6 +21,7 @@ class Dimens {
   static double space2 = 2.w;
   static double space3 = 3.w;
   static double space4 = 4.w;
+  static double space5 = 5.w;
   static double space6 = 6.w;
   static double space8 = 8.w;
   static double space12 = 12.w;
@@ -40,6 +41,7 @@ class Dimens {
   static double menuContainer = 250.w;
   static double carousel = 167.w;
   static double newsHeight = 185.w;
+  static double textField = 50.w;
 
   static double header = 200.w;
   static double minLabel = 116.w;

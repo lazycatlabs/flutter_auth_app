@@ -75,10 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SpacerV(),
                       TextF(
-                        autofillHints: const [AutofillHints.email],
+                        autoFillHints: const [AutofillHints.email],
                         key: const Key("email"),
-                        curFocusNode: _fnEmail,
-                        nextFocusNode: _fnPassword,
+                        focusNode: _fnEmail,
                         textInputAction: TextInputAction.next,
                         controller: _conEmail,
                         keyboardType: TextInputType.emailAddress,
@@ -86,20 +85,21 @@ class _LoginPageState extends State<LoginPage> {
                           Icons.alternate_email,
                           color: Theme.of(context).textTheme.bodyLarge?.color,
                         ),
-                        hintText: "eve.holt@reqres.in",
-                        hint: Strings.of(context)!.email,
-                        validator: (String? value) => value != null
-                            ? (!value.isValidEmail()
-                                ? Strings.of(context)?.errorInvalidEmail
-                                : null)
-                            : null,
+                        hint: "eve.holt@reqres.in",
+                        label: Strings.of(context)!.email,
+                        errorMessage: Strings.of(context)!.errorInvalidEmail,
+                        // validator: (String? value) => value != null
+                        //     ? (!value.isValidEmail()
+                        //     ? Strings.of(context)?.errorInvalidEmail
+                        //     : null)
+                        //     : null,
                       ),
                       BlocBuilder<AuthCubit, AuthState>(
                         builder: (_, state) {
                           return TextF(
-                            autofillHints: const [AutofillHints.password],
+                            autoFillHints: const [AutofillHints.password],
                             key: const Key("password"),
-                            curFocusNode: _fnPassword,
+                            focusNode: _fnPassword,
                             textInputAction: TextInputAction.done,
                             controller: _conPassword,
                             keyboardType: TextInputType.text,
@@ -111,9 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText:
                                 context.read<AuthCubit>().isPasswordHide ??
                                     false,
-                            hintText: '••••••••••••',
-                            maxLine: 1,
-                            hint: Strings.of(context)!.password,
+                            hint: '••••••••••••',
+                            label: Strings.of(context)!.password,
                             suffixIcon: IconButton(
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
@@ -126,11 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                                     : Icons.visibility,
                               ),
                             ),
-                            validator: (String? value) => value != null
-                                ? (value.length < 6
-                                    ? Strings.of(context)!.errorPasswordLength
-                                    : null)
-                                : null,
+                            // validator: (String? value) => value != null
+                            //     ? (value.length < 6
+                            //         ? Strings.of(context)!.errorPasswordLength
+                            //         : null)
+                            //     : null,
                           );
                         },
                       ),

@@ -77,8 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SpacerV(),
                     TextF(
                       key: const Key("email"),
-                      curFocusNode: _fnEmail,
-                      nextFocusNode: _fnPassword,
+                      focusNode: _fnEmail,
                       textInputAction: TextInputAction.next,
                       controller: _conEmail,
                       keyboardType: TextInputType.emailAddress,
@@ -86,13 +85,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         Icons.alternate_email,
                         color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
-                      hintText: 'johndoe@gmail.com',
-                      hint: Strings.of(context)!.email,
-                      validator: (String? value) => value != null
-                          ? (!value.isValidEmail()
-                              ? Strings.of(context)?.errorInvalidEmail
-                              : null)
-                          : null,
+                      hint: 'johndoe@gmail.com',
+                      label: Strings.of(context)!.email,
+                      // validator: (String? value) => value != null
+                      //     ? (!value.isValidEmail()
+                      //     ? Strings.of(context)?.errorInvalidEmail
+                      //     : null)
+                      //     : null,
                     ),
                     BlocBuilder<RegisterCubit, RegisterState>(
                       builder: (_, state) {
@@ -100,8 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           children: [
                             TextF(
                               key: const Key("password"),
-                              curFocusNode: _fnPassword,
-                              nextFocusNode: _fnPasswordRepeat,
+                              focusNode: _fnPassword,
                               textInputAction: TextInputAction.next,
                               controller: _conPassword,
                               keyboardType: TextInputType.text,
@@ -116,9 +114,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       .read<RegisterCubit>()
                                       .isPasswordHide ??
                                   false,
-                              hintText: '••••••••••••',
-                              maxLine: 1,
-                              hint: Strings.of(context)!.password,
+                              hint: '••••••••••••',
+                              label: Strings.of(context)!.password,
                               suffixIcon: IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints: const BoxConstraints(),
@@ -134,16 +131,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                       : Icons.visibility,
                                 ),
                               ),
-                              validator: (String? value) => value != null
-                                  ? (value.length < 6
-                                      ? Strings.of(context)!.errorPasswordLength
-                                      : null)
-                                  : null,
+                              // validator: (String? value) => value != null
+                              //     ? (value.length < 6
+                              //         ? Strings.of(context)!.errorPasswordLength
+                              //         : null)
+                              //     : null,
                               semantic: "password",
                             ),
                             TextF(
                               key: const Key("repeat_password"),
-                              curFocusNode: _fnPasswordRepeat,
+                              focusNode: _fnPasswordRepeat,
                               textInputAction: TextInputAction.done,
                               controller: _conPasswordRepeat,
                               keyboardType: TextInputType.text,
@@ -158,9 +155,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       .read<RegisterCubit>()
                                       .isPasswordRepeatHide ??
                                   false,
-                              hintText: '••••••••••••',
-                              maxLine: 1,
-                              hint: Strings.of(context)!.passwordRepeat,
+                              hint: '••••••••••••',
+                              label: Strings.of(context)!.passwordRepeat,
                               suffixIcon: IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints: const BoxConstraints(),
@@ -176,12 +172,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       : Icons.visibility,
                                 ),
                               ),
-                              validator: (String? value) => value != null
-                                  ? (value != _conPassword.text
-                                      ? Strings.of(context)
-                                          ?.errorPasswordNotMatch
-                                      : null)
-                                  : null,
+                              // validator: (String? value) => value != null
+                              //     ? (value != _conPassword.text
+                              //         ? Strings.of(context)
+                              //             ?.errorPasswordNotMatch
+                              //         : null)
+                              //     : null,
                               semantic: "repeat_password",
                             ),
                           ],

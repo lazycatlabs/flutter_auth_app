@@ -1,195 +1,242 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 
-///*********************************************
-/// Created by ukieTux on 22/04/2020 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class TextF extends StatefulWidget {
   const TextF({
     super.key,
-    this.curFocusNode,
-    this.nextFocusNode,
-    this.hint,
-    this.validator,
-    this.onChanged,
-    this.keyboardType,
-    this.textInputAction,
-    this.obscureText,
-    this.suffixIcon,
     this.controller,
+    required this.label,
+    this.errorMessage,
+    this.isValid = false,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.obscureText,
+    this.keyboardType,
+    this.inputFormatters,
+    this.enabled = true,
+    this.textInputAction,
     this.onTap,
-    this.textAlign,
-    this.enable,
-    this.inputFormatter,
-    this.minLine,
-    this.maxLine,
-    required this.prefixIcon,
-    this.isHintVisible = true,
-    this.prefixText,
-    this.hintText,
-    this.autofillHints,
+    this.autoFillHints,
+    this.description,
+    this.labelTextStyle,
+    this.noErrorSpace = false,
+    this.focusNode,
+    this.backgroundColor,
+    this.hint,
+    this.validatorListener,
+    this.height,
+    this.textStyle,
+    this.maxLines = 1,
     this.semantic,
   });
 
-  final FocusNode? curFocusNode;
-  final FocusNode? nextFocusNode;
-  final String? hint;
-  final Function(String)? validator;
-  final Function(String)? onChanged;
-  final Function? onTap;
+  final TextEditingController? controller;
+  final bool isValid;
+  final String label;
+  final String? errorMessage;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final bool? obscureText;
+  final bool enabled;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
-  final TextEditingController? controller;
-  final bool? obscureText;
-  final int? minLine;
-  final int? maxLine;
-  final Widget? suffixIcon;
-  final TextAlign? textAlign;
-  final bool? enable;
-  final List<TextInputFormatter>? inputFormatter;
-  final bool isHintVisible;
-  final Widget prefixIcon;
-  final String? prefixText;
-  final String? hintText;
-  final Iterable<String>? autofillHints;
+  final List<TextInputFormatter>? inputFormatters;
+  final VoidCallback? onTap;
+  final Function(String)? validatorListener;
+  final List<String>? autoFillHints;
+  final String? description;
+  final TextStyle? labelTextStyle;
+  final TextStyle? textStyle;
+  final bool noErrorSpace;
+  final FocusNode? focusNode;
+  final Color? backgroundColor;
+  final String? hint;
+  final double? height;
+  final int maxLines;
   final String? semantic;
 
   @override
-  _TextFState createState() => _TextFState();
+  TextFState createState() => TextFState();
 }
 
-class _TextFState extends State<TextF> {
-  bool isFocus = false;
-  String currentVal = "";
+class TextFState extends State<TextF> {
+  late FocusNode _fn;
+  bool _isFocus = false;
+  bool _isError = false;
+  bool _isFirstLoad = true;
+
+  final _debouncer = Debouncer();
+
+  @override
+  void initState() {
+    super.initState();
+    _fn = widget.focusNode ?? FocusNode();
+    _fn.addListener(() {
+      setState(() {
+        _isFocus = _fn.hasFocus;
+
+        /// Check if focus changed
+        if (!_isFocus) {
+          _isError = !widget.isValid;
+        }
+      });
+    });
+  }
+
+  void _updateStatus() {
+    if (_isFirstLoad) {
+      _isFirstLoad = false;
+    } else {
+      if (_isFocus) {
+        _isError = !widget.isValid;
+      }
+    }
+  }
+
+  void setIsError({required bool isError}) {
+    setState(() {
+      if (_isFirstLoad) {
+        _isFirstLoad = false;
+      } else {
+        _isError = isError;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(vertical: Dimens.space8),
+    _updateStatus();
+
+    return GestureDetector(
+      onTap: widget.onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(
-            visible: widget.isHintVisible,
-            child: Text(
-              widget.hint ?? "",
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color:
-                        Theme.of(context).extension<LzyctColors>()!.background,
-                    height: 0.1,
+          Stack(
+            children: [
+              Container(
+                width: double.maxFinite,
+                height: widget.height ?? Dimens.textField,
+                decoration: BoxDecoration(
+                  color: widget.enabled
+                      ? widget.backgroundColor ??
+                          Theme.of(context).extension<LzyctColors>()!.background
+                      : Theme.of(context).extension<LzyctColors>()!.shadow,
+                  border: Border.all(
+                    color: _isError
+                        ? Theme.of(context).extension<LzyctColors>()!.red!
+                        : Theme.of(context).extension<LzyctColors>()!.shadow!,
                   ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: Dimens.space8),
-            child: Semantics(
-              label: widget.semantic,
-              child: TextFormField(
-                key: widget.key,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                autofillHints: widget.autofillHints,
-                enabled: widget.enable,
-                obscureText: widget.obscureText ?? false,
-                focusNode: widget.curFocusNode,
-                keyboardType: widget.keyboardType,
-                controller: widget.controller,
-                textInputAction: widget.textInputAction,
-                textAlign: widget.textAlign ?? TextAlign.start,
-                minLines: widget.minLine ?? 1,
-                maxLines: widget.maxLine ?? 10,
-                inputFormatters: widget.inputFormatter,
-                textAlignVertical: TextAlignVertical.center,
-                style: Theme.of(context).textTheme.bodyMedium,
-                cursorColor: Palette.text,
-                decoration: InputDecoration(
-                  prefixText: widget.prefixText,
-                  alignLabelWithHint: true,
-                  isDense: true,
-                  hintText: widget.hintText,
-                  hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).hintColor,
-                      ),
-                  suffixIcon: widget.suffixIcon,
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Dimens.space12),
-                    child: widget.prefixIcon,
-                  ),
-                  prefixIconConstraints: BoxConstraints(
-                    minHeight: Dimens.space24,
-                    maxHeight: Dimens.space24,
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: Dimens.space12,
-                    horizontal: Dimens.space16,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).extension<LzyctColors>()!.card!,
-                    ),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: BorderSide(color: Theme.of(context).cardColor),
-                  ),
-                  errorStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Theme.of(context).extension<LzyctColors>()!.red,
-                      ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).extension<LzyctColors>()!.red!,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).extension<LzyctColors>()!.red!,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    gapPadding: 0,
-                    borderRadius: BorderRadius.circular(Dimens.space4),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).extension<LzyctColors>()!.pink!,
-                    ),
-                  ),
+                  borderRadius: BorderRadius.circular(Dimens.space4),
                 ),
-                validator: widget.validator as String? Function(String?)?,
-                onChanged: widget.onChanged,
-                onTap: widget.onTap as void Function()?,
-                onFieldSubmitted: (value) {
-                  setState(() {
-                    fieldFocusChange(
-                      context,
-                      widget.curFocusNode ?? FocusNode(),
-                      widget.nextFocusNode,
-                    );
-                  });
-                },
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(bottom: Dimens.space4),
+              ),
+              Positioned(
+                top: Dimens.space5,
+                left: Dimens.zero,
+                right: Dimens.zero,
+                bottom: Dimens.space4,
+                child: _textFormField,
+              ),
+            ],
+          ),
+          if (widget.description != null && !_isError)
+            Padding(
+              padding: EdgeInsets.only(top: Dimens.space6),
+              child: Text(
+                widget.description!,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: _isError
+                          ? Theme.of(context).extension<LzyctColors>()!.red!
+                          : Theme.of(context).extension<LzyctColors>()!.shadow,
+                    ),
               ),
             ),
-          ),
+          if (!widget.noErrorSpace) ...[
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: _isError && widget.errorMessage != null
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                        left: Dimens.space16,
+                        top: Dimens.space4,
+                      ),
+                      child: Text(
+                        widget.errorMessage ?? "",
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context)
+                                  .extension<LzyctColors>()!
+                                  .red,
+                            ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+            const SpacerV(),
+          ],
         ],
       ),
     );
   }
 
-  void fieldFocusChange(
-    BuildContext context,
-    FocusNode currentFocus,
-    FocusNode? nextFocus,
-  ) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
+  Widget get _textFormField {
+    return Semantics(
+      label: widget.semantic,
+      child: TextFormField(
+        autofillHints: widget.autoFillHints,
+        textInputAction: widget.textInputAction,
+        onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+        enabled: widget.enabled,
+        inputFormatters: widget.inputFormatters,
+        keyboardType: widget.keyboardType,
+        controller: widget.controller,
+        obscureText: widget.obscureText ?? false,
+        focusNode: _fn,
+        maxLines: widget.maxLines,
+        onTap: widget.onTap,
+        style: widget.textStyle ?? Theme.of(context).textTheme.bodyMedium500,
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.only(
+            left: Dimens.space16,
+            top: Dimens.space4,
+          ),
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          border: InputBorder.none,
+          errorBorder: InputBorder.none,
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.suffixIcon,
+          label: widget.label.isEmpty
+              ? null
+              : Text(
+                  widget.label,
+                  style: widget.labelTextStyle ??
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: _isError
+                                ? Theme.of(context)
+                                    .extension<LzyctColors>()!
+                                    .red!
+                                : Theme.of(context)
+                                    .extension<LzyctColors>()!
+                                    .subtitle!,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                ),
+          alignLabelWithHint: true,
+          hintText: widget.hint,
+          floatingLabelBehavior:
+              widget.hint != null ? FloatingLabelBehavior.always : null,
+          hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).extension<LzyctColors>()!.subtitle,
+              ),
+        ),
+        onChanged: (String value) =>
+            _debouncer.run(() => widget.validatorListener?.call(value)),
+      ),
+    );
   }
 }

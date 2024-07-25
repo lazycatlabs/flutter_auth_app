@@ -32,7 +32,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             backgroundColor: Theme.of(context).hintColor,
             radius: Dimens.menu + Dimens.space6,
             child: CircleAvatar(
-              backgroundImage: AssetImage(Images.icLogo),
+              backgroundImage: AssetImage(Images.icLauncher),
               radius: Dimens.menu,
             ),
           ),

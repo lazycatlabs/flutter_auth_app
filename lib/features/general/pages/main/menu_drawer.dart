@@ -38,7 +38,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     backgroundColor: Theme.of(context).hintColor,
                     radius: Dimens.space40,
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(Images.icLogo),
+                      backgroundImage: AssetImage(Images.icLauncher),
                       radius: Dimens.space36,
                     ),
                   ),

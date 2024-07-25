@@ -46,7 +46,7 @@ class Dimens {
   static double header = 200.w;
   static double minLabel = 116.w;
   static double bottomBar = 80.w;
-  static double profilePicture = 110.w;
+  static double profilePicture = 86.w;
   static double birthdayCalendar = 120.w;
 
   static double buttonH = 40.w;

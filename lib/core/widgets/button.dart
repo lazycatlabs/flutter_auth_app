@@ -44,7 +44,7 @@ class Button extends StatelessWidget {
               ?.withOpacity(0.5),
           padding: EdgeInsets.symmetric(
             horizontal: Dimens.space24,
-            vertical: Dimens.space8,
+            vertical: Dimens.space12,
           ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(

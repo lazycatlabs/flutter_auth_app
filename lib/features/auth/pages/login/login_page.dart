@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                   () => false,
                 ),
                 validatorListener: (String value) {
-                  _formValidator["password"] = value.length > 7;
+                  _formValidator["password"] = value.length > 5;
                   context.read<ReloadFormCubit>().reload();
                 },
                 errorMessage: Strings.of(context)!.errorPasswordLength,

@@ -46,16 +46,22 @@ class AppRoute {
       GoRoute(
         path: Routes.login.path,
         name: Routes.login.name,
-        builder: (_, __) => BlocProvider(
-          create: (_) => sl<ReloadFormCubit>(),
+        builder: (_, __) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<AuthCubit>()),
+            BlocProvider(create: (_) => sl<ReloadFormCubit>()),
+          ],
           child: const LoginPage(),
         ),
       ),
       GoRoute(
         path: Routes.register.path,
         name: Routes.register.name,
-        builder: (_, __) => BlocProvider(
-          create: (_) => sl<RegisterCubit>(),
+        builder: (_, __) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<RegisterCubit>()),
+            BlocProvider(create: (_) => sl<ReloadFormCubit>()),
+          ],
           child: const RegisterPage(),
         ),
       ),

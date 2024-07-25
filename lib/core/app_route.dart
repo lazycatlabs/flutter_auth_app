@@ -46,7 +46,10 @@ class AppRoute {
       GoRoute(
         path: Routes.login.path,
         name: Routes.login.name,
-        builder: (_, __) => const LoginPage(),
+        builder: (_, __) => BlocProvider(
+          create: (_) => sl<ReloadFormCubit>(),
+          child: const LoginPage(),
+        ),
       ),
       GoRoute(
         path: Routes.register.path,

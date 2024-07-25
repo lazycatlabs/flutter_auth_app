@@ -29,12 +29,14 @@ class _LoginPageState extends State<LoginPage> {
   final _conEmail = TextEditingController();
   final _conPassword = TextEditingController();
 
+  bool _isPasswordVisible = false;
+
   /// Focus Node
   final _fnEmail = FocusNode();
   final _fnPassword = FocusNode();
 
   /// Global key
-  final _keyForm = GlobalKey<FormState>();
+  final _formValidator = <String, bool>{};
 
   @override
   Widget build(BuildContext context) {
@@ -60,102 +62,27 @@ class _LoginPageState extends State<LoginPage> {
             child: Padding(
               padding: EdgeInsets.all(Dimens.space24),
               child: AutofillGroup(
-                child: Form(
-                  key: _keyForm,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Theme.of(context).hintColor,
-                        radius: Dimens.profilePicture + Dimens.space4,
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(Images.icLauncher),
-                          radius: Dimens.profilePicture,
-                        ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Theme.of(context).hintColor,
+                      radius: Dimens.profilePicture + Dimens.space4,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(Images.icLauncher),
+                        radius: Dimens.profilePicture,
                       ),
-                      const SpacerV(),
-                      TextF(
-                        autoFillHints: const [AutofillHints.email],
-                        key: const Key("email"),
-                        focusNode: _fnEmail,
-                        textInputAction: TextInputAction.next,
-                        controller: _conEmail,
-                        keyboardType: TextInputType.emailAddress,
-                        prefixIcon: Icon(
-                          Icons.alternate_email,
-                          color: Theme.of(context).textTheme.bodyLarge?.color,
-                        ),
-                        hint: "eve.holt@reqres.in",
-                        label: Strings.of(context)!.email,
-                        errorMessage: Strings.of(context)!.errorInvalidEmail,
-                        // validator: (String? value) => value != null
-                        //     ? (!value.isValidEmail()
-                        //     ? Strings.of(context)?.errorInvalidEmail
-                        //     : null)
-                        //     : null,
-                      ),
-                      BlocBuilder<AuthCubit, AuthState>(
-                        builder: (_, state) {
-                          return TextF(
-                            autoFillHints: const [AutofillHints.password],
-                            key: const Key("password"),
-                            focusNode: _fnPassword,
-                            textInputAction: TextInputAction.done,
-                            controller: _conPassword,
-                            keyboardType: TextInputType.text,
-                            prefixIcon: Icon(
-                              Icons.lock_outline,
-                              color:
-                                  Theme.of(context).textTheme.bodyLarge?.color,
-                            ),
-                            obscureText:
-                                context.read<AuthCubit>().isPasswordHide ??
-                                    false,
-                            hint: '••••••••••••',
-                            label: Strings.of(context)!.password,
-                            suffixIcon: IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              onPressed: () =>
-                                  context.read<AuthCubit>().showHidePassword(),
-                              icon: Icon(
-                                (context.read<AuthCubit>().isPasswordHide ??
-                                        false)
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                            ),
-                            // validator: (String? value) => value != null
-                            //     ? (value.length < 6
-                            //         ? Strings.of(context)!.errorPasswordLength
-                            //         : null)
-                            //     : null,
-                          );
-                        },
-                      ),
-                      SpacerV(value: Dimens.space24),
-                      Button(
-                        title: Strings.of(context)!.login,
-                        onPressed: () {
-                          if (_keyForm.currentState?.validate() ?? false) {
-                            context.read<AuthCubit>().login(
-                                  LoginParams(
-                                    email: _conEmail.text,
-                                    password: _conPassword.text,
-                                  ),
-                                );
-                          }
-                        },
-                      ),
-                      ButtonText(
-                        title: Strings.of(context)!.askRegister,
-                        onPressed: () {
-                          /// Direct to register page
-                          context.pushNamed(Routes.register.name);
-                        },
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SpacerV(),
+                    _loginForm(),
+                    ButtonText(
+                      title: Strings.of(context)!.askRegister,
+                      onPressed: () {
+                        /// Direct to register page
+                        context.pushNamed(Routes.register.name);
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -164,4 +91,86 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  Widget _loginForm() => BlocBuilder<ReloadFormCubit, ReloadFormState>(
+        builder: (_, __) {
+          return Column(
+            children: [
+              TextF(
+                autoFillHints: const [AutofillHints.email],
+                key: const Key("email"),
+                focusNode: _fnEmail,
+                textInputAction: TextInputAction.next,
+                controller: _conEmail,
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: Icon(
+                  Icons.alternate_email,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
+                hint: "eve.holt@reqres.in",
+                label: Strings.of(context)!.email,
+                isValid: _formValidator.putIfAbsent(
+                  "email",
+                  () => false,
+                ),
+                validatorListener: (String value) {
+                  _formValidator["email"] = value.isValidEmail();
+                  context.read<ReloadFormCubit>().reload();
+                },
+                errorMessage: Strings.of(context)!.errorInvalidEmail,
+              ),
+              TextF(
+                autoFillHints: const [AutofillHints.password],
+                key: const Key("password"),
+                focusNode: _fnPassword,
+                textInputAction: TextInputAction.done,
+                controller: _conPassword,
+                keyboardType: TextInputType.text,
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
+                obscureText: context.read<AuthCubit>().isPasswordHide ?? false,
+                hint: '••••••••••••',
+                label: Strings.of(context)!.password,
+                suffixIcon: IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  onPressed: () {
+                    _isPasswordVisible = !_isPasswordVisible;
+                    context.read<ReloadFormCubit>().reload();
+                  },
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                ),
+                isValid: _formValidator.putIfAbsent(
+                  "password",
+                  () => false,
+                ),
+                validatorListener: (String value) {
+                  _formValidator["password"] = value.length > 7;
+                  context.read<ReloadFormCubit>().reload();
+                },
+                errorMessage: Strings.of(context)!.errorPasswordLength,
+              ),
+              SpacerV(value: Dimens.space24),
+              Button(
+                title: Strings.of(context)!.login,
+                width: double.maxFinite,
+                onPressed: _formValidator.validate()
+                    ? () => context.read<AuthCubit>().login(
+                          LoginParams(
+                            email: _conEmail.text,
+                            password: _conPassword.text,
+                          ),
+                        )
+                    : null,
+              ),
+            ],
+          );
+        },
+      );
 }

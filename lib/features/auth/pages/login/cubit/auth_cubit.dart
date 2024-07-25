@@ -12,14 +12,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   final PostLogin _postLogin;
 
-  bool? isPasswordHide = true;
-
-  void showHidePassword() {
-    emit(const _Init());
-    isPasswordHide = !(isPasswordHide ?? false);
-    emit(const _ShowHide());
-  }
-
   Future<void> login(LoginParams params) async {
     emit(const _Loading());
     final data = await _postLogin.call(params);
@@ -36,7 +28,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     emit(const _Loading());
-    isPasswordHide = true;
     await MainBoxMixin().logoutBox();
     emit(const _Success(null));
   }

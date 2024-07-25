@@ -50,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
               data.toString().toToastSuccess(context);
 
               TextInput.finishAutofillContext();
+              context.goNamed(Routes.root.name);
             },
             failure: (message) {
               context.dismiss();
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                         radius: Dimens.profilePicture,
                       ),
                     ),
-                    const SpacerV(),
+                    SpacerV(value: Dimens.space50),
                     _loginForm(),
                     ButtonText(
                       title: Strings.of(context)!.askRegister,
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                   Icons.lock_outline,
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
-                obscureText: context.read<AuthCubit>().isPasswordHide ?? false,
+                obscureText: !_isPasswordVisible,
                 hint: '••••••••••••',
                 label: Strings.of(context)!.password,
                 suffixIcon: IconButton(

@@ -90,6 +90,9 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -106,6 +109,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -231,6 +237,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -244,6 +252,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $RegisterCopyWith<$Res>? get data {
@@ -281,7 +291,9 @@ class _$SuccessImpl implements _Success {
   @override
   int get hashCode => Object.hash(runtimeType, data);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -372,7 +384,10 @@ abstract class _Success implements RegisterState {
   const factory _Success(final Register? data) = _$SuccessImpl;
 
   Register? get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -394,6 +409,8 @@ class __$$FailureImplCopyWithImpl<$Res>
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -432,7 +449,9 @@ class _$FailureImpl implements _Failure {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
@@ -523,7 +542,10 @@ abstract class _Failure implements RegisterState {
   const factory _Failure(final String message) = _$FailureImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -541,6 +563,9 @@ class __$$InitImplCopyWithImpl<$Res>
     implements _$$InitImplCopyWith<$Res> {
   __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -661,6 +686,9 @@ class __$$ShowHidePasswordImplCopyWithImpl<$Res>
   __$$ShowHidePasswordImplCopyWithImpl(_$ShowHidePasswordImpl _value,
       $Res Function(_$ShowHidePasswordImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

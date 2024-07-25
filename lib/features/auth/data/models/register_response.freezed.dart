@@ -24,8 +24,12 @@ mixin _$RegisterResponse {
   String? get token => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
+  /// Serializes this RegisterResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RegisterResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RegisterResponseCopyWith<RegisterResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$RegisterResponseCopyWithImpl<$Res, $Val extends RegisterResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RegisterResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$RegisterResponseImplCopyWithImpl<$Res>
       $Res Function(_$RegisterResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RegisterResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,11 +154,13 @@ class _$RegisterResponseImpl extends _RegisterResponse {
             (identical(other.error, error) || other.error == error));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, token, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RegisterResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RegisterResponseImplCopyWith<_$RegisterResponseImpl> get copyWith =>
@@ -181,8 +191,11 @@ abstract class _RegisterResponse extends RegisterResponse {
   String? get token;
   @override
   String? get error;
+
+  /// Create a copy of RegisterResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RegisterResponseImplCopyWith<_$RegisterResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

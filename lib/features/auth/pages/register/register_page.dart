@@ -35,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _fnPasswordRepeat = FocusNode();
 
   /// Global key form
-  final _keyForm = GlobalKey<FormState>();
+  // final _keyForm = GlobalKey<ReloadFormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,147 +61,135 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(Dimens.space24),
-              child: Form(
-                key: _keyForm,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Theme.of(context).hintColor,
-                      radius: Dimens.profilePicture + Dimens.space4,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(Images.icLauncher),
-                        radius: Dimens.profilePicture,
-                      ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Theme.of(context).hintColor,
+                    radius: Dimens.profilePicture + Dimens.space4,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(Images.icLauncher),
+                      radius: Dimens.profilePicture,
                     ),
-                    const SpacerV(),
-                    TextF(
-                      key: const Key("email"),
-                      focusNode: _fnEmail,
-                      textInputAction: TextInputAction.next,
-                      controller: _conEmail,
-                      keyboardType: TextInputType.emailAddress,
-                      prefixIcon: Icon(
-                        Icons.alternate_email,
-                        color: Theme.of(context).textTheme.bodyLarge?.color,
-                      ),
-                      hint: 'johndoe@gmail.com',
-                      label: Strings.of(context)!.email,
-                      // validator: (String? value) => value != null
-                      //     ? (!value.isValidEmail()
-                      //     ? Strings.of(context)?.errorInvalidEmail
-                      //     : null)
-                      //     : null,
+                  ),
+                  const SpacerV(),
+                  TextF(
+                    key: const Key("email"),
+                    focusNode: _fnEmail,
+                    textInputAction: TextInputAction.next,
+                    controller: _conEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    prefixIcon: Icon(
+                      Icons.alternate_email,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
-                    BlocBuilder<RegisterCubit, RegisterState>(
-                      builder: (_, state) {
-                        return Column(
-                          children: [
-                            TextF(
-                              key: const Key("password"),
-                              focusNode: _fnPassword,
-                              textInputAction: TextInputAction.next,
-                              controller: _conPassword,
-                              keyboardType: TextInputType.text,
-                              prefixIcon: Icon(
-                                Icons.lock_outline,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.color,
-                              ),
-                              obscureText: context
-                                      .read<RegisterCubit>()
-                                      .isPasswordHide ??
-                                  false,
-                              hint: '••••••••••••',
-                              label: Strings.of(context)!.password,
-                              suffixIcon: IconButton(
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                onPressed: () => context
-                                    .read<RegisterCubit>()
-                                    .showHidePassword(),
-                                icon: Icon(
-                                  (context
-                                              .read<RegisterCubit>()
-                                              .isPasswordHide ??
-                                          false)
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
-                              ),
-                              // validator: (String? value) => value != null
-                              //     ? (value.length < 6
-                              //         ? Strings.of(context)!.errorPasswordLength
-                              //         : null)
-                              //     : null,
-                              semantic: "password",
+                    hint: 'johndoe@gmail.com',
+                    label: Strings.of(context)!.email,
+                    // validator: (String? value) => value != null
+                    //     ? (!value.isValidEmail()
+                    //     ? Strings.of(context)?.errorInvalidEmail
+                    //     : null)
+                    //     : null,
+                  ),
+                  BlocBuilder<RegisterCubit, RegisterState>(
+                    builder: (_, state) {
+                      return Column(
+                        children: [
+                          TextF(
+                            key: const Key("password"),
+                            focusNode: _fnPassword,
+                            textInputAction: TextInputAction.next,
+                            controller: _conPassword,
+                            keyboardType: TextInputType.text,
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
                             ),
-                            TextF(
-                              key: const Key("repeat_password"),
-                              focusNode: _fnPasswordRepeat,
-                              textInputAction: TextInputAction.done,
-                              controller: _conPasswordRepeat,
-                              keyboardType: TextInputType.text,
-                              prefixIcon: Icon(
-                                Icons.lock_outline,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.color,
+                            obscureText:
+                                context.read<RegisterCubit>().isPasswordHide ??
+                                    false,
+                            hint: '••••••••••••',
+                            label: Strings.of(context)!.password,
+                            suffixIcon: IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              onPressed: () => context
+                                  .read<RegisterCubit>()
+                                  .showHidePassword(),
+                              icon: Icon(
+                                (context.read<RegisterCubit>().isPasswordHide ??
+                                        false)
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                               ),
-                              obscureText: context
-                                      .read<RegisterCubit>()
-                                      .isPasswordRepeatHide ??
-                                  false,
-                              hint: '••••••••••••',
-                              label: Strings.of(context)!.passwordRepeat,
-                              suffixIcon: IconButton(
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                onPressed: () => context
-                                    .read<RegisterCubit>()
-                                    .showHidePasswordRepeat(),
-                                icon: Icon(
-                                  (context
-                                              .read<RegisterCubit>()
-                                              .isPasswordRepeatHide ??
-                                          false)
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
-                              ),
-                              // validator: (String? value) => value != null
-                              //     ? (value != _conPassword.text
-                              //         ? Strings.of(context)
-                              //             ?.errorPasswordNotMatch
-                              //         : null)
-                              //     : null,
-                              semantic: "repeat_password",
                             ),
-                          ],
-                        );
-                      },
-                    ),
-                    SpacerV(value: Dimens.space24),
-                    Button(
-                      key: const Key("btn_register"),
-                      title: Strings.of(context)!.register,
-                      onPressed: () {
-                        /// Validate form first
-                        if (_keyForm.currentState?.validate() ?? false) {
-                          context.read<RegisterCubit>().register(
-                                RegisterParams(
-                                  email: _conEmail.text,
-                                  password: _conPassword.text,
-                                ),
-                              );
-                        }
-                      },
-                    ),
-                  ],
-                ),
+                            // validator: (String? value) => value != null
+                            //     ? (value.length < 6
+                            //         ? Strings.of(context)!.errorPasswordLength
+                            //         : null)
+                            //     : null,
+                            semantic: "password",
+                          ),
+                          TextF(
+                            key: const Key("repeat_password"),
+                            focusNode: _fnPasswordRepeat,
+                            textInputAction: TextInputAction.done,
+                            controller: _conPasswordRepeat,
+                            keyboardType: TextInputType.text,
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                            obscureText: context
+                                    .read<RegisterCubit>()
+                                    .isPasswordRepeatHide ??
+                                false,
+                            hint: '••••••••••••',
+                            label: Strings.of(context)!.passwordRepeat,
+                            suffixIcon: IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              onPressed: () => context
+                                  .read<RegisterCubit>()
+                                  .showHidePasswordRepeat(),
+                              icon: Icon(
+                                (context
+                                            .read<RegisterCubit>()
+                                            .isPasswordRepeatHide ??
+                                        false)
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
+                            // validator: (String? value) => value != null
+                            //     ? (value != _conPassword.text
+                            //         ? Strings.of(context)
+                            //             ?.errorPasswordNotMatch
+                            //         : null)
+                            //     : null,
+                            semantic: "repeat_password",
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  SpacerV(value: Dimens.space24),
+                  Button(
+                    key: const Key("btn_register"),
+                    title: Strings.of(context)!.register,
+                    onPressed: () {
+                      /// Validate form first
+                      context.read<RegisterCubit>().register(
+                            RegisterParams(
+                              email: _conEmail.text,
+                              password: _conPassword.text,
+                            ),
+                          );
+                    },
+                  ),
+                ],
               ),
             ),
           ),

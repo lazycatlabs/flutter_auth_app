@@ -22,12 +22,19 @@ class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
 class FakeAuthCubit extends Fake implements AuthCubit {}
 
+class FakeReloadFormCubit extends Fake implements ReloadFormCubit {}
+
+class MockReloadFormCubit extends MockCubit<ReloadFormState>
+    implements ReloadFormCubit {}
+
 void main() {
   late AuthCubit authCubit;
+  late ReloadFormCubit reloadFormCubit;
 
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeAuthCubit());
+    registerFallbackValue(FakeReloadFormCubit());
     registerFallbackValue(const LoginParams());
   });
 
@@ -36,11 +43,15 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'login_page_test_');
     authCubit = MockAuthCubit();
+    reloadFormCubit = MockReloadFormCubit();
   });
 
   Widget rootWidget(Widget body) {
-    return BlocProvider<AuthCubit>.value(
-      value: authCubit,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>.value(value: authCubit),
+        BlocProvider<ReloadFormCubit>.value(value: reloadFormCubit),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 667),
         minTextAdapt: true,
@@ -53,6 +64,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale("en"),
+          supportedLocales: L10n.all,
           theme: themeLight(MockBuildContext()),
           home: body,
         ),
@@ -64,6 +76,9 @@ void main() {
     'renders LoginPage for form validation blank',
     (tester) async {
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
+      when(() => reloadFormCubit.state)
+          .thenReturn(const ReloadFormState.initial());
+
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.pumpAndSettle();
       await tester.dragUntilVisible(
@@ -72,27 +87,22 @@ void main() {
         const Offset(0, 50), // delta to move
       );
 
-      /// validate email
-      await tester.tap(find.byType(Button));
-      await tester.pump(const Duration(milliseconds: 100));
-      expect(find.text("Email is not valid"), findsOneWidget);
-      expect(
-        find.text("Password must be at least 6 characters"),
-        findsOneWidget,
-      );
+      /// the button should be disable
+      expect(tester.widget<Button>(find.byType(Button)).onPressed, null);
     },
   );
 
   testWidgets(
     'renders LoginPage for form validation fill email',
     (tester) async {
-      const email = "test@gmail.com";
+      const email = "hey.mudassir@gmail.com";
 
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
+      when(() => authCubit.login(any())).thenAnswer((_) async {});
+      when(() => reloadFormCubit.state)
+          .thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
-      await tester.pumpAndSettle();
-      await tester.enterText(find.byKey(const Key('email')), email);
       await tester.pumpAndSettle();
       await tester.dragUntilVisible(
         find.byType(Button), // what you want to find
@@ -101,12 +111,24 @@ void main() {
       );
 
       /// validate email
-      await tester.tap(find.byType(Button));
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const LoginPage()));
       expect(find.text("Email is not valid"), findsNothing);
+
+      await tester.tap(find.byKey(const Key('password')));
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const LoginPage()));
       expect(
         find.text("Password must be at least 6 characters"),
         findsOneWidget,
+      );
+
+      /// the button should be disable
+      expect(
+        tester.widget<Button>(find.byType(Button)).onPressed,
+        null,
       );
     },
   );
@@ -119,30 +141,42 @@ void main() {
 
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
       when(() => authCubit.login(any())).thenAnswer((_) async {});
+      when(() => reloadFormCubit.state)
+          .thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.pumpAndSettle();
-      await tester.enterText(find.byKey(const Key('email')), email);
-      await tester.pumpAndSettle();
-      await tester.enterText(find.byKey(const Key('password')), password);
-
-      await tester.pumpAndSettle();
-      await tester.dragUntilVisible(
-        find.byType(Button), // what you want to find
-        find.byType(SingleChildScrollView), // widget you want to scroll
-        const Offset(0, 50), // delta to move
-      );
 
       /// validate email
-      await tester.tap(find.byType(Button));
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const LoginPage()));
       expect(find.text("Email is not valid"), findsNothing);
+
+      /// validate password
+      await tester.enterText(find.byKey(const Key('password')), password);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const LoginPage()));
       expect(find.text("Password must be at least 6 characters"), findsNothing);
 
-      for (int i = 0; i < 5; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
+      /// the button should be enable
+      expect(
+        tester.widget<Button>(find.byType(Button)).onPressed,
+        isA<VoidCallback>(),
+      );
 
+      // scroll down to make button visible
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -250),
+      );
+
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.tap(find.byType(Button));
+
+      /// verify if authCubit.login is called
       verify(() => authCubit.login(any())).called(1);
     },
   );

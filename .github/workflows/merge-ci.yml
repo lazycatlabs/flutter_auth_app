@@ -66,7 +66,12 @@ jobs:
       #          name: staging-apk
       #          path: build/app/outputs/flutter-apk/app-stg-release.apk
 
-      - name: Delete branch
-        uses: SvanBoxel/delete-merged-branch@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete branch if merged
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `heads/${context.payload.pull_request.head.ref}`,
+            })}

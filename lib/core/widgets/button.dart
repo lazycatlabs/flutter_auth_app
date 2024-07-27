@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 
 ///*********************************************
 /// Created by ukieTux on 23/04/2020 with ♥
@@ -10,7 +9,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 /// © 2020 | All Right Reserved
 class Button extends StatelessWidget {
   final String title;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double? width;
   final Color? color;
   final Color? titleColor;
@@ -30,14 +29,8 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints:
-          BoxConstraints(minWidth: width ?? context.widthInPercent(100)),
-      margin: EdgeInsets.symmetric(vertical: Dimens.space8),
-      height: Dimens.buttonH,
-      decoration: BoxDecorations(context).button.copyWith(
-            color: color ?? Theme.of(context).extension<LzyctColors>()!.pink,
-          ),
+    return SizedBox(
+      width: width,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
@@ -45,8 +38,15 @@ class Button extends StatelessWidget {
               color ?? Theme.of(context).extension<LzyctColors>()!.pink,
           foregroundColor:
               Theme.of(context).extension<LzyctColors>()!.buttonText,
-          padding: EdgeInsets.symmetric(horizontal: Dimens.space24),
-          shape: const BeveledRectangleBorder(
+          disabledBackgroundColor: Theme.of(context)
+              .extension<LzyctColors>()!
+              .buttonText
+              ?.withOpacity(0.5),
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimens.space24,
+            vertical: Dimens.space12,
+          ),
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(Dimens.cornerRadius),
             ),

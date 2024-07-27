@@ -20,7 +20,9 @@ mixin _$Users {
   int? get currentPage => throw _privateConstructorUsedError;
   int? get lastPage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Users
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UsersCopyWith<Users> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -42,6 +44,8 @@ class _$UsersCopyWithImpl<$Res, $Val extends Users>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Users
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -84,6 +88,8 @@ class __$$UsersImplCopyWithImpl<$Res>
       _$UsersImpl _value, $Res Function(_$UsersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Users
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,7 +156,9 @@ class _$UsersImpl implements _Users {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_users), currentPage, lastPage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Users
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UsersImplCopyWith<_$UsersImpl> get copyWith =>
@@ -169,8 +177,11 @@ abstract class _Users implements Users {
   int? get currentPage;
   @override
   int? get lastPage;
+
+  /// Create a copy of Users
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UsersImplCopyWith<_$UsersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -181,7 +192,9 @@ mixin _$User {
   String? get avatar => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -203,6 +216,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -244,6 +259,8 @@ class __$$UserImplCopyWithImpl<$Res>
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -298,7 +315,9 @@ class _$UserImpl implements _User {
   @override
   int get hashCode => Object.hash(runtimeType, name, avatar, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
@@ -317,8 +336,11 @@ abstract class _User implements User {
   String? get avatar;
   @override
   String? get email;
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

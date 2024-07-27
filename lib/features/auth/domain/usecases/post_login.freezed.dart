@@ -23,8 +23,12 @@ mixin _$LoginParams {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
+  /// Serializes this LoginParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LoginParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LoginParamsCopyWith<LoginParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$LoginParamsCopyWithImpl<$Res, $Val extends LoginParams>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LoginParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$LoginParamsImplCopyWithImpl<$Res>
       _$LoginParamsImpl _value, $Res Function(_$LoginParamsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LoginParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,11 +143,13 @@ class _$LoginParamsImpl implements _LoginParams {
                 other.password == password));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LoginParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoginParamsImplCopyWith<_$LoginParamsImpl> get copyWith =>
@@ -164,8 +174,11 @@ abstract class _LoginParams implements LoginParams {
   String get email;
   @override
   String get password;
+
+  /// Create a copy of LoginParams
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoginParamsImplCopyWith<_$LoginParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

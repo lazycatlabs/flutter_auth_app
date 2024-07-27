@@ -67,6 +67,9 @@ void _cubit() {
   sl.registerFactory(() => RegisterCubit(sl()));
   sl.registerFactory(() => AuthCubit(sl()));
 
+  /// General
+  sl.registerFactory(() => ReloadFormCubit());
+
   /// Users
   sl.registerFactory(() => UsersCubit(sl()));
   sl.registerFactory(() => SettingsCubit());

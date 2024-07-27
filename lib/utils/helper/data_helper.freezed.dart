@@ -35,7 +35,9 @@ mixin _$DataHelper {
   ActiveTheme get activeTheme => throw _privateConstructorUsedError;
   set activeTheme(ActiveTheme value) => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataHelper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DataHelperCopyWith<DataHelper> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,6 +70,8 @@ class _$DataHelperCopyWithImpl<$Res, $Val extends DataHelper>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DataHelper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,6 +154,8 @@ class __$$DataHelperImplCopyWithImpl<$Res>
       _$DataHelperImpl _value, $Res Function(_$DataHelperImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataHelper
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -244,7 +250,9 @@ class _$DataHelperImpl implements _DataHelper {
     return 'DataHelper(title: $title, desc: $desc, iconPath: $iconPath, icon: $icon, url: $url, type: $type, id: $id, isSelected: $isSelected, activeTheme: $activeTheme)';
   }
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataHelper
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DataHelperImplCopyWith<_$DataHelperImpl> get copyWith =>
@@ -290,8 +298,11 @@ abstract class _DataHelper implements DataHelper {
   @override
   ActiveTheme get activeTheme;
   set activeTheme(ActiveTheme value);
+
+  /// Create a copy of DataHelper
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DataHelperImplCopyWith<_$DataHelperImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

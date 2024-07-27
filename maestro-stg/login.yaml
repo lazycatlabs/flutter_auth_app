@@ -1,8 +1,8 @@
 appId: com.lazycatlabs.auths.stg
 ---
 - launchApp
-- tapOn: "eve.holt@reqres.in"
+- tapOn: "Email"
 - inputText: "eve.holt@reqres.in"
-- tapOn: "••••••••••••"
+- tapOn: "Password"
 - inputText: "password123"
 - tapOn: "LOGIN"

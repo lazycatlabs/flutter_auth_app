@@ -109,6 +109,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>);
+
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Register>> register(
           _i5.RegisterParams? registerParams) =>
@@ -155,6 +156,7 @@ class MockAuthRemoteDatasource extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>);
+
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>> login(
           _i5.LoginParams? loginParams) =>
@@ -247,18 +249,21 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
           Invocation.getter(#widget),
         ),
       ) as _i3.Widget);
+
   @override
   bool get mounted => (super.noSuchMethod(
         Invocation.getter(#mounted),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get debugDoingBuild => (super.noSuchMethod(
         Invocation.getter(#debugDoingBuild),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.InheritedWidget dependOnInheritedElement(
     _i3.InheritedElement? ancestor, {
@@ -287,6 +292,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
           ),
         ),
       ) as _i3.InheritedWidget);
+
   @override
   void visitAncestorElements(_i3.ConditionalElementVisitor? visitor) =>
       super.noSuchMethod(
@@ -296,6 +302,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void visitChildElements(_i3.ElementVisitor? visitor) => super.noSuchMethod(
         Invocation.method(
@@ -304,6 +311,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void dispatchNotification(_i9.Notification? notification) =>
       super.noSuchMethod(
@@ -313,6 +321,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.DiagnosticsNode describeElement(
     String? name, {
@@ -341,6 +350,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
           ),
         ),
       ) as _i4.DiagnosticsNode);
+
   @override
   _i4.DiagnosticsNode describeWidget(
     String? name, {
@@ -369,6 +379,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
           ),
         ),
       ) as _i4.DiagnosticsNode);
+
   @override
   List<_i4.DiagnosticsNode> describeMissingAncestor(
           {required Type? expectedAncestorType}) =>
@@ -381,6 +392,7 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
         returnValue: <_i4.DiagnosticsNode>[],
         returnValueForMissingStub: <_i4.DiagnosticsNode>[],
       ) as List<_i4.DiagnosticsNode>);
+
   @override
   _i4.DiagnosticsNode describeOwnershipChain(String? name) =>
       (super.noSuchMethod(

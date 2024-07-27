@@ -22,8 +22,12 @@ UsersParams _$UsersParamsFromJson(Map<String, dynamic> json) {
 mixin _$UsersParams {
   int get page => throw _privateConstructorUsedError;
 
+  /// Serializes this UsersParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UsersParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UsersParamsCopyWith<UsersParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$UsersParamsCopyWithImpl<$Res, $Val extends UsersParams>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UsersParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$UsersParamsImplCopyWithImpl<$Res>
       _$UsersParamsImpl _value, $Res Function(_$UsersParamsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UsersParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,11 +127,13 @@ class _$UsersParamsImpl implements _UsersParams {
             (identical(other.page, page) || other.page == page));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, page);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UsersParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UsersParamsImplCopyWith<_$UsersParamsImpl> get copyWith =>
@@ -145,8 +155,11 @@ abstract class _UsersParams implements UsersParams {
 
   @override
   int get page;
+
+  /// Create a copy of UsersParams
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UsersParamsImplCopyWith<_$UsersParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

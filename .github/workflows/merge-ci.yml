@@ -74,4 +74,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: `heads/${context.payload.pull_request.head.ref}`,
-            })}
+            })

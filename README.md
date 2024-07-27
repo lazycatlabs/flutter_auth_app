@@ -53,7 +53,15 @@ https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/53f880ed-d51e-4bc
 - [x] Implement [Go Router](https://pub.dev/packages/go_router)
 
 ## Maestro Test 🧪
-https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/7826840e-0fbf-4ba6-94b4-e1ef8e45aa44
+- Install Maestro on your machine [Maestro](https://maestro.mobile.dev/getting-started/installing-maestro)
+- Run this command to run the test
+  ```bash
+   maestro test maestro-stg/main.yaml
+  ```
+  
+https://github.com/user-attachments/assets/e30f1e0d-eccc-4624-b5c0-4d9495352f35
+
+
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 

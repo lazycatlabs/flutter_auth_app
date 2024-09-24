@@ -2,7 +2,10 @@
 
 # Flutter App Auth 📱
 
-This is an App with Auth Functions like Login and Register. All API using [reqres.in](https://reqres.in/).
+This is an App with Auth Functions like Login, Register and show pagination data.
+
+The API using [apimock](https://apimock.lazycatlabs.com/) from [lazycatlabs](https://lazycatlabs.com).
+
 <br>This app also implementing **Flutter Clean Architecture with TDD.**
 
 
@@ -45,12 +48,14 @@ https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/53f880ed-d51e-4bc
 - [x] Login, Register Example
 - [x] Pagination Example
 - [x] [Autofill Username and Password](https://github.com/lazycatlabs/flutter_auth_app/pull/3)
-
-## TODO 📝
-
 - [x] Integration Test
 - [x] Implement multi-flavor
 - [x] Implement [Go Router](https://pub.dev/packages/go_router)
+
+## TODO 📝
+- [ ] Login with Biometric / FaceID
+
+
 
 ## Maestro Test 🧪
 - Install Maestro on your machine [Maestro](https://maestro.mobile.dev/getting-started/installing-maestro)

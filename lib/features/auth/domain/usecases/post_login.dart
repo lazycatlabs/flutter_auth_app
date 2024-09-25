@@ -21,6 +21,9 @@ class LoginParams with _$LoginParams {
   const factory LoginParams({
     @Default("") String email,
     @Default("") String password,
+    String? osInfo,
+    String? deviceInfo,
+    @Default("GeneratedFCMToken") String fcmToken,
   }) = _LoginParams;
 
   factory LoginParams.fromJson(Map<String, dynamic> json) =>

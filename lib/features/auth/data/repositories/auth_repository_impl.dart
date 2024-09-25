@@ -18,7 +18,10 @@ class AuthRepositoryImpl implements AuthRepository {
       (failure) => Left(failure),
       (loginResponse) {
         mainBoxMixin.addData(MainBoxKeys.isLogin, true);
-        mainBoxMixin.addData(MainBoxKeys.token, loginResponse.token);
+        mainBoxMixin.addData(
+          MainBoxKeys.token,
+          "${loginResponse.data?.tokenType} ${loginResponse.data?.token}",
+        );
 
         return Right(loginResponse.toEntity());
       },

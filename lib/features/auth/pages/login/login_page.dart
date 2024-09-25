@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
@@ -166,6 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                           LoginParams(
                             email: _conEmail.text,
                             password: _conPassword.text,
+                            osInfo: Platform.operatingSystem,
+                            deviceInfo: Platform.localHostname,
                           ),
                         )
                     : null,

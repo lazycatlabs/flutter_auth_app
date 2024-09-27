@@ -94,39 +94,58 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Login>> login(
-          _i5.LoginParams? loginParams) =>
+          _i5.LoginParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [loginParams],
+          [params],
         ),
         returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>.value(
             _FakeEither_0<_i7.Failure, _i5.Login>(
           this,
           Invocation.method(
             #login,
-            [loginParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Register>> register(
-          _i5.RegisterParams? registerParams) =>
+          _i5.RegisterParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
-          [registerParams],
+          [params],
         ),
         returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>.value(
             _FakeEither_0<_i7.Failure, _i5.Register>(
           this,
           Invocation.method(
             #register,
-            [registerParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>> generalToken(
+          _i5.GeneralTokenParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generalToken,
+          [params],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>.value(
+                _FakeEither_0<_i7.Failure, _i5.GeneralToken>(
+          this,
+          Invocation.method(
+            #generalToken,
+            [params],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>);
 }
 
 /// A class which mocks [AuthRemoteDatasource].
@@ -140,11 +159,11 @@ class MockAuthRemoteDatasource extends _i1.Mock
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>> register(
-          _i5.RegisterParams? registerParams) =>
+          _i5.RegisterParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
-          [registerParams],
+          [params],
         ),
         returnValue:
             _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>.value(
@@ -152,18 +171,18 @@ class MockAuthRemoteDatasource extends _i1.Mock
           this,
           Invocation.method(
             #register,
-            [registerParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>> login(
-          _i5.LoginParams? loginParams) =>
+          _i5.LoginParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [loginParams],
+          [params],
         ),
         returnValue:
             _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>.value(
@@ -171,10 +190,29 @@ class MockAuthRemoteDatasource extends _i1.Mock
           this,
           Invocation.method(
             #login,
-            [loginParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>> generalToken(
+          _i5.GeneralTokenParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generalToken,
+          [params],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>.value(
+                _FakeEither_0<_i7.Failure, _i5.GeneralTokenResponse>(
+          this,
+          Invocation.method(
+            #generalToken,
+            [params],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>);
 }
 
 /// A class which mocks [UsersRepository].

@@ -23,7 +23,7 @@ void main() {
   late Login login;
   late MockPostLogin mockPostLogin;
 
-  const loginParams = LoginParams(
+  const loginParams = GeneralTokenParams(
     email: "dummy@gmail.com",
     password: "dummyPassword",
   );

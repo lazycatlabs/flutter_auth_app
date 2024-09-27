@@ -11,8 +11,8 @@ class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this.authRemoteDatasource, this.mainBoxMixin);
 
   @override
-  Future<Either<Failure, Login>> login(LoginParams loginParams) async {
-    final response = await authRemoteDatasource.login(loginParams);
+  Future<Either<Failure, Login>> login(LoginParams params) async {
+    final response = await authRemoteDatasource.login(params);
 
     return response.fold(
       (failure) => Left(failure),
@@ -29,15 +29,32 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Register>> register(
-    RegisterParams registerParams,
-  ) async {
-    final response = await authRemoteDatasource.register(registerParams);
+  Future<Either<Failure, Register>> register(RegisterParams params) async {
+    final response = await authRemoteDatasource.register(params);
 
     return response.fold(
       (failure) => Left(failure),
       (registerResponse) {
         return Right(registerResponse.toEntity());
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, GeneralToken>> generalToken(
+    GeneralTokenParams params,
+  ) async {
+    final response = await authRemoteDatasource.generalToken(params);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (loginResponse) {
+        mainBoxMixin.addData(
+          MainBoxKeys.token,
+          "${loginResponse.data?.tokenType} ${loginResponse.data?.token}",
+        );
+
+        return Right(loginResponse.toEntity());
       },
     );
   }

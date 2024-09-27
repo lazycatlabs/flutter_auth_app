@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/features/general/general.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 ///*********************************************
@@ -15,25 +17,21 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      context.goNamed(Routes.root.name);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Parent(
-      child: ColoredBox(
-        color: Theme.of(context).extension<LzyctColors>()!.background!,
-        child: Center(
-          child: CircleAvatar(
-            backgroundColor: Theme.of(context).hintColor,
-            radius: Dimens.menu + Dimens.space6,
+      child: BlocListener<GeneralTokenCubit, GeneralTokenState>(
+        listener: (context, state) =>
+            state.whenOrNull(success: (_) => context.goNamed(Routes.root.name)),
+        child: ColoredBox(
+          color: Theme.of(context).extension<LzyctColors>()!.background!,
+          child: Center(
             child: CircleAvatar(
-              backgroundImage: AssetImage(Images.icLauncher),
-              radius: Dimens.menu,
+              backgroundColor: Theme.of(context).hintColor,
+              radius: Dimens.menu + Dimens.space6,
+              child: CircleAvatar(
+                backgroundImage: AssetImage(Images.icLauncher),
+                radius: Dimens.menu,
+              ),
             ),
           ),
         ),

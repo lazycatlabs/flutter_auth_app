@@ -3,11 +3,13 @@ import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/auth/auth.dart';
 
 abstract class AuthRemoteDatasource {
-  Future<Either<Failure, RegisterResponse>> register(
-    RegisterParams registerParams,
-  );
+  Future<Either<Failure, RegisterResponse>> register(RegisterParams params);
 
-  Future<Either<Failure, LoginResponse>> login(LoginParams loginParams);
+  Future<Either<Failure, LoginResponse>> login(LoginParams params);
+
+  Future<Either<Failure, GeneralTokenResponse>> generalToken(
+    GeneralTokenParams params,
+  );
 }
 
 class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
@@ -17,11 +19,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
 
   @override
   Future<Either<Failure, RegisterResponse>> register(
-    RegisterParams registerParams,
+    RegisterParams params,
   ) async {
     final response = await _client.postRequest(
       ListAPI.register,
-      data: registerParams.toJson(),
+      data: params.toJson(),
       converter: (response) =>
           RegisterResponse.fromJson(response as Map<String, dynamic>),
     );
@@ -30,12 +32,26 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   }
 
   @override
-  Future<Either<Failure, LoginResponse>> login(LoginParams loginParams) async {
+  Future<Either<Failure, LoginResponse>> login(LoginParams params) async {
     final response = await _client.postRequest(
       ListAPI.login,
-      data: loginParams.toJson(),
+      data: params.toJson(),
       converter: (response) =>
           LoginResponse.fromJson(response as Map<String, dynamic>),
+    );
+
+    return response;
+  }
+
+  @override
+  Future<Either<Failure, GeneralTokenResponse>> generalToken(
+    GeneralTokenParams params,
+  ) async {
+    final response = await _client.postRequest(
+      ListAPI.generalToken,
+      data: params.toJson(),
+      converter: (response) =>
+          GeneralTokenResponse.fromJson(response as Map<String, dynamic>),
     );
 
     return response;

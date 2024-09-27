@@ -35,7 +35,7 @@ void main() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeAuthCubit());
     registerFallbackValue(FakeReloadFormCubit());
-    registerFallbackValue(const LoginParams());
+    registerFallbackValue(const GeneralTokenParams());
   });
 
   setUp(() async {

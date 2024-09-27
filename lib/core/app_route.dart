@@ -36,7 +36,16 @@ class AppRoute {
       GoRoute(
         path: Routes.splashScreen.path,
         name: Routes.splashScreen.name,
-        builder: (_, __) => SplashScreenPage(),
+        builder: (_, __) => BlocProvider(
+          create: (_) => sl<GeneralTokenCubit>()
+            ..generalToken(
+              const GeneralTokenParams(
+                clientId: String.fromEnvironment("CLIENT_ID"),
+                clientSecret: String.fromEnvironment("CLIENT_SECRET"),
+              ),
+            ),
+          child: SplashScreenPage(),
+        ),
       ),
       GoRoute(
         path: Routes.root.path,
@@ -93,7 +102,8 @@ class AppRoute {
     refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
     redirect: (_, GoRouterState state) {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
-          state.matchedLocation == Routes.register.path;
+          state.matchedLocation == Routes.register.path ||
+          state.matchedLocation == Routes.splashScreen.path;
 
       ///  Check if not login
       ///  if current page is login page we don't need to direct user

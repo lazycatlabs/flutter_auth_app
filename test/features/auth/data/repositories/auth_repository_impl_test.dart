@@ -39,7 +39,8 @@ void main() {
   });
 
   group("login", () {
-    const loginParams = LoginParams(email: "email", password: "password");
+    const loginParams =
+        GeneralTokenParams(email: "email", password: "password");
     test('should return login when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(

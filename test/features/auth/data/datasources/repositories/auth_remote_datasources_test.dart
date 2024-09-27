@@ -87,7 +87,7 @@ void main() {
 
   group('login', () {
     const loginParams =
-        LoginParams(email: "eve.holt@reqres.in", password: "cityslicka");
+        GeneralTokenParams(email: "eve.holt@reqres.in", password: "cityslicka");
     final loginModel = LoginResponse.fromJson(
       json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
     );

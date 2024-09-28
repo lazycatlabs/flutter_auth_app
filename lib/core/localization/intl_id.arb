@@ -25,5 +25,6 @@
   "errorNoData": "Data Kosong",
   "logout": "Keluar",
   "logoutDesc": "Apakah anda ingin keluar dari aplikasi?",
-  "yes": "Ya"
+  "yes": "Ya",
+  "lastUpdate": "Terakhir diperbarui: "
 }

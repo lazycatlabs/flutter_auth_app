@@ -1,3 +1,4 @@
+import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,58 +8,43 @@ part 'users_response.g.dart';
 @freezed
 class UsersResponse with _$UsersResponse {
   const factory UsersResponse({
-    int? page,
-    @JsonKey(name: 'per_page') int? perPage,
-    int? total,
-    @JsonKey(name: 'total_pages') int? totalPages,
-    List<DataUser>? data,
-    SupportUser? support,
-    String? error,
+    @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
+    @JsonKey(name: "data") List<DataUser>? data,
+    @JsonKey(name: "page") Page? page,
   }) = _UsersResponse;
 
   const UsersResponse._();
 
+  Users toEntity() => Users(
+        users: data
+            ?.map(
+              (data) => User(
+                name: data.name,
+                email: data.email,
+                avatar: data.photo,
+                isVerified: data.verified,
+                updatedAt: data.updatedAt,
+              ),
+            )
+            .toList(),
+        currentPage: page?.currentPage,
+        lastPage: page?.lastPage,
+      );
+
   factory UsersResponse.fromJson(Map<String, dynamic> json) =>
       _$UsersResponseFromJson(json);
-
-  Users toEntity() {
-    final listUser = data!
-        .map<User>(
-          (model) => User(
-            name: "${model.firstName} ${model.lastName}",
-            avatar: model.avatar ?? "",
-            email: model.email ?? "",
-          ),
-        )
-        .toList();
-
-    return Users(
-      users: listUser,
-      currentPage: page ?? 1,
-      lastPage: totalPages ?? 1,
-    );
-  }
-}
-
-@freezed
-class SupportUser with _$SupportUser {
-  const factory SupportUser({
-    String? url,
-    String? text,
-  }) = _SupportUser;
-
-  factory SupportUser.fromJson(Map<String, dynamic> json) =>
-      _$SupportUserFromJson(json);
 }
 
 @freezed
 class DataUser with _$DataUser {
   const factory DataUser({
-    int? id,
-    String? email,
-    @JsonKey(name: 'first_name') String? firstName,
-    @JsonKey(name: 'last_name') String? lastName,
-    String? avatar,
+    @JsonKey(name: "id") String? id,
+    @JsonKey(name: "name") String? name,
+    @JsonKey(name: "email") String? email,
+    @JsonKey(name: "photo") String? photo,
+    @JsonKey(name: "verified") bool? verified,
+    @JsonKey(name: "createdAt") String? createdAt,
+    @JsonKey(name: "updatedAt") String? updatedAt,
   }) = _DataUser;
 
   factory DataUser.fromJson(Map<String, dynamic> json) =>

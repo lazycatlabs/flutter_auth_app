@@ -30,15 +30,13 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     _scrollController.addListener(() async {
-      if (_scrollController.position.atEdge) {
-        if (_scrollController.position.pixels != 0) {
-          if (_currentPage < _lastPage) {
-            _currentPage++;
-            await context
-                .read<UsersCubit>()
-                .fetchUsers(UsersParams(page: _currentPage));
-          }
-        }
+      if (_scrollController.position.atEdge &&
+          _scrollController.position.pixels != 0 &&
+          _currentPage < _lastPage) {
+        _currentPage++;
+        await context
+            .read<UsersCubit>()
+            .fetchUsers(UsersParams(page: _currentPage));
       }
     });
   }
@@ -116,6 +114,35 @@ class _DashboardPageState extends State<DashboardPage> {
                                                   .extension<LzyctColors>()!
                                                   .subtitle,
                                             ),
+                                      ),
+                                      const SpacerV(),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            Strings.of(context)!.lastUpdate,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .extension<LzyctColors>()!
+                                                      .subtitle,
+                                                ),
+                                          ),
+                                          Text(
+                                            (_users[index].updatedAt ?? "")
+                                                .toStringDateAlt(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .extension<LzyctColors>()!
+                                                      .subtitle,
+                                                ),
+                                            textAlign: TextAlign.end,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

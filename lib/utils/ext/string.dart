@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 
 extension StringExtension on String {
@@ -79,6 +80,17 @@ extension StringExtension on String {
     } catch (e, stackTrace) {
       FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       log.e("$e");
+    }
+  }
+
+  String toStringDateAlt({bool isShort = false}) {
+    try {
+      final object = DateTime.parse(this).toLocal();
+
+      return DateFormat("dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm", "id")
+          .format(object);
+    } catch (_) {
+      return "-";
     }
   }
 }

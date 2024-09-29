@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                   Icons.alternate_email,
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
-                hint: "eve.holt@reqres.in",
+                hint: "mudassir@lazycatlabs.com",
                 label: Strings.of(context)!.email,
                 isValid: _formValidator.putIfAbsent(
                   "email",
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
                 obscureText: !_isPasswordVisible,
-                hint: '••••••••••••',
+                hint: 'pass123',
                 label: Strings.of(context)!.password,
                 suffixIcon: IconButton(
                   padding: EdgeInsets.zero,

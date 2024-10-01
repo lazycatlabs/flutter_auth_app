@@ -9,24 +9,12 @@ part 'users_cubit.freezed.dart';
 part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
-  late final ScrollController scrollController = ScrollController()
-    ..addListener(() {
-      scrollController.addListener(() async {
-        if (scrollController.position.atEdge) {
-          if (scrollController.position.pixels != 0) {
-            if (currentPage < lastPage) {
-              currentPage++;
-              await fetchUsers(UsersParams(page: currentPage));
-            }
-          }
-        }
-      });
-    });
+  UsersCubit(this._getUser) : super(const _Loading());
+
   int currentPage = 1;
   int lastPage = 1;
   final List<User> users = [];
 
-  UsersCubit(this._getUser) : super(const _Loading());
   final GetUsers _getUser;
 
   Future<void> refresh() async {
@@ -39,6 +27,13 @@ class UsersCubit extends Cubit<UsersState> {
 
     /// fetch data
     await fetchUsers(UsersParams(page: currentPage));
+  }
+
+  Future<void> nextPage() async {
+    if (currentPage < lastPage) {
+      currentPage++;
+      await fetchUsers(UsersParams(page: currentPage));
+    }
   }
 
   Future<void> fetchUsers(UsersParams usersParams) async {
@@ -58,6 +53,7 @@ class UsersCubit extends Cubit<UsersState> {
         currentPage = r.currentPage ?? 1;
         lastPage = r.lastPage ?? 1;
 
+        if (currentPage != 1) emit(const _Initial());
         emit(_Success(users));
       },
     );

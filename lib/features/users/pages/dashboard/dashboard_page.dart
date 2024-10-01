@@ -21,6 +21,14 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  late final ScrollController _scrollController = ScrollController()
+    ..addListener(() async {
+      if (_scrollController.position.atEdge &&
+          _scrollController.position.pixels != 0) {
+        context.read<UsersCubit>().nextPage();
+      }
+    });
+
   @override
   Widget build(BuildContext context) {
     return Parent(
@@ -31,10 +39,11 @@ class _DashboardPageState extends State<DashboardPage> {
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (_, state) {
             return state.when(
+              initial: () => const SizedBox.shrink(),
               loading: () => const Center(child: Loading()),
               success: (data) {
                 return ListView.builder(
-                  controller: context.read<UsersCubit>().scrollController,
+                  controller: _scrollController,
                   itemCount: context.read<UsersCubit>().currentPage ==
                           context.read<UsersCubit>().lastPage
                       ? (data.length)

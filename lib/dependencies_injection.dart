@@ -61,6 +61,7 @@ void _useCase() {
 
   /// Users
   sl.registerLazySingleton(() => GetUsers(sl()));
+  sl.registerLazySingleton(() => GetUser(sl()));
 }
 
 void _cubit() {
@@ -73,6 +74,7 @@ void _cubit() {
   sl.registerFactory(() => ReloadFormCubit());
 
   /// Users
+  sl.registerFactory(() => UserCubit(sl()));
   sl.registerFactory(() => UsersCubit(sl()));
   sl.registerFactory(() => SettingsCubit());
   sl.registerFactory(() => MainCubit());

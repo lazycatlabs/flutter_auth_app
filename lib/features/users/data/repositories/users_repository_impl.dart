@@ -22,4 +22,14 @@ class UsersRepositoryImpl implements UsersRepository {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, User>> user() async {
+    final response = await usersRemoteDatasource.user();
+
+    return response.fold(
+      (failure) => Left(failure),
+      (userResponse) => Right(userResponse.toEntity()),
+    );
+  }
 }

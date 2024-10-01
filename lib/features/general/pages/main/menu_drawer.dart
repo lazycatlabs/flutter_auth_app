@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class MenuDrawer extends StatefulWidget {
@@ -30,44 +32,48 @@ class _MenuDrawerState extends State<MenuDrawer> {
             width: context.widthInPercent(100),
             height: Dimens.header,
             padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
-            color: Theme.of(context).extension<LzyctColors>()!.card,
+            color: Theme.of(context).extension<LzyctColors>()!.banner,
             child: SafeArea(
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Theme.of(context).hintColor,
-                    radius: Dimens.space40,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(Images.icLauncher),
-                      radius: Dimens.space36,
-                    ),
-                  ),
-                  const SpacerH(),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Lazycat Labs",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLargeBold
-                              ?.copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                        Text(
-                          "lzyct@lazycatlabs.com",
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Theme.of(context)
-                                        .extension<LzyctColors>()!
-                                        .shadow,
+              child: BlocBuilder<UserCubit, UserState>(
+                builder: (_, state) => state.when(
+                  loading: () => const Loading(),
+                  failure: (message) => Center(child: Text(message)),
+                  success: (data) => Row(
+                    children: [
+                      CircleImage(
+                        url: data?.avatar ?? "",
+                        size: Dimens.profilePicture,
+                      ),
+                      const SpacerH(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLargeBold
+                                  ?.copyWith(
+                                    color: Theme.of(context).primaryColor,
                                   ),
+                            ),
+                            Text(
+                              data?.email ?? "",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

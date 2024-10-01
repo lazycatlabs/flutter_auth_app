@@ -240,6 +240,22 @@ class MockUsersRepository extends _i1.Mock implements _i8.UsersRepository {
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.Users>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.User>> user() => (super.noSuchMethod(
+        Invocation.method(
+          #user,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.User>>.value(
+            _FakeEither_0<_i7.Failure, _i8.User>(
+          this,
+          Invocation.method(
+            #user,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.User>>);
 }
 
 /// A class which mocks [UsersRemoteDatasource].
@@ -269,6 +285,24 @@ class MockUsersRemoteDatasource extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>> user() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #user,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>.value(
+                _FakeEither_0<_i7.Failure, _i8.UserResponse>(
+          this,
+          Invocation.method(
+            #user,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>);
 }
 
 /// A class which mocks [BuildContext].

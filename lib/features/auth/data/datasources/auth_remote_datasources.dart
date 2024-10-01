@@ -22,7 +22,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     RegisterParams params,
   ) async {
     final response = await _client.postRequest(
-      ListAPI.register,
+      ListAPI.user,
       data: params.toJson(),
       converter: (response) =>
           RegisterResponse.fromJson(response as Map<String, dynamic>),

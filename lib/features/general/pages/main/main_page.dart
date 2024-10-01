@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,27 +32,27 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (isPop) {
-        context.read<MainCubit>().onBackPressed(context, _scaffoldKey);
-      },
+      onPopInvokedWithResult: (_, __) =>
+          context.read<MainCubit>().onBackPressed(context, _scaffoldKey),
       child: Parent(
         scaffoldKey: _scaffoldKey,
         appBar: _appBar(),
         drawer: SizedBox(
           width: context.widthInPercent(80),
-          child: MenuDrawer(
-            dataMenu: context.read<MainCubit>().dataMenus,
-            currentIndex: (int index) {
-              /// don't update when index is logout
-              if (index != 2) {
-                context.read<MainCubit>().updateIndex(index);
-              }
+          child: BlocProvider(
+            create: (_) => sl<UserCubit>()..getUser(),
+            child: MenuDrawer(
+              dataMenu: context.read<MainCubit>().dataMenus,
+              currentIndex: (int index) {
+                /// don't update when index is logout
+                if (index != 2) {
+                  context.read<MainCubit>().updateIndex(index);
+                }
 
-              /// hide navigation drawer
-              _scaffoldKey.currentState?.openEndDrawer();
-            },
-            onLogoutPressed: () {
-              showDialog(
+                /// hide navigation drawer
+                _scaffoldKey.currentState?.openEndDrawer();
+              },
+              onLogoutPressed: () => showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
                   title: Text(
@@ -75,9 +76,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {
-                        context.read<AuthCubit>().logout();
-                      },
+                      onPressed: () => context.read<AuthCubit>().logout(),
                       child: Text(
                         Strings.of(context)!.yes,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -89,8 +88,8 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ],
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ),
         child: widget.child,
@@ -122,9 +121,7 @@ class _MainPageState extends State<MainPage> {
             color: Theme.of(context).extension<LzyctColors>()!.pink,
             semanticLabel: "Menu",
           ),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
+          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
         ),
         actions: const [
           /// Notification on Dashboard

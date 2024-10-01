@@ -40,7 +40,7 @@ void main() {
       () async {
         /// arrange
         dioAdapter.onPost(
-          ListAPI.register,
+          ListAPI.user,
           (server) => server.reply(
             200,
             json.decode(jsonReader(successRegisterPath)),
@@ -65,7 +65,7 @@ void main() {
         /// arrange
 
         dioAdapter.onPost(
-          ListAPI.register,
+          ListAPI.user,
           (server) => server.reply(
             400,
             json.decode(jsonReader(unSuccessRegisterPath)),

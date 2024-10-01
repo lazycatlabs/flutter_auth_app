@@ -101,6 +101,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       extensions: const <ThemeExtension<dynamic>>[
         LzyctColors(
           background: Palette.background,
+          banner: Palette.banner,
           card: Palette.card,
           buttonText: Palette.text,
           subtitle: Palette.subText,
@@ -220,6 +221,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       extensions: const <ThemeExtension<dynamic>>[
         LzyctColors(
           background: Palette.backgroundDark,
+          banner: Palette.bannerDark,
           buttonText: Palette.textDark,
           card: Palette.cardDark,
           subtitle: Palette.subTextDark,
@@ -244,6 +246,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
 
 class LzyctColors extends ThemeExtension<LzyctColors> {
   final Color? background;
+  final Color? banner;
   final Color? card;
   final Color? buttonText;
   final Color? subtitle;
@@ -265,6 +268,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
 
   const LzyctColors({
     this.background,
+    this.banner,
     this.card,
     this.buttonText,
     this.subtitle,
@@ -288,6 +292,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
   @override
   ThemeExtension<LzyctColors> copyWith({
     Color? background,
+    Color? banner,
     Color? card,
     Color? buttonText,
     Color? subtitle,
@@ -309,6 +314,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
   }) {
     return LzyctColors(
       background: background ?? this.background,
+      banner: banner ?? this.banner,
       card: card ?? this.card,
       buttonText: buttonText ?? this.buttonText,
       subtitle: subtitle ?? this.subtitle,
@@ -339,6 +345,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
       return this;
     }
     return LzyctColors(
+      banner: Color.lerp(banner, other.banner, t),
       background: Color.lerp(background, other.background, t),
       card: Color.lerp(card, other.card, t),
       buttonText: Color.lerp(buttonText, other.buttonText, t),

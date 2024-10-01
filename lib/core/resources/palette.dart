@@ -67,6 +67,8 @@ class Palette {
   static const Color subTextDark = Color(0xff6c7086);
   static const Color shadow = Color(0xff8c8fa1);
   static const Color shadowDark = Color(0xff7f849c);
+  static const Color banner = backgroundDark;
+  static const Color bannerDark = background;
 
   static const Color redMocha = Color(0xfff38ba8);
   static const Color greenMocha = Color(0xffa6e3a1);

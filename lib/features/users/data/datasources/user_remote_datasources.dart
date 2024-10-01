@@ -4,6 +4,8 @@ import 'package:flutter_auth_app/features/users/users.dart';
 
 abstract class UsersRemoteDatasource {
   Future<Either<Failure, UsersResponse>> users(UsersParams userParams);
+
+  Future<Either<Failure, UserResponse>> user();
 }
 
 class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
@@ -18,6 +20,17 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
       queryParameters: userParams.toJson(),
       converter: (response) =>
           UsersResponse.fromJson(response as Map<String, dynamic>),
+    );
+
+    return response;
+  }
+
+  @override
+  Future<Either<Failure, UserResponse>> user() async {
+    final response = await _client.getRequest(
+      ListAPI.user,
+      converter: (response) =>
+          UserResponse.fromJson(response as Map<String, dynamic>),
     );
 
     return response;

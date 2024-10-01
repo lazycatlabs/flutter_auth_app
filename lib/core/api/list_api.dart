@@ -3,7 +3,7 @@ class ListAPI {
 
   /// Auth
   static const String generalToken = "/v1/api/auth/general";
-  static const String register = "/v1/api/user";
+  static const String user = "/v1/api/user";
   static const String login = "/v1/api/auth/login";
 
   /// User

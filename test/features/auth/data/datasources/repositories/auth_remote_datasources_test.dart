@@ -32,7 +32,7 @@ void main() {
     const registerParams =
         RegisterParams(email: "mudassir@lazycatlabs.com", password: "Pass123");
     final registerModel = RegisterResponse.fromJson(
-      json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
     );
 
     test(
@@ -43,7 +43,7 @@ void main() {
           ListAPI.user,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(successRegisterPath)),
+            json.decode(jsonReader(pathRegisterResponse200)),
           ),
           data: registerParams.toJson(),
         );
@@ -68,7 +68,7 @@ void main() {
           ListAPI.user,
           (server) => server.reply(
             400,
-            json.decode(jsonReader(unSuccessRegisterPath)),
+            json.decode(jsonReader(pathRegisterResponse400)),
           ),
           data: registerParams.toJson(),
         );

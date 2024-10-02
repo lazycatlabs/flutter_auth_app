@@ -36,7 +36,7 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'register_cubit_test_');
     register = RegisterResponse.fromJson(
-      json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockPostRegister = MockPostRegister();
     registerCubit = RegisterCubit(mockPostRegister);

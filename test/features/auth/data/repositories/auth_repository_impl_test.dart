@@ -34,7 +34,7 @@ void main() {
       json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     ).toEntity();
     register = RegisterResponse.fromJson(
-      json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
     ).toEntity();
   });
 
@@ -85,7 +85,7 @@ void main() {
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(
         (_) async => Right(
           RegisterResponse.fromJson(
-            json.decode(jsonReader(successRegisterPath))
+            json.decode(jsonReader(pathRegisterResponse200))
                 as Map<String, dynamic>,
           ),
         ),

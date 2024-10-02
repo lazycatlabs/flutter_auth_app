@@ -11,7 +11,7 @@ void main() {
 
   test('from json, should return a valid model from json', () {
     /// arrange
-    final jsonMap = json.decode(jsonReader(successRegisterPath));
+    final jsonMap = json.decode(jsonReader(pathRegisterResponse200));
 
     /// act
     final result = RegisterResponse.fromJson(jsonMap as Map<String, dynamic>);

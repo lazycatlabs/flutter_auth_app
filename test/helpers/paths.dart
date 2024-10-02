@@ -1,6 +1,5 @@
-const successRegisterPath = "helpers/stubs/register_success_response.json";
-const unSuccessRegisterPath =
-    "helpers/stubs/register_unsuccessful_response.json";
+const pathRegisterResponse200 = "helpers/stubs/register_response_200.json";
+const pathRegisterResponse400 = "helpers/stubs/register_response_400.json";
 const pathGeneralTokenResponse200 =
     "helpers/stubs/general_token_response_200.json";
 const pathGeneralTokenResponse401 =

@@ -89,7 +89,7 @@ void main() {
     const loginParams =
         GeneralTokenParams(email: "eve.holt@reqres.in", password: "cityslicka");
     final loginModel = LoginResponse.fromJson(
-      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     );
 
     test(
@@ -100,7 +100,7 @@ void main() {
           ListAPI.login,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(successLoginPath)),
+            json.decode(jsonReader(pathLoginResponse200)),
           ),
           data: loginParams.toJson(),
         );
@@ -124,7 +124,7 @@ void main() {
           ListAPI.login,
           (server) => server.reply(
             400,
-            json.decode(jsonReader(unSuccessfulLoginPath)),
+            json.decode(jsonReader(pathLoginResponse401)),
           ),
           data: loginParams.toJson(),
         );

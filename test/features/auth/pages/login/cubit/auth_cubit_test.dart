@@ -35,7 +35,7 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'auth_cubit_test_');
     login = LoginResponse.fromJson(
-      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockPostLogin = MockPostLogin();
     authCubit = AuthCubit(mockPostLogin);

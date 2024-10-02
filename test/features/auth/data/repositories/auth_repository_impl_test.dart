@@ -31,7 +31,7 @@ void main() {
     mockAuthRemoteDatasource = MockAuthRemoteDatasource();
     authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource, sl());
     login = LoginResponse.fromJson(
-      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     ).toEntity();
     register = RegisterResponse.fromJson(
       json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
@@ -46,7 +46,8 @@ void main() {
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
         (_) async => Right(
           LoginResponse.fromJson(
-            json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+            json.decode(jsonReader(pathLoginResponse200))
+                as Map<String, dynamic>,
           ),
         ),
       );

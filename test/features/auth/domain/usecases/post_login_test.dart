@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     login = LoginResponse.fromJson(
-      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockAuthRepository = MockAuthRepository();
     postLogin = PostLogin(mockAuthRepository);

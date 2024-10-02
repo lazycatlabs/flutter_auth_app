@@ -13,7 +13,8 @@ enum ActiveTheme {
 }
 
 enum MainBoxKeys {
-  token,
+  generalToken,
+  authToken,
   fcm,
   language,
   theme,
@@ -44,7 +45,7 @@ mixin class MainBoxMixin {
   Future<void> logoutBox() async {
     /// Clear the box
     removeData(MainBoxKeys.isLogin);
-    removeData(MainBoxKeys.token);
+    removeData(MainBoxKeys.authToken);
   }
 
   Future<void> closeBox({bool isUnitTest = false}) async {

@@ -11,20 +11,16 @@ Future<void> serviceLocator({
   String prefixBox = '',
 }) async {
   /// For unit testing only
-  if (isUnitTest) {
-    await sl.reset();
+  if (isUnitTest) await sl.reset();
+
+  if (isHiveEnable) {
+    await _initHiveBoxes(isUnitTest: isUnitTest, prefixBox: prefixBox);
   }
   sl.registerSingleton<DioClient>(DioClient(isUnitTest: isUnitTest));
   _dataSources();
   _repositories();
   _useCase();
   _cubit();
-  if (isHiveEnable) {
-    await _initHiveBoxes(
-      isUnitTest: isUnitTest,
-      prefixBox: prefixBox,
-    );
-  }
 }
 
 Future<void> _initHiveBoxes({

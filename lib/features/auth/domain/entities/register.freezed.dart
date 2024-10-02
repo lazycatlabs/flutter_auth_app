@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Register {
-  String? get token => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   /// Create a copy of Register
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +30,7 @@ abstract class $RegisterCopyWith<$Res> {
   factory $RegisterCopyWith(Register value, $Res Function(Register) then) =
       _$RegisterCopyWithImpl<$Res, Register>;
   @useResult
-  $Res call({String? token});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -48,12 +48,12 @@ class _$RegisterCopyWithImpl<$Res, $Val extends Register>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = freezed,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -67,7 +67,7 @@ abstract class _$$RegisterImplCopyWith<$Res>
       __$$RegisterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? token});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -83,12 +83,12 @@ class __$$RegisterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = freezed,
+    Object? message = freezed,
   }) {
     return _then(_$RegisterImpl(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -97,14 +97,14 @@ class __$$RegisterImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RegisterImpl implements _Register {
-  const _$RegisterImpl({this.token});
+  const _$RegisterImpl({this.message});
 
   @override
-  final String? token;
+  final String? message;
 
   @override
   String toString() {
-    return 'Register(token: $token)';
+    return 'Register(message: $message)';
   }
 
   @override
@@ -112,11 +112,11 @@ class _$RegisterImpl implements _Register {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegisterImpl &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token);
+  int get hashCode => Object.hash(runtimeType, message);
 
   /// Create a copy of Register
   /// with the given fields replaced by the non-null parameter values.
@@ -128,10 +128,10 @@ class _$RegisterImpl implements _Register {
 }
 
 abstract class _Register implements Register {
-  const factory _Register({final String? token}) = _$RegisterImpl;
+  const factory _Register({final String? message}) = _$RegisterImpl;
 
   @override
-  String? get token;
+  String? get message;
 
   /// Create a copy of Register
   /// with the given fields replaced by the non-null parameter values.

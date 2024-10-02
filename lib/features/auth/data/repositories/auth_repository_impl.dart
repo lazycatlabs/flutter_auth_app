@@ -19,7 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
       (loginResponse) {
         mainBoxMixin.addData(MainBoxKeys.isLogin, true);
         mainBoxMixin.addData(
-          MainBoxKeys.token,
+          MainBoxKeys.authToken,
           "${loginResponse.data?.tokenType} ${loginResponse.data?.token}",
         );
 
@@ -50,7 +50,7 @@ class AuthRepositoryImpl implements AuthRepository {
       (failure) => Left(failure),
       (loginResponse) {
         mainBoxMixin.addData(
-          MainBoxKeys.token,
+          MainBoxKeys.generalToken,
           "${loginResponse.data?.tokenType} ${loginResponse.data?.token}",
         );
 

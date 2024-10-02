@@ -26,5 +26,6 @@
   "logout": "Keluar",
   "logoutDesc": "Apakah anda ingin keluar dari aplikasi?",
   "yes": "Ya",
-  "lastUpdate": "Terakhir diperbarui: "
+  "lastUpdate": "Terakhir diperbarui: ",
+  "name": "Nama"
 }

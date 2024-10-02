@@ -26,5 +26,6 @@
   "logout": "Logout",
   "logoutDesc": "Do you want to logout from the app?",
   "yes": "Yes",
-  "lastUpdate": "Last Update: "
+  "lastUpdate": "Last Update: ",
+  "name": "Name"
 }

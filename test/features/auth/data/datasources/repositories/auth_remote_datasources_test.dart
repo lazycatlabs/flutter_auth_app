@@ -30,7 +30,7 @@ void main() {
 
   group('register', () {
     const registerParams =
-        RegisterParams(email: "eve.holt@reqres.in", password: "pistol");
+        RegisterParams(email: "mudassir@lazycatlabs.com", password: "Pass123");
     final registerModel = RegisterResponse.fromJson(
       json.decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,
     );
@@ -87,7 +87,7 @@ void main() {
 
   group('login', () {
     const loginParams =
-        GeneralTokenParams(email: "eve.holt@reqres.in", password: "cityslicka");
+        LoginParams(email: "mudassir@lazycatlabs.com", password: "Pass123");
     final loginModel = LoginResponse.fromJson(
       json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     );
@@ -117,13 +117,13 @@ void main() {
     );
 
     test(
-      'should return login unsuccessful model when response code is 400',
+      'should return login unsuccessful model when response code is 401',
       () async {
         /// arrange
         dioAdapter.onPost(
           ListAPI.login,
           (server) => server.reply(
-            400,
+            401,
             json.decode(jsonReader(pathLoginResponse401)),
           ),
           data: loginParams.toJson(),
@@ -131,6 +131,63 @@ void main() {
 
         /// act
         final result = await dataSource.login(loginParams);
+
+        /// assert
+        result.fold(
+          (l) => expect(l, isA<ServerFailure>()),
+          (r) => expect(r, null),
+        );
+      },
+    );
+  });
+
+  group('general token', () {
+    const generalTokenParams =
+        GeneralTokenParams(clientId: "apimock", clientSecret: "apimock_secret");
+    final generalTokenResponse = GeneralTokenResponse.fromJson(
+      json.decode(jsonReader(pathGeneralTokenResponse200))
+          as Map<String, dynamic>,
+    );
+
+    test(
+      'should return general token success model when response code is 200',
+      () async {
+        /// arrange
+        dioAdapter.onPost(
+          ListAPI.generalToken,
+          (server) => server.reply(
+            200,
+            json.decode(jsonReader(pathGeneralTokenResponse200)),
+          ),
+          data: generalTokenParams.toJson(),
+        );
+
+        /// act
+        final result = await dataSource.generalToken(generalTokenParams);
+
+        /// assert
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, generalTokenResponse),
+        );
+      },
+    );
+
+    test(
+      'should return general token unsuccessful model when response code is 401',
+      () async {
+        /// arrange
+        dioAdapter.onPost(
+          ListAPI.login,
+          (server) => server.reply(
+            401,
+            json.decode(jsonReader(pathGeneralTokenResponse401)),
+          ),
+          data: generalTokenParams.toJson(),
+        );
+
+        /// act
+        final result = await dataSource.generalToken(generalTokenParams);
 
         /// assert
         result.fold(

@@ -52,6 +52,7 @@ void _dataSources() {
 void _useCase() {
   /// Auth
   sl.registerLazySingleton(() => PostLogin(sl()));
+  sl.registerLazySingleton(() => PostLogout(sl()));
   sl.registerLazySingleton(() => PostRegister(sl()));
   sl.registerLazySingleton(() => PostGeneralToken(sl()));
 
@@ -65,6 +66,7 @@ void _cubit() {
   sl.registerFactory(() => RegisterCubit(sl()));
   sl.registerFactory(() => AuthCubit(sl()));
   sl.registerFactory(() => GeneralTokenCubit(sl()));
+  sl.registerFactory(() => LogoutCubit(sl()));
 
   /// General
   sl.registerFactory(() => ReloadFormCubit());

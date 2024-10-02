@@ -4,6 +4,7 @@ import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 ///*********************************************
 /// Created by ukietux on 25/08/20 with ♥
@@ -75,15 +76,30 @@ class _MainPageState extends State<MainPage> {
                             ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () => context.read<AuthCubit>().logout(),
-                      child: Text(
-                        Strings.of(context)!.yes,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context)
-                                  .extension<LzyctColors>()!
-                                  .red,
-                            ),
+                    BlocListener<LogoutCubit, LogoutState>(
+                      listener: (ctx, state) => state.whenOrNull(
+                        loading: () => ctx.show(),
+                        success: (message) {
+                          ctx.dismiss();
+                          message.toToastSuccess(context);
+                          context.goNamed(Routes.root.name);
+                          return;
+                        },
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          context.read<LogoutCubit>().postLogout();
+                        },
+                        child: Text(
+                          Strings.of(context)!.yes,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context)
+                                        .extension<LzyctColors>()!
+                                        .red,
+                                  ),
+                        ),
                       ),
                     ),
                   ],

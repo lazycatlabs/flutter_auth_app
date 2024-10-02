@@ -5,7 +5,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class MenuDrawer extends StatefulWidget {
+class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
     super.key,
     required this.dataMenu,
@@ -17,11 +17,6 @@ class MenuDrawer extends StatefulWidget {
   final Function(int) currentIndex;
   final VoidCallback onLogoutPressed;
 
-  @override
-  _MenuDrawerState createState() => _MenuDrawerState();
-}
-
-class _MenuDrawerState extends State<MenuDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -80,23 +75,23 @@ class _MenuDrawerState extends State<MenuDrawer> {
           const SpacerV(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: widget.dataMenu
+            children: dataMenu
                 .map<Widget>(
                   (value) => SizedBox(
                     width: double.maxFinite,
                     child: InkWell(
                       onTap: () {
-                        for (final menu in widget.dataMenu) {
+                        for (final menu in dataMenu) {
                           menu.isSelected = menu.title == value.title;
 
                           if (value.title != null) {
-                            widget.currentIndex(
-                              widget.dataMenu.indexOf(value),
+                            currentIndex(
+                              dataMenu.indexOf(value),
                             );
                           }
                         }
 
-                        _selectedPage(value.title!);
+                        _selectedPage(context, value.title!);
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -119,14 +114,14 @@ class _MenuDrawerState extends State<MenuDrawer> {
     );
   }
 
-  void _selectedPage(String title) {
+  void _selectedPage(BuildContext context, String title) {
     //Update page from selected Page
     if (title == Strings.of(context)!.settings) {
       context.goNamed(Routes.settings.name);
     } else if (title == Strings.of(context)!.dashboard) {
       context.goNamed(Routes.dashboard.name);
     } else if (title == Strings.of(context)!.logout) {
-      widget.onLogoutPressed.call();
+      onLogoutPressed.call();
     }
   }
 }

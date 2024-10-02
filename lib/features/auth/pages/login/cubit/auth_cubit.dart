@@ -25,10 +25,4 @@ class AuthCubit extends Cubit<AuthState> {
       (r) => emit(_Success(r.token)),
     );
   }
-
-  Future<void> logout() async {
-    emit(const _Loading());
-    await MainBoxMixin().logoutBox();
-    emit(const _Success(null));
-  }
 }

@@ -55,11 +55,8 @@ class AppRoute {
       GoRoute(
         path: Routes.login.path,
         name: Routes.login.name,
-        builder: (_, __) => MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => sl<AuthCubit>()),
-            BlocProvider(create: (_) => sl<ReloadFormCubit>()),
-          ],
+        builder: (_, __) => BlocProvider(
+          create: (_) => sl<ReloadFormCubit>(),
           child: const LoginPage(),
         ),
       ),
@@ -99,7 +96,9 @@ class AppRoute {
     initialLocation: Routes.splashScreen.path,
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
-    refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
+    refreshListenable: GoRouterRefreshStream(
+      [context.read<AuthCubit>().stream, context.read<LogoutCubit>().stream],
+    ),
     redirect: (_, GoRouterState state) {
       final bool isAllowedPages = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path ||

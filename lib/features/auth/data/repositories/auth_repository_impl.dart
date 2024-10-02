@@ -58,4 +58,14 @@ class AuthRepositoryImpl implements AuthRepository {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, String>> logout() async {
+    final response = await authRemoteDatasource.logout();
+
+    return response.fold(
+      (failure) => Left(failure),
+      (loginResponse) => Right(loginResponse.diagnostic?.message ?? ""),
+    );
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/features/auth/auth.dart';
+import 'package:flutter_auth_app/features/features.dart';
 
 abstract class AuthRemoteDatasource {
   Future<Either<Failure, RegisterResponse>> register(RegisterParams params);
@@ -10,6 +10,8 @@ abstract class AuthRemoteDatasource {
   Future<Either<Failure, GeneralTokenResponse>> generalToken(
     GeneralTokenParams params,
   );
+
+  Future<Either<Failure, DiagnosticResponse>> logout();
 }
 
 class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
@@ -52,6 +54,17 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       data: params.toJson(),
       converter: (response) =>
           GeneralTokenResponse.fromJson(response as Map<String, dynamic>),
+    );
+
+    return response;
+  }
+
+  @override
+  Future<Either<Failure, DiagnosticResponse>> logout() async {
+    final response = await _client.postRequest(
+      ListAPI.logout,
+      converter: (response) =>
+          DiagnosticResponse.fromJson(response as Map<String, dynamic>),
     );
 
     return response;

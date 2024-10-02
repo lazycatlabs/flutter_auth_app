@@ -236,6 +236,7 @@ class TextFState extends State<TextF> {
         ),
         onChanged: (String value) =>
             _debouncer.run(() => widget.validatorListener?.call(value)),
+        onSaved: (String? value) => widget.validatorListener?.call(value ?? ""),
       ),
     );
   }

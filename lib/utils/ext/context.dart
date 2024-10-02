@@ -52,7 +52,7 @@ extension ContextExtensions on BuildContext {
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(this).extension<LzyctColors>()!.background,
+                    color: Theme.of(c).extension<LzyctColors>()!.background,
                     borderRadius: BorderRadius.circular(Dimens.cornerRadius),
                   ),
                   margin: EdgeInsets.symmetric(horizontal: Dimens.space30),

@@ -7,7 +7,7 @@ import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 
 void main() {
-  const registerResponse = RegisterResponse(id: 4, token: 'QpwL5tke4Pnpja7X4');
+  const registerResponse = RegisterResponse();
 
   test('from json, should return a valid model from json', () {
     /// arrange

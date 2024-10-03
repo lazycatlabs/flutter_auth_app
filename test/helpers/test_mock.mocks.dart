@@ -11,7 +11,7 @@ import 'package:flutter/src/widgets/framework.dart' as _i3;
 import 'package:flutter/src/widgets/notification_listener.dart' as _i9;
 import 'package:flutter_auth_app/core/core.dart' as _i7;
 import 'package:flutter_auth_app/features/auth/auth.dart' as _i5;
-import 'package:flutter_auth_app/features/users/users.dart' as _i8;
+import 'package:flutter_auth_app/features/features.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -146,6 +146,22 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, String>> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, String>>.value(
+            _FakeEither_0<_i7.Failure, String>(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, String>>);
 }
 
 /// A class which mocks [AuthRemoteDatasource].
@@ -213,6 +229,24 @@ class MockAuthRemoteDatasource extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>> logout() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>.value(
+                _FakeEither_0<_i7.Failure, _i8.DiagnosticResponse>(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>);
 }
 
 /// A class which mocks [UsersRepository].

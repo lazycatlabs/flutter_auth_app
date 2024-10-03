@@ -6,7 +6,6 @@ import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -19,6 +18,7 @@ void main() {
   late MockAuthRemoteDatasource mockAuthRemoteDatasource;
   late AuthRepositoryImpl authRepositoryImpl;
   late Login login;
+  late GeneralToken generalToken;
   late Register register;
 
   setUp(() async {
@@ -36,11 +36,57 @@ void main() {
     register = RegisterResponse.fromJson(
       json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
     ).toEntity();
+    generalToken = GeneralTokenResponse.fromJson(
+      json.decode(jsonReader(pathGeneralTokenResponse200))
+          as Map<String, dynamic>,
+    ).toEntity();
+  });
+
+  group("general token", () {
+    const generalTokenParams =
+        GeneralTokenParams(clientId: "apimock", clientSecret: "apimock_secret");
+    test('should return general token when call data is successful', () async {
+      // arrange
+      when(mockAuthRemoteDatasource.generalToken(generalTokenParams))
+          .thenAnswer(
+        (_) async => Right(
+          GeneralTokenResponse.fromJson(
+            json.decode(jsonReader(pathGeneralTokenResponse200))
+                as Map<String, dynamic>,
+          ),
+        ),
+      );
+
+      // act
+      final result = await authRepositoryImpl.generalToken(generalTokenParams);
+
+      // assert
+      verify(mockAuthRemoteDatasource.generalToken(generalTokenParams));
+
+      expect(result, Right(generalToken));
+    });
+
+    test(
+      'should return server failure when call data is unsuccessful',
+      () async {
+        // arrange
+        when(mockAuthRemoteDatasource.generalToken(generalTokenParams))
+            .thenAnswer((_) async => const Left(ServerFailure('')));
+
+        // act
+        final result =
+            await authRepositoryImpl.generalToken(generalTokenParams);
+
+        // assert
+        verify(mockAuthRemoteDatasource.generalToken(generalTokenParams));
+        expect(result, const Left(ServerFailure('')));
+      },
+    );
   });
 
   group("login", () {
     const loginParams =
-        GeneralTokenParams(email: "email", password: "password");
+        LoginParams(email: "mudassir@lazycatlabs.com", password: "pass123");
     test('should return login when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
@@ -79,7 +125,8 @@ void main() {
   });
 
   group("register", () {
-    const registerParams = RegisterParams(email: "email", password: "password");
+    const registerParams =
+        RegisterParams(email: "mudassir@lazycatlabs.com", password: "pass123");
     test('should return register when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(

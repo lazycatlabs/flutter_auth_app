@@ -8,6 +8,7 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -61,7 +62,7 @@ void main() {
     wait: const Duration(milliseconds: 100),
     expect: () => [
       const UsersState.loading(),
-      UsersState.success(users.users ?? []),
+      UsersState.success(users),
     ],
   );
 
@@ -75,7 +76,10 @@ void main() {
     },
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
-    expect: () => [UsersState.success(users.users ?? [])],
+    expect: () => [
+      const UsersState.loading(),
+      UsersState.success(users),
+    ],
   );
 
   blocTest<UsersCubit, UsersState>(
@@ -106,6 +110,7 @@ void main() {
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
     expect: () => [
+      const UsersState.loading(),
       const UsersState.empty(),
     ],
   );
@@ -122,7 +127,7 @@ void main() {
     wait: const Duration(milliseconds: 100),
     expect: () => [
       const UsersState.loading(),
-      UsersState.success(users.users ?? []),
+      UsersState.success(users),
     ],
   );
 }

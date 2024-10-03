@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'users_cubit.freezed.dart';
-
 part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
@@ -53,8 +51,14 @@ class UsersCubit extends Cubit<UsersState> {
         currentPage = r.currentPage ?? 1;
         lastPage = r.lastPage ?? 1;
 
+        final updatedUsers = Users(
+          currentPage: currentPage,
+          lastPage: lastPage,
+          users: users,
+        );
+
         if (currentPage != 1) emit(const _Initial());
-        emit(_Success(users));
+        emit(_Success(updatedUsers));
       },
     );
   }

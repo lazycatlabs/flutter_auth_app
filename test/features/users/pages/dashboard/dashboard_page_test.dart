@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -100,8 +101,10 @@ void main() {
     'renders DashboardPage for UsersStatus.success',
     (tester) async {
       when(() => usersCubit.state).thenReturn(
-        UsersState.success(users.users ?? []),
+        UsersState.success(users),
       );
+      when(() => usersCubit.fetchUsers(any())).thenAnswer((_) async {});
+
       await tester.pumpWidget(rootWidget(const DashboardPage()));
 
       /// Do loops to waiting refresh indicator showing
@@ -118,12 +121,24 @@ void main() {
     'trigger refresh when pull to refresh',
     (tester) async {
       when(() => usersCubit.state).thenReturn(
-        UsersState.success(users.users ?? []),
+        UsersState.success(users),
       );
       when(() => usersCubit.refresh()).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const DashboardPage()));
-      await tester.pumpAndSettle();
+
+      /// Do loops to waiting refresh indicator showing
+      /// instead using tester.pumpAndSettle it's will result time out error
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+
+      /// Simulate pull to refresh
+
+      // Do loops to wait for the refresh indicator to show
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
       await tester.fling(
         find.text('Mudassir'),
         const Offset(0.0, 500.0),
@@ -135,6 +150,8 @@ void main() {
       for (int i = 0; i < 5; i++) {
         await tester.pump(const Duration(milliseconds: 100));
       }
+
+      // Verify that the refresh method was called
       verify(() => usersCubit.refresh()).called(1);
     },
   );

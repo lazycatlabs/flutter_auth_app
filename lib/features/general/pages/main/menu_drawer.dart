@@ -85,9 +85,7 @@ class MenuDrawer extends StatelessWidget {
                           menu.isSelected = menu.title == value.title;
 
                           if (value.title != null) {
-                            currentIndex(
-                              dataMenu.indexOf(value),
-                            );
+                            currentIndex(dataMenu.indexOf(value));
                           }
                         }
 

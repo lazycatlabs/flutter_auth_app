@@ -7,134 +7,65 @@ import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 
 void main() {
-  final listUser = [
-    DataUser.fromJson({
-      "id": 7,
-      "email": "michael.lawson@reqres.in",
-      "first_name": "Michael",
-      "last_name": "Lawson",
-      "avatar": "https://reqres.in/img/faces/7-image.jpg",
-    }),
-    DataUser.fromJson({
-      "id": 8,
-      "email": "lindsay.ferguson@reqres.in",
-      "first_name": "Lindsay",
-      "last_name": "Ferguson",
-      "avatar": "https://reqres.in/img/faces/8-image.jpg",
-    }),
-    DataUser.fromJson({
-      "id": 9,
-      "email": "tobias.funke@reqres.in",
-      "first_name": "Tobias",
-      "last_name": "Funke",
-      "avatar": "https://reqres.in/img/faces/9-image.jpg",
-    }),
-    DataUser.fromJson({
-      "id": 10,
-      "email": "byron.fields@reqres.in",
-      "first_name": "Byron",
-      "last_name": "Fields",
-      "avatar": "https://reqres.in/img/faces/10-image.jpg",
-    }),
-    DataUser.fromJson({
-      "id": 11,
-      "email": "george.edwards@reqres.in",
-      "first_name": "George",
-      "last_name": "Edwards",
-      "avatar": "https://reqres.in/img/faces/11-image.jpg",
-    }),
-    DataUser.fromJson({
-      "id": 12,
-      "email": "rachel.howell@reqres.in",
-      "first_name": "Rachel",
-      "last_name": "Howell",
-      "avatar": "https://reqres.in/img/faces/12-image.jpg",
-    }),
-  ];
-  final userResponse = UsersResponse(
-    page: 2,
-    perPage: 6,
-    total: 12,
-    totalPages: 2,
-    data: listUser,
-    support: const SupportUser(
-      url: "https://reqres.in/#support-heading",
-      text:
-          "To keep ReqRes free, contributions towards server costs are appreciated!",
+  const usersResponse = UsersResponse(
+    diagnostic: Diagnostic(
+      status: "200",
+      message: "Success",
     ),
+    data: [
+      DataUser(
+        id: "8364aa6f-6887-4502-a6b0-62f082196476",
+        name: "Mudassir",
+        email: "mudassir@lazycatlabs.com",
+        photo:
+            "https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png",
+        verified: false,
+        createdAt: "2024-08-25T15:04:28.191067",
+        updatedAt: "2024-08-25T15:04:28.191067",
+      ),
+    ],
+    page: Page(currentPage: 1, lastPage: 5, total: 100, perPage: 20),
   );
 
   test('from json, should return a valid model from json', () {
     /// arrange
-    final jsonMap = json.decode(jsonReader(successUserPath));
+    final jsonMap = json.decode(jsonReader(pathUsersResponse200));
 
     /// act
     final result = UsersResponse.fromJson(jsonMap as Map<String, dynamic>);
 
     /// assert
-    expect(result, equals(userResponse));
+    expect(result, equals(usersResponse));
   });
 
   test('to json, should return a json map containing proper data', () {
     /// act
-    final result = userResponse.toJson();
+    final result = usersResponse.toJson();
 
     /// arrange
     final exceptedJson = {
-      "page": 2,
-      "per_page": 6,
-      "total": 12,
-      "total_pages": 2,
+      "diagnostic": {
+        "status": "200",
+        "message": "Success",
+      },
       "data": [
         {
-          "id": 7,
-          "email": "michael.lawson@reqres.in",
-          "first_name": "Michael",
-          "last_name": "Lawson",
-          "avatar": "https://reqres.in/img/faces/7-image.jpg",
-        },
-        {
-          "id": 8,
-          "email": "lindsay.ferguson@reqres.in",
-          "first_name": "Lindsay",
-          "last_name": "Ferguson",
-          "avatar": "https://reqres.in/img/faces/8-image.jpg",
-        },
-        {
-          "id": 9,
-          "email": "tobias.funke@reqres.in",
-          "first_name": "Tobias",
-          "last_name": "Funke",
-          "avatar": "https://reqres.in/img/faces/9-image.jpg",
-        },
-        {
-          "id": 10,
-          "email": "byron.fields@reqres.in",
-          "first_name": "Byron",
-          "last_name": "Fields",
-          "avatar": "https://reqres.in/img/faces/10-image.jpg",
-        },
-        {
-          "id": 11,
-          "email": "george.edwards@reqres.in",
-          "first_name": "George",
-          "last_name": "Edwards",
-          "avatar": "https://reqres.in/img/faces/11-image.jpg",
-        },
-        {
-          "id": 12,
-          "email": "rachel.howell@reqres.in",
-          "first_name": "Rachel",
-          "last_name": "Howell",
-          "avatar": "https://reqres.in/img/faces/12-image.jpg",
-        },
+          "id": "8364aa6f-6887-4502-a6b0-62f082196476",
+          "name": "Mudassir",
+          "email": "mudassir@lazycatlabs.com",
+          "photo":
+              "https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png",
+          "verified": false,
+          "createdAt": "2024-08-25T15:04:28.191067",
+          "updatedAt": "2024-08-25T15:04:28.191067",
+        }
       ],
-      "support": {
-        "url": "https://reqres.in/#support-heading",
-        "text":
-            "To keep ReqRes free, contributions towards server costs are appreciated!",
+      "page": {
+        "currentPage": 1,
+        "perPage": 20,
+        "lastPage": 5,
+        "total": 100,
       },
-      "error": null,
     };
 
     /// assert

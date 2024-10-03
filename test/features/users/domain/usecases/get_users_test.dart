@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     users = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockUsersRepository = MockUsersRepository();
     getUsers = GetUsers(mockUsersRepository);

@@ -5,7 +5,6 @@ import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -31,10 +30,11 @@ void main() {
   group('user', () {
     const usersParams = UsersParams();
     final usersModel = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     );
     final usersEmptyModel = UsersResponse.fromJson(
-      json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersEmptyResponse200))
+          as Map<String, dynamic>,
     );
 
     test(
@@ -45,7 +45,7 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(successUserPath)),
+            json.decode(jsonReader(pathUsersResponse200)),
           ),
           queryParameters: usersParams.toJson(),
         );
@@ -69,7 +69,7 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(emptyUserPath)),
+            json.decode(jsonReader(pathUsersEmptyResponse200)),
           ),
           queryParameters: usersParams.toJson(),
         );
@@ -93,7 +93,7 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             400,
-            json.decode(jsonReader(successUserPath)),
+            json.decode(jsonReader(pathUsersResponse200)),
           ),
           queryParameters: usersParams.toJson(),
         );

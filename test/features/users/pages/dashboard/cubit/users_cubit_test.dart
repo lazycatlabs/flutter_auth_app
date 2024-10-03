@@ -8,7 +8,6 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -34,7 +33,7 @@ void main() {
     await serviceLocator(isUnitTest: true, prefixBox: 'users_cubit_test_');
 
     users = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockGetUsers = MockGetUsers();
     userCubit = UsersCubit(mockGetUsers);
@@ -62,7 +61,7 @@ void main() {
     wait: const Duration(milliseconds: 100),
     expect: () => [
       const UsersState.loading(),
-      UsersState.success(users),
+      UsersState.success(users.users ?? []),
     ],
   );
 
@@ -76,7 +75,7 @@ void main() {
     },
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
-    expect: () => [UsersState.success(users)],
+    expect: () => [UsersState.success(users.users ?? [])],
   );
 
   blocTest<UsersCubit, UsersState>(
@@ -119,11 +118,11 @@ void main() {
 
       return UsersCubit(mockGetUsers);
     },
-    act: (UsersCubit usersCubit) => usersCubit.refreshUsers(dummyUsersRequest1),
+    act: (UsersCubit usersCubit) => usersCubit.refresh(),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       const UsersState.loading(),
-      UsersState.success(users),
+      UsersState.success(users.users ?? []),
     ],
   );
 }

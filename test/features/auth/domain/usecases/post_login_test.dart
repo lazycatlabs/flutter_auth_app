@@ -14,7 +14,7 @@ void main() {
   late PostLogin postLogin;
   late Login login;
   const loginParams =
-      GeneralTokenParams(email: 'test@gmail.com', password: 'password');
+      LoginParams(email: 'mudassir@lazycatlabs.com', password: 'pass123');
 
   setUp(() {
     login = LoginResponse.fromJson(

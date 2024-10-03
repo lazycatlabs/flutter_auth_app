@@ -11,7 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -81,6 +80,19 @@ void main() {
           .thenReturn(const ReloadFormState.formUpdated());
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.pumpAndSettle();
+
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -500),
+      );
+
+      /// validate name
+      await tester.tap(find.byKey(const Key('name')));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Can't be empty"), findsOneWidget);
+
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -120,9 +132,9 @@ void main() {
   );
 
   testWidgets(
-    'renders RegisterPage for form validation fill email',
+    'renders RegisterPage for form validation fill name',
     (tester) async {
-      const email = "test@gmail.com";
+      const name = "Mudassir";
 
       when(() => registerCubit.state)
           .thenReturn(const RegisterState.success(null));
@@ -131,6 +143,90 @@ void main() {
           .thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -500),
+      );
+
+      /// validate name
+      await tester.enterText(find.byKey(const Key('name')), name);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Can't be empty"), findsNothing);
+
+      await tester.dragUntilVisible(
+        find.byKey(const Key('btn_register')), // what you want to find
+        find.byType(SingleChildScrollView), // widget you want to scroll
+        const Offset(0, 50), // delta to move
+      );
+
+      /// validate email
+      await tester.enterText(find.byKey(const Key('email')), name);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Email is not valid"), findsOneWidget);
+
+      /// validate password
+      await tester.tap(find.byKey(const Key('password')));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(
+        find.text("Password must be at least 6 characters"),
+        findsOneWidget,
+      );
+
+      /// validate repeat password
+      await tester.tap(find.byKey(const Key('repeat_password')));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Password doesn't match"), findsOneWidget);
+
+      /// the button should be disable
+      expect(
+        tester.widget<Button>(find.byType(Button)).onPressed,
+        isNull,
+      );
+    },
+  );
+
+  testWidgets(
+    'renders RegisterPage for form validation fill name, email',
+    (tester) async {
+      const name = "Mudassir";
+      const email = "mudassir@lazycatlabs.com";
+
+      when(() => registerCubit.state)
+          .thenReturn(const RegisterState.success(null));
+
+      when(() => reloadFormCubit.state)
+          .thenReturn(const ReloadFormState.initial());
+
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -500),
+      );
+
+      /// validate name
+      await tester.enterText(find.byKey(const Key('name')), name);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Can't be empty"), findsNothing);
+
+      /// validate email
+      await tester.enterText(find.byKey(const Key('email')), email);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Email is not valid"), findsNothing);
+
       await tester.dragUntilVisible(
         find.byKey(const Key('btn_register')), // what you want to find
         find.byType(SingleChildScrollView), // widget you want to scroll
@@ -170,10 +266,11 @@ void main() {
   );
 
   testWidgets(
-    'renders RegisterPage for form validation - fill email, password',
+    'renders RegisterPage for form validation - fill name, email, password',
     (tester) async {
-      const email = "hey.mudassir@gmail.com";
-      const password = "password1234";
+      const name = "Mudassir";
+      const email = "mudassir@lazycatlabs.com";
+      const password = "pass123";
 
       // Mock state providers
       when(() => registerCubit.state)
@@ -184,6 +281,18 @@ void main() {
       // Build the widget
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.pumpAndSettle();
+
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -500),
+      );
+
+      /// validate name
+      await tester.enterText(find.byKey(const Key('name')), name);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Can't be empty"), findsNothing);
 
       // Enter email and check validation
       await tester.enterText(find.byKey(const Key('email')), email);
@@ -217,8 +326,9 @@ void main() {
     'renders RegisterPage for form validation fill email,' +
         'password, repeat password (not match)',
     (tester) async {
-      const email = "test@gmail.com";
-      const password = "password";
+      const name = "Mudassir";
+      const email = "mudassir@lazycatlabs.com";
+      const password = "pass123";
 
       when(() => registerCubit.state)
           .thenReturn(const RegisterState.success(null));
@@ -226,6 +336,18 @@ void main() {
           .thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -500),
+      );
+
+      /// validate name
+      await tester.enterText(find.byKey(const Key('name')), name);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Can't be empty"), findsNothing);
 
       await tester.pumpAndSettle();
       await tester.dragUntilVisible(
@@ -265,10 +387,11 @@ void main() {
 
   testWidgets(
     'renders RegisterPage for form validation fill email,' +
-        'password, repeat password ( match) and call register cubit',
+        'password, repeat password (match) and call register cubit',
     (tester) async {
-      const email = "hey.mudassir@gmail.com";
-      const password = "password";
+      const name = "Mudassir";
+      const email = "mudassir@lazycatlabs.com";
+      const password = "pass123";
 
       when(() => registerCubit.state).thenReturn(const RegisterState.loading());
       when(() => registerCubit.register(any())).thenAnswer((_) async {});
@@ -277,6 +400,18 @@ void main() {
           .thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
+
+      await tester.drag(
+        find.byType(SingleChildScrollView),
+        const Offset(0, -500),
+      );
+
+      /// validate name
+      await tester.enterText(find.byKey(const Key('name')), name);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      expect(find.text("Can't be empty"), findsNothing);
 
       /// validate email
       await tester.enterText(find.byKey(const Key('email')), email);

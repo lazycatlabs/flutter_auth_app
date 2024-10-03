@@ -23,9 +23,9 @@ void main() {
   late Login login;
   late MockPostLogin mockPostLogin;
 
-  const loginParams = GeneralTokenParams(
-    email: "dummy@gmail.com",
-    password: "dummyPassword",
+  const loginParams = LoginParams(
+    email: "mudassir@lazycatlabs.com",
+    password: "pass123",
   );
   const errorMessage = "Wrong username or password";
 
@@ -42,9 +42,7 @@ void main() {
   });
 
   /// Dispose bloc
-  tearDown(() {
-    authCubit.close();
-  });
+  tearDown(() => authCubit.close());
 
   ///  Initial data should be loading
   test("Initial data should be AuthStatus.loading", () {

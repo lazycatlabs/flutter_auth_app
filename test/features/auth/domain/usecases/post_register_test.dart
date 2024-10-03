@@ -14,7 +14,7 @@ void main() {
   late PostRegister postRegister;
   late Register register;
   const registerParams =
-      RegisterParams(email: 'test@gmail.com', password: 'password');
+      RegisterParams(email: 'mudassir@lazycatlabs.com', password: 'pass123');
 
   setUp(() {
     register = RegisterResponse.fromJson(

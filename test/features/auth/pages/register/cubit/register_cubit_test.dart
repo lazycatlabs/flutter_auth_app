@@ -8,7 +8,6 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -24,8 +23,8 @@ void main() {
   late Register register;
 
   const registerParams = RegisterParams(
-    email: "dummy@gmail.com",
-    password: "dummyPassword",
+    email: "mudassir@lazycatlabs.com",
+    password: "pass123",
   );
 
   const errorMessage = "Invalid data";
@@ -43,9 +42,7 @@ void main() {
   });
 
   /// Dispose bloc
-  tearDown(() {
-    registerCubit.close();
-  });
+  tearDown(() => registerCubit.close());
 
   /// Test init data should be loading
   test("Initial state should be RegisterStatus.loading", () {

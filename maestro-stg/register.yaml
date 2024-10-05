@@ -1,14 +1,16 @@
 appId: com.lazycatlabs.auths.stg
 ---
 - tapOn: "DON'T HAVE AN ACCOUNT?"
+- tapOn: "Name"
+- inputText: "Mudassir"
 - tapOn: "Email"
-- inputText: "eve.holt@reqres.in"
+- inputText: "mudassir@lazycatlabs.com"
 - tapOn: "password\nPassword"
-- inputText: "pistol"
+- inputText: "pass123"
 - tapOn:
     point: "50%,38%"
 - tapOn: "repeat_password\nRepeat Password"
-- inputText: "pistol"
+- inputText: "pass123"
 - tapOn:
     point: "50%,38%"
 - tapOn: "REGISTER"

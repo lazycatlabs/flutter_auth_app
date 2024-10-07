@@ -1,4 +1,5 @@
 class ListAPI {
+  // coverage:ignore-line
   ListAPI._();
 
   /// Auth

@@ -10,12 +10,7 @@ import 'package:go_router/go_router.dart';
 /// github : https://www.github.com/Lzyct <(’_’<)
 ///*********************************************
 /// © 2020 | All Right Reserved
-class SplashScreenPage extends StatefulWidget {
-  @override
-  _SplashScreenPageState createState() => _SplashScreenPageState();
-}
-
-class _SplashScreenPageState extends State<SplashScreenPage> {
+class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Parent(

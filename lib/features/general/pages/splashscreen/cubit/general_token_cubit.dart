@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'general_token_cubit.freezed.dart';
+part 'general_token_state.dart';
 
 class GeneralTokenCubit extends Cubit<GeneralTokenState> {
   GeneralTokenCubit(this._postGeneralToken) : super(const _Loading());
@@ -23,13 +24,4 @@ class GeneralTokenCubit extends Cubit<GeneralTokenState> {
       (r) => emit(_Success(r.token)),
     );
   }
-}
-
-@freezed
-class GeneralTokenState with _$GeneralTokenState {
-  const factory GeneralTokenState.loading() = _Loading;
-
-  const factory GeneralTokenState.success(String? data) = _Success;
-
-  const factory GeneralTokenState.failure(String message) = _Failure;
 }

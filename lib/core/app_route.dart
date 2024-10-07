@@ -26,9 +26,11 @@ enum Routes {
 
 class AppRoute {
   static late BuildContext context;
+  static late bool isUnitTest;
 
-  AppRoute.setStream(BuildContext ctx) {
+  AppRoute.setStream(BuildContext ctx, {bool isTest = false}) {
     context = ctx;
+    isUnitTest = isTest;
   }
 
   static final GoRouter router = GoRouter(
@@ -96,9 +98,14 @@ class AppRoute {
     initialLocation: Routes.splashScreen.path,
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
-    refreshListenable: GoRouterRefreshStream(
-      [context.read<AuthCubit>().stream, context.read<LogoutCubit>().stream],
-    ),
+    refreshListenable: isUnitTest
+        ? null
+        : GoRouterRefreshStream(
+            [
+              context.read<AuthCubit>().stream,
+              context.read<LogoutCubit>().stream
+            ],
+          ),
     redirect: (_, GoRouterState state) {
       final bool isAllowedPages = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path ||

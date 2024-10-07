@@ -43,11 +43,16 @@ class _MainPageState extends State<MainPage> {
           child: BlocProvider(
             create: (_) => sl<UserCubit>()..getUser(),
             child: MenuDrawer(
-              dataMenu: context.read<MainCubit>().dataMenus,
+              dataMenu: context.read<MainCubit>().dataMenus ??
+                  [
+                    DataHelper(title: "Dashboard", isSelected: true),
+                    DataHelper(title: "Settings"),
+                    DataHelper(title: "Logout"),
+                  ],
               currentIndex: (int index) {
                 /// don't update when index is logout
                 if (index != 2) {
-                  context.read<MainCubit>().updateIndex(index);
+                  context.read<MainCubit>().updateIndex(index, null);
                 }
 
                 /// hide navigation drawer

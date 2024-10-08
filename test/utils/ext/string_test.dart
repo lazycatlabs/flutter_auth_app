@@ -15,8 +15,11 @@ void main() {
     // Initialize date formatting for the desired locale
     initializeDateFormatting('id');
 
-    /// the time is convert to local time
-    expect('2023-10-01T12:34:56Z'.toStringDateAlt(), '01 Oktober 2023 20:34');
+    /// disable isToLocal since the local time is different with GitHub Actions
+    expect(
+      '2023-10-01T12:34:56Z'.toStringDateAlt(isToLocal: false),
+      '01 Oktober 2023 12:34',
+    );
   });
 
   test('toStringDateAlt returns "-" for invalid date', () {

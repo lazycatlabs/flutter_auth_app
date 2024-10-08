@@ -90,11 +90,17 @@ extension StringExtension on String {
       log.e("$e");
     }
   }
+
   //coverage:ignore-end
 
-  String toStringDateAlt({bool isShort = false}) {
+  String toStringDateAlt({bool isShort = false, bool isToLocal = true}) {
     try {
-      final object = DateTime.parse(this).toLocal();
+      DateTime object;
+      if (isToLocal) {
+        object = DateTime.parse(this).toLocal();
+      } else {
+        object = DateTime.parse(this);
+      }
 
       return DateFormat("dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm", "id")
           .format(object);

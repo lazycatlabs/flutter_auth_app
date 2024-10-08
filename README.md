@@ -26,17 +26,37 @@ https://github.com/lazycatlabs/flutter_auth_app/assets/1531684/53f880ed-d51e-4bc
 ## Get Started 🚀
 
 - Clone this project
-- Run `flutter pub get`
-- Run `flutter gen-l10n` to generate localization files
-- Run `flutter pub run build_runner build --delete-conflicting-outputs` to generate freezes files
-- Run `flutter run --flavor stg -t lib/main.dart --dart-define-from-file .env.stg.json` for **staging** or
-- Run `flutter run --flavor prd -t lib/main.dart --dart-define-from-file .env.prd.json` for **production**
-- Run Test `flutter test`
-- Run Test Coverage ` flutter test -j8 --coverage;lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' -o
- coverage/new_lcov.info ;genhtml coverage/new_lcov.info -o coverage/html
-`
-- To generate launcher icon based on Flavor `dart run flutter_launcher_icons`
-- To generate mock class `dart pub run build_runner build`
+```bash 
+  flutter pub get 
+```
+- Run to generate localization files
+```bash
+flutter gen-l10n
+```
+- Run to generate freezes files
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+- Run for **staging** or
+```bash
+flutter run --flavor stg -t lib/main.dart --dart-define-from-file .env.stg.json 
+```
+- Run for **production**
+```bash
+flutter run --flavor prd -t lib/main.dart --dart-define-from-file .env.prd.json 
+```
+- Run Test Coverage, we ignore some folder and file which is not necessary to test coverage because it's generated file
+```bash
+ flutter test -j8 --coverage;lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' '**/*.g.dart' -o coverage/new_lcov.info ;genhtml coverage/new_lcov.info -o coverage/html
+````
+- To generate launcher icon based on Flavor 
+```bash
+dart run flutter_launcher_icons 
+```
+- To generate mock class
+```bash
+dart pub run build_runner build
+```
 
 
 ## Feature ✅

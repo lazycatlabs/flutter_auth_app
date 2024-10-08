@@ -46,6 +46,7 @@ flutter run --flavor stg -t lib/main.dart --dart-define-from-file .env.stg.json
 flutter run --flavor prd -t lib/main.dart --dart-define-from-file .env.prd.json 
 ```
 - Run Test Coverage, we ignore some folder and file which is not necessary to test coverage because it's generated file
+- Note: on macOS you need to have lcov installed on your system (`brew install lcov`) to use this:
 ```bash
  flutter test -j8 --coverage;lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' '**/*.g.dart' -o coverage/new_lcov.info ;genhtml coverage/new_lcov.info -o coverage/html
 ````

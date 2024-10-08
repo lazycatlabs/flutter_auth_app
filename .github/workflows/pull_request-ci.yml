@@ -24,6 +24,10 @@ jobs:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
           # flutter-version: '1.12.x' # you can also specify exact version of flutter
 
+      # Check Flutter version
+      - name: Check Flutter version
+        run: flutter doctor -v
+
       # Get flutter dependencies.
       - name: Run initialize flutter project
         run: flutter pub get ;flutter gen-l10n;flutter pub run build_runner build --delete-conflicting-outputs

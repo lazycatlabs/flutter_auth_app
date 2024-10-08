@@ -81,7 +81,7 @@ void main() {
   );
 
   testWidgets(
-    'trigger update language when dropdown language tapped ',
+    'trigger update language when dropdown language tapped in English',
     (tester) async {
       when(() => settingsCubit.state).thenReturn(DataHelper());
 
@@ -99,6 +99,29 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(() => settingsCubit.updateLanguage("en")).called(1);
+    },
+  );
+
+  testWidgets(
+    'trigger update language when dropdown language tapped in Bahasa ',
+    (tester) async {
+      when(() => settingsCubit.state).thenReturn(DataHelper());
+
+      MainBoxMixin().addData(MainBoxKeys.locale, "id");
+      await tester.pumpWidget(rootWidget(const SettingsPage()));
+      await tester.pumpAndSettle();
+      final dropdown = find.byKey(const Key("dropdown_language")).last;
+
+      await tester.tap(dropdown);
+      await tester.pumpAndSettle();
+
+      /// Tap  the first Item
+      final dropdownItem = find.text('Bahasa').last;
+
+      await tester.tap(dropdownItem);
+      await tester.pumpAndSettle();
+
+      verify(() => settingsCubit.updateLanguage("id")).called(1);
     },
   );
 }

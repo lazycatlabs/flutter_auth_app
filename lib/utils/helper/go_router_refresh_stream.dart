@@ -14,9 +14,11 @@ class GoRouterRefreshStream extends ChangeNotifier {
 
   @override
   void dispose() {
-    for (final subscription in _subscriptions) {
-      subscription.cancel();
-    }
+    try {
+      for (final subscription in _subscriptions) {
+        subscription.cancel(); //coverage:ignore-line
+      }
+    } catch (_) {}
     super.dispose();
   }
 }

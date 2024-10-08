@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 enum ActiveTheme {
@@ -46,18 +45,5 @@ mixin class MainBoxMixin {
     /// Clear the box
     removeData(MainBoxKeys.isLogin);
     removeData(MainBoxKeys.authToken);
-  }
-
-  Future<void> closeBox({bool isUnitTest = false}) async {
-    try {
-      if (mainBox != null) {
-        await mainBox?.close();
-        await mainBox?.deleteFromDisk();
-      }
-    } catch (e, stackTrace) {
-      if (!isUnitTest) {
-        FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
-      }
-    }
   }
 }

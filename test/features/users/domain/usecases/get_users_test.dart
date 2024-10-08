@@ -34,4 +34,21 @@ void main() {
     /// assert
     expect(result, equals(Right(users)));
   });
+
+  test("parse UsersParams to json", () {
+    /// act
+    final result = usersParams.toJson();
+    final expected = {"page": 1};
+
+    /// assert
+    expect(result, equals(expected));
+  });
+
+  test("parse UsersParams from json", () {
+    /// act
+    final params = UsersParams.fromJson({"page": 1});
+
+    /// assert
+    expect(params, equals(usersParams));
+  });
 }

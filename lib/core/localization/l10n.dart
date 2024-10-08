@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class L10n {
-  L10n._();
+  L10n._(); //coverage:ignore-line
 
   static final all = [
     const Locale('en'),

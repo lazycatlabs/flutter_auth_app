@@ -21,12 +21,20 @@ void main() {
 
   blocTest(
     "The theme should be system",
-    build: () {
-      return settingsCubit;
-    },
+    build: () => settingsCubit,
     act: (SettingsCubit settingsCubit) =>
         settingsCubit.updateTheme(ActiveTheme.system),
     expect: () => [
+      isA<DataHelper>(),
+    ],
+  );
+
+  blocTest(
+    "The language should be updated",
+    build: () => settingsCubit,
+    act: (SettingsCubit settingsCubit) => settingsCubit.updateLanguage("en"),
+    expect: () => [
+      isA<DataHelper>(),
       isA<DataHelper>(),
     ],
   );

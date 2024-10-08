@@ -5,6 +5,7 @@ import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -27,7 +28,7 @@ void main() {
     dataSource = UsersRemoteDatasourceImpl(sl<DioClient>());
   });
 
-  group('user', () {
+  group('users', () {
     const usersParams = UsersParams();
     final usersModel = UsersResponse.fromJson(
       json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
@@ -100,6 +101,58 @@ void main() {
 
         /// act
         final result = await dataSource.users(usersParams);
+
+        /// assert
+        result.fold(
+          (l) => expect(l, isA<ServerFailure>()),
+          (r) => expect(r, null),
+        );
+      },
+    );
+  });
+
+  group('user', () {
+    final userModel = UserResponse.fromJson(
+      json.decode(jsonReader(pathUserResponse200)) as Map<String, dynamic>,
+    );
+
+    test(
+      'should return list user success model when response code is 200',
+      () async {
+        /// arrange
+        dioAdapter.onGet(
+          ListAPI.user,
+          (server) => server.reply(
+            200,
+            json.decode(jsonReader(pathUserResponse200)),
+          ),
+        );
+
+        /// act
+        final result = await dataSource.user();
+
+        /// assert
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, userModel),
+        );
+      },
+    );
+
+    test(
+      'should return user unsuccessful model when response code is 400',
+      () async {
+        /// arrange
+        dioAdapter.onGet(
+          ListAPI.user,
+          (server) => server.reply(
+            400,
+            json.decode(jsonReader(pathUsersResponse200)),
+          ),
+        );
+
+        /// act
+        final result = await dataSource.user();
 
         /// assert
         result.fold(

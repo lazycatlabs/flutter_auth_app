@@ -22,7 +22,8 @@ class MenuDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        mainAxisSize: MainAxisSize.min,
+        children: [
           Container(
             width: context.widthInPercent(100),
             height: Dimens.header,
@@ -73,38 +74,43 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           const SpacerV(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: dataMenu
-                .map<Widget>(
-                  (value) => SizedBox(
-                    width: double.maxFinite,
-                    child: InkWell(
-                      onTap: () {
-                        for (final menu in dataMenu) {
-                          menu.isSelected = menu.title == value.title;
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: dataMenu
+                    .map<Widget>(
+                      (value) => SizedBox(
+                        width: double.maxFinite,
+                        child: InkWell(
+                          onTap: () {
+                            for (final menu in dataMenu) {
+                              menu.isSelected = menu.title == value.title;
 
-                          if (value.title != null) {
-                            currentIndex(dataMenu.indexOf(value));
-                          }
-                        }
+                              if (value.title != null) {
+                                currentIndex(dataMenu.indexOf(value));
+                              }
+                            }
 
-                        _selectedPage(context, value.title!);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: Dimens.space12,
-                          horizontal: Dimens.space24,
-                        ),
-                        child: Text(
-                          value.title!,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                            _selectedPage(context, value.title!);
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: Dimens.space12,
+                              horizontal: Dimens.space24,
+                            ),
+                            child: Text(
+                              value.title!,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                )
-                .toList(),
+                    )
+                    .toList(),
+              ),
+            ),
           ), //
           const SpacerH(),
         ],

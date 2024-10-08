@@ -1,6 +1,5 @@
 class ListAPI {
-  // coverage:ignore-line
-  ListAPI._();
+  ListAPI._(); // coverage:ignore-line
 
   /// Auth
   static const String generalToken = "/v1/api/auth/general";

@@ -83,6 +83,20 @@ void main() {
   );
 
   blocTest<UsersCubit, UsersState>(
+    "When call nextPage",
+    build: () {
+      when(mockGetUsers.call(any)).thenAnswer((_) async => Right(users));
+      userCubit.lastPage = 2;
+      return userCubit;
+    },
+    act: (UsersCubit usersCubit) => usersCubit.nextPage(),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      UsersState.success(users),
+    ],
+  );
+
+  blocTest<UsersCubit, UsersState>(
     "When failed to get data from server",
     build: () {
       when(

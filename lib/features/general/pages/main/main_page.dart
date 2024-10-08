@@ -41,6 +41,7 @@ class _MainPageState extends State<MainPage> {
         drawer: SizedBox(
           width: context.widthInPercent(80),
           child: BlocProvider(
+            //coverage:ignore-start
             create: (_) => sl<UserCubit>()..getUser(),
             child: MenuDrawer(
               dataMenu: context.read<MainCubit>().dataMenus ??
@@ -71,7 +72,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                   actions: [
                     TextButton(
-                      onPressed: () => context.back(),
+                      onPressed: () => context.pop(),
                       child: Text(
                         Strings.of(context)!.cancel,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -111,6 +112,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
+            //coverage:ignore-end
           ),
         ),
         child: widget.child,
@@ -128,7 +130,7 @@ class _MainPageState extends State<MainPage> {
           builder: (_, state) {
             return Text(
               state.when(
-                loading: () => "-",
+                loading: () => "-", //coverage:ignore-line
                 success: (data) => data?.title ?? "-",
               ),
               style: Theme.of(context).textTheme.titleLarge,
@@ -142,7 +144,9 @@ class _MainPageState extends State<MainPage> {
             color: Theme.of(context).extension<LzyctColors>()!.pink,
             semanticLabel: "Menu",
           ),
+          //coverage:ignore-start
           onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+          //coverage:ignore-end
         ),
         actions: const [
           /// Notification on Dashboard

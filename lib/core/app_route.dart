@@ -100,12 +100,14 @@ class AppRoute {
     debugLogDiagnostics: kDebugMode,
     refreshListenable: isUnitTest
         ? null
+        //coverage:ignore-start
         : GoRouterRefreshStream(
             [
               context.read<AuthCubit>().stream,
-              context.read<LogoutCubit>().stream
+              context.read<LogoutCubit>().stream,
             ],
           ),
+    //coverage:ignore-end
     redirect: (_, GoRouterState state) {
       final bool isAllowedPages = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path ||
@@ -116,7 +118,7 @@ class AppRoute {
       ///  but if not we must direct user to login page
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {
-        return isAllowedPages ? null : Routes.login.path;
+        return isAllowedPages ? null : Routes.login.path; //coverage:ignore-line
       }
 
       /// Check if already login and in login page

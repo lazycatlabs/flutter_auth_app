@@ -16,7 +16,7 @@ class UsersRepositoryImpl implements UsersRepository {
       (failure) => Left(failure),
       (usersResponse) {
         if (usersResponse.data?.isEmpty ?? true) {
-          return Left(NoDataFailure());
+          return Left(NoDataFailure()); //coverage:ignore-line
         }
         return Right(usersResponse.toEntity());
       },

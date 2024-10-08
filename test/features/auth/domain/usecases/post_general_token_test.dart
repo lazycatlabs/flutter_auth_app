@@ -36,4 +36,24 @@ void main() {
     /// assert
     expect(result, equals(Right(generalToken)));
   });
+
+  test("parse GeneralTokenParams to json", () {
+    /// act
+    final result = generalTokenParams.toJson();
+    final expected = {"clientId": "apimock", "clientSecret": "apimock_secret"};
+
+    /// assert
+    expect(result, equals(expected));
+  });
+
+  test("parse GeneralTokenParams from json", () {
+    /// act
+    final params = GeneralTokenParams.fromJson({
+      "clientId": "apimock",
+      "clientSecret": "apimock_secret",
+    });
+
+    /// assert
+    expect(params, equals(generalTokenParams));
+  });
 }

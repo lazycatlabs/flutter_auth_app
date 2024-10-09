@@ -17,9 +17,9 @@ coverage:
         target: 80%
 
 ignore:
-  - "lib/core/localization/generated/**/*"  # Generated files
-  - "lib/utils/services/firebase/**/*"      # Firebase services
-  - "lib/core/resources/**/*"               # Resources
+  - "lib/core/localization/generated/"  # Generated files
+  - "lib/utils/services/firebase/*"      # Firebase services
+  - "lib/core/resources/*"               # Resources
   - "lib/generated/**/*"  # Generated files
   - "**/*.g.dart"        # Generated files
   - "**/*.freezed.dart"  # Freezed generated files

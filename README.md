@@ -2,6 +2,9 @@
 
 # Flutter App Auth 📱
 
+[![codecov](https://codecov.io/gh/lazycatlabs/flutter_auth_app/main/graph/badge.svg)](https://codecov.io/gh/lazycatlabs/flutter_auth_app)
+
+
 This is an App with Auth Functions like Login, Register and show pagination data.
 
 The API using [apimock](https://apimock.lazycatlabs.com/) from [lazycatlabs](https://lazycatlabs.com).

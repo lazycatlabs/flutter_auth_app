@@ -22,7 +22,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-          flutter-version: '3.24.3' # you can also specify exact version of flutter
+          #flutter-version: '3.24.3' # you can also specify exact version of flutter
 
       # Check Flutter version
       - name: Check Flutter version

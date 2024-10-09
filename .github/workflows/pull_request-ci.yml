@@ -39,3 +39,9 @@ jobs:
       # Run widget tests for our flutter project.
       - name: Run flutter test --machine --coverage
         run: flutter test # For now, just disable flutter test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Add this secret in your repository settings
+          file: coverage/lcov.info

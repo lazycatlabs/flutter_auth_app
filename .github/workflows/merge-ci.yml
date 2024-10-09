@@ -53,7 +53,15 @@ jobs:
           git checkout ${{ steps.branch-name.outputs.current_branch }}
           git commit -am "clean: apply formatting changes"
           git push
+      # Run widget tests for our flutter project.
+      - name: Run flutter test --machine --coverage
+        run: flutter test --machine --coverage
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Add this secret in your repository settings
+          file: coverage/lcov.info
 
       # Build apk.
       #      - name: Build apk file

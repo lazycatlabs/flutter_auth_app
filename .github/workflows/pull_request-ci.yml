@@ -38,7 +38,7 @@ jobs:
 
       # Run widget tests for our flutter project.
       - name: Run flutter test --machine --coverage
-        run: flutter test # For now, just disable flutter test
+        run: flutter test --machine --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4

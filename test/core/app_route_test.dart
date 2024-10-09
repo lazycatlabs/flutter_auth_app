@@ -3,6 +3,7 @@ import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
+import 'package:flutter_auth_app/utils/services/hive/hive.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -53,6 +54,9 @@ void main() {
   testWidgets('Dashboard route builds within shell correctly',
       (WidgetTester tester) async {
     final context = MockBuildContext();
+    //set login as true
+    MainBoxMixin.mainBox?.put(MainBoxKeys.isLogin.name, true);
+
     AppRoute.setStream(context, isTest: true);
     // Create a test app with the router
     await tester.pumpWidget(
@@ -79,7 +83,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pumpAndSettle();
 
-    // expect(find.byType(MainPage), findsOneWidget);
+    expect(find.byType(MainPage), findsOneWidget);
     expect(find.byType(DashboardPage), findsOneWidget);
   });
 }

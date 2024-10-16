@@ -76,7 +76,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     Images.icLauncher,
                     width: context.widthInPercent(70),
                   ),
-                  SpacerV(value: Dimens.space24),
                   _registerForm(),
                 ],
               ),

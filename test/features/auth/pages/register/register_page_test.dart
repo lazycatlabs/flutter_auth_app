@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -80,16 +81,18 @@ void main() {
           .thenReturn(const ReloadFormState.formUpdated());
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 500));
 
-      await tester.drag(
+      await tester.dragUntilVisible(
+        find.byKey(const Key('name')),
         find.byType(SingleChildScrollView),
-        const Offset(0, -500),
+        const Offset(0, 50),
       );
 
       /// validate name
       await tester.tap(find.byKey(const Key('name')));
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pump(const Duration(milliseconds: 500));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
       expect(find.text("Can't be empty"), findsOneWidget);
 

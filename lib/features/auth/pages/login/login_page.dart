@@ -68,13 +68,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Theme.of(context).hintColor,
-                      radius: Dimens.profilePicture + Dimens.space4,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(Images.icLauncher),
-                        radius: Dimens.profilePicture,
-                      ),
+                    Image.asset(
+                      Images.icLauncher,
+                      width: context.widthInPercent(70),
                     ),
                     SpacerV(value: Dimens.space50),
                     _loginForm(),

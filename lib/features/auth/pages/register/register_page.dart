@@ -72,15 +72,11 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    backgroundColor: Theme.of(context).hintColor,
-                    radius: Dimens.profilePicture + Dimens.space4,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(Images.icLauncher),
-                      radius: Dimens.profilePicture,
-                    ),
+                  Image.asset(
+                    Images.icLauncher,
+                    width: context.widthInPercent(70),
                   ),
-                  SpacerV(value: Dimens.space50),
+                  SpacerV(value: Dimens.space24),
                   _registerForm(),
                 ],
               ),

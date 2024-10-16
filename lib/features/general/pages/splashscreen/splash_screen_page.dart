@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,13 +23,9 @@ class SplashScreenPage extends StatelessWidget {
         child: ColoredBox(
           color: Theme.of(context).extension<LzyctColors>()!.background!,
           child: Center(
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).hintColor,
-              radius: Dimens.menu + Dimens.space6,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(Images.icLauncher),
-                radius: Dimens.menu,
-              ),
+            child: Image.asset(
+              Images.icLauncher,
+              width: context.widthInPercent(70),
             ),
           ),
         ),

@@ -57,6 +57,10 @@ flutter run --flavor prd -t lib/main.dart --dart-define-from-file .env.prd.json
 ```bash
 dart run flutter_launcher_icons 
 ```
+- To generate native splash screen
+```bash
+dart run flutter_native_splash:create --flavors stg,prd
+```
 - To generate mock class
 ```bash
 dart pub run build_runner build

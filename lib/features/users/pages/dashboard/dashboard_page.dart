@@ -41,7 +41,8 @@ class _DashboardPageState extends State<DashboardPage> {
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (_, state) {
             return state.when(
-              initial: () => const SizedBox.shrink(), //coverage:ignore-line
+              initial: () => const SizedBox.shrink(),
+              //coverage:ignore-line
               loading: () => const Center(child: Loading()),
               success: (data) {
                 return ListView.builder(
@@ -104,31 +105,28 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 Text(
                   user.email ?? "",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .extension<LzyctColors>()!
-                            .subtitle,
-                      ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: Theme.of(context).hintColor),
                 ),
                 const SpacerV(),
                 Row(
                   children: [
                     Text(
                       Strings.of(context)!.lastUpdate,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Theme.of(context)
-                                .extension<LzyctColors>()!
-                                .subtitle,
-                          ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.copyWith(color: Theme.of(context).hintColor),
                     ),
                     Flexible(
                       child: Text(
                         (user.updatedAt ?? "").toStringDateAlt(),
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: Theme.of(context)
-                                  .extension<LzyctColors>()!
-                                  .subtitle,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelSmall
+                            ?.copyWith(color: Theme.of(context).hintColor),
                         textAlign: TextAlign.end,
                       ),
                     ),

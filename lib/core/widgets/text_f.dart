@@ -230,9 +230,10 @@ class TextFState extends State<TextF> {
           hintText: widget.hint,
           floatingLabelBehavior:
               widget.hint != null ? FloatingLabelBehavior.always : null,
-          hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).extension<LzyctColors>()!.subtitle,
-              ),
+          hintStyle: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(color: Theme.of(context).hintColor),
         ),
         onChanged: (String value) =>
             _debouncer.run(() => widget.validatorListener?.call(value)),

@@ -64,7 +64,10 @@ class _MainPageState extends State<MainPage> {
                 builder: (_) => AlertDialog(
                   title: Text(
                     Strings.of(context)!.logout,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color:
+                              Theme.of(context).extension<LzyctColors>()!.red,
+                        ),
                   ),
                   content: Text(
                     Strings.of(context)!.logoutDesc,
@@ -75,11 +78,10 @@ class _MainPageState extends State<MainPage> {
                       onPressed: () => context.pop(),
                       child: Text(
                         Strings.of(context)!.cancel,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context)
-                                  .extension<LzyctColors>()!
-                                  .subtitle,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Theme.of(context).hintColor),
                       ),
                     ),
                     BlocListener<LogoutCubit, LogoutState>(
@@ -141,7 +143,6 @@ class _MainPageState extends State<MainPage> {
           icon: Icon(
             Icons.sort,
             size: Dimens.space24,
-            color: Theme.of(context).extension<LzyctColors>()!.pink,
             semanticLabel: "Menu",
           ),
           //coverage:ignore-start

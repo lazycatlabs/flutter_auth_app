@@ -107,7 +107,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Palette.primaryLight,
+                    color: Palette.secondary,
                   ),
                 ),
                 Transform.translate(

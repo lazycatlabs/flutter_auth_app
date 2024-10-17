@@ -52,7 +52,9 @@ class MenuDrawer extends StatelessWidget {
                                   .textTheme
                                   .titleLargeBold
                                   ?.copyWith(
-                                    color: Theme.of(context).primaryColor,
+                                    color: Theme.of(context)
+                                        .extension<LzyctColors>()!
+                                        .subtitle,
                                   ),
                             ),
                             Text(
@@ -61,7 +63,9 @@ class MenuDrawer extends StatelessWidget {
                                   .textTheme
                                   .bodySmall
                                   ?.copyWith(
-                                    color: Theme.of(context).hintColor,
+                                    color: Theme.of(context)
+                                        .extension<LzyctColors>()!
+                                        .subtitle,
                                   ),
                             ),
                           ],

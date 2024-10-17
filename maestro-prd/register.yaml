@@ -1,0 +1,16 @@
+appId: com.lazycatlabs.auths
+---
+- tapOn: "DON'T HAVE AN ACCOUNT?"
+- tapOn: "Name"
+- inputText: "Mudassir"
+- tapOn: "Email"
+- inputText: "mudassir@lazycatlabs.com"
+- tapOn: "password\nPassword"
+- inputText: "pass123"
+- tapOn:
+    point: "50%,38%"
+- tapOn: "repeat_password\nRepeat Password"
+- inputText: "pass123"
+- tapOn:
+    point: "50%,38%"
+- tapOn: "REGISTER"

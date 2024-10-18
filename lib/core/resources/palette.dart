@@ -54,19 +54,21 @@ import 'package:flutter/material.dart';
 class Palette {
   Palette._();
 
-  static const Color primary = Color(0xffE18925);
-  static const Color primaryLight = Color(0xffF7B553);
+  static const Color primary = Color(0xffFF7043);
+  static const Color secondary = Color(0xff00838F);
 
-  static const Color background = Color(0xffeff1f5);
-  static const Color backgroundDark = Color(0xff1e1e2e);
-  static const Color card = Color(0xffccd0da);
-  static const Color cardDark = Color(0xff313244);
-  static const Color text = Color(0xff4c4f69);
-  static const Color textDark = Color(0xffcdd6f4);
-  static const Color subText = Color(0xff9ca0b0);
-  static const Color subTextDark = Color(0xff6c7086);
+  static const Color background = Color(0xffffffff);
+  static const Color backgroundDark = Color(0xff0D0D0D);
+  static const Color card = primary;
+  static const Color cardDark = primary;
+  static const Color text = Color(0xff0D0D0D);
+  static const Color textDark = Color(0xffffffff);
+  static const Color subText = Color(0xff757575);
+  static const Color subTextDark = Color(0xffB0BEC5);
   static const Color shadow = Color(0xff8c8fa1);
   static const Color shadowDark = Color(0xff7f849c);
+  static const Color banner = backgroundDark;
+  static const Color bannerDark = background;
 
   static const Color redMocha = Color(0xfff38ba8);
   static const Color greenMocha = Color(0xffa6e3a1);

@@ -16,10 +16,20 @@ class UsersRepositoryImpl implements UsersRepository {
       (failure) => Left(failure),
       (usersResponse) {
         if (usersResponse.data?.isEmpty ?? true) {
-          return Left(NoDataFailure());
+          return Left(NoDataFailure()); //coverage:ignore-line
         }
         return Right(usersResponse.toEntity());
       },
+    );
+  }
+
+  @override
+  Future<Either<Failure, User>> user() async {
+    final response = await usersRemoteDatasource.user();
+
+    return response.fold(
+      (failure) => Left(failure),
+      (userResponse) => Right(userResponse.toEntity()),
     );
   }
 }

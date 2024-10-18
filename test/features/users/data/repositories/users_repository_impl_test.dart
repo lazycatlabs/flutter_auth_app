@@ -19,6 +19,7 @@ void main() {
   late MockUsersRemoteDatasource mockUsersRemoteDatasource;
   late UsersRepositoryImpl authRepositoryImpl;
   late Users users;
+  late User user;
 
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -30,45 +31,49 @@ void main() {
     mockUsersRemoteDatasource = MockUsersRemoteDatasource();
     authRepositoryImpl = UsersRepositoryImpl(mockUsersRemoteDatasource);
     users = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
+    ).toEntity();
+    user = UserResponse.fromJson(
+      json.decode(jsonReader(pathUserResponse200)) as Map<String, dynamic>,
     ).toEntity();
   });
 
-  group("user", () {
-    const userParams = UsersParams();
-    const userParamsEmpty = UsersParams(page: 3);
+  group("users", () {
+    const usersParams = UsersParams();
+    const usersParamsEmpty = UsersParams(page: 3);
 
-    test('should return list user when call data is successful', () async {
+    test('should return list users when call data is successful', () async {
       // arrange
-      when(mockUsersRemoteDatasource.users(userParams)).thenAnswer(
+      when(mockUsersRemoteDatasource.users(usersParams)).thenAnswer(
         (_) async => Right(
           UsersResponse.fromJson(
-            json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+            json.decode(jsonReader(pathUsersResponse200))
+                as Map<String, dynamic>,
           ),
         ),
       );
 
       // act
-      final result = await authRepositoryImpl.users(userParams);
+      final result = await authRepositoryImpl.users(usersParams);
 
       // assert
-      verify(mockUsersRemoteDatasource.users(userParams));
+      verify(mockUsersRemoteDatasource.users(usersParams));
       expect(result, equals(Right(users)));
     });
 
     test(
-      'should return empty list user when call data is successful',
+      'should return empty list users when call data is successful',
       () async {
         // arrange
-        when(mockUsersRemoteDatasource.users(userParamsEmpty)).thenAnswer(
+        when(mockUsersRemoteDatasource.users(usersParamsEmpty)).thenAnswer(
           (_) async => Left(NoDataFailure()),
         );
 
         // act
-        final result = await authRepositoryImpl.users(userParamsEmpty);
+        final result = await authRepositoryImpl.users(usersParamsEmpty);
 
         // assert
-        verify(mockUsersRemoteDatasource.users(userParamsEmpty));
+        verify(mockUsersRemoteDatasource.users(usersParamsEmpty));
         expect(result, equals(Left(NoDataFailure())));
       },
     );
@@ -77,14 +82,68 @@ void main() {
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
-        when(mockUsersRemoteDatasource.users(userParams))
+        when(mockUsersRemoteDatasource.users(usersParams))
             .thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
-        final result = await authRepositoryImpl.users(userParams);
+        final result = await authRepositoryImpl.users(usersParams);
 
         // assert
-        verify(mockUsersRemoteDatasource.users(userParams));
+        verify(mockUsersRemoteDatasource.users(usersParams));
+        expect(result, equals(const Left(ServerFailure(''))));
+      },
+    );
+  });
+
+  group("user", () {
+    test('should return list users when call data is successful', () async {
+      // arrange
+      when(mockUsersRemoteDatasource.user()).thenAnswer(
+        (_) async => Right(
+          UserResponse.fromJson(
+            json.decode(jsonReader(pathUserResponse200))
+                as Map<String, dynamic>,
+          ),
+        ),
+      );
+
+      // act
+      final result = await authRepositoryImpl.user();
+
+      // assert
+      verify(mockUsersRemoteDatasource.user());
+      expect(result, equals(Right(user)));
+    });
+
+    test(
+      'should return empty list users when call data is successful',
+      () async {
+        // arrange
+        when(mockUsersRemoteDatasource.user()).thenAnswer(
+          (_) async => Left(NoDataFailure()),
+        );
+
+        // act
+        final result = await authRepositoryImpl.user();
+
+        // assert
+        verify(mockUsersRemoteDatasource.user());
+        expect(result, equals(Left(NoDataFailure())));
+      },
+    );
+
+    test(
+      'should return server failure when call data is unsuccessful',
+      () async {
+        // arrange
+        when(mockUsersRemoteDatasource.user())
+            .thenAnswer((_) async => const Left(ServerFailure('')));
+
+        // act
+        final result = await authRepositoryImpl.user();
+
+        // assert
+        verify(mockUsersRemoteDatasource.user());
         expect(result, equals(const Left(ServerFailure(''))));
       },
     );

@@ -1,0 +1,26 @@
+# codecov.yml
+codecov:
+  require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+  status:
+    project:
+      default:
+        target: 80%    # the required coverage value
+        threshold: 1%  # the leniency in hitting the target
+    patch:
+      default:
+        target: 80%
+
+ignore:
+  - "lib/core/localization/generated/"  # Generated files
+  - "lib/utils/services/firebase/*"      # Firebase services
+  - "lib/core/resources/*"               # Resources
+  - "lib/generated/**/*"  # Generated files
+  - "**/*.g.dart"        # Generated files
+  - "**/*.freezed.dart"  # Freezed generated files
+  

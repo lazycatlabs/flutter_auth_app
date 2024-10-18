@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
@@ -66,13 +68,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Theme.of(context).hintColor,
-                      radius: Dimens.profilePicture + Dimens.space4,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(Images.icLauncher),
-                        radius: Dimens.profilePicture,
-                      ),
+                    Image.asset(
+                      Images.icLauncher,
+                      width: context.widthInPercent(70),
                     ),
                     SpacerV(value: Dimens.space50),
                     _loginForm(),
@@ -108,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   Icons.alternate_email,
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
-                hint: "eve.holt@reqres.in",
+                hint: "mudassir@lazycatlabs.com",
                 label: Strings.of(context)!.email,
                 isValid: _formValidator.putIfAbsent(
                   "email",
@@ -132,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
                 obscureText: !_isPasswordVisible,
-                hint: '••••••••••••',
+                hint: 'pass123',
                 label: Strings.of(context)!.password,
                 suffixIcon: IconButton(
                   padding: EdgeInsets.zero,
@@ -166,6 +164,8 @@ class _LoginPageState extends State<LoginPage> {
                           LoginParams(
                             email: _conEmail.text,
                             password: _conPassword.text,
+                            osInfo: Platform.operatingSystem,
+                            deviceInfo: Platform.localHostname,
                           ),
                         )
                     : null,

@@ -11,7 +11,7 @@ import 'package:flutter/src/widgets/framework.dart' as _i3;
 import 'package:flutter/src/widgets/notification_listener.dart' as _i9;
 import 'package:flutter_auth_app/core/core.dart' as _i7;
 import 'package:flutter_auth_app/features/auth/auth.dart' as _i5;
-import 'package:flutter_auth_app/features/users/users.dart' as _i8;
+import 'package:flutter_auth_app/features/features.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -94,39 +94,74 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Login>> login(
-          _i5.LoginParams? loginParams) =>
+          _i5.LoginParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [loginParams],
+          [params],
         ),
         returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>.value(
             _FakeEither_0<_i7.Failure, _i5.Login>(
           this,
           Invocation.method(
             #login,
-            [loginParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Register>> register(
-          _i5.RegisterParams? registerParams) =>
+          _i5.RegisterParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
-          [registerParams],
+          [params],
         ),
         returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>.value(
             _FakeEither_0<_i7.Failure, _i5.Register>(
           this,
           Invocation.method(
             #register,
-            [registerParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>> generalToken(
+          _i5.GeneralTokenParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generalToken,
+          [params],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>.value(
+                _FakeEither_0<_i7.Failure, _i5.GeneralToken>(
+          this,
+          Invocation.method(
+            #generalToken,
+            [params],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, String>> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, String>>.value(
+            _FakeEither_0<_i7.Failure, String>(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, String>>);
 }
 
 /// A class which mocks [AuthRemoteDatasource].
@@ -140,11 +175,11 @@ class MockAuthRemoteDatasource extends _i1.Mock
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>> register(
-          _i5.RegisterParams? registerParams) =>
+          _i5.RegisterParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #register,
-          [registerParams],
+          [params],
         ),
         returnValue:
             _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>.value(
@@ -152,18 +187,18 @@ class MockAuthRemoteDatasource extends _i1.Mock
           this,
           Invocation.method(
             #register,
-            [registerParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>> login(
-          _i5.LoginParams? loginParams) =>
+          _i5.LoginParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [loginParams],
+          [params],
         ),
         returnValue:
             _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>.value(
@@ -171,10 +206,47 @@ class MockAuthRemoteDatasource extends _i1.Mock
           this,
           Invocation.method(
             #login,
-            [loginParams],
+            [params],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>> generalToken(
+          _i5.GeneralTokenParams? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generalToken,
+          [params],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>.value(
+                _FakeEither_0<_i7.Failure, _i5.GeneralTokenResponse>(
+          this,
+          Invocation.method(
+            #generalToken,
+            [params],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>> logout() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>.value(
+                _FakeEither_0<_i7.Failure, _i8.DiagnosticResponse>(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>);
 }
 
 /// A class which mocks [UsersRepository].
@@ -202,6 +274,22 @@ class MockUsersRepository extends _i1.Mock implements _i8.UsersRepository {
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.Users>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.User>> user() => (super.noSuchMethod(
+        Invocation.method(
+          #user,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.User>>.value(
+            _FakeEither_0<_i7.Failure, _i8.User>(
+          this,
+          Invocation.method(
+            #user,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.User>>);
 }
 
 /// A class which mocks [UsersRemoteDatasource].
@@ -231,6 +319,24 @@ class MockUsersRemoteDatasource extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>> user() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #user,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>.value(
+                _FakeEither_0<_i7.Failure, _i8.UserResponse>(
+          this,
+          Invocation.method(
+            #user,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>);
 }
 
 /// A class which mocks [BuildContext].

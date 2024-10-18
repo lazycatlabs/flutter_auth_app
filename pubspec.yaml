@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.0.0
+  sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
   flutter:
@@ -37,14 +37,14 @@ dependencies:
   dartz: ^0.10.1
 
   # Use as Network Client
-  dio: ^5.5.0+1
+  dio: ^5.7.0
 
   # Use hive to save local data
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
   # Use for Dependencies Injection
-  get_it: ^7.7.0
+  get_it: ^8.0.0
 
   # Use for State Management with BLoC pattern
   flutter_bloc: ^8.1.6
@@ -56,18 +56,18 @@ dependencies:
   # Use for responsive UI, set default size base on Mock Up
   flutter_screenutil: ^5.9.3
 
-  cached_network_image: ^3.3.1
+  cached_network_image: ^3.4.1
 
   # logger
   logger: ^2.4.0
 
   # Firebase
-  firebase_core: ^3.2.0
-  firebase_analytics: ^11.2.0
-  firebase_crashlytics: ^4.0.3
+  firebase_core: ^3.6.0
+  firebase_analytics: ^11.3.3
+  firebase_crashlytics: ^4.1.3
 
   # router
-  go_router: ^14.2.1
+  go_router: ^14.3.0
 
   # Freezed
   freezed_annotation: ^2.4.4
@@ -75,16 +75,18 @@ dependencies:
 
   flutter_native_splash: ^2.4.1
 
+  intl: ^0.19.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.1
   #Remove unused files
 #  dart_code_metrics: ^4.21.0
   lint: ^2.3.0
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   bloc_test: ^9.1.7
-  build_runner: ^2.4.11
+  build_runner: ^2.4.13
   http_mock_adapter: ^0.6.1
 
   #Temporary using old version because error when generate build_runner
@@ -98,7 +100,7 @@ dev_dependencies:
   hive_generator: ^2.0.1
 
 dependency_overrides:
-  meta: ^1.15.0
+  meta: ^1.16.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

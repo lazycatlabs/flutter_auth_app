@@ -8,7 +8,7 @@ typedef ResponseConverter<T> = T Function(dynamic response);
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
   String baseUrl = const String.fromEnvironment("BASE_URL");
 
-  String? _auth;
+  String? _token;
   bool _isUnitTest = false;
   late Dio _dio;
 
@@ -16,13 +16,16 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     _isUnitTest = isUnitTest;
 
     try {
-      _auth = getData(MainBoxKeys.token);
+      _token = token();
     } catch (_) {}
 
     _dio = _createDio();
 
     if (!_isUnitTest) _dio.interceptors.add(DioInterceptor());
   }
+
+  String token() =>
+      getData(MainBoxKeys.authToken) ?? getData(MainBoxKeys.generalToken);
 
   Dio get dio {
     if (_isUnitTest) {
@@ -31,7 +34,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     } else {
       /// We need to recreate dio to avoid token issue after login
       try {
-        _auth = getData(MainBoxKeys.token);
+        _token = token();
       } catch (_) {}
 
       final dio = _createDio();
@@ -48,8 +51,8 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            if (_auth != null) ...{
-              'Authorization': _auth,
+            if (_token != null) ...{
+              'Authorization': _token,
             },
           },
           receiveTimeout: const Duration(minutes: 1),
@@ -86,14 +89,18 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
-      if (!_isUnitTest) {
-        nonFatalError(error: e, stackTrace: stackTrace);
+      try {
+        if (!_isUnitTest) {
+          nonFatalError(error: e, stackTrace: stackTrace);
+        }
+        return Left(
+          ServerFailure(
+            e.response?.data['diagnostic']['message'] as String? ?? e.message,
+          ),
+        );
+      } catch (e) {
+        return Left(ServerFailure(e.toString()));
       }
-      return Left(
-        ServerFailure(
-          e.response?.data['error'] as String? ?? e.message,
-        ),
-      );
     }
   }
 
@@ -123,14 +130,18 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
-      if (!_isUnitTest) {
-        nonFatalError(error: e, stackTrace: stackTrace);
+      try {
+        if (!_isUnitTest) {
+          nonFatalError(error: e, stackTrace: stackTrace);
+        }
+        return Left(
+          ServerFailure(
+            e.response?.data['diagnostic']['message'] as String? ?? e.message,
+          ),
+        );
+      } catch (e) {
+        return Left(ServerFailure(e.toString()));
       }
-      return Left(
-        ServerFailure(
-          e.response?.data['error'] as String? ?? e.message,
-        ),
-      );
     }
   }
 }

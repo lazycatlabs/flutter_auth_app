@@ -11,7 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -95,7 +94,7 @@ void main() {
   testWidgets(
     'renders LoginPage for form validation fill email',
     (tester) async {
-      const email = "hey.mudassir@gmail.com";
+      const email = "mudassir@lazycatlabs.com";
 
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
       when(() => authCubit.login(any())).thenAnswer((_) async {});
@@ -136,7 +135,7 @@ void main() {
   testWidgets(
     'renders LoginPage for form validation fill email,password and call login cubit',
     (tester) async {
-      const email = "test@gmail.com";
+      const email = "mudassir@lazycatlabs.com";
       const password = "password";
 
       when(() => authCubit.state).thenReturn(const AuthState.success(null));

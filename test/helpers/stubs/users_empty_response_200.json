@@ -1,0 +1,13 @@
+{
+  "diagnostic": {
+    "status": "200",
+    "message": "Success"
+  },
+  "data": [],
+  "page": {
+    "currentPage": 1,
+    "perPage": 0,
+    "lastPage": 1,
+    "total": 0
+  }
+}

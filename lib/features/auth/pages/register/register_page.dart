@@ -16,6 +16,7 @@ import 'package:go_router/go_router.dart';
 /// 🌐 : https://www.lazycatlabs.com
 ///*********************************************
 /// © 2021 | All Right Reserved
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -25,11 +26,13 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   /// Controller
+  final _conName = TextEditingController();
   final _conEmail = TextEditingController();
   final _conPassword = TextEditingController();
   final _conPasswordRepeat = TextEditingController();
 
   /// Focus Node
+  final _fnName = FocusNode();
   final _fnEmail = FocusNode();
   final _fnPassword = FocusNode();
   final _fnPasswordRepeat = FocusNode();
@@ -51,6 +54,8 @@ class _RegisterPageState extends State<RegisterPage> {
             success: (data) {
               context.dismiss();
 
+              data?.message?.toToastSuccess(context);
+
               /// back to login page after register success
               context.pop();
             },
@@ -67,15 +72,10 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    backgroundColor: Theme.of(context).hintColor,
-                    radius: Dimens.profilePicture + Dimens.space4,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(Images.icLauncher),
-                      radius: Dimens.profilePicture,
-                    ),
+                  Image.asset(
+                    Images.icLauncher,
+                    width: context.widthInPercent(70),
                   ),
-                  SpacerV(value: Dimens.space50),
                   _registerForm(),
                 ],
               ),
@@ -92,6 +92,28 @@ class _RegisterPageState extends State<RegisterPage> {
         return Column(
           children: [
             TextF(
+              key: const Key("name"),
+              focusNode: _fnName,
+              textInputAction: TextInputAction.next,
+              controller: _conName,
+              keyboardType: TextInputType.emailAddress,
+              prefixIcon: Icon(
+                Icons.person,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
+              hint: 'Mudassir',
+              label: Strings.of(context)!.name,
+              isValid: _formValidator.putIfAbsent(
+                "name",
+                () => false,
+              ),
+              validatorListener: (String value) {
+                _formValidator["name"] = value.isNotEmpty;
+                context.read<ReloadFormCubit>().reload();
+              },
+              errorMessage: Strings.of(context)!.errorEmptyField,
+            ),
+            TextF(
               key: const Key("email"),
               focusNode: _fnEmail,
               textInputAction: TextInputAction.next,
@@ -101,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Icons.alternate_email,
                 color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
-              hint: 'johndoe@gmail.com',
+              hint: 'mudassir@lazycatlabs.com',
               label: Strings.of(context)!.email,
               isValid: _formValidator.putIfAbsent(
                 "email",
@@ -195,6 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       /// Validate form first
                       context.read<RegisterCubit>().register(
                             RegisterParams(
+                              name: _conName.text,
                               email: _conEmail.text,
                               password: _conPassword.text,
                             ),

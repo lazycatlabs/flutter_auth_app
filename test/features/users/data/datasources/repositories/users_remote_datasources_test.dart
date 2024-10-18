@@ -28,13 +28,14 @@ void main() {
     dataSource = UsersRemoteDatasourceImpl(sl<DioClient>());
   });
 
-  group('user', () {
+  group('users', () {
     const usersParams = UsersParams();
     final usersModel = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     );
     final usersEmptyModel = UsersResponse.fromJson(
-      json.decode(jsonReader(emptyUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersEmptyResponse200))
+          as Map<String, dynamic>,
     );
 
     test(
@@ -45,7 +46,7 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(successUserPath)),
+            json.decode(jsonReader(pathUsersResponse200)),
           ),
           queryParameters: usersParams.toJson(),
         );
@@ -69,7 +70,7 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(emptyUserPath)),
+            json.decode(jsonReader(pathUsersEmptyResponse200)),
           ),
           queryParameters: usersParams.toJson(),
         );
@@ -93,13 +94,65 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             400,
-            json.decode(jsonReader(successUserPath)),
+            json.decode(jsonReader(pathUsersResponse200)),
           ),
           queryParameters: usersParams.toJson(),
         );
 
         /// act
         final result = await dataSource.users(usersParams);
+
+        /// assert
+        result.fold(
+          (l) => expect(l, isA<ServerFailure>()),
+          (r) => expect(r, null),
+        );
+      },
+    );
+  });
+
+  group('user', () {
+    final userModel = UserResponse.fromJson(
+      json.decode(jsonReader(pathUserResponse200)) as Map<String, dynamic>,
+    );
+
+    test(
+      'should return list user success model when response code is 200',
+      () async {
+        /// arrange
+        dioAdapter.onGet(
+          ListAPI.user,
+          (server) => server.reply(
+            200,
+            json.decode(jsonReader(pathUserResponse200)),
+          ),
+        );
+
+        /// act
+        final result = await dataSource.user();
+
+        /// assert
+        result.fold(
+          (l) => expect(l, null),
+          (r) => expect(r, userModel),
+        );
+      },
+    );
+
+    test(
+      'should return user unsuccessful model when response code is 400',
+      () async {
+        /// arrange
+        dioAdapter.onGet(
+          ListAPI.user,
+          (server) => server.reply(
+            400,
+            json.decode(jsonReader(pathUsersResponse200)),
+          ),
+        );
+
+        /// act
+        final result = await dataSource.user();
 
         /// assert
         result.fold(

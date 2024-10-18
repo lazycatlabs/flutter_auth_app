@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 
+// coverage:ignore-start
 class DioInterceptor extends Interceptor with FirebaseCrashLogger {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -65,3 +66,4 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
     super.onResponse(response, handler);
   }
 }
+// coverage:ignore-end

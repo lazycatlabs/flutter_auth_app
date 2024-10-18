@@ -24,8 +24,8 @@ void main() {
   late MockPostLogin mockPostLogin;
 
   const loginParams = LoginParams(
-    email: "dummy@gmail.com",
-    password: "dummyPassword",
+    email: "mudassir@lazycatlabs.com",
+    password: "pass123",
   );
   const errorMessage = "Wrong username or password";
 
@@ -35,16 +35,14 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'auth_cubit_test_');
     login = LoginResponse.fromJson(
-      json.decode(jsonReader(successLoginPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockPostLogin = MockPostLogin();
     authCubit = AuthCubit(mockPostLogin);
   });
 
   /// Dispose bloc
-  tearDown(() {
-    authCubit.close();
-  });
+  tearDown(() => authCubit.close());
 
   ///  Initial data should be loading
   test("Initial data should be AuthStatus.loading", () {

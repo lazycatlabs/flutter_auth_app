@@ -1,8 +1,12 @@
 class ListAPI {
-  ListAPI._();
+  ListAPI._(); // coverage:ignore-line
 
-  static const String register = "/api/register";
+  /// Auth
+  static const String generalToken = "/v1/api/auth/general";
+  static const String user = "/v1/api/user";
+  static const String login = "/v1/api/auth/login";
+  static const String logout = "/v1/api/auth/logout";
 
-  static const String login = "/api/login";
-  static const String users = "/api/users";
+  /// User
+  static const String users = "/v1/api/user/all";
 }

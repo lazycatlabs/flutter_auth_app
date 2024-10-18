@@ -34,7 +34,7 @@ void main() {
     await serviceLocator(isUnitTest: true, prefixBox: 'users_cubit_test_');
 
     users = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     ).toEntity();
     mockGetUsers = MockGetUsers();
     userCubit = UsersCubit(mockGetUsers);
@@ -76,7 +76,24 @@ void main() {
     },
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
-    expect: () => [UsersState.success(users)],
+    expect: () => [
+      const UsersState.loading(),
+      UsersState.success(users),
+    ],
+  );
+
+  blocTest<UsersCubit, UsersState>(
+    "When call nextPage",
+    build: () {
+      when(mockGetUsers.call(any)).thenAnswer((_) async => Right(users));
+      userCubit.lastPage = 2;
+      return userCubit;
+    },
+    act: (UsersCubit usersCubit) => usersCubit.nextPage(),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      UsersState.success(users),
+    ],
   );
 
   blocTest<UsersCubit, UsersState>(
@@ -107,6 +124,7 @@ void main() {
     act: (UsersCubit usersCubit) => usersCubit.fetchUsers(dummyUsersRequest2),
     wait: const Duration(milliseconds: 100),
     expect: () => [
+      const UsersState.loading(),
       const UsersState.empty(),
     ],
   );
@@ -119,7 +137,7 @@ void main() {
 
       return UsersCubit(mockGetUsers);
     },
-    act: (UsersCubit usersCubit) => usersCubit.refreshUsers(dummyUsersRequest1),
+    act: (UsersCubit usersCubit) => usersCubit.refresh(),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       const UsersState.loading(),

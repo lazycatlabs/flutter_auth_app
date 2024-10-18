@@ -25,5 +25,7 @@
   "errorNoData": "No data",
   "logout": "Logout",
   "logoutDesc": "Do you want to logout from the app?",
-  "yes": "Yes"
+  "yes": "Yes",
+  "lastUpdate": "Last Update: ",
+  "name": "Name"
 }

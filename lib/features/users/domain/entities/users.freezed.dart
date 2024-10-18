@@ -191,6 +191,8 @@ mixin _$User {
   String? get name => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  bool? get isVerified => throw _privateConstructorUsedError;
+  String? get updatedAt => throw _privateConstructorUsedError;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -203,7 +205,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String? name, String? avatar, String? email});
+  $Res call(
+      {String? name,
+      String? avatar,
+      String? email,
+      bool? isVerified,
+      String? updatedAt});
 }
 
 /// @nodoc
@@ -224,6 +231,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = freezed,
     Object? avatar = freezed,
     Object? email = freezed,
+    Object? isVerified = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -238,6 +247,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -249,7 +266,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? avatar, String? email});
+  $Res call(
+      {String? name,
+      String? avatar,
+      String? email,
+      bool? isVerified,
+      String? updatedAt});
 }
 
 /// @nodoc
@@ -267,6 +289,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? avatar = freezed,
     Object? email = freezed,
+    Object? isVerified = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$UserImpl(
       name: freezed == name
@@ -281,6 +305,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -288,7 +320,8 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserImpl implements _User {
-  const _$UserImpl({this.name, this.avatar, this.email});
+  const _$UserImpl(
+      {this.name, this.avatar, this.email, this.isVerified, this.updatedAt});
 
   @override
   final String? name;
@@ -296,10 +329,14 @@ class _$UserImpl implements _User {
   final String? avatar;
   @override
   final String? email;
+  @override
+  final bool? isVerified;
+  @override
+  final String? updatedAt;
 
   @override
   String toString() {
-    return 'User(name: $name, avatar: $avatar, email: $email)';
+    return 'User(name: $name, avatar: $avatar, email: $email, isVerified: $isVerified, updatedAt: $updatedAt)';
   }
 
   @override
@@ -309,11 +346,16 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, avatar, email);
+  int get hashCode =>
+      Object.hash(runtimeType, name, avatar, email, isVerified, updatedAt);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -328,7 +370,9 @@ abstract class _User implements User {
   const factory _User(
       {final String? name,
       final String? avatar,
-      final String? email}) = _$UserImpl;
+      final String? email,
+      final bool? isVerified,
+      final String? updatedAt}) = _$UserImpl;
 
   @override
   String? get name;
@@ -336,6 +380,10 @@ abstract class _User implements User {
   String? get avatar;
   @override
   String? get email;
+  @override
+  bool? get isVerified;
+  @override
+  String? get updatedAt;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

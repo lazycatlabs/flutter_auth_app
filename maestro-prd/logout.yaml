@@ -1,0 +1,5 @@
+appId: com.lazycatlabs.auths
+---
+- tapOn: "Menu"
+- tapOn: "Logout"
+- tapOn: "Yes"

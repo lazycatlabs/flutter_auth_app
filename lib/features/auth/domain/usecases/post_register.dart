@@ -19,8 +19,9 @@ class PostRegister extends UseCase<Register, RegisterParams> {
 @freezed
 class RegisterParams with _$RegisterParams {
   const factory RegisterParams({
-    @Default("") String email,
-    @Default("") String password,
+    String? name,
+    String? email,
+    String? password,
   }) = _RegisterParams;
 
   factory RegisterParams.fromJson(Map<String, dynamic> json) =>

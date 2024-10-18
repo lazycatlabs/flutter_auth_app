@@ -12,8 +12,8 @@ jobs:
     steps:
 
       # Setup Java environment in order to build the Android app.
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v4.2.0
+      - uses: actions/setup-java@v4.2.2
         with:
           distribution: 'zulu' # See 'Supported distributions' for available options
           java-version: '17'
@@ -22,7 +22,11 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+          #flutter-version: '3.24.3' # you can also specify exact version of flutter
+
+      # Check Flutter version
+      - name: Check Flutter version
+        run: flutter doctor -v
 
       # Get flutter dependencies.
       - name: Run initialize flutter project
@@ -33,5 +37,11 @@ jobs:
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       # Run widget tests for our flutter project.
-      - name: Run flutter test
-        run: flutter test # For now, just disable flutter test
+      - name: Run flutter test --machine --coverage
+        run: flutter test --machine --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Add this secret in your repository settings
+          file: coverage/lcov.info

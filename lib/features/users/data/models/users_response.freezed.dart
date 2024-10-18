@@ -20,15 +20,12 @@ UsersResponse _$UsersResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UsersResponse {
-  int? get page => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_page')
-  int? get perPage => throw _privateConstructorUsedError;
-  int? get total => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_pages')
-  int? get totalPages => throw _privateConstructorUsedError;
+  @JsonKey(name: "diagnostic")
+  Diagnostic? get diagnostic => throw _privateConstructorUsedError;
+  @JsonKey(name: "data")
   List<DataUser>? get data => throw _privateConstructorUsedError;
-  SupportUser? get support => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  @JsonKey(name: "page")
+  Page? get page => throw _privateConstructorUsedError;
 
   /// Serializes this UsersResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,15 +44,12 @@ abstract class $UsersResponseCopyWith<$Res> {
       _$UsersResponseCopyWithImpl<$Res, UsersResponse>;
   @useResult
   $Res call(
-      {int? page,
-      @JsonKey(name: 'per_page') int? perPage,
-      int? total,
-      @JsonKey(name: 'total_pages') int? totalPages,
-      List<DataUser>? data,
-      SupportUser? support,
-      String? error});
+      {@JsonKey(name: "diagnostic") Diagnostic? diagnostic,
+      @JsonKey(name: "data") List<DataUser>? data,
+      @JsonKey(name: "page") Page? page});
 
-  $SupportUserCopyWith<$Res>? get support;
+  $DiagnosticCopyWith<$Res>? get diagnostic;
+  $PageCopyWith<$Res>? get page;
 }
 
 /// @nodoc
@@ -73,43 +67,23 @@ class _$UsersResponseCopyWithImpl<$Res, $Val extends UsersResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = freezed,
-    Object? perPage = freezed,
-    Object? total = freezed,
-    Object? totalPages = freezed,
+    Object? diagnostic = freezed,
     Object? data = freezed,
-    Object? support = freezed,
-    Object? error = freezed,
+    Object? page = freezed,
   }) {
     return _then(_value.copyWith(
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-      perPage: freezed == perPage
-          ? _value.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int?,
-      total: freezed == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
-              as int?,
-      totalPages: freezed == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int?,
+      diagnostic: freezed == diagnostic
+          ? _value.diagnostic
+          : diagnostic // ignore: cast_nullable_to_non_nullable
+              as Diagnostic?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<DataUser>?,
-      support: freezed == support
-          ? _value.support
-          : support // ignore: cast_nullable_to_non_nullable
-              as SupportUser?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as Page?,
     ) as $Val);
   }
 
@@ -117,13 +91,27 @@ class _$UsersResponseCopyWithImpl<$Res, $Val extends UsersResponse>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $SupportUserCopyWith<$Res>? get support {
-    if (_value.support == null) {
+  $DiagnosticCopyWith<$Res>? get diagnostic {
+    if (_value.diagnostic == null) {
       return null;
     }
 
-    return $SupportUserCopyWith<$Res>(_value.support!, (value) {
-      return _then(_value.copyWith(support: value) as $Val);
+    return $DiagnosticCopyWith<$Res>(_value.diagnostic!, (value) {
+      return _then(_value.copyWith(diagnostic: value) as $Val);
+    });
+  }
+
+  /// Create a copy of UsersResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PageCopyWith<$Res>? get page {
+    if (_value.page == null) {
+      return null;
+    }
+
+    return $PageCopyWith<$Res>(_value.page!, (value) {
+      return _then(_value.copyWith(page: value) as $Val);
     });
   }
 }
@@ -137,16 +125,14 @@ abstract class _$$UsersResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? page,
-      @JsonKey(name: 'per_page') int? perPage,
-      int? total,
-      @JsonKey(name: 'total_pages') int? totalPages,
-      List<DataUser>? data,
-      SupportUser? support,
-      String? error});
+      {@JsonKey(name: "diagnostic") Diagnostic? diagnostic,
+      @JsonKey(name: "data") List<DataUser>? data,
+      @JsonKey(name: "page") Page? page});
 
   @override
-  $SupportUserCopyWith<$Res>? get support;
+  $DiagnosticCopyWith<$Res>? get diagnostic;
+  @override
+  $PageCopyWith<$Res>? get page;
 }
 
 /// @nodoc
@@ -162,43 +148,23 @@ class __$$UsersResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = freezed,
-    Object? perPage = freezed,
-    Object? total = freezed,
-    Object? totalPages = freezed,
+    Object? diagnostic = freezed,
     Object? data = freezed,
-    Object? support = freezed,
-    Object? error = freezed,
+    Object? page = freezed,
   }) {
     return _then(_$UsersResponseImpl(
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-      perPage: freezed == perPage
-          ? _value.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int?,
-      total: freezed == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
-              as int?,
-      totalPages: freezed == totalPages
-          ? _value.totalPages
-          : totalPages // ignore: cast_nullable_to_non_nullable
-              as int?,
+      diagnostic: freezed == diagnostic
+          ? _value.diagnostic
+          : diagnostic // ignore: cast_nullable_to_non_nullable
+              as Diagnostic?,
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<DataUser>?,
-      support: freezed == support
-          ? _value.support
-          : support // ignore: cast_nullable_to_non_nullable
-              as SupportUser?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as Page?,
     ));
   }
 }
@@ -207,13 +173,9 @@ class __$$UsersResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UsersResponseImpl extends _UsersResponse {
   const _$UsersResponseImpl(
-      {this.page,
-      @JsonKey(name: 'per_page') this.perPage,
-      this.total,
-      @JsonKey(name: 'total_pages') this.totalPages,
-      final List<DataUser>? data,
-      this.support,
-      this.error})
+      {@JsonKey(name: "diagnostic") this.diagnostic,
+      @JsonKey(name: "data") final List<DataUser>? data,
+      @JsonKey(name: "page") this.page})
       : _data = data,
         super._();
 
@@ -221,17 +183,11 @@ class _$UsersResponseImpl extends _UsersResponse {
       _$$UsersResponseImplFromJson(json);
 
   @override
-  final int? page;
-  @override
-  @JsonKey(name: 'per_page')
-  final int? perPage;
-  @override
-  final int? total;
-  @override
-  @JsonKey(name: 'total_pages')
-  final int? totalPages;
+  @JsonKey(name: "diagnostic")
+  final Diagnostic? diagnostic;
   final List<DataUser>? _data;
   @override
+  @JsonKey(name: "data")
   List<DataUser>? get data {
     final value = _data;
     if (value == null) return null;
@@ -241,13 +197,12 @@ class _$UsersResponseImpl extends _UsersResponse {
   }
 
   @override
-  final SupportUser? support;
-  @override
-  final String? error;
+  @JsonKey(name: "page")
+  final Page? page;
 
   @override
   String toString() {
-    return 'UsersResponse(page: $page, perPage: $perPage, total: $total, totalPages: $totalPages, data: $data, support: $support, error: $error)';
+    return 'UsersResponse(diagnostic: $diagnostic, data: $data, page: $page)';
   }
 
   @override
@@ -255,20 +210,16 @@ class _$UsersResponseImpl extends _UsersResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UsersResponseImpl &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.perPage, perPage) || other.perPage == perPage) &&
-            (identical(other.total, total) || other.total == total) &&
-            (identical(other.totalPages, totalPages) ||
-                other.totalPages == totalPages) &&
+            (identical(other.diagnostic, diagnostic) ||
+                other.diagnostic == diagnostic) &&
             const DeepCollectionEquality().equals(other._data, _data) &&
-            (identical(other.support, support) || other.support == support) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.page, page) || other.page == page));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, page, perPage, total, totalPages,
-      const DeepCollectionEquality().hash(_data), support, error);
+  int get hashCode => Object.hash(runtimeType, diagnostic,
+      const DeepCollectionEquality().hash(_data), page);
 
   /// Create a copy of UsersResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -288,34 +239,23 @@ class _$UsersResponseImpl extends _UsersResponse {
 
 abstract class _UsersResponse extends UsersResponse {
   const factory _UsersResponse(
-      {final int? page,
-      @JsonKey(name: 'per_page') final int? perPage,
-      final int? total,
-      @JsonKey(name: 'total_pages') final int? totalPages,
-      final List<DataUser>? data,
-      final SupportUser? support,
-      final String? error}) = _$UsersResponseImpl;
+      {@JsonKey(name: "diagnostic") final Diagnostic? diagnostic,
+      @JsonKey(name: "data") final List<DataUser>? data,
+      @JsonKey(name: "page") final Page? page}) = _$UsersResponseImpl;
   const _UsersResponse._() : super._();
 
   factory _UsersResponse.fromJson(Map<String, dynamic> json) =
       _$UsersResponseImpl.fromJson;
 
   @override
-  int? get page;
+  @JsonKey(name: "diagnostic")
+  Diagnostic? get diagnostic;
   @override
-  @JsonKey(name: 'per_page')
-  int? get perPage;
-  @override
-  int? get total;
-  @override
-  @JsonKey(name: 'total_pages')
-  int? get totalPages;
-  @override
+  @JsonKey(name: "data")
   List<DataUser>? get data;
   @override
-  SupportUser? get support;
-  @override
-  String? get error;
+  @JsonKey(name: "page")
+  Page? get page;
 
   /// Create a copy of UsersResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -325,185 +265,26 @@ abstract class _UsersResponse extends UsersResponse {
       throw _privateConstructorUsedError;
 }
 
-SupportUser _$SupportUserFromJson(Map<String, dynamic> json) {
-  return _SupportUser.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SupportUser {
-  String? get url => throw _privateConstructorUsedError;
-  String? get text => throw _privateConstructorUsedError;
-
-  /// Serializes this SupportUser to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SupportUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SupportUserCopyWith<SupportUser> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SupportUserCopyWith<$Res> {
-  factory $SupportUserCopyWith(
-          SupportUser value, $Res Function(SupportUser) then) =
-      _$SupportUserCopyWithImpl<$Res, SupportUser>;
-  @useResult
-  $Res call({String? url, String? text});
-}
-
-/// @nodoc
-class _$SupportUserCopyWithImpl<$Res, $Val extends SupportUser>
-    implements $SupportUserCopyWith<$Res> {
-  _$SupportUserCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SupportUser
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = freezed,
-    Object? text = freezed,
-  }) {
-    return _then(_value.copyWith(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SupportUserImplCopyWith<$Res>
-    implements $SupportUserCopyWith<$Res> {
-  factory _$$SupportUserImplCopyWith(
-          _$SupportUserImpl value, $Res Function(_$SupportUserImpl) then) =
-      __$$SupportUserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? url, String? text});
-}
-
-/// @nodoc
-class __$$SupportUserImplCopyWithImpl<$Res>
-    extends _$SupportUserCopyWithImpl<$Res, _$SupportUserImpl>
-    implements _$$SupportUserImplCopyWith<$Res> {
-  __$$SupportUserImplCopyWithImpl(
-      _$SupportUserImpl _value, $Res Function(_$SupportUserImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SupportUser
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = freezed,
-    Object? text = freezed,
-  }) {
-    return _then(_$SupportUserImpl(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SupportUserImpl implements _SupportUser {
-  const _$SupportUserImpl({this.url, this.text});
-
-  factory _$SupportUserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SupportUserImplFromJson(json);
-
-  @override
-  final String? url;
-  @override
-  final String? text;
-
-  @override
-  String toString() {
-    return 'SupportUser(url: $url, text: $text)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SupportUserImpl &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.text, text) || other.text == text));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, url, text);
-
-  /// Create a copy of SupportUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SupportUserImplCopyWith<_$SupportUserImpl> get copyWith =>
-      __$$SupportUserImplCopyWithImpl<_$SupportUserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SupportUserImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _SupportUser implements SupportUser {
-  const factory _SupportUser({final String? url, final String? text}) =
-      _$SupportUserImpl;
-
-  factory _SupportUser.fromJson(Map<String, dynamic> json) =
-      _$SupportUserImpl.fromJson;
-
-  @override
-  String? get url;
-  @override
-  String? get text;
-
-  /// Create a copy of SupportUser
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SupportUserImplCopyWith<_$SupportUserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 DataUser _$DataUserFromJson(Map<String, dynamic> json) {
   return _DataUser.fromJson(json);
 }
 
 /// @nodoc
 mixin _$DataUser {
-  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "id")
+  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "email")
   String? get email => throw _privateConstructorUsedError;
-  @JsonKey(name: 'first_name')
-  String? get firstName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_name')
-  String? get lastName => throw _privateConstructorUsedError;
-  String? get avatar => throw _privateConstructorUsedError;
+  @JsonKey(name: "photo")
+  String? get photo => throw _privateConstructorUsedError;
+  @JsonKey(name: "verified")
+  bool? get verified => throw _privateConstructorUsedError;
+  @JsonKey(name: "createdAt")
+  String? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updatedAt")
+  String? get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this DataUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -521,11 +302,13 @@ abstract class $DataUserCopyWith<$Res> {
       _$DataUserCopyWithImpl<$Res, DataUser>;
   @useResult
   $Res call(
-      {int? id,
-      String? email,
-      @JsonKey(name: 'first_name') String? firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      String? avatar});
+      {@JsonKey(name: "id") String? id,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "email") String? email,
+      @JsonKey(name: "photo") String? photo,
+      @JsonKey(name: "verified") bool? verified,
+      @JsonKey(name: "createdAt") String? createdAt,
+      @JsonKey(name: "updatedAt") String? updatedAt});
 }
 
 /// @nodoc
@@ -544,31 +327,41 @@ class _$DataUserCopyWithImpl<$Res, $Val extends DataUser>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
     Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? avatar = freezed,
+    Object? photo = freezed,
+    Object? verified = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      photo: freezed == photo
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      verified: freezed == verified
+          ? _value.verified
+          : verified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -583,11 +376,13 @@ abstract class _$$DataUserImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      String? email,
-      @JsonKey(name: 'first_name') String? firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      String? avatar});
+      {@JsonKey(name: "id") String? id,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "email") String? email,
+      @JsonKey(name: "photo") String? photo,
+      @JsonKey(name: "verified") bool? verified,
+      @JsonKey(name: "createdAt") String? createdAt,
+      @JsonKey(name: "updatedAt") String? updatedAt});
 }
 
 /// @nodoc
@@ -604,31 +399,41 @@ class __$$DataUserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
     Object? email = freezed,
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? avatar = freezed,
+    Object? photo = freezed,
+    Object? verified = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$DataUserImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      photo: freezed == photo
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      verified: freezed == verified
+          ? _value.verified
+          : verified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -638,31 +443,42 @@ class __$$DataUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DataUserImpl implements _DataUser {
   const _$DataUserImpl(
-      {this.id,
-      this.email,
-      @JsonKey(name: 'first_name') this.firstName,
-      @JsonKey(name: 'last_name') this.lastName,
-      this.avatar});
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "name") this.name,
+      @JsonKey(name: "email") this.email,
+      @JsonKey(name: "photo") this.photo,
+      @JsonKey(name: "verified") this.verified,
+      @JsonKey(name: "createdAt") this.createdAt,
+      @JsonKey(name: "updatedAt") this.updatedAt});
 
   factory _$DataUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataUserImplFromJson(json);
 
   @override
-  final int? id;
+  @JsonKey(name: "id")
+  final String? id;
   @override
+  @JsonKey(name: "name")
+  final String? name;
+  @override
+  @JsonKey(name: "email")
   final String? email;
   @override
-  @JsonKey(name: 'first_name')
-  final String? firstName;
+  @JsonKey(name: "photo")
+  final String? photo;
   @override
-  @JsonKey(name: 'last_name')
-  final String? lastName;
+  @JsonKey(name: "verified")
+  final bool? verified;
   @override
-  final String? avatar;
+  @JsonKey(name: "createdAt")
+  final String? createdAt;
+  @override
+  @JsonKey(name: "updatedAt")
+  final String? updatedAt;
 
   @override
   String toString() {
-    return 'DataUser(id: $id, email: $email, firstName: $firstName, lastName: $lastName, avatar: $avatar)';
+    return 'DataUser(id: $id, name: $name, email: $email, photo: $photo, verified: $verified, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -671,18 +487,21 @@ class _$DataUserImpl implements _DataUser {
         (other.runtimeType == runtimeType &&
             other is _$DataUserImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
-            (identical(other.avatar, avatar) || other.avatar == avatar));
+            (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.verified, verified) ||
+                other.verified == verified) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, email, firstName, lastName, avatar);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, email, photo, verified, createdAt, updatedAt);
 
   /// Create a copy of DataUser
   /// with the given fields replaced by the non-null parameter values.
@@ -702,27 +521,38 @@ class _$DataUserImpl implements _DataUser {
 
 abstract class _DataUser implements DataUser {
   const factory _DataUser(
-      {final int? id,
-      final String? email,
-      @JsonKey(name: 'first_name') final String? firstName,
-      @JsonKey(name: 'last_name') final String? lastName,
-      final String? avatar}) = _$DataUserImpl;
+      {@JsonKey(name: "id") final String? id,
+      @JsonKey(name: "name") final String? name,
+      @JsonKey(name: "email") final String? email,
+      @JsonKey(name: "photo") final String? photo,
+      @JsonKey(name: "verified") final bool? verified,
+      @JsonKey(name: "createdAt") final String? createdAt,
+      @JsonKey(name: "updatedAt") final String? updatedAt}) = _$DataUserImpl;
 
   factory _DataUser.fromJson(Map<String, dynamic> json) =
       _$DataUserImpl.fromJson;
 
   @override
-  int? get id;
+  @JsonKey(name: "id")
+  String? get id;
   @override
+  @JsonKey(name: "name")
+  String? get name;
+  @override
+  @JsonKey(name: "email")
   String? get email;
   @override
-  @JsonKey(name: 'first_name')
-  String? get firstName;
+  @JsonKey(name: "photo")
+  String? get photo;
   @override
-  @JsonKey(name: 'last_name')
-  String? get lastName;
+  @JsonKey(name: "verified")
+  bool? get verified;
   @override
-  String? get avatar;
+  @JsonKey(name: "createdAt")
+  String? get createdAt;
+  @override
+  @JsonKey(name: "updatedAt")
+  String? get updatedAt;
 
   /// Create a copy of DataUser
   /// with the given fields replaced by the non-null parameter values.

@@ -17,5 +17,7 @@ class User with _$User {
     String? name,
     String? avatar,
     String? email,
+    bool? isVerified,
+    String? updatedAt,
   }) = _User;
 }

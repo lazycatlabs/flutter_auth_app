@@ -11,20 +11,16 @@ Future<void> serviceLocator({
   String prefixBox = '',
 }) async {
   /// For unit testing only
-  if (isUnitTest) {
-    await sl.reset();
+  if (isUnitTest) await sl.reset();
+
+  if (isHiveEnable) {
+    await _initHiveBoxes(isUnitTest: isUnitTest, prefixBox: prefixBox);
   }
   sl.registerSingleton<DioClient>(DioClient(isUnitTest: isUnitTest));
   _dataSources();
   _repositories();
   _useCase();
   _cubit();
-  if (isHiveEnable) {
-    await _initHiveBoxes(
-      isUnitTest: isUnitTest,
-      prefixBox: prefixBox,
-    );
-  }
 }
 
 Future<void> _initHiveBoxes({
@@ -56,21 +52,27 @@ void _dataSources() {
 void _useCase() {
   /// Auth
   sl.registerLazySingleton(() => PostLogin(sl()));
+  sl.registerLazySingleton(() => PostLogout(sl()));
   sl.registerLazySingleton(() => PostRegister(sl()));
+  sl.registerLazySingleton(() => PostGeneralToken(sl()));
 
   /// Users
   sl.registerLazySingleton(() => GetUsers(sl()));
+  sl.registerLazySingleton(() => GetUser(sl()));
 }
 
 void _cubit() {
   /// Auth
   sl.registerFactory(() => RegisterCubit(sl()));
   sl.registerFactory(() => AuthCubit(sl()));
+  sl.registerFactory(() => GeneralTokenCubit(sl()));
+  sl.registerFactory(() => LogoutCubit(sl()));
 
   /// General
   sl.registerFactory(() => ReloadFormCubit());
 
   /// Users
+  sl.registerFactory(() => UserCubit(sl()));
   sl.registerFactory(() => UsersCubit(sl()));
   sl.registerFactory(() => SettingsCubit());
   sl.registerFactory(() => MainCubit());

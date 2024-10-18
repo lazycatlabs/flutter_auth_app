@@ -34,8 +34,7 @@ class Button extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor:
-              color ?? Theme.of(context).extension<LzyctColors>()!.pink,
+          backgroundColor: color ?? Theme.of(context).primaryColor,
           foregroundColor:
               Theme.of(context).extension<LzyctColors>()!.buttonText,
           disabledBackgroundColor: Theme.of(context)

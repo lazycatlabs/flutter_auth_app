@@ -23,6 +23,7 @@ class LzyctApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),
         BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<LogoutCubit>()),
       ],
       child: OKToast(
         child: ScreenUtilInit(

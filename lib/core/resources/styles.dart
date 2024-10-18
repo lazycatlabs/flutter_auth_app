@@ -6,7 +6,7 @@ import 'package:flutter_auth_app/core/core.dart';
 ThemeData themeLight(BuildContext context) => ThemeData(
       fontFamily: 'Poppins',
       useMaterial3: true,
-      primaryColor: Palette.pinkLatte,
+      primaryColor: Palette.primary,
       disabledColor: Palette.shadowDark,
       hintColor: Palette.subText,
       cardColor: Palette.background,
@@ -73,10 +73,9 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
         color: Palette.background,
-        iconTheme: const IconThemeData(color: Palette.pinkLatte),
-        systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: Colors.transparent,
-        ),
+        iconTheme: const IconThemeData(color: Palette.primary),
+        systemOverlayStyle: SystemUiOverlayStyle.dark
+            .copyWith(statusBarColor: Colors.transparent),
         surfaceTintColor: Palette.background,
         shadowColor: Palette.shadow,
       ),
@@ -101,9 +100,10 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       extensions: const <ThemeExtension<dynamic>>[
         LzyctColors(
           background: Palette.background,
+          banner: Palette.banner,
           card: Palette.card,
           buttonText: Palette.text,
-          subtitle: Palette.subText,
+          subtitle: Palette.primary,
           shadow: Palette.shadowDark,
           green: Palette.greenLatte,
           roseWater: Palette.roseWaterLatte,
@@ -127,61 +127,61 @@ ThemeData themeLight(BuildContext context) => ThemeData(
 ThemeData themeDark(BuildContext context) => ThemeData(
       fontFamily: 'Poppins',
       useMaterial3: true,
-      primaryColor: Palette.pinkMocha,
+      primaryColor: Palette.primary,
       disabledColor: Palette.shadowDark,
       hintColor: Palette.subTextDark,
       cardColor: Palette.backgroundDark,
       scaffoldBackgroundColor: Palette.backgroundDark,
       colorScheme: const ColorScheme.dark().copyWith(primary: Palette.primary),
       textTheme: TextTheme(
-        displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
-              fontSize: Dimens.displayLarge,
-              color: Palette.textDark,
-            ),
-        displayMedium: Theme.of(context).textTheme.displayMedium?.copyWith(
-              fontSize: Dimens.displayMedium,
-              color: Palette.textDark,
-            ),
-        displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
-              fontSize: Dimens.displaySmall,
-              color: Palette.textDark,
-            ),
+        displayLarge: Theme.of(context)
+            .textTheme
+            .displayLarge
+            ?.copyWith(fontSize: Dimens.displayLarge, color: Palette.textDark),
+        displayMedium: Theme.of(context)
+            .textTheme
+            .displayMedium
+            ?.copyWith(fontSize: Dimens.displayMedium, color: Palette.textDark),
+        displaySmall: Theme.of(context)
+            .textTheme
+            .displaySmall
+            ?.copyWith(fontSize: Dimens.displaySmall, color: Palette.textDark),
         headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontSize: Dimens.headlineMedium,
               color: Palette.textDark,
             ),
-        headlineSmall: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontSize: Dimens.headlineSmall,
-              color: Palette.textDark,
-            ),
-        titleLarge: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontSize: Dimens.titleLarge,
-              color: Palette.textDark,
-            ),
-        titleMedium: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontSize: Dimens.titleMedium,
-              color: Palette.textDark,
-            ),
-        titleSmall: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontSize: Dimens.titleSmall,
-              color: Palette.textDark,
-            ),
-        bodyLarge: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              fontSize: Dimens.bodyLarge,
-              color: Palette.textDark,
-            ),
-        bodyMedium: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: Dimens.bodyMedium,
-              color: Palette.textDark,
-            ),
-        bodySmall: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontSize: Dimens.bodySmall,
-              color: Palette.textDark,
-            ),
-        labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
-              fontSize: Dimens.labelLarge,
-              color: Palette.textDark,
-            ),
+        headlineSmall: Theme.of(context)
+            .textTheme
+            .headlineSmall
+            ?.copyWith(fontSize: Dimens.headlineSmall, color: Palette.textDark),
+        titleLarge: Theme.of(context)
+            .textTheme
+            .titleLarge
+            ?.copyWith(fontSize: Dimens.titleLarge, color: Palette.textDark),
+        titleMedium: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontSize: Dimens.titleMedium, color: Palette.textDark),
+        titleSmall: Theme.of(context)
+            .textTheme
+            .titleSmall
+            ?.copyWith(fontSize: Dimens.titleSmall, color: Palette.textDark),
+        bodyLarge: Theme.of(context)
+            .textTheme
+            .bodyLarge
+            ?.copyWith(fontSize: Dimens.bodyLarge, color: Palette.textDark),
+        bodyMedium: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontSize: Dimens.bodyMedium, color: Palette.textDark),
+        bodySmall: Theme.of(context)
+            .textTheme
+            .bodySmall
+            ?.copyWith(fontSize: Dimens.bodySmall, color: Palette.textDark),
+        labelLarge: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(fontSize: Dimens.labelLarge, color: Palette.textDark),
         labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
               fontSize: Dimens.labelSmall,
               letterSpacing: 0.25,
@@ -190,7 +190,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       ),
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
-        iconTheme: const IconThemeData(color: Palette.pinkMocha),
+        iconTheme: const IconThemeData(color: Palette.primary),
         color: Palette.backgroundDark,
         systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.transparent,
@@ -220,9 +220,10 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       extensions: const <ThemeExtension<dynamic>>[
         LzyctColors(
           background: Palette.backgroundDark,
+          banner: Palette.primary,
           buttonText: Palette.textDark,
           card: Palette.cardDark,
-          subtitle: Palette.subTextDark,
+          subtitle: Palette.textDark,
           shadow: Palette.shadowDark,
           green: Palette.greenMocha,
           roseWater: Palette.roseWaterMocha,
@@ -244,6 +245,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
 
 class LzyctColors extends ThemeExtension<LzyctColors> {
   final Color? background;
+  final Color? banner;
   final Color? card;
   final Color? buttonText;
   final Color? subtitle;
@@ -265,6 +267,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
 
   const LzyctColors({
     this.background,
+    this.banner,
     this.card,
     this.buttonText,
     this.subtitle,
@@ -288,6 +291,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
   @override
   ThemeExtension<LzyctColors> copyWith({
     Color? background,
+    Color? banner,
     Color? card,
     Color? buttonText,
     Color? subtitle,
@@ -309,6 +313,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
   }) {
     return LzyctColors(
       background: background ?? this.background,
+      banner: banner ?? this.banner,
       card: card ?? this.card,
       buttonText: buttonText ?? this.buttonText,
       subtitle: subtitle ?? this.subtitle,
@@ -339,6 +344,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
       return this;
     }
     return LzyctColors(
+      banner: Color.lerp(banner, other.banner, t),
       background: Color.lerp(background, other.background, t),
       card: Color.lerp(card, other.card, t),
       buttonText: Color.lerp(buttonText, other.buttonText, t),

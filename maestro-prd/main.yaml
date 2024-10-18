@@ -1,0 +1,8 @@
+appId: com.lazycatlabs.auths
+---
+- runFlow: "login.yaml"
+- runFlow: "dashboard.yaml"
+- runFlow: "settings.yaml"
+- runFlow: "dashboard.yaml"
+- runFlow: "logout.yaml"
+- runFlow: "register.yaml"

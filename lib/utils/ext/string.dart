@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 
 extension StringExtension on String {
@@ -10,7 +11,9 @@ extension StringExtension on String {
     ).hasMatch(this);
   }
 
-  void toToastError(BuildContext context) {
+  //https://github.com/ponnamkarthik/FlutterToast/issues/262
+  //coverage:ignore-start
+  void toToastError(BuildContext context, {bool isUnitTest = false}) {
     try {
       final message = isEmpty ? "error" : this;
 
@@ -29,12 +32,14 @@ extension StringExtension on String {
         duration: const Duration(seconds: 3),
       );
     } catch (e, stackTrace) {
-      FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      if (!isUnitTest) {
+        FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      }
       log.e("error $e");
     }
   }
 
-  void toToastSuccess(BuildContext context) {
+  void toToastSuccess(BuildContext context, {bool isUnitTest = false}) {
     try {
       final message = isEmpty ? "success" : this;
 
@@ -54,12 +59,14 @@ extension StringExtension on String {
         duration: const Duration(seconds: 3),
       );
     } catch (e, stackTrace) {
-      FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      if (!isUnitTest) {
+        FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      }
       log.e("$e");
     }
   }
 
-  void toToastLoading(BuildContext context) {
+  void toToastLoading(BuildContext context, {bool isUnitTest = false}) {
     try {
       final message = isEmpty ? "loading" : this;
       //dismiss before show toast
@@ -77,8 +84,28 @@ extension StringExtension on String {
         duration: const Duration(seconds: 3),
       );
     } catch (e, stackTrace) {
-      FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      if (!isUnitTest) {
+        FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+      }
       log.e("$e");
+    }
+  }
+
+  //coverage:ignore-end
+
+  String toStringDateAlt({bool isShort = false, bool isToLocal = true}) {
+    try {
+      DateTime object;
+      if (isToLocal) {
+        object = DateTime.parse(this).toLocal();
+      } else {
+        object = DateTime.parse(this);
+      }
+
+      return DateFormat("dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm", "id")
+          .format(object);
+    } catch (_) {
+      return "-";
     }
   }
 }

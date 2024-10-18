@@ -8,21 +8,34 @@ part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
   UsersCubit(this._getUser) : super(const _Loading());
+
+  int currentPage = 1;
+  int lastPage = 1;
+  final List<User> users = [];
+
   final GetUsers _getUser;
 
-  Future<void> fetchUsers(UsersParams userParams) async {
-    /// Only show loading in 1 page
-    await _fetchData(userParams);
+  Future<void> refresh() async {
+    /// reset data
+    users.clear();
+
+    /// reset page
+    currentPage = 1;
+    lastPage = 1;
+
+    /// fetch data
+    await fetchUsers(UsersParams(page: currentPage));
   }
 
-  Future<void> refreshUsers(UsersParams usersParams) async {
-    await _fetchData(usersParams);
-  }
-
-  Future<void> _fetchData(UsersParams usersParams) async {
-    if (usersParams.page == 1) {
-      emit(const _Loading());
+  Future<void> nextPage() async {
+    if (currentPage < lastPage) {
+      currentPage++;
+      await fetchUsers(UsersParams(page: currentPage));
     }
+  }
+
+  Future<void> fetchUsers(UsersParams usersParams) async {
+    if (currentPage == 1) emit(const _Loading());
 
     final data = await _getUser.call(usersParams);
     data.fold(
@@ -33,7 +46,20 @@ class UsersCubit extends Cubit<UsersState> {
           emit(const _Empty());
         }
       },
-      (r) => emit(_Success(r)),
+      (r) {
+        users.addAll(r.users ?? []);
+        currentPage = r.currentPage ?? 1;
+        lastPage = r.lastPage ?? 1;
+
+        final updatedUsers = Users(
+          currentPage: currentPage,
+          lastPage: lastPage,
+          users: users,
+        );
+
+        if (currentPage != 1) emit(const _Initial());
+        emit(_Success(updatedUsers));
+      },
     );
   }
 }

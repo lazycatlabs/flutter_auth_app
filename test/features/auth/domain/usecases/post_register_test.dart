@@ -13,13 +13,16 @@ void main() {
   late MockAuthRepository mockAuthRepository;
   late PostRegister postRegister;
   late Register register;
-  const registerParams =
-      RegisterParams(email: 'test@gmail.com', password: 'password');
+  const registerParams = RegisterParams(
+    name: "Mudassir",
+    email: 'mudassir@lazycatlabs.com',
+    password: 'pass123',
+  );
 
   setUp(() {
-    register = RegisterResponse.fromJson(json
-            .decode(jsonReader(successRegisterPath)) as Map<String, dynamic>,)
-        .toEntity();
+    register = RegisterResponse.fromJson(
+      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
+    ).toEntity();
     mockAuthRepository = MockAuthRepository();
     postRegister = PostRegister(mockAuthRepository);
   });
@@ -34,5 +37,30 @@ void main() {
 
     /// assert
     expect(result, equals(Right(register)));
+  });
+
+  test("parse RegisterParams to json", () {
+    /// act
+    final result = registerParams.toJson();
+    final expected = {
+      "name": "Mudassir",
+      "email": "mudassir@lazycatlabs.com",
+      "password": "pass123",
+    };
+
+    /// assert
+    expect(result, equals(expected));
+  });
+
+  test("parse RegisterParams from json", () {
+    /// act
+    final params = RegisterParams.fromJson({
+      "name": "Mudassir",
+      "email": "mudassir@lazycatlabs.com",
+      "password": "pass123",
+    });
+
+    /// assert
+    expect(params, equals(registerParams));
   });
 }

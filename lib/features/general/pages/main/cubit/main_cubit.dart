@@ -11,46 +11,47 @@ class MainCubit extends Cubit<MainState> {
   MainCubit() : super(const _Loading());
 
   int _currentIndex = 0;
-  late List<DataHelper> dataMenus;
+  late List<DataHelper>? dataMenus;
 
-  void updateIndex(int index, {BuildContext? context}) {
+  void updateIndex(int index, DataHelper? mockMenu, {BuildContext? context}) {
     emit(const _Loading());
     _currentIndex = index;
     if (context != null) {
-      initMenu(context);
+      initMenu(context, mockMenu: mockMenu);
     }
-    emit(_Success(dataMenus[_currentIndex]));
+    emit(_Success(mockMenu ?? dataMenus?[_currentIndex]));
   }
 
-  void initMenu(BuildContext context) {
+  void initMenu(BuildContext context, {DataHelper? mockMenu}) {
     dataMenus = [
       DataHelper(
-        title: Strings.of(context)!.dashboard,
+        title: Strings.of(context)?.dashboard ?? "Dashboard",
         isSelected: true,
       ),
-      DataHelper(
-        title: Strings.of(context)!.settings,
-      ),
-      DataHelper(
-        title: Strings.of(context)!.logout,
-      ),
+      DataHelper(title: Strings.of(context)?.settings ?? "Settings"),
+      DataHelper(title: Strings.of(context)?.logout ?? "Logout"),
     ];
-    updateIndex(_currentIndex);
+    updateIndex(_currentIndex, mockMenu);
   }
 
   bool onBackPressed(
     BuildContext context,
-    GlobalKey<ScaffoldState> scaffoldState,
-  ) {
-    if (dataMenus[_currentIndex].title == Strings.of(context)!.dashboard) {
+    GlobalKey<ScaffoldState> scaffoldState, {
+    bool isDrawerClosed = false,
+  }) {
+    if (dataMenus == null) return false;
+    if (dataMenus?[_currentIndex].title ==
+        (Strings.of(context)?.dashboard ?? "Dashboard")) {
       return true;
     } else {
-      if (scaffoldState.currentState!.isEndDrawerOpen) {
+      if ((scaffoldState.currentState?.isEndDrawerOpen ?? false) ||
+          isDrawerClosed) {
         //hide navigation drawer
-        scaffoldState.currentState!.openDrawer();
+        scaffoldState.currentState?.openDrawer();
       } else {
-        for (final menu in dataMenus) {
-          menu.isSelected = menu.title == Strings.of(context)!.dashboard;
+        for (final menu in dataMenus!) {
+          menu.isSelected =
+              menu.title == (Strings.of(context)?.dashboard ?? "Dashboard");
         }
       }
 

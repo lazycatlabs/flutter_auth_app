@@ -22,6 +22,9 @@ LoginParams _$LoginParamsFromJson(Map<String, dynamic> json) {
 mixin _$LoginParams {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String? get osInfo => throw _privateConstructorUsedError;
+  String? get deviceInfo => throw _privateConstructorUsedError;
+  String get fcmToken => throw _privateConstructorUsedError;
 
   /// Serializes this LoginParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +42,12 @@ abstract class $LoginParamsCopyWith<$Res> {
           LoginParams value, $Res Function(LoginParams) then) =
       _$LoginParamsCopyWithImpl<$Res, LoginParams>;
   @useResult
-  $Res call({String email, String password});
+  $Res call(
+      {String email,
+      String password,
+      String? osInfo,
+      String? deviceInfo,
+      String fcmToken});
 }
 
 /// @nodoc
@@ -59,6 +67,9 @@ class _$LoginParamsCopyWithImpl<$Res, $Val extends LoginParams>
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? osInfo = freezed,
+    Object? deviceInfo = freezed,
+    Object? fcmToken = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -68,6 +79,18 @@ class _$LoginParamsCopyWithImpl<$Res, $Val extends LoginParams>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      osInfo: freezed == osInfo
+          ? _value.osInfo
+          : osInfo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceInfo: freezed == deviceInfo
+          ? _value.deviceInfo
+          : deviceInfo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fcmToken: null == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,7 +104,12 @@ abstract class _$$LoginParamsImplCopyWith<$Res>
       __$$LoginParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String password});
+  $Res call(
+      {String email,
+      String password,
+      String? osInfo,
+      String? deviceInfo,
+      String fcmToken});
 }
 
 /// @nodoc
@@ -99,6 +127,9 @@ class __$$LoginParamsImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? osInfo = freezed,
+    Object? deviceInfo = freezed,
+    Object? fcmToken = null,
   }) {
     return _then(_$LoginParamsImpl(
       email: null == email
@@ -109,6 +140,18 @@ class __$$LoginParamsImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      osInfo: freezed == osInfo
+          ? _value.osInfo
+          : osInfo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceInfo: freezed == deviceInfo
+          ? _value.deviceInfo
+          : deviceInfo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fcmToken: null == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,7 +159,12 @@ class __$$LoginParamsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LoginParamsImpl implements _LoginParams {
-  const _$LoginParamsImpl({this.email = "", this.password = ""});
+  const _$LoginParamsImpl(
+      {this.email = "",
+      this.password = "",
+      this.osInfo,
+      this.deviceInfo,
+      this.fcmToken = "GeneratedFCMToken"});
 
   factory _$LoginParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginParamsImplFromJson(json);
@@ -127,10 +175,17 @@ class _$LoginParamsImpl implements _LoginParams {
   @override
   @JsonKey()
   final String password;
+  @override
+  final String? osInfo;
+  @override
+  final String? deviceInfo;
+  @override
+  @JsonKey()
+  final String fcmToken;
 
   @override
   String toString() {
-    return 'LoginParams(email: $email, password: $password)';
+    return 'LoginParams(email: $email, password: $password, osInfo: $osInfo, deviceInfo: $deviceInfo, fcmToken: $fcmToken)';
   }
 
   @override
@@ -140,12 +195,18 @@ class _$LoginParamsImpl implements _LoginParams {
             other is _$LoginParamsImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.osInfo, osInfo) || other.osInfo == osInfo) &&
+            (identical(other.deviceInfo, deviceInfo) ||
+                other.deviceInfo == deviceInfo) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode =>
+      Object.hash(runtimeType, email, password, osInfo, deviceInfo, fcmToken);
 
   /// Create a copy of LoginParams
   /// with the given fields replaced by the non-null parameter values.
@@ -164,8 +225,12 @@ class _$LoginParamsImpl implements _LoginParams {
 }
 
 abstract class _LoginParams implements LoginParams {
-  const factory _LoginParams({final String email, final String password}) =
-      _$LoginParamsImpl;
+  const factory _LoginParams(
+      {final String email,
+      final String password,
+      final String? osInfo,
+      final String? deviceInfo,
+      final String fcmToken}) = _$LoginParamsImpl;
 
   factory _LoginParams.fromJson(Map<String, dynamic> json) =
       _$LoginParamsImpl.fromJson;
@@ -174,6 +239,12 @@ abstract class _LoginParams implements LoginParams {
   String get email;
   @override
   String get password;
+  @override
+  String? get osInfo;
+  @override
+  String? get deviceInfo;
+  @override
+  String get fcmToken;
 
   /// Create a copy of LoginParams
   /// with the given fields replaced by the non-null parameter values.

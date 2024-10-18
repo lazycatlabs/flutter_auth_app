@@ -23,7 +23,7 @@ import '../../../../helpers/test_mock.mocks.dart';
 
 class MockUsersCubit extends MockCubit<UsersState> implements UsersCubit {}
 
-class FakeUserState extends Fake implements UsersState {}
+class FakeUsersState extends Fake implements UsersState {}
 
 void main() {
   late UsersCubit usersCubit;
@@ -31,7 +31,7 @@ void main() {
 
   setUpAll(() {
     HttpOverrides.global = null;
-    registerFallbackValue(FakeUserState());
+    registerFallbackValue(FakeUsersState());
     registerFallbackValue(const UsersParams());
   });
 
@@ -41,7 +41,7 @@ void main() {
     await serviceLocator(isUnitTest: true, prefixBox: 'dashboard_page_test_');
     usersCubit = MockUsersCubit();
     users = UsersResponse.fromJson(
-      json.decode(jsonReader(successUserPath)) as Map<String, dynamic>,
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     ).toEntity();
   });
 
@@ -103,8 +103,16 @@ void main() {
       when(() => usersCubit.state).thenReturn(
         UsersState.success(users),
       );
+      when(() => usersCubit.fetchUsers(any())).thenAnswer((_) async {});
+
       await tester.pumpWidget(rootWidget(const DashboardPage()));
-      await tester.pumpAndSettle();
+
+      /// Do loops to waiting refresh indicator showing
+      /// instead using tester.pumpAndSettle it's will result time out error
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+
       expect(find.byType(ListView), findsOneWidget);
     },
   );
@@ -115,12 +123,24 @@ void main() {
       when(() => usersCubit.state).thenReturn(
         UsersState.success(users),
       );
-      when(() => usersCubit.refreshUsers(any())).thenAnswer((_) async {});
+      when(() => usersCubit.refresh()).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const DashboardPage()));
-      await tester.pumpAndSettle();
+
+      /// Do loops to waiting refresh indicator showing
+      /// instead using tester.pumpAndSettle it's will result time out error
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+
+      /// Simulate pull to refresh
+
+      // Do loops to wait for the refresh indicator to show
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
       await tester.fling(
-        find.text('Michael Lawson'),
+        find.text('Mudassir'),
         const Offset(0.0, 500.0),
         1000.0,
       );
@@ -130,7 +150,9 @@ void main() {
       for (int i = 0; i < 5; i++) {
         await tester.pump(const Duration(milliseconds: 100));
       }
-      verify(() => usersCubit.refreshUsers(any())).called(1);
+
+      // Verify that the refresh method was called
+      verify(() => usersCubit.refresh()).called(1);
     },
   );
 }

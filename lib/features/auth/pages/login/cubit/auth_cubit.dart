@@ -1,6 +1,5 @@
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -24,11 +23,5 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) => emit(_Success(r.token)),
     );
-  }
-
-  Future<void> logout() async {
-    emit(const _Loading());
-    await MainBoxMixin().logoutBox();
-    emit(const _Success(null));
   }
 }

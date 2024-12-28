@@ -43,7 +43,7 @@ mixin class MainBoxMixin {
 
   Future<void> logoutBox() async {
     /// Clear the box
-    removeData(MainBoxKeys.isLogin);
-    removeData(MainBoxKeys.authToken);
+    await removeData(MainBoxKeys.isLogin);
+    await removeData(MainBoxKeys.authToken);
   }
 }

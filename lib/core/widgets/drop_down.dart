@@ -17,6 +17,7 @@ class DropDown<T> extends StatefulWidget {
     this.hintIsVisible = true,
     this.prefixIcon,
   });
+
   final T value;
   final List<DropdownMenuItem<T>> items;
   final bool hintIsVisible;
@@ -50,15 +51,26 @@ class _DropDownState<T> extends State<DropDown<T>> {
             key: widget.key,
             alignedDropdown: true,
             padding: EdgeInsets.zero,
+            textTheme: ButtonTextTheme.primary,
             child: DropdownButtonFormField<T>(
               isExpanded: true,
-              dropdownColor: Theme.of(context).extension<LzyctColors>()!.card,
-              icon: const Icon(Icons.arrow_drop_down),
+              dropdownColor: Theme.of(context).extension<LzyctColors>()!.banner,
+              icon: const Icon(Icons.keyboard_arrow_down),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color:
+                        Theme.of(context).extension<LzyctColors>()!.subtitle,
+                  ),
+
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 isDense: true,
                 isCollapsed: true,
                 filled: true,
+                labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context)
+                          .extension<LzyctColors>()!
+                          .subtitle,
+                    ),
                 fillColor: Theme.of(context).extension<LzyctColors>()!.card,
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(left: Dimens.space12),

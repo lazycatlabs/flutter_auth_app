@@ -25,7 +25,7 @@ class SplashScreenPage extends StatelessWidget {
           child: Center(
             child: Image.asset(
               Images.icLauncher,
-              width: context.widthInPercent(70),
+              width: context.widthInPercent(55),
             ),
           ),
         ),

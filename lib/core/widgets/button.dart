@@ -40,7 +40,7 @@ class Button extends StatelessWidget {
           disabledBackgroundColor: Theme.of(context)
               .extension<LzyctColors>()!
               .buttonText
-              ?.withOpacity(0.5),
+              ?.withValues(alpha: 0.5),
           padding: EdgeInsets.symmetric(
             horizontal: Dimens.space24,
             vertical: Dimens.space12,

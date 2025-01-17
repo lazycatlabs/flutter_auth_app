@@ -24,7 +24,9 @@ class SplashScreenPage extends StatelessWidget {
           color: Theme.of(context).extension<LzyctColors>()!.background!,
           child: Center(
             child: Image.asset(
-              Images.icLauncher,
+              Theme.of(context).brightness == Brightness.dark
+                  ? Images.icLauncherDark
+                  : Images.icLauncher,
               width: context.widthInPercent(55),
             ),
           ),

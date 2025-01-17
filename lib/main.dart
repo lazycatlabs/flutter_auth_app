@@ -24,8 +24,7 @@ void main() {
         ],
       ).then((_) => runApp(LzyctApp()));
     },
-    (error, stackTrace) async {
-      FirebaseCrashlytics.instance.recordError(error, stackTrace);
-    },
+    (error, stackTrace) =>
+        FirebaseCrashlytics.instance.recordError(error, stackTrace),
   );
 }

@@ -73,7 +73,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
         color: Palette.background,
-        iconTheme: const IconThemeData(color: Palette.primary),
+        iconTheme: const IconThemeData(color: Palette.icon),
         systemOverlayStyle: SystemUiOverlayStyle.dark
             .copyWith(statusBarColor: Colors.transparent),
         surfaceTintColor: Palette.background,
@@ -95,15 +95,15 @@ ThemeData themeLight(BuildContext context) => ThemeData(
         elevation: Dimens.zero,
       ),
       brightness: Brightness.light,
-      iconTheme: const IconThemeData(color: Palette.primary),
+      iconTheme: const IconThemeData(color: Palette.icon),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       extensions: const <ThemeExtension<dynamic>>[
         LzyctColors(
           background: Palette.background,
-          banner: Palette.banner,
+          banner: Palette.bannerDark,
           card: Palette.card,
           buttonText: Palette.text,
-          subtitle: Palette.primary,
+          subtitle: Palette.textDark,
           shadow: Palette.shadowDark,
           green: Palette.greenLatte,
           roseWater: Palette.roseWaterLatte,
@@ -190,7 +190,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       ),
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
-        iconTheme: const IconThemeData(color: Palette.primary),
+        iconTheme: const IconThemeData(color: Palette.iconDark),
         color: Palette.backgroundDark,
         systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.transparent,
@@ -215,15 +215,15 @@ ThemeData themeDark(BuildContext context) => ThemeData(
         elevation: Dimens.zero,
       ),
       brightness: Brightness.dark,
-      iconTheme: const IconThemeData(color: Palette.primary),
+      iconTheme: const IconThemeData(color: Palette.iconDark),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       extensions: const <ThemeExtension<dynamic>>[
         LzyctColors(
           background: Palette.backgroundDark,
-          banner: Palette.primary,
+          banner: Palette.background,
           buttonText: Palette.textDark,
           card: Palette.cardDark,
-          subtitle: Palette.textDark,
+          subtitle: Palette.text,
           shadow: Palette.shadowDark,
           green: Palette.greenMocha,
           roseWater: Palette.roseWaterMocha,
@@ -397,7 +397,7 @@ class BoxShadows {
         color: Theme.of(context)
             .extension<LzyctColors>()!
             .shadow!
-            .withOpacity(0.5),
+            .withValues(alpha: 0.5),
         blurRadius: 16.0,
         spreadRadius: 1.0,
       );
@@ -406,7 +406,7 @@ class BoxShadows {
         color: Theme.of(context)
             .extension<LzyctColors>()!
             .shadow!
-            .withOpacity(0.5),
+            .withValues(alpha: 0.5),
         blurRadius: 5.0,
         spreadRadius: 0.5,
       );

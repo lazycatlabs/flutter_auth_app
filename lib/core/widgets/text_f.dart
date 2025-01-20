@@ -222,7 +222,7 @@ class TextFState extends State<TextF> {
                                     .red!
                                 : Theme.of(context)
                                     .extension<LzyctColors>()!
-                                    .subtitle!,
+                                    .banner!,
                             overflow: TextOverflow.ellipsis,
                           ),
                 ),

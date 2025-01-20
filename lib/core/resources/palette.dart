@@ -58,17 +58,19 @@ class Palette {
   static const Color secondary = Color(0xff00838F);
 
   static const Color background = Color(0xffffffff);
-  static const Color backgroundDark = Color(0xff0D0D0D);
-  static const Color card = primary;
-  static const Color cardDark = primary;
-  static const Color text = Color(0xff0D0D0D);
+  static const Color backgroundDark = Color(0xff000000);
+  static const Color icon = Color(0xff000000);
+  static const Color iconDark = Color(0xffffffff);
+  static const Color card = backgroundDark;
+  static const Color cardDark = background;
+  static const Color text = Color(0xff000000);
   static const Color textDark = Color(0xffffffff);
   static const Color subText = Color(0xff757575);
   static const Color subTextDark = Color(0xffB0BEC5);
   static const Color shadow = Color(0xff8c8fa1);
   static const Color shadowDark = Color(0xff7f849c);
-  static const Color banner = backgroundDark;
-  static const Color bannerDark = background;
+  static const Color banner = background;
+  static const Color bannerDark = backgroundDark;
 
   static const Color redMocha = Color(0xfff38ba8);
   static const Color greenMocha = Color(0xffa6e3a1);

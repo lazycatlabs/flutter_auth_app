@@ -11,7 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -39,7 +38,7 @@ void main() {
     generalTokenCubit = MockGeneralTokenCubit();
   });
 
-  Widget rootWidget(Widget body) {
+  Widget rootWidget(Widget body, {bool isDarkTheme = false}) {
     return BlocProvider<GeneralTokenCubit>.value(
       value: generalTokenCubit,
       child: ScreenUtilInit(
@@ -55,12 +54,52 @@ void main() {
           ],
           locale: const Locale("en"),
           supportedLocales: L10n.all,
-          theme: themeLight(MockBuildContext()),
+          theme: isDarkTheme
+              ? themeDark(MockBuildContext())
+              : themeLight(MockBuildContext()),
           home: body,
         ),
       ),
     );
   }
+
+  testWidgets(
+    'renders SplashScreenPage in Light and DarkTheme',
+    (tester) async {
+      when(() => generalTokenCubit.state)
+          .thenReturn(const GeneralTokenState.success(null));
+      when(() => generalTokenCubit.generalToken(any()))
+          .thenAnswer((_) async {});
+
+      await tester.pumpWidget(rootWidget(SplashScreenPage()));
+      await tester.pumpAndSettle();
+      expect(
+        find.byWidgetPredicate((widget) {
+          if (widget is Image) {
+            return widget.image == AssetImage(Images.icLauncher);
+          }
+          return false;
+        }),
+        findsOneWidget,
+      );
+
+      /// change theme to dark
+      await tester.pumpWidget(
+        rootWidget(SplashScreenPage(), isDarkTheme: true),
+      );
+      await tester
+          .pumpAndSettle(); // Verify that the dark theme image is displayed
+      expect(
+        find.byWidgetPredicate((widget) {
+          if (widget is Image) {
+            return widget.image == AssetImage(Images.icLauncherDark);
+          }
+          return false;
+        }),
+        findsOneWidget,
+      );
+    },
+  );
 
   testWidgets(
     'renders SplashScreenPage and validate if general token is called',

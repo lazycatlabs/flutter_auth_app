@@ -42,14 +42,22 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                 key: const Key("dropdown_theme"),
                 hint: Strings.of(context)!.chooseTheme,
                 value: _selectedTheme,
-                prefixIcon: const Icon(Icons.light),
+                prefixIcon: Icon(
+                  Icons.light,
+                  color: Theme.of(context).extension<LzyctColors>()!.subtitle,
+                ),
                 items: ActiveTheme.values
                     .map(
                       (data) => DropdownMenuItem(
                         value: data,
                         child: Text(
                           _getThemeName(data, context),
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context)
+                                        .extension<LzyctColors>()!
+                                        .subtitle,
+                                  ),
                         ),
                       ),
                     )
@@ -67,14 +75,22 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                 key: const Key("dropdown_language"),
                 hint: Strings.of(context)!.chooseLanguage,
                 value: _selectedLanguage,
-                prefixIcon: const Icon(Icons.language_outlined),
+                prefixIcon: Icon(
+                  Icons.language_outlined,
+                  color: Theme.of(context).extension<LzyctColors>()!.subtitle,
+                ),
                 items: _listLanguage
                     .map(
                       (data) => DropdownMenuItem(
                         value: data,
                         child: Text(
                           data.title ?? "-",
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context)
+                                        .extension<LzyctColors>()!
+                                        .subtitle,
+                                  ),
                         ),
                       ),
                     )

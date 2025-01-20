@@ -73,7 +73,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    Images.icLauncher,
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Images.icLauncherDark
+                        : Images.icLauncher,
                     width: context.widthInPercent(70),
                   ),
                   _registerForm(),

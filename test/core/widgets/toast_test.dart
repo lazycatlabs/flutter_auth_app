@@ -29,12 +29,14 @@ void main() {
 
   testWidgets('displays circle image', (WidgetTester tester) async {
     await tester.pumpWidget(
-      rootWidget(const Toast(
-        bgColor: Colors.red,
-        icon: Icons.error,
-        message: "Message",
-        textColor: Colors.white,
-      )),
+      rootWidget(
+        const Toast(
+          bgColor: Colors.red,
+          icon: Icons.error,
+          message: "Message",
+          textColor: Colors.white,
+        ),
+      ),
     );
 
     expect(find.byType(Toast), findsOneWidget);

@@ -34,13 +34,13 @@ class Button extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: color ?? Theme.of(context).primaryColor,
+          backgroundColor: color ?? Theme.of(context).extension<LzyctColors>()!.banner,
           foregroundColor:
               Theme.of(context).extension<LzyctColors>()!.buttonText,
           disabledBackgroundColor: Theme.of(context)
               .extension<LzyctColors>()!
               .buttonText
-              ?.withOpacity(0.5),
+              ?.withValues(alpha: 0.5),
           padding: EdgeInsets.symmetric(
             horizontal: Dimens.space24,
             vertical: Dimens.space12,

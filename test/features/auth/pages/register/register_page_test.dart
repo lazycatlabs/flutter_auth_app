@@ -11,7 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
-
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -47,7 +46,7 @@ void main() {
     reloadFormCubit = MockReloadFormCubit();
   });
 
-  Widget rootWidget(Widget body) {
+  Widget rootWidget(Widget body, {bool isDarkTheme = false}) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<RegisterCubit>.value(value: registerCubit),
@@ -65,12 +64,55 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale("en"),
-          theme: themeLight(MockBuildContext()),
+          theme: isDarkTheme
+              ? themeDark(MockBuildContext())
+              : themeLight(MockBuildContext()),
           home: body,
         ),
       ),
     );
   }
+
+  testWidgets(
+    'renders RegisterPage for in Light and Dark Theme',
+    (tester) async {
+      when(() => registerCubit.state)
+          .thenReturn(const RegisterState.success(null));
+      when(() => reloadFormCubit.state)
+          .thenReturn(const ReloadFormState.initial());
+
+      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.pumpAndSettle();
+      expect(
+        find.byWidgetPredicate((widget) {
+          if (widget is Image) {
+            return widget.image == AssetImage(Images.icLauncher);
+          }
+          return false;
+        }),
+        findsOneWidget,
+      );
+
+      /// change theme to dark
+      await tester.pumpWidget(
+        rootWidget(const RegisterPage(), isDarkTheme: true),
+      );
+      await tester
+          .pumpAndSettle(); // Verify that the dark theme image is displayed
+      expect(
+        find.byWidgetPredicate((widget) {
+          if (widget is Image) {
+            return widget.image == AssetImage(Images.icLauncherDark);
+          }
+          return false;
+        }),
+        findsOneWidget,
+      );
+
+      /// the button should be disable
+      expect(tester.widget<Button>(find.byType(Button)).onPressed, null);
+    },
+  );
 
   testWidgets(
     'renders RegisterPage for form validation blank',

@@ -45,7 +45,7 @@ void main() {
     reloadFormCubit = MockReloadFormCubit();
   });
 
-  Widget rootWidget(Widget body) {
+  Widget rootWidget(Widget body, {bool isDarkTheme = false}) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>.value(value: authCubit),
@@ -64,13 +64,54 @@ void main() {
           ],
           locale: const Locale("en"),
           supportedLocales: L10n.all,
-          theme: themeLight(MockBuildContext()),
+          theme: isDarkTheme
+              ? themeDark(MockBuildContext())
+              : themeLight(MockBuildContext()),
           home: body,
         ),
       ),
     );
   }
 
+  testWidgets(
+    'renders LoginPage for in Light and Dark Theme',
+    (tester) async {
+      when(() => authCubit.state).thenReturn(const AuthState.success(null));
+      when(() => reloadFormCubit.state)
+          .thenReturn(const ReloadFormState.initial());
+
+      await tester.pumpWidget(rootWidget(const LoginPage()));
+      await tester.pumpAndSettle();
+      expect(
+        find.byWidgetPredicate((widget) {
+          if (widget is Image) {
+            return widget.image == AssetImage(Images.icLauncher);
+          }
+          return false;
+        }),
+        findsOneWidget,
+      );
+
+      /// change theme to dark
+      await tester.pumpWidget(
+        rootWidget(const LoginPage(), isDarkTheme: true),
+      );
+      await tester
+          .pumpAndSettle(); // Verify that the dark theme image is displayed
+      expect(
+        find.byWidgetPredicate((widget) {
+          if (widget is Image) {
+            return widget.image == AssetImage(Images.icLauncherDark);
+          }
+          return false;
+        }),
+        findsOneWidget,
+      );
+
+      /// the button should be disable
+      expect(tester.widget<Button>(find.byType(Button)).onPressed, null);
+    },
+  );
   testWidgets(
     'renders LoginPage for form validation blank',
     (tester) async {

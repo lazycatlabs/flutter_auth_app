@@ -122,6 +122,8 @@ dart pub run build_runner build
 
 ![architecture-proposal](./architecture-proposal.png)
 
+## 📜 GNU General Public License v3.0
+
 <br><br>
 
 <h3 align="center">Buy me coffee if you love my works ☕️</h3>

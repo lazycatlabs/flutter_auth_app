@@ -15,6 +15,7 @@ class SplashScreenPage extends StatelessWidget {
           if (state is GeneralTokenStateSuccess)
             {context.goNamed(Routes.root.name)}
         },
+        //coverage:ignore-end
         child: ColoredBox(
           color: Theme.of(context).extension<LzyctColors>()!.background!,
           child: Center(

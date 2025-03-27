@@ -11,9 +11,10 @@ class SplashScreenPage extends StatelessWidget {
     return Parent(
       child: BlocListener<GeneralTokenCubit, GeneralTokenState>(
         //coverage:ignore-start
-        listener: (context, state) =>
-            state.whenOrNull(success: (_) => context.goNamed(Routes.root.name)),
-        //coverage:ignore-end
+        listener: (context, state) => {
+          if (state is GeneralTokenStateSuccess)
+            {context.goNamed(Routes.root.name)}
+        },
         child: ColoredBox(
           color: Theme.of(context).extension<LzyctColors>()!.background!,
           child: Center(

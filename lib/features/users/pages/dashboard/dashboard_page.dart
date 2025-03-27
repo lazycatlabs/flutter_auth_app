@@ -15,7 +15,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   late final ScrollController _scrollController = ScrollController()
-    ..addListener(() async {
+    ..addListener(() {
       //coverage:ignore-start
       if (_scrollController.position.atEdge &&
           _scrollController.position.pixels != 0) {
@@ -32,34 +32,30 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
         onRefresh: () => context.read<UsersCubit>().refresh(),
         child: BlocBuilder<UsersCubit, UsersState>(
-          builder: (_, state) {
-            return state.when(
-              initial: () => const SizedBox.shrink(),
-              //coverage:ignore-line
-              loading: () => const Center(child: Loading()),
-              success: (data) {
-                return ListView.builder(
-                  controller: _scrollController,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: data.currentPage == data.lastPage
-                      ? data.users?.length //coverage:ignore-line
-                      : ((data.users?.length ?? 0) + 1),
-                  padding: EdgeInsets.symmetric(vertical: Dimens.space16),
-                  itemBuilder: (_, index) {
-                    return index < (data.users?.length ?? 0)
-                        ? userItem(data.users![index])
-                        : Padding(
-                            padding: EdgeInsets.all(Dimens.space16),
-                            child: const Center(
-                              child: CupertinoActivityIndicator(),
-                            ),
-                          );
-                  },
-                );
-              },
-              failure: (message) => Center(child: Empty(errorMessage: message)),
-              empty: () => const Center(child: Empty()),
-            );
+          builder: (_, state) => switch (state) {
+            UsersStateLoading() => const Center(child: Loading()),
+            UsersStateInitial() => const SizedBox.shrink(),
+            UsersStateSuccess(:final data) => ListView.builder(
+                controller: _scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: data.currentPage == data.lastPage
+                    ? data.users?.length //coverage:ignore-line
+                    : ((data.users?.length ?? 0) + 1),
+                padding: EdgeInsets.symmetric(vertical: Dimens.space16),
+                itemBuilder: (_, index) {
+                  return index < (data.users?.length ?? 0)
+                      ? userItem(data.users![index])
+                      : Padding(
+                          padding: EdgeInsets.all(Dimens.space16),
+                          child: const Center(
+                            child: CupertinoActivityIndicator(),
+                          ),
+                        );
+                },
+              ),
+            UsersStateFailure(:final message) =>
+              Center(child: Empty(errorMessage: message)),
+            UsersStateEmpty() => const Center(child: Empty()),
           },
         ),
       ),

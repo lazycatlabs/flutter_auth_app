@@ -79,15 +79,18 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     BlocListener<LogoutCubit, LogoutState>(
-                      listener: (ctx, state) => state.whenOrNull(
-                        loading: () => ctx.show(),
-                        success: (message) {
-                          ctx.dismiss();
-                          message.toToastSuccess(context);
-                          context.goNamed(Routes.root.name);
-                          return;
-                        },
-                      ),
+                      listener: (ctx, state) => switch (state) {
+                        LogoutStateLoading() => ctx.show(),
+                        LogoutStateFailure(:final message) => (() {
+                            ctx.dismiss();
+                            message.toToastError(context);
+                          })(),
+                        LogoutStateSuccess(:final message) => (() {
+                            ctx.dismiss();
+                            message.toToastSuccess(context);
+                            context.goNamed(Routes.root.name);
+                          })()
+                      },
                       child: TextButton(
                         onPressed: () {
                           Navigator.pop(context);
@@ -123,15 +126,13 @@ class _MainPageState extends State<MainPage> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: BlocBuilder<MainCubit, MainState>(
-          builder: (_, state) {
-            return Text(
-              state.when(
-                loading: () => "-", //coverage:ignore-line
-                success: (data) => data?.title ?? "-",
-              ),
-              style: Theme.of(context).textTheme.titleLarge,
-            );
-          },
+          builder: (_, state) => Text(
+            switch (state) {
+              MainStateLoading() => "-",
+              MainStateSuccess(:final data) => data?.title ?? "-",
+            },
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         leading: IconButton(
           icon: Icon(

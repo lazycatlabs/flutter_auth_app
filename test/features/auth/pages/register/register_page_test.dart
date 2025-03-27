@@ -20,12 +20,12 @@ import '../../../../helpers/test_mock.mocks.dart';
 class MockRegisterCubit extends MockCubit<RegisterState>
     implements RegisterCubit {}
 
-class FakeRegisterState extends Fake implements RegisterState {}
+class FakeRegisterState extends Fake {}
 
 class MockReloadFormCubit extends MockCubit<ReloadFormState>
     implements ReloadFormCubit {}
 
-class FakeReloadFormState extends Fake implements ReloadFormState {}
+class FakeReloadFormState extends Fake  {}
 
 void main() {
   late RegisterCubit registerCubit;

@@ -23,7 +23,7 @@ import '../../../../helpers/test_mock.mocks.dart';
 
 class MockUsersCubit extends MockCubit<UsersState> implements UsersCubit {}
 
-class FakeUsersState extends Fake implements UsersState {}
+class FakeUsersState extends Fake {}
 
 void main() {
   late UsersCubit usersCubit;

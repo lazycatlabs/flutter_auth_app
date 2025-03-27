@@ -8,7 +8,6 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -34,22 +33,20 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Parent(
       child: BlocListener<AuthCubit, AuthState>(
-        listener: (_, state) =>
-        {
-          state.whenOrNull(
-            loading: () => context.show(),
-            success: (data) {
+        listener: (_, state) => switch (state) {
+          AuthStateLoading() => context.show(),
+          AuthStateSuccess(:final data) => (() {
               context.dismiss();
               data.toString().toToastSuccess(context);
 
               TextInput.finishAutofillContext();
               context.goNamed(Routes.root.name);
-            },
-            failure: (message) {
+            })(),
+          AuthStateFailure(:final message) => (() {
               context.dismiss();
               message.toToastError(context);
-            },
-          );
+            })(),
+          _ => {},
         },
         child: Center(
           child: SingleChildScrollView(

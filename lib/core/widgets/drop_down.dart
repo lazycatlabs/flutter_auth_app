@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
-///*********************************************
-/// Created by ukietux on 01/11/20 with ♥
-/// (>’_’)> email : ukie.tux@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
+
 class DropDown<T> extends StatefulWidget {
   const DropDown({
     super.key,

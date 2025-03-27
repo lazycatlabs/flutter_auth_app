@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-///*********************************************
-/// Created by ukietux on 24/08/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
+
 class Parent extends StatefulWidget {
   final Widget? child;
   final PreferredSize? appBar;

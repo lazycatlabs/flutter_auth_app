@@ -6,13 +6,6 @@ import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-///*********************************************
-/// Created by ukietux on 25/08/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
-
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 

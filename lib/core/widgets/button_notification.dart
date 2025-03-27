@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
-///*********************************************
-///  flutter_auth_app |
-///  button_notification.dart
-/// --------------------------------------------
-/// Created by Mudassir 🧑🏻‍💻 @ lazycatlabs.com
-/// on 📅 03/01/22 🕰 11:13 with ❤️
-/// ✉️ : hey.mudassir@gmail.com
-/// 🚀 : https://www.github.com/Lzyct
-/// 🌐 : https://www.lazycatlabs.com
-///*********************************************
-/// © 2022 | All Right Reserved
 class ButtonNotification extends StatelessWidget {
   const ButtonNotification({super.key});
 

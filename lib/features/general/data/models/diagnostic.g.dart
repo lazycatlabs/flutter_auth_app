@@ -6,13 +6,12 @@ part of 'diagnostic.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DiagnosticImpl _$$DiagnosticImplFromJson(Map<String, dynamic> json) =>
-    _$DiagnosticImpl(
+_Diagnostic _$DiagnosticFromJson(Map<String, dynamic> json) => _Diagnostic(
       status: json['status'] as String?,
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$$DiagnosticImplToJson(_$DiagnosticImpl instance) =>
+Map<String, dynamic> _$DiagnosticToJson(_Diagnostic instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,

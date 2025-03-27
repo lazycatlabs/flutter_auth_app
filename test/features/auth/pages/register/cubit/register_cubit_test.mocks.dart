@@ -25,13 +25,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeEither_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [PostRegister].
@@ -44,19 +39,17 @@ class MockPostRegister extends _i1.Mock implements _i3.PostRegister {
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i3.Register>> call(
-          _i3.RegisterParams? params) =>
+    _i3.RegisterParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [params],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i3.Register>>.value(
-            _FakeEither_0<_i5.Failure, _i3.Register>(
-          this,
-          Invocation.method(
-            #call,
-            [params],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i3.Register>>);
+            Invocation.method(#call, [params]),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.Failure, _i3.Register>>.value(
+                  _FakeEither_0<_i5.Failure, _i3.Register>(
+                    this,
+                    Invocation.method(#call, [params]),
+                  ),
+                ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, _i3.Register>>);
 }

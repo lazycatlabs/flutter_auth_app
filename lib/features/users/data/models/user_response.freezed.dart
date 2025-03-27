@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,180 +10,32 @@ part of 'user_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-UserResponse _$UserResponseFromJson(Map<String, dynamic> json) {
-  return _UserResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$UserResponse {
   @JsonKey(name: "diagnostic")
-  Diagnostic? get diagnostic => throw _privateConstructorUsedError;
+  Diagnostic? get diagnostic;
   @JsonKey(name: "data")
-  DataUser? get data => throw _privateConstructorUsedError;
-
-  /// Serializes this UserResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DataUser? get data;
 
   /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $UserResponseCopyWith<UserResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$UserResponseCopyWithImpl<UserResponse>(
+          this as UserResponse, _$identity);
 
-/// @nodoc
-abstract class $UserResponseCopyWith<$Res> {
-  factory $UserResponseCopyWith(
-          UserResponse value, $Res Function(UserResponse) then) =
-      _$UserResponseCopyWithImpl<$Res, UserResponse>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: "diagnostic") Diagnostic? diagnostic,
-      @JsonKey(name: "data") DataUser? data});
-
-  $DiagnosticCopyWith<$Res>? get diagnostic;
-  $DataUserCopyWith<$Res>? get data;
-}
-
-/// @nodoc
-class _$UserResponseCopyWithImpl<$Res, $Val extends UserResponse>
-    implements $UserResponseCopyWith<$Res> {
-  _$UserResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of UserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? diagnostic = freezed,
-    Object? data = freezed,
-  }) {
-    return _then(_value.copyWith(
-      diagnostic: freezed == diagnostic
-          ? _value.diagnostic
-          : diagnostic // ignore: cast_nullable_to_non_nullable
-              as Diagnostic?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as DataUser?,
-    ) as $Val);
-  }
-
-  /// Create a copy of UserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DiagnosticCopyWith<$Res>? get diagnostic {
-    if (_value.diagnostic == null) {
-      return null;
-    }
-
-    return $DiagnosticCopyWith<$Res>(_value.diagnostic!, (value) {
-      return _then(_value.copyWith(diagnostic: value) as $Val);
-    });
-  }
-
-  /// Create a copy of UserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DataUserCopyWith<$Res>? get data {
-    if (_value.data == null) {
-      return null;
-    }
-
-    return $DataUserCopyWith<$Res>(_value.data!, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$UserResponseImplCopyWith<$Res>
-    implements $UserResponseCopyWith<$Res> {
-  factory _$$UserResponseImplCopyWith(
-          _$UserResponseImpl value, $Res Function(_$UserResponseImpl) then) =
-      __$$UserResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: "diagnostic") Diagnostic? diagnostic,
-      @JsonKey(name: "data") DataUser? data});
-
-  @override
-  $DiagnosticCopyWith<$Res>? get diagnostic;
-  @override
-  $DataUserCopyWith<$Res>? get data;
-}
-
-/// @nodoc
-class __$$UserResponseImplCopyWithImpl<$Res>
-    extends _$UserResponseCopyWithImpl<$Res, _$UserResponseImpl>
-    implements _$$UserResponseImplCopyWith<$Res> {
-  __$$UserResponseImplCopyWithImpl(
-      _$UserResponseImpl _value, $Res Function(_$UserResponseImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of UserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? diagnostic = freezed,
-    Object? data = freezed,
-  }) {
-    return _then(_$UserResponseImpl(
-      diagnostic: freezed == diagnostic
-          ? _value.diagnostic
-          : diagnostic // ignore: cast_nullable_to_non_nullable
-              as Diagnostic?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as DataUser?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$UserResponseImpl extends _UserResponse {
-  const _$UserResponseImpl(
-      {@JsonKey(name: "diagnostic") this.diagnostic,
-      @JsonKey(name: "data") this.data})
-      : super._();
-
-  factory _$UserResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserResponseImplFromJson(json);
-
-  @override
-  @JsonKey(name: "diagnostic")
-  final Diagnostic? diagnostic;
-  @override
-  @JsonKey(name: "data")
-  final DataUser? data;
-
-  @override
-  String toString() {
-    return 'UserResponse(diagnostic: $diagnostic, data: $data)';
-  }
+  /// Serializes this UserResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserResponseImpl &&
+            other is UserResponse &&
             (identical(other.diagnostic, diagnostic) ||
                 other.diagnostic == diagnostic) &&
             (identical(other.data, data) || other.data == data));
@@ -192,42 +45,207 @@ class _$UserResponseImpl extends _UserResponse {
   @override
   int get hashCode => Object.hash(runtimeType, diagnostic, data);
 
-  /// Create a copy of UserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserResponseImplCopyWith<_$UserResponseImpl> get copyWith =>
-      __$$UserResponseImplCopyWithImpl<_$UserResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'UserResponse(diagnostic: $diagnostic, data: $data)';
   }
 }
 
-abstract class _UserResponse extends UserResponse {
-  const factory _UserResponse(
-      {@JsonKey(name: "diagnostic") final Diagnostic? diagnostic,
-      @JsonKey(name: "data") final DataUser? data}) = _$UserResponseImpl;
-  const _UserResponse._() : super._();
+/// @nodoc
+abstract mixin class $UserResponseCopyWith<$Res> {
+  factory $UserResponseCopyWith(
+          UserResponse value, $Res Function(UserResponse) _then) =
+      _$UserResponseCopyWithImpl;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "diagnostic") Diagnostic? diagnostic,
+      @JsonKey(name: "data") DataUser? data});
 
-  factory _UserResponse.fromJson(Map<String, dynamic> json) =
-      _$UserResponseImpl.fromJson;
+  $DiagnosticCopyWith<$Res>? get diagnostic;
+  $DataUserCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class _$UserResponseCopyWithImpl<$Res> implements $UserResponseCopyWith<$Res> {
+  _$UserResponseCopyWithImpl(this._self, this._then);
+
+  final UserResponse _self;
+  final $Res Function(UserResponse) _then;
+
+  /// Create a copy of UserResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? diagnostic = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_self.copyWith(
+      diagnostic: freezed == diagnostic
+          ? _self.diagnostic
+          : diagnostic // ignore: cast_nullable_to_non_nullable
+              as Diagnostic?,
+      data: freezed == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DataUser?,
+    ));
+  }
+
+  /// Create a copy of UserResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DiagnosticCopyWith<$Res>? get diagnostic {
+    if (_self.diagnostic == null) {
+      return null;
+    }
+
+    return $DiagnosticCopyWith<$Res>(_self.diagnostic!, (value) {
+      return _then(_self.copyWith(diagnostic: value));
+    });
+  }
+
+  /// Create a copy of UserResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DataUserCopyWith<$Res>? get data {
+    if (_self.data == null) {
+      return null;
+    }
+
+    return $DataUserCopyWith<$Res>(_self.data!, (value) {
+      return _then(_self.copyWith(data: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _UserResponse extends UserResponse {
+  const _UserResponse(
+      {@JsonKey(name: "diagnostic") this.diagnostic,
+      @JsonKey(name: "data") this.data})
+      : super._();
+  factory _UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
 
   @override
   @JsonKey(name: "diagnostic")
-  Diagnostic? get diagnostic;
+  final Diagnostic? diagnostic;
   @override
   @JsonKey(name: "data")
-  DataUser? get data;
+  final DataUser? data;
 
   /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserResponseImplCopyWith<_$UserResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$UserResponseCopyWith<_UserResponse> get copyWith =>
+      __$UserResponseCopyWithImpl<_UserResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserResponseToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UserResponse &&
+            (identical(other.diagnostic, diagnostic) ||
+                other.diagnostic == diagnostic) &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, diagnostic, data);
+
+  @override
+  String toString() {
+    return 'UserResponse(diagnostic: $diagnostic, data: $data)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$UserResponseCopyWith<$Res>
+    implements $UserResponseCopyWith<$Res> {
+  factory _$UserResponseCopyWith(
+          _UserResponse value, $Res Function(_UserResponse) _then) =
+      __$UserResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "diagnostic") Diagnostic? diagnostic,
+      @JsonKey(name: "data") DataUser? data});
+
+  @override
+  $DiagnosticCopyWith<$Res>? get diagnostic;
+  @override
+  $DataUserCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$UserResponseCopyWithImpl<$Res>
+    implements _$UserResponseCopyWith<$Res> {
+  __$UserResponseCopyWithImpl(this._self, this._then);
+
+  final _UserResponse _self;
+  final $Res Function(_UserResponse) _then;
+
+  /// Create a copy of UserResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? diagnostic = freezed,
+    Object? data = freezed,
+  }) {
+    return _then(_UserResponse(
+      diagnostic: freezed == diagnostic
+          ? _self.diagnostic
+          : diagnostic // ignore: cast_nullable_to_non_nullable
+              as Diagnostic?,
+      data: freezed == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DataUser?,
+    ));
+  }
+
+  /// Create a copy of UserResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DiagnosticCopyWith<$Res>? get diagnostic {
+    if (_self.diagnostic == null) {
+      return null;
+    }
+
+    return $DiagnosticCopyWith<$Res>(_self.diagnostic!, (value) {
+      return _then(_self.copyWith(diagnostic: value));
+    });
+  }
+
+  /// Create a copy of UserResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DataUserCopyWith<$Res>? get data {
+    if (_self.data == null) {
+      return null;
+    }
+
+    return $DataUserCopyWith<$Res>(_self.data!, (value) {
+      return _then(_self.copyWith(data: value));
+    });
+  }
+}
+
+// dart format on

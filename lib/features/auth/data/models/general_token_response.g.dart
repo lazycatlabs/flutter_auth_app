@@ -6,9 +6,9 @@ part of 'general_token_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GeneralTokenResponseImpl _$$GeneralTokenResponseImplFromJson(
+_GeneralTokenResponse _$GeneralTokenResponseFromJson(
         Map<String, dynamic> json) =>
-    _$GeneralTokenResponseImpl(
+    _GeneralTokenResponse(
       diagnostic: json['diagnostic'] == null
           ? null
           : Diagnostic.fromJson(json['diagnostic'] as Map<String, dynamic>),
@@ -17,22 +17,20 @@ _$GeneralTokenResponseImpl _$$GeneralTokenResponseImplFromJson(
           : DataGeneralToken.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$GeneralTokenResponseImplToJson(
-        _$GeneralTokenResponseImpl instance) =>
+Map<String, dynamic> _$GeneralTokenResponseToJson(
+        _GeneralTokenResponse instance) =>
     <String, dynamic>{
       'diagnostic': instance.diagnostic?.toJson(),
       'data': instance.data?.toJson(),
     };
 
-_$DataGeneralTokenImpl _$$DataGeneralTokenImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DataGeneralTokenImpl(
+_DataGeneralToken _$DataGeneralTokenFromJson(Map<String, dynamic> json) =>
+    _DataGeneralToken(
       token: json['token'] as String?,
       tokenType: json['tokenType'] as String?,
     );
 
-Map<String, dynamic> _$$DataGeneralTokenImplToJson(
-        _$DataGeneralTokenImpl instance) =>
+Map<String, dynamic> _$DataGeneralTokenToJson(_DataGeneralToken instance) =>
     <String, dynamic>{
       'token': instance.token,
       'tokenType': instance.tokenType,

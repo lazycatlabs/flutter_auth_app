@@ -4,7 +4,7 @@ part 'page.freezed.dart';
 part 'page.g.dart';
 
 @freezed
-class Page with _$Page {
+abstract class Page with _$Page {
   const factory Page({
     @JsonKey(name: "currentPage") int? currentPage,
     @JsonKey(name: "perPage") int? perPage,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,75 +10,53 @@ part of 'general_token.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GeneralToken {
-  String? get token => throw _privateConstructorUsedError;
+  String? get token;
 
   /// Create a copy of GeneralToken
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GeneralTokenCopyWith<GeneralToken> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GeneralTokenCopyWith<$Res> {
-  factory $GeneralTokenCopyWith(
-          GeneralToken value, $Res Function(GeneralToken) then) =
-      _$GeneralTokenCopyWithImpl<$Res, GeneralToken>;
-  @useResult
-  $Res call({String? token});
-}
-
-/// @nodoc
-class _$GeneralTokenCopyWithImpl<$Res, $Val extends GeneralToken>
-    implements $GeneralTokenCopyWith<$Res> {
-  _$GeneralTokenCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GeneralToken
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GeneralTokenCopyWith<GeneralToken> get copyWith =>
+      _$GeneralTokenCopyWithImpl<GeneralToken>(
+          this as GeneralToken, _$identity);
+
   @override
-  $Res call({
-    Object? token = freezed,
-  }) {
-    return _then(_value.copyWith(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GeneralToken &&
+            (identical(other.token, token) || other.token == token));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, token);
+
+  @override
+  String toString() {
+    return 'GeneralToken(token: $token)';
   }
 }
 
 /// @nodoc
-abstract class _$$GeneralTokenImplCopyWith<$Res>
-    implements $GeneralTokenCopyWith<$Res> {
-  factory _$$GeneralTokenImplCopyWith(
-          _$GeneralTokenImpl value, $Res Function(_$GeneralTokenImpl) then) =
-      __$$GeneralTokenImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GeneralTokenCopyWith<$Res> {
+  factory $GeneralTokenCopyWith(
+          GeneralToken value, $Res Function(GeneralToken) _then) =
+      _$GeneralTokenCopyWithImpl;
   @useResult
   $Res call({String? token});
 }
 
 /// @nodoc
-class __$$GeneralTokenImplCopyWithImpl<$Res>
-    extends _$GeneralTokenCopyWithImpl<$Res, _$GeneralTokenImpl>
-    implements _$$GeneralTokenImplCopyWith<$Res> {
-  __$$GeneralTokenImplCopyWithImpl(
-      _$GeneralTokenImpl _value, $Res Function(_$GeneralTokenImpl) _then)
-      : super(_value, _then);
+class _$GeneralTokenCopyWithImpl<$Res> implements $GeneralTokenCopyWith<$Res> {
+  _$GeneralTokenCopyWithImpl(this._self, this._then);
+
+  final GeneralToken _self;
+  final $Res Function(GeneralToken) _then;
 
   /// Create a copy of GeneralToken
   /// with the given fields replaced by the non-null parameter values.
@@ -86,9 +65,9 @@ class __$$GeneralTokenImplCopyWithImpl<$Res>
   $Res call({
     Object? token = freezed,
   }) {
-    return _then(_$GeneralTokenImpl(
+    return _then(_self.copyWith(
       token: freezed == token
-          ? _value.token
+          ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -97,47 +76,70 @@ class __$$GeneralTokenImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GeneralTokenImpl implements _GeneralToken {
-  const _$GeneralTokenImpl({this.token});
+class _GeneralToken implements GeneralToken {
+  const _GeneralToken({this.token});
 
   @override
   final String? token;
 
+  /// Create a copy of GeneralToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GeneralToken(token: $token)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GeneralTokenCopyWith<_GeneralToken> get copyWith =>
+      __$GeneralTokenCopyWithImpl<_GeneralToken>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GeneralTokenImpl &&
+            other is _GeneralToken &&
             (identical(other.token, token) || other.token == token));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, token);
 
+  @override
+  String toString() {
+    return 'GeneralToken(token: $token)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$GeneralTokenCopyWith<$Res>
+    implements $GeneralTokenCopyWith<$Res> {
+  factory _$GeneralTokenCopyWith(
+          _GeneralToken value, $Res Function(_GeneralToken) _then) =
+      __$GeneralTokenCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? token});
+}
+
+/// @nodoc
+class __$GeneralTokenCopyWithImpl<$Res>
+    implements _$GeneralTokenCopyWith<$Res> {
+  __$GeneralTokenCopyWithImpl(this._self, this._then);
+
+  final _GeneralToken _self;
+  final $Res Function(_GeneralToken) _then;
+
   /// Create a copy of GeneralToken
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GeneralTokenImplCopyWith<_$GeneralTokenImpl> get copyWith =>
-      __$$GeneralTokenImplCopyWithImpl<_$GeneralTokenImpl>(this, _$identity);
+  $Res call({
+    Object? token = freezed,
+  }) {
+    return _then(_GeneralToken(
+      token: freezed == token
+          ? _self.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _GeneralToken implements GeneralToken {
-  const factory _GeneralToken({final String? token}) = _$GeneralTokenImpl;
-
-  @override
-  String? get token;
-
-  /// Create a copy of GeneralToken
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GeneralTokenImplCopyWith<_$GeneralTokenImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

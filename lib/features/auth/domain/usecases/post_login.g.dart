@@ -6,8 +6,7 @@ part of 'post_login.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LoginParamsImpl _$$LoginParamsImplFromJson(Map<String, dynamic> json) =>
-    _$LoginParamsImpl(
+_LoginParams _$LoginParamsFromJson(Map<String, dynamic> json) => _LoginParams(
       email: json['email'] as String? ?? "",
       password: json['password'] as String? ?? "",
       osInfo: json['osInfo'] as String?,
@@ -15,7 +14,7 @@ _$LoginParamsImpl _$$LoginParamsImplFromJson(Map<String, dynamic> json) =>
       fcmToken: json['fcmToken'] as String? ?? "GeneratedFCMToken",
     );
 
-Map<String, dynamic> _$$LoginParamsImplToJson(_$LoginParamsImpl instance) =>
+Map<String, dynamic> _$LoginParamsToJson(_LoginParams instance) =>
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,

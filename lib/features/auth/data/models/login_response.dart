@@ -6,7 +6,7 @@ part 'login_response.freezed.dart';
 part 'login_response.g.dart';
 
 @freezed
-class LoginResponse with _$LoginResponse {
+abstract class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
     @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
     @JsonKey(name: "data") DataLogin? data,
@@ -21,7 +21,7 @@ class LoginResponse with _$LoginResponse {
 }
 
 @freezed
-class DataLogin with _$DataLogin {
+abstract class DataLogin with _$DataLogin {
   const factory DataLogin({
     @JsonKey(name: "token") String? token,
     @JsonKey(name: "tokenType") String? tokenType,

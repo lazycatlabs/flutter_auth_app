@@ -6,7 +6,7 @@ part 'users_response.freezed.dart';
 part 'users_response.g.dart';
 
 @freezed
-class UsersResponse with _$UsersResponse {
+abstract class UsersResponse with _$UsersResponse {
   const factory UsersResponse({
     @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
     @JsonKey(name: "data") List<DataUser>? data,
@@ -36,7 +36,7 @@ class UsersResponse with _$UsersResponse {
 }
 
 @freezed
-class DataUser with _$DataUser {
+abstract class DataUser with _$DataUser {
   const factory DataUser({
     @JsonKey(name: "id") String? id,
     @JsonKey(name: "name") String? name,

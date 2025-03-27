@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,74 +10,51 @@ part of 'register.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Register {
-  String? get message => throw _privateConstructorUsedError;
+  String? get message;
 
   /// Create a copy of Register
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RegisterCopyWith<Register> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RegisterCopyWith<$Res> {
-  factory $RegisterCopyWith(Register value, $Res Function(Register) then) =
-      _$RegisterCopyWithImpl<$Res, Register>;
-  @useResult
-  $Res call({String? message});
-}
-
-/// @nodoc
-class _$RegisterCopyWithImpl<$Res, $Val extends Register>
-    implements $RegisterCopyWith<$Res> {
-  _$RegisterCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Register
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $RegisterCopyWith<Register> get copyWith =>
+      _$RegisterCopyWithImpl<Register>(this as Register, _$identity);
+
   @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_value.copyWith(
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Register &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @override
+  String toString() {
+    return 'Register(message: $message)';
   }
 }
 
 /// @nodoc
-abstract class _$$RegisterImplCopyWith<$Res>
-    implements $RegisterCopyWith<$Res> {
-  factory _$$RegisterImplCopyWith(
-          _$RegisterImpl value, $Res Function(_$RegisterImpl) then) =
-      __$$RegisterImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $RegisterCopyWith<$Res> {
+  factory $RegisterCopyWith(Register value, $Res Function(Register) _then) =
+      _$RegisterCopyWithImpl;
   @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$RegisterImplCopyWithImpl<$Res>
-    extends _$RegisterCopyWithImpl<$Res, _$RegisterImpl>
-    implements _$$RegisterImplCopyWith<$Res> {
-  __$$RegisterImplCopyWithImpl(
-      _$RegisterImpl _value, $Res Function(_$RegisterImpl) _then)
-      : super(_value, _then);
+class _$RegisterCopyWithImpl<$Res> implements $RegisterCopyWith<$Res> {
+  _$RegisterCopyWithImpl(this._self, this._then);
+
+  final Register _self;
+  final $Res Function(Register) _then;
 
   /// Create a copy of Register
   /// with the given fields replaced by the non-null parameter values.
@@ -85,9 +63,9 @@ class __$$RegisterImplCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_$RegisterImpl(
+    return _then(_self.copyWith(
       message: freezed == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -96,47 +74,68 @@ class __$$RegisterImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RegisterImpl implements _Register {
-  const _$RegisterImpl({this.message});
+class _Register implements Register {
+  const _Register({this.message});
 
   @override
   final String? message;
 
+  /// Create a copy of Register
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Register(message: $message)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RegisterCopyWith<_Register> get copyWith =>
+      __$RegisterCopyWithImpl<_Register>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RegisterImpl &&
+            other is _Register &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
+  @override
+  String toString() {
+    return 'Register(message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RegisterCopyWith<$Res>
+    implements $RegisterCopyWith<$Res> {
+  factory _$RegisterCopyWith(_Register value, $Res Function(_Register) _then) =
+      __$RegisterCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? message});
+}
+
+/// @nodoc
+class __$RegisterCopyWithImpl<$Res> implements _$RegisterCopyWith<$Res> {
+  __$RegisterCopyWithImpl(this._self, this._then);
+
+  final _Register _self;
+  final $Res Function(_Register) _then;
+
   /// Create a copy of Register
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
-      __$$RegisterImplCopyWithImpl<_$RegisterImpl>(this, _$identity);
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_Register(
+      message: freezed == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _Register implements Register {
-  const factory _Register({final String? message}) = _$RegisterImpl;
-
-  @override
-  String? get message;
-
-  /// Create a copy of Register
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

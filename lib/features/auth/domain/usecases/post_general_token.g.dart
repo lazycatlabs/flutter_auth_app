@@ -6,15 +6,13 @@ part of 'post_general_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GeneralTokenParamsImpl _$$GeneralTokenParamsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$GeneralTokenParamsImpl(
+_GeneralTokenParams _$GeneralTokenParamsFromJson(Map<String, dynamic> json) =>
+    _GeneralTokenParams(
       clientId: json['clientId'] as String?,
       clientSecret: json['clientSecret'] as String?,
     );
 
-Map<String, dynamic> _$$GeneralTokenParamsImplToJson(
-        _$GeneralTokenParamsImpl instance) =>
+Map<String, dynamic> _$GeneralTokenParamsToJson(_GeneralTokenParams instance) =>
     <String, dynamic>{
       'clientId': instance.clientId,
       'clientSecret': instance.clientSecret,

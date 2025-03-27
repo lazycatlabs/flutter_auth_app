@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'data_helper.freezed.dart';
 
 @unfreezed
-class DataHelper with _$DataHelper {
+abstract class DataHelper with _$DataHelper {
   factory DataHelper({
     String? title,
     String? desc,

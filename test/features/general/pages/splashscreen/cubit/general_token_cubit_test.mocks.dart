@@ -25,13 +25,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeEither_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [PostGeneralToken].
@@ -44,20 +39,17 @@ class MockPostGeneralToken extends _i1.Mock implements _i3.PostGeneralToken {
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i3.GeneralToken>> call(
-          _i3.GeneralTokenParams? params) =>
+    _i3.GeneralTokenParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [params],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.Failure, _i3.GeneralToken>>.value(
-                _FakeEither_0<_i5.Failure, _i3.GeneralToken>(
-          this,
-          Invocation.method(
-            #call,
-            [params],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i3.GeneralToken>>);
+            Invocation.method(#call, [params]),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.Failure, _i3.GeneralToken>>.value(
+                  _FakeEither_0<_i5.Failure, _i3.GeneralToken>(
+                    this,
+                    Invocation.method(#call, [params]),
+                  ),
+                ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, _i3.GeneralToken>>);
 }

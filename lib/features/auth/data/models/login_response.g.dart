@@ -6,8 +6,8 @@ part of 'login_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
-    _$LoginResponseImpl(
+_LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
+    _LoginResponse(
       diagnostic: json['diagnostic'] == null
           ? null
           : Diagnostic.fromJson(json['diagnostic'] as Map<String, dynamic>),
@@ -16,19 +16,18 @@ _$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
           : DataLogin.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$LoginResponseImplToJson(_$LoginResponseImpl instance) =>
+Map<String, dynamic> _$LoginResponseToJson(_LoginResponse instance) =>
     <String, dynamic>{
       'diagnostic': instance.diagnostic?.toJson(),
       'data': instance.data?.toJson(),
     };
 
-_$DataLoginImpl _$$DataLoginImplFromJson(Map<String, dynamic> json) =>
-    _$DataLoginImpl(
+_DataLogin _$DataLoginFromJson(Map<String, dynamic> json) => _DataLogin(
       token: json['token'] as String?,
       tokenType: json['tokenType'] as String?,
     );
 
-Map<String, dynamic> _$$DataLoginImplToJson(_$DataLoginImpl instance) =>
+Map<String, dynamic> _$DataLoginToJson(_DataLogin instance) =>
     <String, dynamic>{
       'token': instance.token,
       'tokenType': instance.tokenType,

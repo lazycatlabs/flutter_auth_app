@@ -20,7 +20,7 @@ class UserCubit extends Cubit<UserState> {
   }
 }
 @freezed
-abstract class UserState with _$UserState {
+sealed class UserState with _$UserState {
   const factory UserState.loading() = UserStateLoading;
   const factory UserState.failure(String message) = UserStateFailure;
   const factory UserState.success(User? data) = UserStateSuccess;

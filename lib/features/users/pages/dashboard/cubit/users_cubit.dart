@@ -63,7 +63,7 @@ class UsersCubit extends Cubit<UsersState> {
   }
 }
 @freezed
-abstract class UsersState with _$UsersState {
+sealed class UsersState with _$UsersState {
   const factory UsersState.loading() = UsersStateLoading;
   const factory UsersState.initial() = UsersStateInitial;
   const factory UsersState.success(Users data) = UsersStateSuccess;

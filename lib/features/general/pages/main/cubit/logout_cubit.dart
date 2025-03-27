@@ -25,7 +25,7 @@ class LogoutCubit extends Cubit<LogoutState> {
   }
 }
 @freezed
-abstract class LogoutState with _$LogoutState {
+sealed class LogoutState with _$LogoutState {
   const factory LogoutState.loading() = LogoutStateLoading;
   const factory LogoutState.failure(String message) = LogoutStateFailure;
   const factory LogoutState.success(String message) = LogoutStateSuccess;

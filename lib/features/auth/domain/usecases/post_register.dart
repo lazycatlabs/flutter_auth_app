@@ -17,7 +17,7 @@ class PostRegister extends UseCase<Register, RegisterParams> {
 }
 
 @freezed
-abstract class RegisterParams with _$RegisterParams {
+sealed class RegisterParams with _$RegisterParams {
   const factory RegisterParams({
     String? name,
     String? email,

@@ -24,7 +24,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 }
 @freezed
-abstract class RegisterState with _$RegisterState {
+sealed class RegisterState with _$RegisterState {
   const factory RegisterState.loading() = RegisterStateLoading;
   const factory RegisterState.success(Register? data) = RegisterStateSuccess;
   const factory RegisterState.failure(String message) = RegisterStateFailure;

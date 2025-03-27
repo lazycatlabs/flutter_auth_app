@@ -25,7 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 }
 @freezed
-abstract class AuthState with _$AuthState {
+sealed class AuthState with _$AuthState {
   const factory AuthState.loading() = AuthStateLoading;
   const factory AuthState.success(String? data) = AuthStateSuccess;
   const factory AuthState.failure(String message) = AuthStateFailure;

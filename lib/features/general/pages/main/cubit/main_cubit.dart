@@ -59,7 +59,7 @@ class MainCubit extends Cubit<MainState> {
   }
 }
 @freezed
-abstract class MainState with _$MainState {
+sealed class MainState with _$MainState {
   const factory MainState.loading() = MainStateLoading;
   const factory MainState.success(DataHelper? data) = MainStateSuccess;
 }

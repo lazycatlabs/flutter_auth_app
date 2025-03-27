@@ -25,7 +25,7 @@ class GeneralTokenCubit extends Cubit<GeneralTokenState> {
   }
 }
 @freezed
-abstract class GeneralTokenState with _$GeneralTokenState {
+sealed class GeneralTokenState with _$GeneralTokenState {
   const factory GeneralTokenState.loading() = GeneralTokenStateLoading;
 
   const factory GeneralTokenState.success(String? data) = GeneralTokenStateSuccess;

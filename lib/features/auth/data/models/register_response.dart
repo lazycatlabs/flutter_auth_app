@@ -6,7 +6,7 @@ part 'register_response.freezed.dart';
 part 'register_response.g.dart';
 
 @freezed
-abstract class RegisterResponse with _$RegisterResponse {
+sealed class RegisterResponse with _$RegisterResponse {
   const factory RegisterResponse({
     @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
     @JsonKey(name: "data") DataRegister? data,
@@ -21,7 +21,7 @@ abstract class RegisterResponse with _$RegisterResponse {
 }
 
 @freezed
-abstract class DataRegister with _$DataRegister {
+sealed class DataRegister with _$DataRegister {
   const factory DataRegister({
     @JsonKey(name: "id") String? id,
     @JsonKey(name: "name") String? name,

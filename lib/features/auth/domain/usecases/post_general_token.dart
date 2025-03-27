@@ -17,7 +17,7 @@ class PostGeneralToken extends UseCase<GeneralToken, GeneralTokenParams> {
 }
 
 @freezed
-abstract class GeneralTokenParams with _$GeneralTokenParams {
+sealed class GeneralTokenParams with _$GeneralTokenParams {
   const factory GeneralTokenParams({
     String? clientId,
     String? clientSecret,

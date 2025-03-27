@@ -37,13 +37,13 @@ class $RegisterStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements RegisterState {
-  const _Loading();
+class RegisterStateLoading implements RegisterState {
+  const RegisterStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is RegisterStateLoading);
   }
 
   @override
@@ -57,8 +57,8 @@ class _Loading implements RegisterState {
 
 /// @nodoc
 
-class _Success implements RegisterState {
-  const _Success(this.data);
+class RegisterStateSuccess implements RegisterState {
+  const RegisterStateSuccess(this.data);
 
   final Register? data;
 
@@ -66,14 +66,15 @@ class _Success implements RegisterState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $RegisterStateSuccessCopyWith<RegisterStateSuccess> get copyWith =>
+      _$RegisterStateSuccessCopyWithImpl<RegisterStateSuccess>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is RegisterStateSuccess &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -87,10 +88,11 @@ class _Success implements RegisterState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $RegisterStateSuccessCopyWith<$Res>
     implements $RegisterStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $RegisterStateSuccessCopyWith(RegisterStateSuccess value,
+          $Res Function(RegisterStateSuccess) _then) =
+      _$RegisterStateSuccessCopyWithImpl;
   @useResult
   $Res call({Register? data});
 
@@ -98,11 +100,12 @@ abstract mixin class _$SuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$RegisterStateSuccessCopyWithImpl<$Res>
+    implements $RegisterStateSuccessCopyWith<$Res> {
+  _$RegisterStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final RegisterStateSuccess _self;
+  final $Res Function(RegisterStateSuccess) _then;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -110,7 +113,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_Success(
+    return _then(RegisterStateSuccess(
       freezed == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -135,8 +138,8 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
 
 /// @nodoc
 
-class _Failure implements RegisterState {
-  const _Failure(this.message);
+class RegisterStateFailure implements RegisterState {
+  const RegisterStateFailure(this.message);
 
   final String message;
 
@@ -144,14 +147,15 @@ class _Failure implements RegisterState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
+  $RegisterStateFailureCopyWith<RegisterStateFailure> get copyWith =>
+      _$RegisterStateFailureCopyWithImpl<RegisterStateFailure>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure &&
+            other is RegisterStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -165,20 +169,22 @@ class _Failure implements RegisterState {
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res>
+abstract mixin class $RegisterStateFailureCopyWith<$Res>
     implements $RegisterStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) =
-      __$FailureCopyWithImpl;
+  factory $RegisterStateFailureCopyWith(RegisterStateFailure value,
+          $Res Function(RegisterStateFailure) _then) =
+      _$RegisterStateFailureCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$RegisterStateFailureCopyWithImpl<$Res>
+    implements $RegisterStateFailureCopyWith<$Res> {
+  _$RegisterStateFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final RegisterStateFailure _self;
+  final $Res Function(RegisterStateFailure) _then;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -186,7 +192,7 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Failure(
+    return _then(RegisterStateFailure(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -197,13 +203,13 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
 
 /// @nodoc
 
-class _Init implements RegisterState {
-  const _Init();
+class RegisterStateInit implements RegisterState {
+  const RegisterStateInit();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Init);
+        (other.runtimeType == runtimeType && other is RegisterStateInit);
   }
 
   @override
@@ -217,13 +223,14 @@ class _Init implements RegisterState {
 
 /// @nodoc
 
-class _ShowHidePassword implements RegisterState {
-  const _ShowHidePassword();
+class RegisterStateShowHidePassword implements RegisterState {
+  const RegisterStateShowHidePassword();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ShowHidePassword);
+        (other.runtimeType == runtimeType &&
+            other is RegisterStateShowHidePassword);
   }
 
   @override

@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'users_cubit.freezed.dart';
-part 'users_state.dart';
 
 class UsersCubit extends Cubit<UsersState> {
-  UsersCubit(this._getUser) : super(const _Loading());
+  UsersCubit(this._getUser) : super(const UsersStateLoading());
 
   int currentPage = 1;
   int lastPage = 1;
@@ -35,15 +34,15 @@ class UsersCubit extends Cubit<UsersState> {
   }
 
   Future<void> fetchUsers(UsersParams usersParams) async {
-    if (currentPage == 1) emit(const _Loading());
+    if (currentPage == 1) emit(const UsersStateLoading());
 
     final data = await _getUser.call(usersParams);
     data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(_Failure(l.message ?? ""));
+          emit(UsersStateFailure(l.message ?? ""));
         } else if (l is NoDataFailure) {
-          emit(const _Empty());
+          emit(const UsersStateEmpty());
         }
       },
       (r) {
@@ -57,9 +56,17 @@ class UsersCubit extends Cubit<UsersState> {
           users: users,
         );
 
-        if (currentPage != 1) emit(const _Initial());
-        emit(_Success(updatedUsers));
+        if (currentPage != 1) emit(const UsersStateInitial());
+        emit(UsersStateSuccess(updatedUsers));
       },
     );
   }
+}
+@freezed
+abstract class UsersState with _$UsersState {
+  const factory UsersState.loading() = UsersStateLoading;
+  const factory UsersState.initial() = UsersStateInitial;
+  const factory UsersState.success(Users data) = UsersStateSuccess;
+  const factory UsersState.failure(String message) = UsersStateFailure;
+  const factory UsersState.empty() = UsersStateEmpty;
 }

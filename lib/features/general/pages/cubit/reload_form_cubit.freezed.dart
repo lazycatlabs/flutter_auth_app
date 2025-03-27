@@ -38,13 +38,13 @@ class $ReloadFormStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Initial implements ReloadFormState {
-  const _Initial();
+class ReloadFormStateInitial implements ReloadFormState {
+  const ReloadFormStateInitial();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
+        (other.runtimeType == runtimeType && other is ReloadFormStateInitial);
   }
 
   @override
@@ -58,13 +58,14 @@ class _Initial implements ReloadFormState {
 
 /// @nodoc
 
-class _FormUpdated implements ReloadFormState {
-  const _FormUpdated();
+class ReloadFormStateFormUpdate implements ReloadFormState {
+  const ReloadFormStateFormUpdate();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _FormUpdated);
+        (other.runtimeType == runtimeType &&
+            other is ReloadFormStateFormUpdate);
   }
 
   @override

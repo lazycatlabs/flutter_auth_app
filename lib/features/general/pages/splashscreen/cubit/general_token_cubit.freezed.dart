@@ -38,13 +38,13 @@ class $GeneralTokenStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements GeneralTokenState {
-  const _Loading();
+class GeneralTokenStateLoading implements GeneralTokenState {
+  const GeneralTokenStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is GeneralTokenStateLoading);
   }
 
   @override
@@ -58,8 +58,8 @@ class _Loading implements GeneralTokenState {
 
 /// @nodoc
 
-class _Success implements GeneralTokenState {
-  const _Success(this.data);
+class GeneralTokenStateSuccess implements GeneralTokenState {
+  const GeneralTokenStateSuccess(this.data);
 
   final String? data;
 
@@ -67,14 +67,15 @@ class _Success implements GeneralTokenState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $GeneralTokenStateSuccessCopyWith<GeneralTokenStateSuccess> get copyWith =>
+      _$GeneralTokenStateSuccessCopyWithImpl<GeneralTokenStateSuccess>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is GeneralTokenStateSuccess &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -88,20 +89,22 @@ class _Success implements GeneralTokenState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $GeneralTokenStateSuccessCopyWith<$Res>
     implements $GeneralTokenStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $GeneralTokenStateSuccessCopyWith(GeneralTokenStateSuccess value,
+          $Res Function(GeneralTokenStateSuccess) _then) =
+      _$GeneralTokenStateSuccessCopyWithImpl;
   @useResult
   $Res call({String? data});
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$GeneralTokenStateSuccessCopyWithImpl<$Res>
+    implements $GeneralTokenStateSuccessCopyWith<$Res> {
+  _$GeneralTokenStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final GeneralTokenStateSuccess _self;
+  final $Res Function(GeneralTokenStateSuccess) _then;
 
   /// Create a copy of GeneralTokenState
   /// with the given fields replaced by the non-null parameter values.
@@ -109,7 +112,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_Success(
+    return _then(GeneralTokenStateSuccess(
       freezed == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -120,8 +123,8 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
 
 /// @nodoc
 
-class _Failure implements GeneralTokenState {
-  const _Failure(this.message);
+class GeneralTokenStateFailure implements GeneralTokenState {
+  const GeneralTokenStateFailure(this.message);
 
   final String message;
 
@@ -129,14 +132,15 @@ class _Failure implements GeneralTokenState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
+  $GeneralTokenStateFailureCopyWith<GeneralTokenStateFailure> get copyWith =>
+      _$GeneralTokenStateFailureCopyWithImpl<GeneralTokenStateFailure>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure &&
+            other is GeneralTokenStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -150,20 +154,22 @@ class _Failure implements GeneralTokenState {
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res>
+abstract mixin class $GeneralTokenStateFailureCopyWith<$Res>
     implements $GeneralTokenStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) =
-      __$FailureCopyWithImpl;
+  factory $GeneralTokenStateFailureCopyWith(GeneralTokenStateFailure value,
+          $Res Function(GeneralTokenStateFailure) _then) =
+      _$GeneralTokenStateFailureCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$GeneralTokenStateFailureCopyWithImpl<$Res>
+    implements $GeneralTokenStateFailureCopyWith<$Res> {
+  _$GeneralTokenStateFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final GeneralTokenStateFailure _self;
+  final $Res Function(GeneralTokenStateFailure) _then;
 
   /// Create a copy of GeneralTokenState
   /// with the given fields replaced by the non-null parameter values.
@@ -171,7 +177,7 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Failure(
+    return _then(GeneralTokenStateFailure(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

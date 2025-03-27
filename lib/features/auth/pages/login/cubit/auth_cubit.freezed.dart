@@ -37,13 +37,13 @@ class $AuthStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements AuthState {
-  const _Loading();
+class AuthStateLoading implements AuthState {
+  const AuthStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is AuthStateLoading);
   }
 
   @override
@@ -57,8 +57,8 @@ class _Loading implements AuthState {
 
 /// @nodoc
 
-class _Success implements AuthState {
-  const _Success(this.data);
+class AuthStateSuccess implements AuthState {
+  const AuthStateSuccess(this.data);
 
   final String? data;
 
@@ -66,14 +66,14 @@ class _Success implements AuthState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $AuthStateSuccessCopyWith<AuthStateSuccess> get copyWith =>
+      _$AuthStateSuccessCopyWithImpl<AuthStateSuccess>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is AuthStateSuccess &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -87,20 +87,22 @@ class _Success implements AuthState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $AuthStateSuccessCopyWith<$Res>
     implements $AuthStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $AuthStateSuccessCopyWith(
+          AuthStateSuccess value, $Res Function(AuthStateSuccess) _then) =
+      _$AuthStateSuccessCopyWithImpl;
   @useResult
   $Res call({String? data});
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$AuthStateSuccessCopyWithImpl<$Res>
+    implements $AuthStateSuccessCopyWith<$Res> {
+  _$AuthStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final AuthStateSuccess _self;
+  final $Res Function(AuthStateSuccess) _then;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -108,7 +110,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_Success(
+    return _then(AuthStateSuccess(
       freezed == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -119,8 +121,8 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
 
 /// @nodoc
 
-class _Failure implements AuthState {
-  const _Failure(this.message);
+class AuthStateFailure implements AuthState {
+  const AuthStateFailure(this.message);
 
   final String message;
 
@@ -128,14 +130,14 @@ class _Failure implements AuthState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
+  $AuthStateFailureCopyWith<AuthStateFailure> get copyWith =>
+      _$AuthStateFailureCopyWithImpl<AuthStateFailure>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure &&
+            other is AuthStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -149,20 +151,22 @@ class _Failure implements AuthState {
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res>
+abstract mixin class $AuthStateFailureCopyWith<$Res>
     implements $AuthStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) =
-      __$FailureCopyWithImpl;
+  factory $AuthStateFailureCopyWith(
+          AuthStateFailure value, $Res Function(AuthStateFailure) _then) =
+      _$AuthStateFailureCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$AuthStateFailureCopyWithImpl<$Res>
+    implements $AuthStateFailureCopyWith<$Res> {
+  _$AuthStateFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final AuthStateFailure _self;
+  final $Res Function(AuthStateFailure) _then;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -170,7 +174,7 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Failure(
+    return _then(AuthStateFailure(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -181,13 +185,13 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
 
 /// @nodoc
 
-class _ShowHide implements AuthState {
-  const _ShowHide();
+class AuthStateShowHide implements AuthState {
+  const AuthStateShowHide();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ShowHide);
+        (other.runtimeType == runtimeType && other is AuthStateShowHide);
   }
 
   @override
@@ -201,13 +205,13 @@ class _ShowHide implements AuthState {
 
 /// @nodoc
 
-class _Init implements AuthState {
-  const _Init();
+class AuthStateInit implements AuthState {
+  const AuthStateInit();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Init);
+        (other.runtimeType == runtimeType && other is AuthStateInit);
   }
 
   @override

@@ -37,13 +37,13 @@ class $MainStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements MainState {
-  const _Loading();
+class MainStateLoading implements MainState {
+  const MainStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is MainStateLoading);
   }
 
   @override
@@ -57,8 +57,8 @@ class _Loading implements MainState {
 
 /// @nodoc
 
-class _Success implements MainState {
-  const _Success(this.data);
+class MainStateSuccess implements MainState {
+  const MainStateSuccess(this.data);
 
   final DataHelper? data;
 
@@ -66,14 +66,14 @@ class _Success implements MainState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $MainStateSuccessCopyWith<MainStateSuccess> get copyWith =>
+      _$MainStateSuccessCopyWithImpl<MainStateSuccess>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is MainStateSuccess &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -87,10 +87,11 @@ class _Success implements MainState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $MainStateSuccessCopyWith<$Res>
     implements $MainStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $MainStateSuccessCopyWith(
+          MainStateSuccess value, $Res Function(MainStateSuccess) _then) =
+      _$MainStateSuccessCopyWithImpl;
   @useResult
   $Res call({DataHelper? data});
 
@@ -98,11 +99,12 @@ abstract mixin class _$SuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$MainStateSuccessCopyWithImpl<$Res>
+    implements $MainStateSuccessCopyWith<$Res> {
+  _$MainStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final MainStateSuccess _self;
+  final $Res Function(MainStateSuccess) _then;
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.
@@ -110,7 +112,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_Success(
+    return _then(MainStateSuccess(
       freezed == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable

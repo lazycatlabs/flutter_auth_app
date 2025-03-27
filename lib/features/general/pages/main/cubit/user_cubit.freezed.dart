@@ -37,13 +37,13 @@ class $UserStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements UserState {
-  const _Loading();
+class UserStateLoading implements UserState {
+  const UserStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is UserStateLoading);
   }
 
   @override
@@ -57,8 +57,8 @@ class _Loading implements UserState {
 
 /// @nodoc
 
-class _Failure implements UserState {
-  const _Failure(this.message);
+class UserStateFailure implements UserState {
+  const UserStateFailure(this.message);
 
   final String message;
 
@@ -66,14 +66,14 @@ class _Failure implements UserState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
+  $UserStateFailureCopyWith<UserStateFailure> get copyWith =>
+      _$UserStateFailureCopyWithImpl<UserStateFailure>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure &&
+            other is UserStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -87,20 +87,22 @@ class _Failure implements UserState {
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res>
+abstract mixin class $UserStateFailureCopyWith<$Res>
     implements $UserStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) =
-      __$FailureCopyWithImpl;
+  factory $UserStateFailureCopyWith(
+          UserStateFailure value, $Res Function(UserStateFailure) _then) =
+      _$UserStateFailureCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$UserStateFailureCopyWithImpl<$Res>
+    implements $UserStateFailureCopyWith<$Res> {
+  _$UserStateFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final UserStateFailure _self;
+  final $Res Function(UserStateFailure) _then;
 
   /// Create a copy of UserState
   /// with the given fields replaced by the non-null parameter values.
@@ -108,7 +110,7 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Failure(
+    return _then(UserStateFailure(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -119,8 +121,8 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
 
 /// @nodoc
 
-class _Success implements UserState {
-  const _Success(this.data);
+class UserStateSuccess implements UserState {
+  const UserStateSuccess(this.data);
 
   final User? data;
 
@@ -128,14 +130,14 @@ class _Success implements UserState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $UserStateSuccessCopyWith<UserStateSuccess> get copyWith =>
+      _$UserStateSuccessCopyWithImpl<UserStateSuccess>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is UserStateSuccess &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -149,10 +151,11 @@ class _Success implements UserState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $UserStateSuccessCopyWith<$Res>
     implements $UserStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $UserStateSuccessCopyWith(
+          UserStateSuccess value, $Res Function(UserStateSuccess) _then) =
+      _$UserStateSuccessCopyWithImpl;
   @useResult
   $Res call({User? data});
 
@@ -160,11 +163,12 @@ abstract mixin class _$SuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$UserStateSuccessCopyWithImpl<$Res>
+    implements $UserStateSuccessCopyWith<$Res> {
+  _$UserStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final UserStateSuccess _self;
+  final $Res Function(UserStateSuccess) _then;
 
   /// Create a copy of UserState
   /// with the given fields replaced by the non-null parameter values.
@@ -172,7 +176,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_Success(
+    return _then(UserStateSuccess(
       freezed == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable

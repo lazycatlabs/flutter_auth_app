@@ -37,13 +37,13 @@ class $UsersStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements UsersState {
-  const _Loading();
+class UsersStateLoading implements UsersState {
+  const UsersStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is UsersStateLoading);
   }
 
   @override
@@ -57,13 +57,13 @@ class _Loading implements UsersState {
 
 /// @nodoc
 
-class _Initial implements UsersState {
-  const _Initial();
+class UsersStateInitial implements UsersState {
+  const UsersStateInitial();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
+        (other.runtimeType == runtimeType && other is UsersStateInitial);
   }
 
   @override
@@ -77,8 +77,8 @@ class _Initial implements UsersState {
 
 /// @nodoc
 
-class _Success implements UsersState {
-  const _Success(this.data);
+class UsersStateSuccess implements UsersState {
+  const UsersStateSuccess(this.data);
 
   final Users data;
 
@@ -86,14 +86,14 @@ class _Success implements UsersState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $UsersStateSuccessCopyWith<UsersStateSuccess> get copyWith =>
+      _$UsersStateSuccessCopyWithImpl<UsersStateSuccess>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is UsersStateSuccess &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -107,10 +107,11 @@ class _Success implements UsersState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $UsersStateSuccessCopyWith<$Res>
     implements $UsersStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $UsersStateSuccessCopyWith(
+          UsersStateSuccess value, $Res Function(UsersStateSuccess) _then) =
+      _$UsersStateSuccessCopyWithImpl;
   @useResult
   $Res call({Users data});
 
@@ -118,11 +119,12 @@ abstract mixin class _$SuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$UsersStateSuccessCopyWithImpl<$Res>
+    implements $UsersStateSuccessCopyWith<$Res> {
+  _$UsersStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final UsersStateSuccess _self;
+  final $Res Function(UsersStateSuccess) _then;
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -130,7 +132,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? data = null,
   }) {
-    return _then(_Success(
+    return _then(UsersStateSuccess(
       null == data
           ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -151,8 +153,8 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
 
 /// @nodoc
 
-class _Failure implements UsersState {
-  const _Failure(this.message);
+class UsersStateFailure implements UsersState {
+  const UsersStateFailure(this.message);
 
   final String message;
 
@@ -160,14 +162,14 @@ class _Failure implements UsersState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
+  $UsersStateFailureCopyWith<UsersStateFailure> get copyWith =>
+      _$UsersStateFailureCopyWithImpl<UsersStateFailure>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure &&
+            other is UsersStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -181,20 +183,22 @@ class _Failure implements UsersState {
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res>
+abstract mixin class $UsersStateFailureCopyWith<$Res>
     implements $UsersStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) =
-      __$FailureCopyWithImpl;
+  factory $UsersStateFailureCopyWith(
+          UsersStateFailure value, $Res Function(UsersStateFailure) _then) =
+      _$UsersStateFailureCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$UsersStateFailureCopyWithImpl<$Res>
+    implements $UsersStateFailureCopyWith<$Res> {
+  _$UsersStateFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final UsersStateFailure _self;
+  final $Res Function(UsersStateFailure) _then;
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -202,7 +206,7 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Failure(
+    return _then(UsersStateFailure(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -213,13 +217,13 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
 
 /// @nodoc
 
-class _Empty implements UsersState {
-  const _Empty();
+class UsersStateEmpty implements UsersState {
+  const UsersStateEmpty();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Empty);
+        (other.runtimeType == runtimeType && other is UsersStateEmpty);
   }
 
   @override

@@ -37,13 +37,13 @@ class $LogoutStateCopyWith<$Res> {
 
 /// @nodoc
 
-class _Loading implements LogoutState {
-  const _Loading();
+class LogoutStateLoading implements LogoutState {
+  const LogoutStateLoading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is LogoutStateLoading);
   }
 
   @override
@@ -57,8 +57,8 @@ class _Loading implements LogoutState {
 
 /// @nodoc
 
-class _Failure implements LogoutState {
-  const _Failure(this.message);
+class LogoutStateFailure implements LogoutState {
+  const LogoutStateFailure(this.message);
 
   final String message;
 
@@ -66,14 +66,14 @@ class _Failure implements LogoutState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
+  $LogoutStateFailureCopyWith<LogoutStateFailure> get copyWith =>
+      _$LogoutStateFailureCopyWithImpl<LogoutStateFailure>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Failure &&
+            other is LogoutStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -87,20 +87,22 @@ class _Failure implements LogoutState {
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res>
+abstract mixin class $LogoutStateFailureCopyWith<$Res>
     implements $LogoutStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) =
-      __$FailureCopyWithImpl;
+  factory $LogoutStateFailureCopyWith(
+          LogoutStateFailure value, $Res Function(LogoutStateFailure) _then) =
+      _$LogoutStateFailureCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$LogoutStateFailureCopyWithImpl<$Res>
+    implements $LogoutStateFailureCopyWith<$Res> {
+  _$LogoutStateFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final LogoutStateFailure _self;
+  final $Res Function(LogoutStateFailure) _then;
 
   /// Create a copy of LogoutState
   /// with the given fields replaced by the non-null parameter values.
@@ -108,7 +110,7 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Failure(
+    return _then(LogoutStateFailure(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -119,8 +121,8 @@ class __$FailureCopyWithImpl<$Res> implements _$FailureCopyWith<$Res> {
 
 /// @nodoc
 
-class _Success implements LogoutState {
-  const _Success(this.message);
+class LogoutStateSuccess implements LogoutState {
+  const LogoutStateSuccess(this.message);
 
   final String message;
 
@@ -128,14 +130,14 @@ class _Success implements LogoutState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
+  $LogoutStateSuccessCopyWith<LogoutStateSuccess> get copyWith =>
+      _$LogoutStateSuccessCopyWithImpl<LogoutStateSuccess>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Success &&
+            other is LogoutStateSuccess &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -149,20 +151,22 @@ class _Success implements LogoutState {
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
+abstract mixin class $LogoutStateSuccessCopyWith<$Res>
     implements $LogoutStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
+  factory $LogoutStateSuccessCopyWith(
+          LogoutStateSuccess value, $Res Function(LogoutStateSuccess) _then) =
+      _$LogoutStateSuccessCopyWithImpl;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class _$LogoutStateSuccessCopyWithImpl<$Res>
+    implements $LogoutStateSuccessCopyWith<$Res> {
+  _$LogoutStateSuccessCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final LogoutStateSuccess _self;
+  final $Res Function(LogoutStateSuccess) _then;
 
   /// Create a copy of LogoutState
   /// with the given fields replaced by the non-null parameter values.
@@ -170,7 +174,7 @@ class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
   $Res call({
     Object? message = null,
   }) {
-    return _then(_Success(
+    return _then(LogoutStateSuccess(
       null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable

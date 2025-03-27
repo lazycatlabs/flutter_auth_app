@@ -5,21 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'main_cubit.freezed.dart';
-part 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
-  MainCubit() : super(const _Loading());
+  MainCubit() : super(const MainStateLoading());
 
   int _currentIndex = 0;
   late List<DataHelper>? dataMenus;
 
   void updateIndex(int index, DataHelper? mockMenu, {BuildContext? context}) {
-    emit(const _Loading());
+    emit(const MainStateLoading());
     _currentIndex = index;
     if (context != null) {
       initMenu(context, mockMenu: mockMenu);
     }
-    emit(_Success(mockMenu ?? dataMenus?[_currentIndex]));
+    emit(MainStateSuccess(mockMenu ?? dataMenus?[_currentIndex]));
   }
 
   void initMenu(BuildContext context, {DataHelper? mockMenu}) {
@@ -58,4 +57,9 @@ class MainCubit extends Cubit<MainState> {
       return false;
     }
   }
+}
+@freezed
+abstract class MainState with _$MainState {
+  const factory MainState.loading() = MainStateLoading;
+  const factory MainState.success(DataHelper? data) = MainStateSuccess;
 }

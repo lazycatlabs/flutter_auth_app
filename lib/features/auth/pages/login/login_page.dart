@@ -34,7 +34,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Parent(
       child: BlocListener<AuthCubit, AuthState>(
-        listener: (_, state) {
+        listener: (_, state)
+        {
           state.whenOrNull(
             loading: () => context.show(),
             success: (data) {

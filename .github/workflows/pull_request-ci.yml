@@ -38,10 +38,11 @@ jobs:
 
       # Run widget tests for our flutter project.
       - name: Run flutter test --machine --coverage
-        run: flutter test --machine --coverage
+        run: flutter test --coverage;lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' '**/*.g.dart' -o coverage/new_lcov.info ;genhtml coverage/new_lcov.info -o coverage/html
+
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # Add this secret in your repository settings
-          file: coverage/lcov.info
+          file: coverage/new_lcov.info

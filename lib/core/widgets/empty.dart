@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 
-
 class Empty extends StatelessWidget {
   final String? errorMessage;
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Parent extends StatefulWidget {
   final Widget? child;
   final PreferredSize? appBar;

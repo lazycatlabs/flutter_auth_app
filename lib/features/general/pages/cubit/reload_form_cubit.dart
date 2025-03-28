@@ -11,6 +11,7 @@ class ReloadFormCubit extends Cubit<ReloadFormState> {
     emit(const ReloadFormStateFormUpdate());
   }
 }
+
 @freezed
 sealed class ReloadFormState with _$ReloadFormState {
   const factory ReloadFormState.initial() = ReloadFormStateInitial;

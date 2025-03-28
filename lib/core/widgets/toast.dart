@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class Toast extends StatelessWidget {
   final IconData? icon;
   final Color? bgColor;
   final Color? textColor;
   final String? message;
 
-  const Toast({super.key, this.icon, this.bgColor, this.message, this.textColor});
+  const Toast(
+      {super.key, this.icon, this.bgColor, this.message, this.textColor});
 
   @override
   Widget build(BuildContext context) {

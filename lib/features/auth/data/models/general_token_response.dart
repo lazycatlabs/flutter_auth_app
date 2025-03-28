@@ -14,7 +14,8 @@ sealed class GeneralTokenResponse with _$GeneralTokenResponse {
 
   const GeneralTokenResponse._();
 
-  GeneralToken toEntity() => GeneralToken(token: "${data?.tokenType} ${data?.token}");
+  GeneralToken toEntity() =>
+      GeneralToken(token: "${data?.tokenType} ${data?.token}");
 
   factory GeneralTokenResponse.fromJson(Map<String, dynamic> json) =>
       _$GeneralTokenResponseFromJson(json);

@@ -24,6 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 }
+
 @freezed
 sealed class AuthState with _$AuthState {
   const factory AuthState.loading() = AuthStateLoading;

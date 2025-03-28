@@ -62,6 +62,7 @@ class UsersCubit extends Cubit<UsersState> {
     );
   }
 }
+
 @freezed
 sealed class UsersState with _$UsersState {
   const factory UsersState.loading() = UsersStateLoading;

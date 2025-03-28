@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
-
 class ButtonText extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;

@@ -23,11 +23,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
   }
 }
+
 @freezed
 sealed class RegisterState with _$RegisterState {
   const factory RegisterState.loading() = RegisterStateLoading;
   const factory RegisterState.success(Register? data) = RegisterStateSuccess;
   const factory RegisterState.failure(String message) = RegisterStateFailure;
   const factory RegisterState.init() = RegisterStateInit;
-  const factory RegisterState.showHidePassword() = RegisterStateShowHidePassword;
+  const factory RegisterState.showHidePassword() =
+      RegisterStateShowHidePassword;
 }

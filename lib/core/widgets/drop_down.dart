@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
-
 class DropDown<T> extends StatefulWidget {
   const DropDown({
     super.key,
@@ -52,19 +51,16 @@ class _DropDownState<T> extends State<DropDown<T>> {
               dropdownColor: Theme.of(context).extension<LzyctColors>()!.banner,
               icon: const Icon(Icons.keyboard_arrow_down),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color:
-                        Theme.of(context).extension<LzyctColors>()!.subtitle,
+                    color: Theme.of(context).extension<LzyctColors>()!.subtitle,
                   ),
-
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 isDense: true,
                 isCollapsed: true,
                 filled: true,
                 labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context)
-                          .extension<LzyctColors>()!
-                          .subtitle,
+                      color:
+                          Theme.of(context).extension<LzyctColors>()!.subtitle,
                     ),
                 fillColor: Theme.of(context).extension<LzyctColors>()!.card,
                 prefixIcon: Padding(

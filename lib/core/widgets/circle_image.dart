@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
-
 class CircleImage extends StatelessWidget {
   final String url;
   final double? size;

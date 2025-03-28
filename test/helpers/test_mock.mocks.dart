@@ -29,23 +29,13 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeEither_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeWidget_1 extends _i1.SmartFake implements _i3.Widget {
-  _FakeWidget_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeWidget_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 
   @override
   String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
@@ -54,13 +44,8 @@ class _FakeWidget_1 extends _i1.SmartFake implements _i3.Widget {
 
 class _FakeInheritedWidget_2 extends _i1.SmartFake
     implements _i3.InheritedWidget {
-  _FakeInheritedWidget_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeInheritedWidget_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 
   @override
   String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
@@ -69,20 +54,14 @@ class _FakeInheritedWidget_2 extends _i1.SmartFake
 
 class _FakeDiagnosticsNode_3 extends _i1.SmartFake
     implements _i4.DiagnosticsNode {
-  _FakeDiagnosticsNode_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDiagnosticsNode_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 
   @override
   String toString({
     _i4.TextTreeConfiguration? parentConfiguration,
     _i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info,
-  }) =>
-      super.toString();
+  }) => super.toString();
 }
 
 /// A class which mocks [AuthRepository].
@@ -95,74 +74,63 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Login>> login(
-          _i5.LoginParams? params) =>
+    _i5.LoginParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #login,
-          [params],
-        ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>.value(
-            _FakeEither_0<_i7.Failure, _i5.Login>(
-          this,
-          Invocation.method(
-            #login,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>);
+            Invocation.method(#login, [params]),
+            returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>.value(
+              _FakeEither_0<_i7.Failure, _i5.Login>(
+                this,
+                Invocation.method(#login, [params]),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i5.Login>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.Register>> register(
-          _i5.RegisterParams? params) =>
+    _i5.RegisterParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #register,
-          [params],
-        ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>.value(
-            _FakeEither_0<_i7.Failure, _i5.Register>(
-          this,
-          Invocation.method(
-            #register,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>);
+            Invocation.method(#register, [params]),
+            returnValue:
+                _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>.value(
+                  _FakeEither_0<_i7.Failure, _i5.Register>(
+                    this,
+                    Invocation.method(#register, [params]),
+                  ),
+                ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i5.Register>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>> generalToken(
-          _i5.GeneralTokenParams? params) =>
+    _i5.GeneralTokenParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #generalToken,
-          [params],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>.value(
-                _FakeEither_0<_i7.Failure, _i5.GeneralToken>(
-          this,
-          Invocation.method(
-            #generalToken,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>);
+            Invocation.method(#generalToken, [params]),
+            returnValue:
+                _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>.value(
+                  _FakeEither_0<_i7.Failure, _i5.GeneralToken>(
+                    this,
+                    Invocation.method(#generalToken, [params]),
+                  ),
+                ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralToken>>);
 
   @override
-  _i6.Future<_i2.Either<_i7.Failure, String>> logout() => (super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, String>>.value(
-            _FakeEither_0<_i7.Failure, String>(
-          this,
-          Invocation.method(
-            #logout,
-            [],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, String>>);
+  _i6.Future<_i2.Either<_i7.Failure, String>> logout() =>
+      (super.noSuchMethod(
+            Invocation.method(#logout, []),
+            returnValue: _i6.Future<_i2.Either<_i7.Failure, String>>.value(
+              _FakeEither_0<_i7.Failure, String>(
+                this,
+                Invocation.method(#logout, []),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, String>>);
 }
 
 /// A class which mocks [AuthRemoteDatasource].
@@ -176,78 +144,67 @@ class MockAuthRemoteDatasource extends _i1.Mock
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>> register(
-          _i5.RegisterParams? params) =>
+    _i5.RegisterParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #register,
-          [params],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>.value(
-                _FakeEither_0<_i7.Failure, _i5.RegisterResponse>(
-          this,
-          Invocation.method(
-            #register,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>);
+            Invocation.method(#register, [params]),
+            returnValue:
+                _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>.value(
+                  _FakeEither_0<_i7.Failure, _i5.RegisterResponse>(
+                    this,
+                    Invocation.method(#register, [params]),
+                  ),
+                ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i5.RegisterResponse>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>> login(
-          _i5.LoginParams? params) =>
+    _i5.LoginParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #login,
-          [params],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>.value(
-                _FakeEither_0<_i7.Failure, _i5.LoginResponse>(
-          this,
-          Invocation.method(
-            #login,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>);
+            Invocation.method(#login, [params]),
+            returnValue:
+                _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>.value(
+                  _FakeEither_0<_i7.Failure, _i5.LoginResponse>(
+                    this,
+                    Invocation.method(#login, [params]),
+                  ),
+                ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i5.LoginResponse>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>> generalToken(
-          _i5.GeneralTokenParams? params) =>
+    _i5.GeneralTokenParams? params,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #generalToken,
-          [params],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>.value(
-                _FakeEither_0<_i7.Failure, _i5.GeneralTokenResponse>(
-          this,
-          Invocation.method(
-            #generalToken,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>);
+            Invocation.method(#generalToken, [params]),
+            returnValue: _i6.Future<
+              _i2.Either<_i7.Failure, _i5.GeneralTokenResponse>
+            >.value(
+              _FakeEither_0<_i7.Failure, _i5.GeneralTokenResponse>(
+                this,
+                Invocation.method(#generalToken, [params]),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i5.GeneralTokenResponse>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>> logout() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>.value(
-                _FakeEither_0<_i7.Failure, _i8.DiagnosticResponse>(
-          this,
-          Invocation.method(
-            #logout,
-            [],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>);
+            Invocation.method(#logout, []),
+            returnValue: _i6.Future<
+              _i2.Either<_i7.Failure, _i8.DiagnosticResponse>
+            >.value(
+              _FakeEither_0<_i7.Failure, _i8.DiagnosticResponse>(
+                this,
+                Invocation.method(#logout, []),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i8.DiagnosticResponse>>);
 }
 
 /// A class which mocks [UsersRepository].
@@ -260,37 +217,31 @@ class MockUsersRepository extends _i1.Mock implements _i8.UsersRepository {
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i8.Users>> users(
-          _i8.UsersParams? usersParams) =>
+    _i8.UsersParams? usersParams,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #users,
-          [usersParams],
-        ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.Users>>.value(
-            _FakeEither_0<_i7.Failure, _i8.Users>(
-          this,
-          Invocation.method(
-            #users,
-            [usersParams],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.Users>>);
+            Invocation.method(#users, [usersParams]),
+            returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.Users>>.value(
+              _FakeEither_0<_i7.Failure, _i8.Users>(
+                this,
+                Invocation.method(#users, [usersParams]),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i8.Users>>);
 
   @override
-  _i6.Future<_i2.Either<_i7.Failure, _i8.User>> user() => (super.noSuchMethod(
-        Invocation.method(
-          #user,
-          [],
-        ),
-        returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.User>>.value(
-            _FakeEither_0<_i7.Failure, _i8.User>(
-          this,
-          Invocation.method(
-            #user,
-            [],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.User>>);
+  _i6.Future<_i2.Either<_i7.Failure, _i8.User>> user() =>
+      (super.noSuchMethod(
+            Invocation.method(#user, []),
+            returnValue: _i6.Future<_i2.Either<_i7.Failure, _i8.User>>.value(
+              _FakeEither_0<_i7.Failure, _i8.User>(
+                this,
+                Invocation.method(#user, []),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i8.User>>);
 }
 
 /// A class which mocks [UsersRemoteDatasource].
@@ -304,40 +255,33 @@ class MockUsersRemoteDatasource extends _i1.Mock
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>> users(
-          _i8.UsersParams? userParams) =>
+    _i8.UsersParams? userParams,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #users,
-          [userParams],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>>.value(
-                _FakeEither_0<_i7.Failure, _i8.UsersResponse>(
-          this,
-          Invocation.method(
-            #users,
-            [userParams],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>>);
+            Invocation.method(#users, [userParams]),
+            returnValue:
+                _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>>.value(
+                  _FakeEither_0<_i7.Failure, _i8.UsersResponse>(
+                    this,
+                    Invocation.method(#users, [userParams]),
+                  ),
+                ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i8.UsersResponse>>);
 
   @override
   _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>> user() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #user,
-          [],
-        ),
-        returnValue:
-            _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>.value(
-                _FakeEither_0<_i7.Failure, _i8.UserResponse>(
-          this,
-          Invocation.method(
-            #user,
-            [],
-          ),
-        )),
-      ) as _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>);
+            Invocation.method(#user, []),
+            returnValue:
+                _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>.value(
+                  _FakeEither_0<_i7.Failure, _i8.UserResponse>(
+                    this,
+                    Invocation.method(#user, []),
+                  ),
+                ),
+          )
+          as _i6.Future<_i2.Either<_i7.Failure, _i8.UserResponse>>);
 }
 
 /// A class which mocks [BuildContext].
@@ -345,31 +289,34 @@ class MockUsersRemoteDatasource extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
   @override
-  _i3.Widget get widget => (super.noSuchMethod(
-        Invocation.getter(#widget),
-        returnValue: _FakeWidget_1(
-          this,
-          Invocation.getter(#widget),
-        ),
-        returnValueForMissingStub: _FakeWidget_1(
-          this,
-          Invocation.getter(#widget),
-        ),
-      ) as _i3.Widget);
+  _i3.Widget get widget =>
+      (super.noSuchMethod(
+            Invocation.getter(#widget),
+            returnValue: _FakeWidget_1(this, Invocation.getter(#widget)),
+            returnValueForMissingStub: _FakeWidget_1(
+              this,
+              Invocation.getter(#widget),
+            ),
+          )
+          as _i3.Widget);
 
   @override
-  bool get mounted => (super.noSuchMethod(
-        Invocation.getter(#mounted),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get mounted =>
+      (super.noSuchMethod(
+            Invocation.getter(#mounted),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  bool get debugDoingBuild => (super.noSuchMethod(
-        Invocation.getter(#debugDoingBuild),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get debugDoingBuild =>
+      (super.noSuchMethod(
+            Invocation.getter(#debugDoingBuild),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   _i3.InheritedWidget dependOnInheritedElement(
@@ -377,55 +324,47 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
     Object? aspect,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #dependOnInheritedElement,
-          [ancestor],
-          {#aspect: aspect},
-        ),
-        returnValue: _FakeInheritedWidget_2(
-          this,
-          Invocation.method(
-            #dependOnInheritedElement,
-            [ancestor],
-            {#aspect: aspect},
-          ),
-        ),
-        returnValueForMissingStub: _FakeInheritedWidget_2(
-          this,
-          Invocation.method(
-            #dependOnInheritedElement,
-            [ancestor],
-            {#aspect: aspect},
-          ),
-        ),
-      ) as _i3.InheritedWidget);
+            Invocation.method(
+              #dependOnInheritedElement,
+              [ancestor],
+              {#aspect: aspect},
+            ),
+            returnValue: _FakeInheritedWidget_2(
+              this,
+              Invocation.method(
+                #dependOnInheritedElement,
+                [ancestor],
+                {#aspect: aspect},
+              ),
+            ),
+            returnValueForMissingStub: _FakeInheritedWidget_2(
+              this,
+              Invocation.method(
+                #dependOnInheritedElement,
+                [ancestor],
+                {#aspect: aspect},
+              ),
+            ),
+          )
+          as _i3.InheritedWidget);
 
   @override
   void visitAncestorElements(_i3.ConditionalElementVisitor? visitor) =>
       super.noSuchMethod(
-        Invocation.method(
-          #visitAncestorElements,
-          [visitor],
-        ),
+        Invocation.method(#visitAncestorElements, [visitor]),
         returnValueForMissingStub: null,
       );
 
   @override
   void visitChildElements(_i3.ElementVisitor? visitor) => super.noSuchMethod(
-        Invocation.method(
-          #visitChildElements,
-          [visitor],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#visitChildElements, [visitor]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void dispatchNotification(_i9.Notification? notification) =>
       super.noSuchMethod(
-        Invocation.method(
-          #dispatchNotification,
-          [notification],
-        ),
+        Invocation.method(#dispatchNotification, [notification]),
         returnValueForMissingStub: null,
       );
 
@@ -435,28 +374,17 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
     _i4.DiagnosticsTreeStyle? style = _i4.DiagnosticsTreeStyle.errorProperty,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #describeElement,
-          [name],
-          {#style: style},
-        ),
-        returnValue: _FakeDiagnosticsNode_3(
-          this,
-          Invocation.method(
-            #describeElement,
-            [name],
-            {#style: style},
-          ),
-        ),
-        returnValueForMissingStub: _FakeDiagnosticsNode_3(
-          this,
-          Invocation.method(
-            #describeElement,
-            [name],
-            {#style: style},
-          ),
-        ),
-      ) as _i4.DiagnosticsNode);
+            Invocation.method(#describeElement, [name], {#style: style}),
+            returnValue: _FakeDiagnosticsNode_3(
+              this,
+              Invocation.method(#describeElement, [name], {#style: style}),
+            ),
+            returnValueForMissingStub: _FakeDiagnosticsNode_3(
+              this,
+              Invocation.method(#describeElement, [name], {#style: style}),
+            ),
+          )
+          as _i4.DiagnosticsNode);
 
   @override
   _i4.DiagnosticsNode describeWidget(
@@ -464,62 +392,43 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
     _i4.DiagnosticsTreeStyle? style = _i4.DiagnosticsTreeStyle.errorProperty,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #describeWidget,
-          [name],
-          {#style: style},
-        ),
-        returnValue: _FakeDiagnosticsNode_3(
-          this,
-          Invocation.method(
-            #describeWidget,
-            [name],
-            {#style: style},
-          ),
-        ),
-        returnValueForMissingStub: _FakeDiagnosticsNode_3(
-          this,
-          Invocation.method(
-            #describeWidget,
-            [name],
-            {#style: style},
-          ),
-        ),
-      ) as _i4.DiagnosticsNode);
+            Invocation.method(#describeWidget, [name], {#style: style}),
+            returnValue: _FakeDiagnosticsNode_3(
+              this,
+              Invocation.method(#describeWidget, [name], {#style: style}),
+            ),
+            returnValueForMissingStub: _FakeDiagnosticsNode_3(
+              this,
+              Invocation.method(#describeWidget, [name], {#style: style}),
+            ),
+          )
+          as _i4.DiagnosticsNode);
 
   @override
-  List<_i4.DiagnosticsNode> describeMissingAncestor(
-          {required Type? expectedAncestorType}) =>
+  List<_i4.DiagnosticsNode> describeMissingAncestor({
+    required Type? expectedAncestorType,
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #describeMissingAncestor,
-          [],
-          {#expectedAncestorType: expectedAncestorType},
-        ),
-        returnValue: <_i4.DiagnosticsNode>[],
-        returnValueForMissingStub: <_i4.DiagnosticsNode>[],
-      ) as List<_i4.DiagnosticsNode>);
+            Invocation.method(#describeMissingAncestor, [], {
+              #expectedAncestorType: expectedAncestorType,
+            }),
+            returnValue: <_i4.DiagnosticsNode>[],
+            returnValueForMissingStub: <_i4.DiagnosticsNode>[],
+          )
+          as List<_i4.DiagnosticsNode>);
 
   @override
   _i4.DiagnosticsNode describeOwnershipChain(String? name) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #describeOwnershipChain,
-          [name],
-        ),
-        returnValue: _FakeDiagnosticsNode_3(
-          this,
-          Invocation.method(
-            #describeOwnershipChain,
-            [name],
-          ),
-        ),
-        returnValueForMissingStub: _FakeDiagnosticsNode_3(
-          this,
-          Invocation.method(
-            #describeOwnershipChain,
-            [name],
-          ),
-        ),
-      ) as _i4.DiagnosticsNode);
+            Invocation.method(#describeOwnershipChain, [name]),
+            returnValue: _FakeDiagnosticsNode_3(
+              this,
+              Invocation.method(#describeOwnershipChain, [name]),
+            ),
+            returnValueForMissingStub: _FakeDiagnosticsNode_3(
+              this,
+              Invocation.method(#describeOwnershipChain, [name]),
+            ),
+          )
+          as _i4.DiagnosticsNode);
 }

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
-///*********************************************
-/// Created by ukieTux on 23/04/2020 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class Button extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,142 +10,30 @@ part of 'diagnostic_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DiagnosticResponse _$DiagnosticResponseFromJson(Map<String, dynamic> json) {
-  return _DiagnosticResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DiagnosticResponse {
   @JsonKey(name: "diagnostic")
-  Diagnostic? get diagnostic => throw _privateConstructorUsedError;
-
-  /// Serializes this DiagnosticResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Diagnostic? get diagnostic;
 
   /// Create a copy of DiagnosticResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DiagnosticResponseCopyWith<DiagnosticResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$DiagnosticResponseCopyWithImpl<DiagnosticResponse>(
+          this as DiagnosticResponse, _$identity);
 
-/// @nodoc
-abstract class $DiagnosticResponseCopyWith<$Res> {
-  factory $DiagnosticResponseCopyWith(
-          DiagnosticResponse value, $Res Function(DiagnosticResponse) then) =
-      _$DiagnosticResponseCopyWithImpl<$Res, DiagnosticResponse>;
-  @useResult
-  $Res call({@JsonKey(name: "diagnostic") Diagnostic? diagnostic});
-
-  $DiagnosticCopyWith<$Res>? get diagnostic;
-}
-
-/// @nodoc
-class _$DiagnosticResponseCopyWithImpl<$Res, $Val extends DiagnosticResponse>
-    implements $DiagnosticResponseCopyWith<$Res> {
-  _$DiagnosticResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DiagnosticResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? diagnostic = freezed,
-  }) {
-    return _then(_value.copyWith(
-      diagnostic: freezed == diagnostic
-          ? _value.diagnostic
-          : diagnostic // ignore: cast_nullable_to_non_nullable
-              as Diagnostic?,
-    ) as $Val);
-  }
-
-  /// Create a copy of DiagnosticResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DiagnosticCopyWith<$Res>? get diagnostic {
-    if (_value.diagnostic == null) {
-      return null;
-    }
-
-    return $DiagnosticCopyWith<$Res>(_value.diagnostic!, (value) {
-      return _then(_value.copyWith(diagnostic: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DiagnosticResponseImplCopyWith<$Res>
-    implements $DiagnosticResponseCopyWith<$Res> {
-  factory _$$DiagnosticResponseImplCopyWith(_$DiagnosticResponseImpl value,
-          $Res Function(_$DiagnosticResponseImpl) then) =
-      __$$DiagnosticResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@JsonKey(name: "diagnostic") Diagnostic? diagnostic});
-
-  @override
-  $DiagnosticCopyWith<$Res>? get diagnostic;
-}
-
-/// @nodoc
-class __$$DiagnosticResponseImplCopyWithImpl<$Res>
-    extends _$DiagnosticResponseCopyWithImpl<$Res, _$DiagnosticResponseImpl>
-    implements _$$DiagnosticResponseImplCopyWith<$Res> {
-  __$$DiagnosticResponseImplCopyWithImpl(_$DiagnosticResponseImpl _value,
-      $Res Function(_$DiagnosticResponseImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DiagnosticResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? diagnostic = freezed,
-  }) {
-    return _then(_$DiagnosticResponseImpl(
-      diagnostic: freezed == diagnostic
-          ? _value.diagnostic
-          : diagnostic // ignore: cast_nullable_to_non_nullable
-              as Diagnostic?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$DiagnosticResponseImpl implements _DiagnosticResponse {
-  const _$DiagnosticResponseImpl(
-      {@JsonKey(name: "diagnostic") this.diagnostic});
-
-  factory _$DiagnosticResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DiagnosticResponseImplFromJson(json);
-
-  @override
-  @JsonKey(name: "diagnostic")
-  final Diagnostic? diagnostic;
-
-  @override
-  String toString() {
-    return 'DiagnosticResponse(diagnostic: $diagnostic)';
-  }
+  /// Serializes this DiagnosticResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DiagnosticResponseImpl &&
+            other is DiagnosticResponse &&
             (identical(other.diagnostic, diagnostic) ||
                 other.diagnostic == diagnostic));
   }
@@ -153,39 +42,156 @@ class _$DiagnosticResponseImpl implements _DiagnosticResponse {
   @override
   int get hashCode => Object.hash(runtimeType, diagnostic);
 
-  /// Create a copy of DiagnosticResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DiagnosticResponseImplCopyWith<_$DiagnosticResponseImpl> get copyWith =>
-      __$$DiagnosticResponseImplCopyWithImpl<_$DiagnosticResponseImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DiagnosticResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DiagnosticResponse(diagnostic: $diagnostic)';
   }
 }
 
-abstract class _DiagnosticResponse implements DiagnosticResponse {
-  const factory _DiagnosticResponse(
-          {@JsonKey(name: "diagnostic") final Diagnostic? diagnostic}) =
-      _$DiagnosticResponseImpl;
+/// @nodoc
+abstract mixin class $DiagnosticResponseCopyWith<$Res> {
+  factory $DiagnosticResponseCopyWith(
+          DiagnosticResponse value, $Res Function(DiagnosticResponse) _then) =
+      _$DiagnosticResponseCopyWithImpl;
+  @useResult
+  $Res call({@JsonKey(name: "diagnostic") Diagnostic? diagnostic});
 
-  factory _DiagnosticResponse.fromJson(Map<String, dynamic> json) =
-      _$DiagnosticResponseImpl.fromJson;
+  $DiagnosticCopyWith<$Res>? get diagnostic;
+}
+
+/// @nodoc
+class _$DiagnosticResponseCopyWithImpl<$Res>
+    implements $DiagnosticResponseCopyWith<$Res> {
+  _$DiagnosticResponseCopyWithImpl(this._self, this._then);
+
+  final DiagnosticResponse _self;
+  final $Res Function(DiagnosticResponse) _then;
+
+  /// Create a copy of DiagnosticResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? diagnostic = freezed,
+  }) {
+    return _then(_self.copyWith(
+      diagnostic: freezed == diagnostic
+          ? _self.diagnostic
+          : diagnostic // ignore: cast_nullable_to_non_nullable
+              as Diagnostic?,
+    ));
+  }
+
+  /// Create a copy of DiagnosticResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DiagnosticCopyWith<$Res>? get diagnostic {
+    if (_self.diagnostic == null) {
+      return null;
+    }
+
+    return $DiagnosticCopyWith<$Res>(_self.diagnostic!, (value) {
+      return _then(_self.copyWith(diagnostic: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _DiagnosticResponse implements DiagnosticResponse {
+  const _DiagnosticResponse({@JsonKey(name: "diagnostic") this.diagnostic});
+  factory _DiagnosticResponse.fromJson(Map<String, dynamic> json) =>
+      _$DiagnosticResponseFromJson(json);
 
   @override
   @JsonKey(name: "diagnostic")
-  Diagnostic? get diagnostic;
+  final Diagnostic? diagnostic;
 
   /// Create a copy of DiagnosticResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DiagnosticResponseImplCopyWith<_$DiagnosticResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$DiagnosticResponseCopyWith<_DiagnosticResponse> get copyWith =>
+      __$DiagnosticResponseCopyWithImpl<_DiagnosticResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DiagnosticResponseToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DiagnosticResponse &&
+            (identical(other.diagnostic, diagnostic) ||
+                other.diagnostic == diagnostic));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, diagnostic);
+
+  @override
+  String toString() {
+    return 'DiagnosticResponse(diagnostic: $diagnostic)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$DiagnosticResponseCopyWith<$Res>
+    implements $DiagnosticResponseCopyWith<$Res> {
+  factory _$DiagnosticResponseCopyWith(
+          _DiagnosticResponse value, $Res Function(_DiagnosticResponse) _then) =
+      __$DiagnosticResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: "diagnostic") Diagnostic? diagnostic});
+
+  @override
+  $DiagnosticCopyWith<$Res>? get diagnostic;
+}
+
+/// @nodoc
+class __$DiagnosticResponseCopyWithImpl<$Res>
+    implements _$DiagnosticResponseCopyWith<$Res> {
+  __$DiagnosticResponseCopyWithImpl(this._self, this._then);
+
+  final _DiagnosticResponse _self;
+  final $Res Function(_DiagnosticResponse) _then;
+
+  /// Create a copy of DiagnosticResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? diagnostic = freezed,
+  }) {
+    return _then(_DiagnosticResponse(
+      diagnostic: freezed == diagnostic
+          ? _self.diagnostic
+          : diagnostic // ignore: cast_nullable_to_non_nullable
+              as Diagnostic?,
+    ));
+  }
+
+  /// Create a copy of DiagnosticResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DiagnosticCopyWith<$Res>? get diagnostic {
+    if (_self.diagnostic == null) {
+      return null;
+    }
+
+    return $DiagnosticCopyWith<$Res>(_self.diagnostic!, (value) {
+      return _then(_self.copyWith(diagnostic: value));
+    });
+  }
+}
+
+// dart format on

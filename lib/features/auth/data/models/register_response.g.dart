@@ -6,9 +6,8 @@ part of 'register_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RegisterResponseImpl _$$RegisterResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$RegisterResponseImpl(
+_RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
+    _RegisterResponse(
       diagnostic: json['diagnostic'] == null
           ? null
           : Diagnostic.fromJson(json['diagnostic'] as Map<String, dynamic>),
@@ -17,15 +16,14 @@ _$RegisterResponseImpl _$$RegisterResponseImplFromJson(
           : DataRegister.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$RegisterResponseImplToJson(
-        _$RegisterResponseImpl instance) =>
+Map<String, dynamic> _$RegisterResponseToJson(_RegisterResponse instance) =>
     <String, dynamic>{
       'diagnostic': instance.diagnostic?.toJson(),
       'data': instance.data?.toJson(),
     };
 
-_$DataRegisterImpl _$$DataRegisterImplFromJson(Map<String, dynamic> json) =>
-    _$DataRegisterImpl(
+_DataRegister _$DataRegisterFromJson(Map<String, dynamic> json) =>
+    _DataRegister(
       id: json['id'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
@@ -35,7 +33,7 @@ _$DataRegisterImpl _$$DataRegisterImplFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'] as String?,
     );
 
-Map<String, dynamic> _$$DataRegisterImplToJson(_$DataRegisterImpl instance) =>
+Map<String, dynamic> _$DataRegisterToJson(_DataRegister instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

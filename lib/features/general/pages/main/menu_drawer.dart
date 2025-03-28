@@ -31,49 +31,50 @@ class MenuDrawer extends StatelessWidget {
             color: Theme.of(context).extension<LzyctColors>()!.banner,
             child: SafeArea(
               child: BlocBuilder<UserCubit, UserState>(
-                builder: (_, state) => state.when(
-                  loading: () => const Loading(),
-                  failure: (message) => Center(child: Text(message)),
-                  success: (data) => Row(
-                    children: [
-                      CircleImage(
-                        url: data?.avatar ?? "",
-                        size: Dimens.profilePicture,
-                      ),
-                      const SpacerH(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLargeBold
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .extension<LzyctColors>()!
-                                        .subtitle,
-                                  ),
-                            ),
-                            Text(
-                              data?.email ?? "",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .extension<LzyctColors>()!
-                                        .subtitle,
-                                  ),
-                            ),
-                          ],
+                builder: (_, state) => switch (state) {
+                  UserStateLoading() => const Loading(),
+                  UserStateFailure(:final message) =>
+                    Center(child: Text(message)),
+                  UserStateSuccess(:final data) => Row(
+                      children: [
+                        CircleImage(
+                          url: data?.avatar ?? "",
+                          size: Dimens.profilePicture,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                        const SpacerH(),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLargeBold
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .extension<LzyctColors>()!
+                                          .subtitle,
+                                    ),
+                              ),
+                              Text(
+                                data?.email ?? "",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .extension<LzyctColors>()!
+                                          .subtitle,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                },
               ),
             ),
           ),

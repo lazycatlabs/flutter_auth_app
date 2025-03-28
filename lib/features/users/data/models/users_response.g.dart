@@ -6,8 +6,8 @@ part of 'users_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UsersResponseImpl _$$UsersResponseImplFromJson(Map<String, dynamic> json) =>
-    _$UsersResponseImpl(
+_UsersResponse _$UsersResponseFromJson(Map<String, dynamic> json) =>
+    _UsersResponse(
       diagnostic: json['diagnostic'] == null
           ? null
           : Diagnostic.fromJson(json['diagnostic'] as Map<String, dynamic>),
@@ -19,15 +19,14 @@ _$UsersResponseImpl _$$UsersResponseImplFromJson(Map<String, dynamic> json) =>
           : Page.fromJson(json['page'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$UsersResponseImplToJson(_$UsersResponseImpl instance) =>
+Map<String, dynamic> _$UsersResponseToJson(_UsersResponse instance) =>
     <String, dynamic>{
       'diagnostic': instance.diagnostic?.toJson(),
       'data': instance.data?.map((e) => e.toJson()).toList(),
       'page': instance.page?.toJson(),
     };
 
-_$DataUserImpl _$$DataUserImplFromJson(Map<String, dynamic> json) =>
-    _$DataUserImpl(
+_DataUser _$DataUserFromJson(Map<String, dynamic> json) => _DataUser(
       id: json['id'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
@@ -37,8 +36,7 @@ _$DataUserImpl _$$DataUserImplFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'] as String?,
     );
 
-Map<String, dynamic> _$$DataUserImplToJson(_$DataUserImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DataUserToJson(_DataUser instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,

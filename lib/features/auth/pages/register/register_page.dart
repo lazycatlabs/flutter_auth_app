@@ -5,18 +5,6 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-///*********************************************
-///  flutter_auth_app |
-///  register_page.dart
-/// --------------------------------------------
-/// Created by Mudassir 🧑🏻‍💻 @ lazycatlabs.com
-/// on 📅 13/09/21 🕰 21:21 with ❤️
-/// ✉️ : hey.mudassir@gmail.com
-/// 🚀 : https://www.github.com/Lzyct
-/// 🌐 : https://www.lazycatlabs.com
-///*********************************************
-/// © 2021 | All Right Reserved
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -48,22 +36,21 @@ class _RegisterPageState extends State<RegisterPage> {
     return Parent(
       appBar: const MyAppBar().call(),
       child: BlocListener<RegisterCubit, RegisterState>(
-        listener: (_, state) {
-          state.whenOrNull(
-            loading: () => context.show(),
-            success: (data) {
+        listener: (_, state) => switch (state) {
+          RegisterStateLoading() => context.show(),
+          RegisterStateSuccess(:final data) => (() {
               context.dismiss();
 
               data?.message?.toToastSuccess(context);
 
               /// back to login page after register success
               context.pop();
-            },
-            failure: (message) {
+            })(),
+          RegisterStateFailure(:final message) => (() {
               context.dismiss();
               message.toToastError(context);
-            },
-          );
+            })(),
+          _ => {}
         },
         child: Center(
           child: SingleChildScrollView(

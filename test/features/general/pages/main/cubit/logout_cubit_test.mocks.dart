@@ -25,13 +25,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeEither_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [PostLogout].
@@ -45,17 +40,13 @@ class MockPostLogout extends _i1.Mock implements _i3.PostLogout {
   @override
   _i4.Future<_i2.Either<_i5.Failure, String>> call(_i5.NoParams? _0) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [_0],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, String>>.value(
-            _FakeEither_0<_i5.Failure, String>(
-          this,
-          Invocation.method(
-            #call,
-            [_0],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, String>>);
+            Invocation.method(#call, [_0]),
+            returnValue: _i4.Future<_i2.Either<_i5.Failure, String>>.value(
+              _FakeEither_0<_i5.Failure, String>(
+                this,
+                Invocation.method(#call, [_0]),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, String>>);
 }

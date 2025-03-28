@@ -17,7 +17,7 @@ class GetUsers extends UseCase<Users, UsersParams> {
 }
 
 @freezed
-class UsersParams with _$UsersParams {
+sealed class UsersParams with _$UsersParams {
   const factory UsersParams({@Default(1) int page}) = _UsersParams;
 
   factory UsersParams.fromJson(Map<String, dynamic> json) =>

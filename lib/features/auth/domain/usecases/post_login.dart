@@ -17,7 +17,7 @@ class PostLogin extends UseCase<Login, LoginParams> {
 }
 
 @freezed
-class LoginParams with _$LoginParams {
+sealed class LoginParams with _$LoginParams {
   const factory LoginParams({
     @Default("") String email,
     @Default("") String password,

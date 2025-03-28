@@ -4,7 +4,7 @@ part 'diagnostic.freezed.dart';
 part 'diagnostic.g.dart';
 
 @freezed
-class Diagnostic with _$Diagnostic {
+sealed class Diagnostic with _$Diagnostic {
   const factory Diagnostic({
     @JsonKey(name: "status") String? status,
     @JsonKey(name: "message") String? message,

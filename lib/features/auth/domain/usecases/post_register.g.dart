@@ -6,15 +6,14 @@ part of 'post_register.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RegisterParamsImpl _$$RegisterParamsImplFromJson(Map<String, dynamic> json) =>
-    _$RegisterParamsImpl(
+_RegisterParams _$RegisterParamsFromJson(Map<String, dynamic> json) =>
+    _RegisterParams(
       name: json['name'] as String?,
       email: json['email'] as String?,
       password: json['password'] as String?,
     );
 
-Map<String, dynamic> _$$RegisterParamsImplToJson(
-        _$RegisterParamsImpl instance) =>
+Map<String, dynamic> _$RegisterParamsToJson(_RegisterParams instance) =>
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,

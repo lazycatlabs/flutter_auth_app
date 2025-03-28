@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'users.freezed.dart';
 
 @freezed
-class Users with _$Users {
+sealed class Users with _$Users {
   const factory Users({
     List<User>? users,
     int? currentPage,
@@ -12,7 +12,7 @@ class Users with _$Users {
 }
 
 @freezed
-class User with _$User {
+sealed class User with _$User {
   const factory User({
     String? name,
     String? avatar,

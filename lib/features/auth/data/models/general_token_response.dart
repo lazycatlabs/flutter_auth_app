@@ -6,7 +6,7 @@ part 'general_token_response.freezed.dart';
 part 'general_token_response.g.dart';
 
 @freezed
-class GeneralTokenResponse with _$GeneralTokenResponse {
+sealed class GeneralTokenResponse with _$GeneralTokenResponse {
   const factory GeneralTokenResponse({
     @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
     @JsonKey(name: "data") DataGeneralToken? data,
@@ -21,7 +21,7 @@ class GeneralTokenResponse with _$GeneralTokenResponse {
 }
 
 @freezed
-class DataGeneralToken with _$DataGeneralToken {
+sealed class DataGeneralToken with _$DataGeneralToken {
   const factory DataGeneralToken({
     @JsonKey(name: "token") String? token,
     @JsonKey(name: "tokenType") String? tokenType,

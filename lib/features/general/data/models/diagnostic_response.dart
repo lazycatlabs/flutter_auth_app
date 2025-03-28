@@ -5,7 +5,7 @@ part 'diagnostic_response.freezed.dart';
 part 'diagnostic_response.g.dart';
 
 @freezed
-class DiagnosticResponse with _$DiagnosticResponse {
+sealed class DiagnosticResponse with _$DiagnosticResponse {
   const factory DiagnosticResponse({
     @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
   }) = _DiagnosticResponse;

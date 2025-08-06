@@ -5,22 +5,14 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 
 class FakePathProvider extends PathProviderPlatform {
   @override
-  Future<String?> getApplicationDocumentsPath() async {
-    return '.docs';
-  }
+  Future<String?> getApplicationDocumentsPath() async => '.docs';
 
   @override
-  Future<String?> getDownloadsPath() async {
-    return '.downloads';
-  }
+  Future<String?> getDownloadsPath() async => '.downloads';
 
   @override
-  Future<String?> getTemporaryPath() async {
-    return '.temp';
-  }
+  Future<String?> getTemporaryPath() async => '.temp';
 
   @override
-  Future<String?> getApplicationSupportPath() async {
-    return '.applicationSupport';
-  }
+  Future<String?> getApplicationSupportPath() async => '.applicationSupport';
 }

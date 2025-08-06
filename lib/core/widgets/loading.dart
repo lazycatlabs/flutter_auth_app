@@ -7,8 +7,7 @@ class Loading extends StatelessWidget {
   final bool showMessage;
 
   @override
-  Widget build(BuildContext context) {
-    return FittedBox(
+  Widget build(BuildContext context) => FittedBox(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -23,5 +22,4 @@ class Loading extends StatelessWidget {
         ],
       ),
     );
-  }
 }

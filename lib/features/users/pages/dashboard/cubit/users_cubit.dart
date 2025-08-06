@@ -34,13 +34,15 @@ class UsersCubit extends Cubit<UsersState> {
   }
 
   Future<void> fetchUsers(UsersParams usersParams) async {
-    if (currentPage == 1) emit(const UsersStateLoading());
+    if (currentPage == 1) {
+      emit(const UsersStateLoading());
+    }
 
     final data = await _getUser.call(usersParams);
     data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(UsersStateFailure(l.message ?? ""));
+          emit(UsersStateFailure(l.message ?? ''));
         } else if (l is NoDataFailure) {
           emit(const UsersStateEmpty());
         }
@@ -56,17 +58,24 @@ class UsersCubit extends Cubit<UsersState> {
           users: users,
         );
 
-        if (currentPage != 1) emit(const UsersStateInitial());
+        if (currentPage != 1) {
+          emit(const UsersStateInitial());
+        }
         emit(UsersStateSuccess(updatedUsers));
       },
     );
   }
 }
+
 @freezed
 sealed class UsersState with _$UsersState {
   const factory UsersState.loading() = UsersStateLoading;
+
   const factory UsersState.initial() = UsersStateInitial;
+
   const factory UsersState.success(Users data) = UsersStateSuccess;
+
   const factory UsersState.failure(String message) = UsersStateFailure;
+
   const factory UsersState.empty() = UsersStateEmpty;
 }

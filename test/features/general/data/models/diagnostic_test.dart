@@ -7,7 +7,7 @@ import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
 
 void main() {
-  const diagnostic = Diagnostic(status: "200", message: "Success");
+  const diagnostic = Diagnostic(status: '200', message: 'Success');
 
   test('from json, should return a valid model from json', () {
     /// arrange
@@ -26,8 +26,8 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      "status": "200",
-      "message": "Success",
+      'status': '200',
+      'message': 'Success',
     };
 
     /// assert

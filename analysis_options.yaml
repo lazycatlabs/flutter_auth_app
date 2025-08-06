@@ -11,3 +11,15 @@ linter:
   rules:
     sort_pub_dependencies: false
     avoid_dynamic_calls: false
+    require_trailing_commas: true # Enforce trailing commas for better formatting
+    prefer_const_constructors: true # Prefer const constructors where possible
+    prefer_const_literals_to_create_immutables: true # Prefer const for immutable literals
+    avoid_unnecessary_containers: true # Discourage unnecessary Container usage
+    always_put_control_body_on_new_line: true # Improves readability for control flow
+    always_put_required_named_parameters_first: true # Improves readability for function signatures
+    prefer_single_quotes: true # Consistent string quotes
+    unnecessary_brace_in_string_interps: true # Remove unnecessary braces in string interpolation
+    unnecessary_late: true # Avoid unnecessary late keyword
+    unnecessary_new: true # Remove unnecessary new keyword
+    unnecessary_this: true # Remove unnecessary this keyword
+    prefer_expression_function_bodies: true # Use expression function bodies for single-line functions

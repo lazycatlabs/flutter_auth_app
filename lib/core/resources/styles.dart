@@ -310,8 +310,7 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
     Color? blue,
     Color? lavender,
     Color? red,
-  }) {
-    return LzyctColors(
+  }) => LzyctColors(
       background: background ?? this.background,
       banner: banner ?? this.banner,
       card: card ?? this.card,
@@ -333,7 +332,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
       lavender: lavender ?? this.lavender,
       red: red ?? this.red,
     );
-  }
 
   @override
   ThemeExtension<LzyctColors> lerp(

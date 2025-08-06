@@ -22,7 +22,7 @@ void main() {
   late String message;
   late MockPostLogout mockPostLogout;
 
-  const errorMessage = "Error message";
+  const errorMessage = 'Error message';
 
   /// Initialize data
   setUp(() async {
@@ -33,7 +33,7 @@ void main() {
           json.decode(jsonReader(pathDiagnosticResponse200))
               as Map<String, dynamic>,
         ).diagnostic?.message ??
-        "";
+        '';
     mockPostLogout = MockPostLogout();
     logoutCubit = LogoutCubit(mockPostLogout);
   });
@@ -42,12 +42,12 @@ void main() {
   tearDown(() => logoutCubit.close());
 
   ///  Initial data should be loading
-  test("Initial data should be LogoutStatus.loading", () {
+  test('Initial data should be LogoutStatus.loading', () {
     expect(logoutCubit.state, const LogoutState.loading());
   });
 
   blocTest<LogoutCubit, LogoutState>(
-    "When repo success get data should be return LogoutState",
+    'When repo success get data should be return LogoutState',
     build: () {
       when(mockPostLogout.call(any)).thenAnswer((_) async => Right(message));
 
@@ -62,7 +62,7 @@ void main() {
   );
 
   blocTest<LogoutCubit, LogoutState>(
-    "When user input wrong credential should be return ServerFailure",
+    'When user input wrong credential should be return ServerFailure',
     build: () {
       when(mockPostLogout.call(any))
           .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));

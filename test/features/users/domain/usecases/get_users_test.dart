@@ -23,7 +23,7 @@ void main() {
     getUsers = GetUsers(mockUsersRepository);
   });
 
-  test("should get users from the repository", () async {
+  test('should get users from the repository', () async {
     /// arrange
     when(mockUsersRepository.users(usersParams))
         .thenAnswer((_) async => Right(users));
@@ -35,18 +35,18 @@ void main() {
     expect(result, equals(Right(users)));
   });
 
-  test("parse UsersParams to json", () {
+  test('parse UsersParams to json', () {
     /// act
     final result = usersParams.toJson();
-    final expected = {"page": 1};
+    final expected = {'page': 1};
 
     /// assert
     expect(result, equals(expected));
   });
 
-  test("parse UsersParams from json", () {
+  test('parse UsersParams from json', () {
     /// act
-    final params = UsersParams.fromJson({"page": 1});
+    final params = UsersParams.fromJson({'page': 1});
 
     /// assert
     expect(params, equals(usersParams));

@@ -20,7 +20,7 @@ class AuthRepositoryImpl implements AuthRepository {
         mainBoxMixin.addData(MainBoxKeys.isLogin, true);
         mainBoxMixin.addData(
           MainBoxKeys.authToken,
-          "${loginResponse.data?.tokenType} ${loginResponse.data?.token}",
+          '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
         );
 
         return Right(loginResponse.toEntity());
@@ -34,9 +34,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return response.fold(
       (failure) => Left(failure),
-      (registerResponse) {
-        return Right(registerResponse.toEntity());
-      },
+      (registerResponse) => Right(registerResponse.toEntity()),
     );
   }
 
@@ -51,7 +49,7 @@ class AuthRepositoryImpl implements AuthRepository {
       (loginResponse) {
         mainBoxMixin.addData(
           MainBoxKeys.generalToken,
-          "${loginResponse.data?.tokenType} ${loginResponse.data?.token}",
+          '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
         );
 
         return Right(loginResponse.toEntity());
@@ -65,7 +63,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return response.fold(
       (failure) => Left(failure),
-      (loginResponse) => Right(loginResponse.diagnostic?.message ?? ""),
+      (loginResponse) => Right(loginResponse.diagnostic?.message ?? ''),
     );
   }
 }

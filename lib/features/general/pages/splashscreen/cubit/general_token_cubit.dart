@@ -17,7 +17,7 @@ class GeneralTokenCubit extends Cubit<GeneralTokenState> {
     data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(GeneralTokenStateFailure(l.message ?? ""));
+          emit(GeneralTokenStateFailure(l.message ?? ''));
         }
       },
       (r) => emit(GeneralTokenStateSuccess(r.token)),

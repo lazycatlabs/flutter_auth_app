@@ -8,27 +8,26 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/test_mock.mocks.dart';
 
 void main() {
-  Widget rootWidget(Widget body) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 667),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, __) => MaterialApp(
-        localizationsDelegates: const [
-          Strings.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: const Locale("en"),
-        theme: themeLight(MockBuildContext()),
-        home: body,
-      ),
-    );
-  }
+  Widget rootWidget(Widget body) => ScreenUtilInit(
+    designSize: const Size(375, 667),
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (_, _) => MaterialApp(
+      localizationsDelegates: const [
+        Strings.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: const Locale('en'),
+      theme: themeLight(MockBuildContext()),
+      home: body,
+    ),
+  );
 
-  testWidgets('widthInPercent returns correct width',
-      (WidgetTester tester) async {
+  testWidgets('widthInPercent returns correct width', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       rootWidget(
         Builder(
@@ -42,8 +41,9 @@ void main() {
     );
   });
 
-  testWidgets('heightInPercent returns correct height',
-      (WidgetTester tester) async {
+  testWidgets('heightInPercent returns correct height', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
       rootWidget(
         Builder(

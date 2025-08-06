@@ -24,11 +24,11 @@ class MainCubit extends Cubit<MainState> {
   void initMenu(BuildContext context, {DataHelper? mockMenu}) {
     dataMenus = [
       DataHelper(
-        title: Strings.of(context)?.dashboard ?? "Dashboard",
+        title: Strings.of(context)?.dashboard ?? 'Dashboard',
         isSelected: true,
       ),
-      DataHelper(title: Strings.of(context)?.settings ?? "Settings"),
-      DataHelper(title: Strings.of(context)?.logout ?? "Logout"),
+      DataHelper(title: Strings.of(context)?.settings ?? 'Settings'),
+      DataHelper(title: Strings.of(context)?.logout ?? 'Logout'),
     ];
     updateIndex(_currentIndex, mockMenu);
   }
@@ -38,9 +38,11 @@ class MainCubit extends Cubit<MainState> {
     GlobalKey<ScaffoldState> scaffoldState, {
     bool isDrawerClosed = false,
   }) {
-    if (dataMenus == null) return false;
+    if (dataMenus == null) {
+      return false;
+    }
     if (dataMenus?[_currentIndex].title ==
-        (Strings.of(context)?.dashboard ?? "Dashboard")) {
+        (Strings.of(context)?.dashboard ?? 'Dashboard')) {
       return true;
     } else {
       if ((scaffoldState.currentState?.isEndDrawerOpen ?? false) ||
@@ -50,7 +52,7 @@ class MainCubit extends Cubit<MainState> {
       } else {
         for (final menu in dataMenus!) {
           menu.isSelected =
-              menu.title == (Strings.of(context)?.dashboard ?? "Dashboard");
+              menu.title == (Strings.of(context)?.dashboard ?? 'Dashboard');
         }
       }
 
@@ -58,8 +60,10 @@ class MainCubit extends Cubit<MainState> {
     }
   }
 }
+
 @freezed
 sealed class MainState with _$MainState {
   const factory MainState.loading() = MainStateLoading;
+
   const factory MainState.success(DataHelper? data) = MainStateSuccess;
 }

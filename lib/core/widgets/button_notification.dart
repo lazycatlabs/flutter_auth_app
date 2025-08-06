@@ -5,8 +5,7 @@ class ButtonNotification extends StatelessWidget {
   const ButtonNotification({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
+  Widget build(BuildContext context) => IconButton(
       icon: SizedBox(
         width: Dimens.space36,
         height: Dimens.space36,
@@ -16,10 +15,7 @@ class ButtonNotification extends StatelessWidget {
               left: 0,
               top: 0,
               bottom: 0,
-              child: Icon(
-                Icons.notifications_outlined,
-                size: Dimens.space30,
-              ),
+              child: Icon(Icons.notifications_outlined, size: Dimens.space30),
             ),
             Positioned(
               right: Dimens.space4,
@@ -30,12 +26,12 @@ class ButtonNotification extends StatelessWidget {
                   maxRadius: Dimens.space8,
                   child: Center(
                     child: Text(
-                      "1",
+                      '1',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Theme.of(context)
-                                .extension<LzyctColors>()!
-                                .background,
-                          ),
+                        color: Theme.of(
+                          context,
+                        ).extension<LzyctColors>()!.background,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -45,10 +41,9 @@ class ButtonNotification extends StatelessWidget {
           ],
         ),
       ),
-      onPressed: () async {
+      onPressed: () {
         ///TODO: Go to notifications page
         // context.goTo(AppRoute.notifications);
       },
     );
-  }
 }

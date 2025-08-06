@@ -33,8 +33,7 @@ class Parent extends StatefulWidget {
 
 class _ParentState extends State<Parent> {
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         key: widget.scaffoldKey,
@@ -49,5 +48,4 @@ class _ParentState extends State<Parent> {
         bottomNavigationBar: widget.bottomNavigation,
       ),
     );
-  }
 }

@@ -2,14 +2,14 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
-  SettingsCubit() : super(DataHelper(type: "en"));
+  SettingsCubit() : super(DataHelper(type: 'en'));
 
   void updateTheme(ActiveTheme activeTheme) {
     addData(MainBoxKeys.theme, activeTheme.name);
     emit(
       DataHelper(
         activeTheme: activeTheme,
-        type: getData(MainBoxKeys.locale) ?? "en",
+        type: getData(MainBoxKeys.locale) ?? 'en',
       ),
     );
   }
@@ -29,7 +29,7 @@ class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
     emit(
       DataHelper(
         activeTheme: activeTheme,
-        type: getData(MainBoxKeys.locale) ?? "en",
+        type: getData(MainBoxKeys.locale) ?? 'en',
       ),
     );
     return activeTheme;

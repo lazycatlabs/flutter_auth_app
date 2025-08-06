@@ -36,49 +36,46 @@ void main() {
     settingsCubit = MockSettingsCubit();
   });
 
-  Widget rootWidget(Widget body) {
-    return BlocProvider<SettingsCubit>.value(
-      value: settingsCubit,
-      child: ScreenUtilInit(
-        designSize: const Size(375, 667),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, __) => MaterialApp(
-          localizationsDelegates: const [
-            Strings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: const Locale("en"),
-          theme: themeLight(MockBuildContext()),
-          home: body,
-        ),
+  Widget rootWidget(Widget body) => BlocProvider<SettingsCubit>.value(
+    value: settingsCubit,
+    child: ScreenUtilInit(
+      designSize: const Size(375, 667),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, _) => MaterialApp(
+        localizationsDelegates: const [
+          Strings.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+        theme: themeLight(MockBuildContext()),
+        home: body,
       ),
-    );
-  }
-
-  testWidgets(
-    'trigger update theme when dropdown theme tapped ',
-    (tester) async {
-      when(() => settingsCubit.state).thenReturn(DataHelper());
-
-      await tester.pumpWidget(rootWidget(const SettingsPage()));
-      await tester.pumpAndSettle();
-      final dropdown = find.byKey(const Key("dropdown_theme")).last;
-
-      await tester.tap(dropdown);
-      await tester.pumpAndSettle();
-
-      /// Tap  the first Item
-      final dropdownItem = find.text('Theme Dark').last;
-
-      await tester.tap(dropdownItem);
-      await tester.pumpAndSettle();
-
-      verify(() => settingsCubit.updateTheme(ActiveTheme.dark)).called(1);
-    },
+    ),
   );
+
+  testWidgets('trigger update theme when dropdown theme tapped ', (
+    tester,
+  ) async {
+    when(() => settingsCubit.state).thenReturn(DataHelper());
+
+    await tester.pumpWidget(rootWidget(const SettingsPage()));
+    await tester.pumpAndSettle();
+    final dropdown = find.byKey(const Key('dropdown_theme')).last;
+
+    await tester.tap(dropdown);
+    await tester.pumpAndSettle();
+
+    /// Tap  the first Item
+    final dropdownItem = find.text('Theme Dark').last;
+
+    await tester.tap(dropdownItem);
+    await tester.pumpAndSettle();
+
+    verify(() => settingsCubit.updateTheme(ActiveTheme.dark)).called(1);
+  });
 
   testWidgets(
     'trigger update language when dropdown language tapped in English',
@@ -87,7 +84,7 @@ void main() {
 
       await tester.pumpWidget(rootWidget(const SettingsPage()));
       await tester.pumpAndSettle();
-      final dropdown = find.byKey(const Key("dropdown_language")).last;
+      final dropdown = find.byKey(const Key('dropdown_language')).last;
 
       await tester.tap(dropdown);
       await tester.pumpAndSettle();
@@ -98,7 +95,7 @@ void main() {
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 
-      verify(() => settingsCubit.updateLanguage("en")).called(1);
+      verify(() => settingsCubit.updateLanguage('en')).called(1);
     },
   );
 
@@ -107,10 +104,10 @@ void main() {
     (tester) async {
       when(() => settingsCubit.state).thenReturn(DataHelper());
 
-      MainBoxMixin().addData(MainBoxKeys.locale, "id");
+      MainBoxMixin().addData(MainBoxKeys.locale, 'id');
       await tester.pumpWidget(rootWidget(const SettingsPage()));
       await tester.pumpAndSettle();
-      final dropdown = find.byKey(const Key("dropdown_language")).last;
+      final dropdown = find.byKey(const Key('dropdown_language')).last;
 
       await tester.tap(dropdown);
       await tester.pumpAndSettle();
@@ -121,7 +118,7 @@ void main() {
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 
-      verify(() => settingsCubit.updateLanguage("id")).called(1);
+      verify(() => settingsCubit.updateLanguage('id')).called(1);
     },
   );
 }

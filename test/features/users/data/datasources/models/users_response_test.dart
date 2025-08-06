@@ -9,19 +9,19 @@ import '../../../../../helpers/paths.dart';
 void main() {
   const usersResponse = UsersResponse(
     diagnostic: Diagnostic(
-      status: "200",
-      message: "Success",
+      status: '200',
+      message: 'Success',
     ),
     data: [
       DataUser(
-        id: "8364aa6f-6887-4502-a6b0-62f082196476",
-        name: "Mudassir",
-        email: "mudassir@lazycatlabs.com",
+        id: '8364aa6f-6887-4502-a6b0-62f082196476',
+        name: 'Mudassir',
+        email: 'mudassir@lazycatlabs.com',
         photo:
-            "https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png",
+            'https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png',
         verified: false,
-        createdAt: "2024-08-25T15:04:28.191067",
-        updatedAt: "2024-08-25T15:04:28.191067",
+        createdAt: '2024-08-25T15:04:28.191067',
+        updatedAt: '2024-08-25T15:04:28.191067',
       ),
     ],
     page: Page(currentPage: 1, lastPage: 5, total: 100, perPage: 20),
@@ -44,27 +44,27 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      "diagnostic": {
-        "status": "200",
-        "message": "Success",
+      'diagnostic': {
+        'status': '200',
+        'message': 'Success',
       },
-      "data": [
+      'data': [
         {
-          "id": "8364aa6f-6887-4502-a6b0-62f082196476",
-          "name": "Mudassir",
-          "email": "mudassir@lazycatlabs.com",
-          "photo":
-              "https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png",
-          "verified": false,
-          "createdAt": "2024-08-25T15:04:28.191067",
-          "updatedAt": "2024-08-25T15:04:28.191067",
+          'id': '8364aa6f-6887-4502-a6b0-62f082196476',
+          'name': 'Mudassir',
+          'email': 'mudassir@lazycatlabs.com',
+          'photo':
+              'https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png',
+          'verified': false,
+          'createdAt': '2024-08-25T15:04:28.191067',
+          'updatedAt': '2024-08-25T15:04:28.191067',
         }
       ],
-      "page": {
-        "currentPage": 1,
-        "perPage": 20,
-        "lastPage": 5,
-        "total": 100,
+      'page': {
+        'currentPage': 1,
+        'perPage': 20,
+        'lastPage': 5,
+        'total': 100,
       },
     };
 

@@ -20,12 +20,12 @@ void main() {
           json.decode(jsonReader(pathGeneralTokenResponse200))
               as Map<String, dynamic>,
         ).diagnostic?.message ??
-        "";
+        '';
     mockAuthRepository = MockAuthRepository();
     postLogout = PostLogout(mockAuthRepository);
   });
 
-  test("should get logout from the repository", () async {
+  test('should get logout from the repository', () async {
     /// arrange
     when(mockAuthRepository.logout()).thenAnswer((_) async => Right(logout));
 

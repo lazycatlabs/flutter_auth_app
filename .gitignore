@@ -21,7 +21,10 @@
 # is commented out by default.
 #.vscode/
 
-# Flutter/Dart/Pub related
+# ignore freezed and json_serializable generated files
+*.freezed.dart
+*.g.dart
+
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/

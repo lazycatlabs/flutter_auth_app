@@ -14,8 +14,8 @@ void main() {
     });
 
     test('returns correct values for RegisterStatus.failure', () {
-      const status = RegisterState.failure("");
-      expect(status, const RegisterState.failure(""));
+      const status = RegisterState.failure('');
+      expect(status, const RegisterState.failure(''));
     });
   });
 }

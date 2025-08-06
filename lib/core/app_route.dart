@@ -7,17 +7,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 enum Routes {
-  root("/"),
-  splashScreen("/splashscreen"),
+  root('/'),
+  splashScreen('/splashscreen'),
 
   /// Home Page
-  dashboard("/dashboard"),
-  settings("/settings"),
+  dashboard('/dashboard'),
+  settings('/settings'),
 
   // Auth Page
-  login("/auth/login"),
-  register("/auth/register"),
-  ;
+  login('/auth/login'),
+  register('/auth/register');
 
   const Routes(this.path);
 
@@ -38,12 +37,12 @@ class AppRoute {
       GoRoute(
         path: Routes.splashScreen.path,
         name: Routes.splashScreen.name,
-        builder: (_, __) => BlocProvider(
+        builder: (_, _) => BlocProvider(
           create: (_) => sl<GeneralTokenCubit>()
             ..generalToken(
               const GeneralTokenParams(
-                clientId: String.fromEnvironment("CLIENT_ID"),
-                clientSecret: String.fromEnvironment("CLIENT_SECRET"),
+                clientId: String.fromEnvironment('CLIENT_ID'),
+                clientSecret: String.fromEnvironment('CLIENT_SECRET'),
               ),
             ),
           child: SplashScreenPage(),
@@ -52,12 +51,12 @@ class AppRoute {
       GoRoute(
         path: Routes.root.path,
         name: Routes.root.name,
-        redirect: (_, __) => Routes.dashboard.path,
+        redirect: (_, _) => Routes.dashboard.path,
       ),
       GoRoute(
         path: Routes.login.path,
         name: Routes.login.name,
-        builder: (_, __) => BlocProvider(
+        builder: (_, _) => BlocProvider(
           create: (_) => sl<ReloadFormCubit>(),
           child: const LoginPage(),
         ),
@@ -65,7 +64,7 @@ class AppRoute {
       GoRoute(
         path: Routes.register.path,
         name: Routes.register.name,
-        builder: (_, __) => MultiBlocProvider(
+        builder: (_, _) => MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => sl<RegisterCubit>()),
             BlocProvider(create: (_) => sl<ReloadFormCubit>()),
@@ -74,7 +73,7 @@ class AppRoute {
         ),
       ),
       ShellRoute(
-        builder: (_, __, child) => BlocProvider(
+        builder: (_, _, child) => BlocProvider(
           create: (context) => sl<MainCubit>(),
           child: MainPage(child: child),
         ),
@@ -82,7 +81,7 @@ class AppRoute {
           GoRoute(
             path: Routes.dashboard.path,
             name: Routes.dashboard.name,
-            builder: (_, __) => BlocProvider(
+            builder: (_, _) => BlocProvider(
               create: (_) => sl<UsersCubit>()..fetchUsers(const UsersParams()),
               child: const DashboardPage(),
             ),
@@ -90,7 +89,7 @@ class AppRoute {
           GoRoute(
             path: Routes.settings.path,
             name: Routes.settings.name,
-            builder: (_, __) => const SettingsPage(),
+            builder: (_, _) => const SettingsPage(),
           ),
         ],
       ),
@@ -101,15 +100,14 @@ class AppRoute {
     refreshListenable: isUnitTest
         ? null
         //coverage:ignore-start
-        : GoRouterRefreshStream(
-            [
-              context.read<AuthCubit>().stream,
-              context.read<LogoutCubit>().stream,
-            ],
-          ),
+        : GoRouterRefreshStream([
+            context.read<AuthCubit>().stream,
+            context.read<LogoutCubit>().stream,
+          ]),
     //coverage:ignore-end
     redirect: (_, GoRouterState state) {
-      final bool isAllowedPages = state.matchedLocation == Routes.login.path ||
+      final bool isAllowedPages =
+          state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path ||
           state.matchedLocation == Routes.splashScreen.path;
 

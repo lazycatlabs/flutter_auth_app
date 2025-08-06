@@ -8,7 +8,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 class DioInterceptor extends Interceptor with FirebaseCrashLogger {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    String headerMessage = "";
+    String headerMessage = '';
     options.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
 
     try {
@@ -24,13 +24,13 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
       log.d(
         // ignore: unnecessary_null_comparison
         "REQUEST ► ︎ ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"${options.baseUrl}${options.path}"}\n\n"
-        "Headers:\n"
-        "$headerMessage\n"
-        "❖ QueryParameters : \n"
-        "Body: $prettyJson",
+        'Headers:\n'
+        '$headerMessage\n'
+        '❖ QueryParameters : \n'
+        'Body: $prettyJson',
       );
     } catch (e, stackTrace) {
-      log.e("Failed to extract json request $e");
+      log.e('Failed to extract json request $e');
       nonFatalError(error: e, stackTrace: stackTrace);
     }
 
@@ -50,7 +50,7 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    String headerMessage = "";
+    String headerMessage = '';
     response.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
 
     const JsonEncoder encoder = JsonEncoder.withIndent('  ');
@@ -58,10 +58,10 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
     log.d(
       // ignore: unnecessary_null_comparison
       "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
-      "Headers:\n"
-      "$headerMessage\n"
-      "❖ Results : \n"
-      "Response: $prettyJson",
+      'Headers:\n'
+      '$headerMessage\n'
+      '❖ Results : \n'
+      'Response: $prettyJson',
     );
     super.onResponse(response, handler);
   }

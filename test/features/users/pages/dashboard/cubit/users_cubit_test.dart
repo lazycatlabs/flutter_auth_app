@@ -25,7 +25,7 @@ void main() {
 
   const dummyUsersRequest1 = UsersParams();
   const dummyUsersRequest2 = UsersParams(page: 2);
-  const errorMessage = "";
+  const errorMessage = '';
 
   /// Initialize data
   setUp(() async {
@@ -46,12 +46,12 @@ void main() {
   });
 
   ///  Initial data should be loading
-  test("Initial data should be UsersStatus.loading", () {
+  test('Initial data should be UsersStatus.loading', () {
     expect(userCubit.state, const UsersState.loading());
   });
 
   blocTest<UsersCubit, UsersState>(
-    "When repo success get data should be return UsersState and loading only show when request page 1",
+    'When repo success get data should be return UsersState and loading only show when request page 1',
     build: () {
       when(mockGetUsers.call(dummyUsersRequest1))
           .thenAnswer((_) async => Right(users));
@@ -67,7 +67,7 @@ void main() {
   );
 
   blocTest<UsersCubit, UsersState>(
-    "When request page 2, isLoading should not execute",
+    'When request page 2, isLoading should not execute',
     build: () {
       when(mockGetUsers.call(dummyUsersRequest2))
           .thenAnswer((_) async => Right(users));
@@ -83,7 +83,7 @@ void main() {
   );
 
   blocTest<UsersCubit, UsersState>(
-    "When call nextPage",
+    'When call nextPage',
     build: () {
       when(mockGetUsers.call(any)).thenAnswer((_) async => Right(users));
       userCubit.lastPage = 2;
@@ -97,7 +97,7 @@ void main() {
   );
 
   blocTest<UsersCubit, UsersState>(
-    "When failed to get data from server",
+    'When failed to get data from server',
     build: () {
       when(
         mockGetUsers.call(dummyUsersRequest1),
@@ -114,7 +114,7 @@ void main() {
   );
 
   blocTest<UsersCubit, UsersState>(
-    "When no data from server",
+    'When no data from server',
     build: () {
       when(mockGetUsers.call(dummyUsersRequest2))
           .thenAnswer((_) async => Left(NoDataFailure()));
@@ -130,7 +130,7 @@ void main() {
   );
 
   blocTest<UsersCubit, UsersState>(
-    "When request refreshUsers",
+    'When request refreshUsers',
     build: () {
       when(mockGetUsers.call(dummyUsersRequest1))
           .thenAnswer((_) async => Right(users));

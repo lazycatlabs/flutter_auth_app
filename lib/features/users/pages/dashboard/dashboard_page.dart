@@ -25,8 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
     });
 
   @override
-  Widget build(BuildContext context) {
-    return Parent(
+  Widget build(BuildContext context) => Parent(
       child: RefreshIndicator(
         color: Theme.of(context).extension<LzyctColors>()!.pink,
         backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
@@ -42,16 +41,14 @@ class _DashboardPageState extends State<DashboardPage> {
                     ? data.users?.length //coverage:ignore-line
                     : ((data.users?.length ?? 0) + 1),
                 padding: EdgeInsets.symmetric(vertical: Dimens.space16),
-                itemBuilder: (_, index) {
-                  return index < (data.users?.length ?? 0)
+                itemBuilder: (_, index) => index < (data.users?.length ?? 0)
                       ? userItem(data.users![index])
                       : Padding(
                           padding: EdgeInsets.all(Dimens.space16),
                           child: const Center(
                             child: CupertinoActivityIndicator(),
                           ),
-                        );
-                },
+                        ),
               ),
             UsersStateFailure(:final message) =>
               Center(child: Empty(errorMessage: message)),
@@ -60,10 +57,8 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       ),
     );
-  }
 
-  Container userItem(User user) {
-    return Container(
+  Container userItem(User user) => Container(
       decoration: BoxDecorations(context).card,
       margin: EdgeInsets.symmetric(
         vertical: Dimens.space12,
@@ -77,7 +72,7 @@ class _DashboardPageState extends State<DashboardPage> {
               bottomLeft: Radius.circular(Dimens.space8),
             ),
             child: CachedNetworkImage(
-              imageUrl: user.avatar ?? "",
+              imageUrl: user.avatar ?? '',
               width: Dimens.profilePicture,
               height: Dimens.profilePicture,
               fit: BoxFit.cover,
@@ -89,11 +84,11 @@ class _DashboardPageState extends State<DashboardPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user.name ?? "",
+                  user.name ?? '',
                   style: Theme.of(context).textTheme.titleLargeBold,
                 ),
                 Text(
-                  user.email ?? "",
+                  user.email ?? '',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -111,7 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     Flexible(
                       child: Text(
-                        (user.updatedAt ?? "").toStringDateAlt(),
+                        (user.updatedAt ?? '').toStringDateAlt(),
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall
@@ -127,5 +122,4 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       ),
     );
-  }
 }

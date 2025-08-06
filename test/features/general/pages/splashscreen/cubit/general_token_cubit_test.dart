@@ -25,10 +25,10 @@ void main() {
   late MockPostGeneralToken mockPostGeneralToken;
 
   const generalTokenParams = GeneralTokenParams(
-    clientId: "apimock",
-    clientSecret: "apimock_secret",
+    clientId: 'apimock',
+    clientSecret: 'apimock_secret',
   );
-  const errorMessage = "Unauthorized";
+  const errorMessage = 'Unauthorized';
 
   /// Initialize data
   setUp(() async {
@@ -47,12 +47,12 @@ void main() {
   tearDown(() => generalTokenCubit.close());
 
   ///  Initial data should be loading
-  test("Initial data should be AuthStatus.loading", () {
+  test('Initial data should be AuthStatus.loading', () {
     expect(generalTokenCubit.state, const GeneralTokenState.loading());
   });
 
   blocTest<GeneralTokenCubit, GeneralTokenState>(
-    "When repo success get data should be return GeneralTokenState",
+    'When repo success get data should be return GeneralTokenState',
     build: () {
       when(mockPostGeneralToken.call(generalTokenParams))
           .thenAnswer((_) async => Right(generalToken));
@@ -68,7 +68,7 @@ void main() {
   );
 
   blocTest<GeneralTokenCubit, GeneralTokenState>(
-    "When user input wrong credential should be return ServerFailure",
+    'When user input wrong credential should be return ServerFailure',
     build: () {
       when(mockPostGeneralToken.call(generalTokenParams))
           .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));

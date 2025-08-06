@@ -35,21 +35,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: String.fromEnvironment("ANDROID_API_KEY"),
-    appId: String.fromEnvironment("ANDROID_APP_ID"),
-    messagingSenderId: String.fromEnvironment("ANDROID_SENDER_ID"),
-    projectId: String.fromEnvironment("ANDROID_PROJECT_ID"),
-    storageBucket: String.fromEnvironment("ANDROID_STORAGE_BUCKET"),
+    apiKey: String.fromEnvironment('ANDROID_API_KEY'),
+    appId: String.fromEnvironment('ANDROID_APP_ID'),
+    messagingSenderId: String.fromEnvironment('ANDROID_SENDER_ID'),
+    projectId: String.fromEnvironment('ANDROID_PROJECT_ID'),
+    storageBucket: String.fromEnvironment('ANDROID_STORAGE_BUCKET'),
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: String.fromEnvironment("IOS_API_KEY"),
-    appId: String.fromEnvironment("IOS_APP_ID"),
-    messagingSenderId: String.fromEnvironment("IOS_SENDER_ID"),
-    projectId: String.fromEnvironment("IOS_PROJECT_ID"),
-    storageBucket: String.fromEnvironment("IOS_STORAGE_BUCKET"),
-    androidClientId: String.fromEnvironment("IOS_ANDROID_CLIENT_ID"),
-    iosClientId: String.fromEnvironment("IOS_IOS_CLIENT_ID"),
-    iosBundleId: String.fromEnvironment("IOS_BUNDLE_ID"),
+    apiKey: String.fromEnvironment('IOS_API_KEY'),
+    appId: String.fromEnvironment('IOS_APP_ID'),
+    messagingSenderId: String.fromEnvironment('IOS_SENDER_ID'),
+    projectId: String.fromEnvironment('IOS_PROJECT_ID'),
+    storageBucket: String.fromEnvironment('IOS_STORAGE_BUCKET'),
+    androidClientId: String.fromEnvironment('IOS_ANDROID_CLIENT_ID'),
+    iosClientId: String.fromEnvironment('IOS_IOS_CLIENT_ID'),
+    iosBundleId: String.fromEnvironment('IOS_BUNDLE_ID'),
   );
 }

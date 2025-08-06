@@ -8,8 +8,8 @@ part 'user_response.g.dart';
 @freezed
 sealed class UserResponse with _$UserResponse {
   const factory UserResponse({
-    @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
-    @JsonKey(name: "data") DataUser? data,
+    @JsonKey(name: 'diagnostic') Diagnostic? diagnostic,
+    @JsonKey(name: 'data') DataUser? data,
   }) = _UserResponse;
 
   const UserResponse._();

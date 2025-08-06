@@ -18,10 +18,8 @@ void main() {
   });
 
   blocTest(
-    "The theme should be system",
-    build: () {
-      return reloadFormCubit;
-    },
+    'The theme should be system',
+    build: () => reloadFormCubit,
     act: (ReloadFormCubit settingsCubit) => settingsCubit.reload(),
     expect: () => [
       const ReloadFormState.initial(),

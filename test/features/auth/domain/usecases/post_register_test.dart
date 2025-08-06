@@ -14,7 +14,7 @@ void main() {
   late PostRegister postRegister;
   late Register register;
   const registerParams = RegisterParams(
-    name: "Mudassir",
+    name: 'Mudassir',
     email: 'mudassir@lazycatlabs.com',
     password: 'pass123',
   );
@@ -27,7 +27,7 @@ void main() {
     postRegister = PostRegister(mockAuthRepository);
   });
 
-  test("should get register from the repository", () async {
+  test('should get register from the repository', () async {
     /// arrange
     when(mockAuthRepository.register(registerParams))
         .thenAnswer((_) async => Right(register));
@@ -39,25 +39,25 @@ void main() {
     expect(result, equals(Right(register)));
   });
 
-  test("parse RegisterParams to json", () {
+  test('parse RegisterParams to json', () {
     /// act
     final result = registerParams.toJson();
     final expected = {
-      "name": "Mudassir",
-      "email": "mudassir@lazycatlabs.com",
-      "password": "pass123",
+      'name': 'Mudassir',
+      'email': 'mudassir@lazycatlabs.com',
+      'password': 'pass123',
     };
 
     /// assert
     expect(result, equals(expected));
   });
 
-  test("parse RegisterParams from json", () {
+  test('parse RegisterParams from json', () {
     /// act
     final params = RegisterParams.fromJson({
-      "name": "Mudassir",
-      "email": "mudassir@lazycatlabs.com",
-      "password": "pass123",
+      'name': 'Mudassir',
+      'email': 'mudassir@lazycatlabs.com',
+      'password': 'pass123',
     });
 
     /// assert

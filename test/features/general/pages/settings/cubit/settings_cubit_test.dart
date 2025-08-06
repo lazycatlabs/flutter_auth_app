@@ -20,7 +20,7 @@ void main() {
   });
 
   blocTest(
-    "The theme should be system",
+    'The theme should be system',
     build: () => settingsCubit,
     act: (SettingsCubit settingsCubit) =>
         settingsCubit.updateTheme(ActiveTheme.system),
@@ -30,9 +30,9 @@ void main() {
   );
 
   blocTest(
-    "The language should be updated",
+    'The language should be updated',
     build: () => settingsCubit,
-    act: (SettingsCubit settingsCubit) => settingsCubit.updateLanguage("en"),
+    act: (SettingsCubit settingsCubit) => settingsCubit.updateLanguage('en'),
     expect: () => [
       isA<DataHelper>(),
       isA<DataHelper>(),

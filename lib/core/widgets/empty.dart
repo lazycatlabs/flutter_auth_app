@@ -9,8 +9,7 @@ class Empty extends StatelessWidget {
   const Empty({super.key, this.errorMessage});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
@@ -22,5 +21,4 @@ class Empty extends StatelessWidget {
         ),
       ],
     );
-  }
 }

@@ -22,7 +22,7 @@ void main() {
   late User user;
   late MockGetUser mockGetUser;
 
-  const errorMessage = "Error message";
+  const errorMessage = 'Error message';
 
   /// Initialize data
   setUp(() async {
@@ -40,12 +40,12 @@ void main() {
   tearDown(() => userCubit.close());
 
   ///  Initial data should be loading
-  test("Initial data should be UserStatus.loading", () {
+  test('Initial data should be UserStatus.loading', () {
     expect(userCubit.state, const UserState.loading());
   });
 
   blocTest<UserCubit, UserState>(
-    "When repo success get data should be return UserState",
+    'When repo success get data should be return UserState',
     build: () {
       when(mockGetUser.call(any)).thenAnswer((_) async => Right(user));
 
@@ -60,7 +60,7 @@ void main() {
   );
 
   blocTest<UserCubit, UserState>(
-    "When user input wrong credential should be return ServerFailure",
+    'When user input wrong credential should be return ServerFailure',
     build: () {
       when(mockGetUser.call(any))
           .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));

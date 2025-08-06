@@ -30,22 +30,21 @@ class _LoginPageState extends State<LoginPage> {
   final _formValidator = <String, bool>{};
 
   @override
-  Widget build(BuildContext context) {
-    return Parent(
+  Widget build(BuildContext context) => Parent(
       child: BlocListener<AuthCubit, AuthState>(
         listener: (_, state) => switch (state) {
           AuthStateLoading() => context.show(),
           AuthStateSuccess(:final data) => (() {
-              context.dismiss();
-              data.toString().toToastSuccess(context);
+            context.dismiss();
+            data.toString().toToastSuccess(context);
 
-              TextInput.finishAutofillContext();
-              context.goNamed(Routes.root.name);
-            })(),
+            TextInput.finishAutofillContext();
+            context.goNamed(Routes.root.name);
+          })(),
           AuthStateFailure(:final message) => (() {
-              context.dismiss();
-              message.toToastError(context);
-            })(),
+            context.dismiss();
+            message.toToastError(context);
+          })(),
           _ => {},
         },
         child: Center(
@@ -79,89 +78,78 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
 
   Widget _loginForm() => BlocBuilder<ReloadFormCubit, ReloadFormState>(
-        builder: (_, __) {
-          return Column(
-            children: [
-              TextF(
-                autoFillHints: const [AutofillHints.email],
-                key: const Key("email"),
-                focusNode: _fnEmail,
-                textInputAction: TextInputAction.next,
-                controller: _conEmail,
-                keyboardType: TextInputType.emailAddress,
-                prefixIcon: Icon(
-                  Icons.alternate_email,
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                ),
-                hint: "mudassir@lazycatlabs.com",
-                label: Strings.of(context)!.email,
-                isValid: _formValidator.putIfAbsent(
-                  "email",
-                  () => false,
-                ),
-                validatorListener: (String value) {
-                  _formValidator["email"] = value.isValidEmail();
-                  context.read<ReloadFormCubit>().reload();
-                },
-                errorMessage: Strings.of(context)!.errorInvalidEmail,
+    builder: (_, _) => Column(
+        children: [
+          TextF(
+            autoFillHints: const [AutofillHints.email],
+            key: const Key('email'),
+            focusNode: _fnEmail,
+            textInputAction: TextInputAction.next,
+            controller: _conEmail,
+            keyboardType: TextInputType.emailAddress,
+            prefixIcon: Icon(
+              Icons.alternate_email,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
+            ),
+            hint: 'mudassir@lazycatlabs.com',
+            label: Strings.of(context)!.email,
+            isValid: _formValidator.putIfAbsent('email', () => false),
+            validatorListener: (String value) {
+              _formValidator['email'] = value.isValidEmail();
+              context.read<ReloadFormCubit>().reload();
+            },
+            errorMessage: Strings.of(context)!.errorInvalidEmail,
+          ),
+          TextF(
+            autoFillHints: const [AutofillHints.password],
+            key: const Key('password'),
+            focusNode: _fnPassword,
+            textInputAction: TextInputAction.done,
+            controller: _conPassword,
+            keyboardType: TextInputType.text,
+            prefixIcon: Icon(
+              Icons.lock_outline,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
+            ),
+            obscureText: !_isPasswordVisible,
+            hint: 'pass123',
+            label: Strings.of(context)!.password,
+            suffixIcon: IconButton(
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              onPressed: () {
+                _isPasswordVisible = !_isPasswordVisible;
+                context.read<ReloadFormCubit>().reload();
+              },
+              icon: Icon(
+                _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
               ),
-              TextF(
-                autoFillHints: const [AutofillHints.password],
-                key: const Key("password"),
-                focusNode: _fnPassword,
-                textInputAction: TextInputAction.done,
-                controller: _conPassword,
-                keyboardType: TextInputType.text,
-                prefixIcon: Icon(
-                  Icons.lock_outline,
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                ),
-                obscureText: !_isPasswordVisible,
-                hint: 'pass123',
-                label: Strings.of(context)!.password,
-                suffixIcon: IconButton(
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  onPressed: () {
-                    _isPasswordVisible = !_isPasswordVisible;
-                    context.read<ReloadFormCubit>().reload();
-                  },
-                  icon: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                ),
-                isValid: _formValidator.putIfAbsent(
-                  "password",
-                  () => false,
-                ),
-                validatorListener: (String value) {
-                  _formValidator["password"] = value.length > 5;
-                  context.read<ReloadFormCubit>().reload();
-                },
-                errorMessage: Strings.of(context)!.errorPasswordLength,
-              ),
-              SpacerV(value: Dimens.space24),
-              Button(
-                title: Strings.of(context)!.login,
-                width: double.maxFinite,
-                onPressed: _formValidator.validate()
-                    ? () => context.read<AuthCubit>().login(
-                          LoginParams(
-                            email: _conEmail.text,
-                            password: _conPassword.text,
-                            osInfo: Platform.operatingSystem,
-                            deviceInfo: Platform.localHostname,
-                          ),
-                        )
-                    : null,
-              ),
-            ],
-          );
-        },
-      );
+            ),
+            isValid: _formValidator.putIfAbsent('password', () => false),
+            validatorListener: (String value) {
+              _formValidator['password'] = value.length > 5;
+              context.read<ReloadFormCubit>().reload();
+            },
+            errorMessage: Strings.of(context)!.errorPasswordLength,
+          ),
+          SpacerV(value: Dimens.space24),
+          Button(
+            title: Strings.of(context)!.login,
+            width: double.maxFinite,
+            onPressed: _formValidator.validate()
+                ? () => context.read<AuthCubit>().login(
+                    LoginParams(
+                      email: _conEmail.text,
+                      password: _conPassword.text,
+                      osInfo: Platform.operatingSystem,
+                      deviceInfo: Platform.localHostname,
+                    ),
+                  )
+                : null,
+          ),
+        ],
+      ),
+  );
 }

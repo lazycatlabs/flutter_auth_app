@@ -24,19 +24,19 @@ void main() {
     await serviceLocator(isUnitTest: true, prefixBox: 'main_cubit_test_');
     mainCubit = MainCubit();
     mockBuildContext = MockBuildContext();
-    menu = DataHelper(title: "Dashboard", isSelected: true);
+    menu = DataHelper(title: 'Dashboard', isSelected: true);
   });
 
   /// Dispose bloc
   tearDown(() => mainCubit.close());
 
   ///  Initial data should be loading
-  test("Initial data should be MainStatus.loading", () {
+  test('Initial data should be MainStatus.loading', () {
     expect(mainCubit.state, const MainState.loading());
   });
 
   blocTest<MainCubit, MainState>(
-    "When initMenu success get data should be return MainState",
+    'When initMenu success get data should be return MainState',
     build: () => mainCubit,
     act: (cubit) => cubit.initMenu(MockBuildContext(), mockMenu: menu),
     wait: const Duration(milliseconds: 300),

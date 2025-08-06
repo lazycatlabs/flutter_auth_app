@@ -39,28 +39,26 @@ void main() {
     userCubit = MockUserCubit();
   });
 
-  Widget rootWidget(Widget body) {
-    return BlocProvider.value(
-      value: userCubit,
-      child: ScreenUtilInit(
-        designSize: const Size(375, 667),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, __) => MaterialApp(
-          localizationsDelegates: const [
-            Strings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: const Locale("en"),
-          supportedLocales: L10n.all,
-          theme: themeLight(MockBuildContext()),
-          home: body,
-        ),
+  Widget rootWidget(Widget body) => BlocProvider.value(
+    value: userCubit,
+    child: ScreenUtilInit(
+      designSize: const Size(375, 667),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, _) => MaterialApp(
+        localizationsDelegates: const [
+          Strings.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+        supportedLocales: L10n.all,
+        theme: themeLight(MockBuildContext()),
+        home: body,
       ),
-    );
-  }
+    ),
+  );
 
   group('MenuDrawer', () {
     testWidgets('displays user information', (WidgetTester tester) async {
@@ -107,8 +105,9 @@ void main() {
       }
     });
 
-    testWidgets('calls onLogoutPressed when logout is tapped',
-        (WidgetTester tester) async {
+    testWidgets('calls onLogoutPressed when logout is tapped', (
+      WidgetTester tester,
+    ) async {
       bool logoutCalled = false;
       when(() => userCubit.state).thenReturn(const UserState.success(null));
 

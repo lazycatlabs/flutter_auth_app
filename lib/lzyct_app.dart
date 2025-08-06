@@ -13,9 +13,7 @@ class LzyctApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-      ),
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
 
     log.d(const String.fromEnvironment('ENV'));
@@ -29,11 +27,10 @@ class LzyctApp extends StatelessWidget {
         child: ScreenUtilInit(
           /// Set screen size to make responsive
           /// Almost all device
-
           designSize: const Size(375, 667),
           minTextAdapt: true,
           splitScreenMode: true,
-          builder: (context, __) {
+          builder: (context, _) {
             /// Pass context to appRoute
             AppRoute.setStream(context);
 
@@ -61,7 +58,7 @@ class LzyctApp extends StatelessWidget {
                 title: Constants.get.appName,
                 theme: themeLight(context),
                 darkTheme: themeDark(context),
-                locale: Locale(data.type ?? "en"),
+                locale: Locale(data.type ?? 'en'),
                 supportedLocales: L10n.all,
                 themeMode: data.activeTheme.mode,
               ),

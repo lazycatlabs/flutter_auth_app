@@ -30,7 +30,7 @@ void main() {
 
   group('register', () {
     const registerParams =
-        RegisterParams(email: "mudassir@lazycatlabs.com", password: "Pass123");
+        RegisterParams(email: 'mudassir@lazycatlabs.com', password: 'Pass123');
     final registerModel = RegisterResponse.fromJson(
       json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
     );
@@ -87,7 +87,7 @@ void main() {
 
   group('login', () {
     const loginParams =
-        LoginParams(email: "mudassir@lazycatlabs.com", password: "Pass123");
+        LoginParams(email: 'mudassir@lazycatlabs.com', password: 'Pass123');
     final loginModel = LoginResponse.fromJson(
       json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     );
@@ -143,7 +143,7 @@ void main() {
 
   group('general token', () {
     const generalTokenParams =
-        GeneralTokenParams(clientId: "apimock", clientSecret: "apimock_secret");
+        GeneralTokenParams(clientId: 'apimock', clientSecret: 'apimock_secret');
     final generalTokenResponse = GeneralTokenResponse.fromJson(
       json.decode(jsonReader(pathGeneralTokenResponse200))
           as Map<String, dynamic>,

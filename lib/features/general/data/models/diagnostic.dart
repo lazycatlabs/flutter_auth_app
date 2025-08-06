@@ -6,8 +6,8 @@ part 'diagnostic.g.dart';
 @freezed
 sealed class Diagnostic with _$Diagnostic {
   const factory Diagnostic({
-    @JsonKey(name: "status") String? status,
-    @JsonKey(name: "message") String? message,
+    @JsonKey(name: 'status') String? status,
+    @JsonKey(name: 'message') String? message,
   }) = _Diagnostic;
 
   factory Diagnostic.fromJson(Map<String, dynamic> json) =>

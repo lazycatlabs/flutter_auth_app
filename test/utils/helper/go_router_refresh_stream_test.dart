@@ -28,7 +28,7 @@ void main() {
       streamController2.close();
     });
 
-    test('cancels subscriptions on dispose', () async {
+    test('cancels subscriptions on dispose', () {
       final streamController1 = StreamController<dynamic>();
       final streamController2 = StreamController<dynamic>();
 

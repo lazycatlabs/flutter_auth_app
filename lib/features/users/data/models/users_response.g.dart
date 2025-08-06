@@ -27,21 +27,21 @@ Map<String, dynamic> _$UsersResponseToJson(_UsersResponse instance) =>
     };
 
 _DataUser _$DataUserFromJson(Map<String, dynamic> json) => _DataUser(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      email: json['email'] as String?,
-      photo: json['photo'] as String?,
-      verified: json['verified'] as bool?,
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
-    );
+  id: json['id'] as String?,
+  name: json['name'] as String?,
+  email: json['email'] as String?,
+  photo: json['photo'] as String?,
+  verified: json['verified'] as bool?,
+  createdAt: json['createdAt'] as String?,
+  updatedAt: json['updatedAt'] as String?,
+);
 
 Map<String, dynamic> _$DataUserToJson(_DataUser instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'email': instance.email,
-      'photo': instance.photo,
-      'verified': instance.verified,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'email': instance.email,
+  'photo': instance.photo,
+  'verified': instance.verified,
+  'createdAt': instance.createdAt,
+  'updatedAt': instance.updatedAt,
+};

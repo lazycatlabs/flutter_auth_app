@@ -14,6 +14,4 @@ _DiagnosticResponse _$DiagnosticResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$DiagnosticResponseToJson(_DiagnosticResponse instance) =>
-    <String, dynamic>{
-      'diagnostic': instance.diagnostic?.toJson(),
-    };
+    <String, dynamic>{'diagnostic': instance.diagnostic?.toJson()};

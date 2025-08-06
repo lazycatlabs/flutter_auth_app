@@ -22,3 +22,4 @@ linter:
     unnecessary_late: true # Avoid unnecessary late keyword
     unnecessary_new: true # Remove unnecessary new keyword
     unnecessary_this: true # Remove unnecessary this keyword
+    prefer_expression_function_bodies: true # Use expression function bodies for single-line functions

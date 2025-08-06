@@ -17,7 +17,7 @@ class IsolateParser<T> {
     return result as T;
   }
 
-  Future<void> _parseListOfJson(SendPort sendPort) async {
+  void _parseListOfJson(SendPort sendPort) {
     final result = converter(json);
     Isolate.exit(sendPort, result);
   }

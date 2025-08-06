@@ -7,8 +7,7 @@ import 'package:go_router/go_router.dart';
 
 class SplashScreenPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Parent(
+  Widget build(BuildContext context) => Parent(
       child: BlocListener<GeneralTokenCubit, GeneralTokenState>(
         //coverage:ignore-start
         listener: (context, state) => {
@@ -29,5 +28,4 @@ class SplashScreenPage extends StatelessWidget {
         ),
       ),
     );
-  }
 }

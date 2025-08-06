@@ -4,11 +4,8 @@ import 'package:flutter_auth_app/core/core.dart';
 
 class DropDown<T> extends StatefulWidget {
   const DropDown({
-    super.key,
-    required this.value,
-    required this.items,
+    required this.value, required this.items, required this.onChanged, super.key,
     this.hint,
-    required this.onChanged,
     this.hintIsVisible = true,
     this.prefixIcon,
   });
@@ -26,15 +23,14 @@ class DropDown<T> extends StatefulWidget {
 
 class _DropDownState<T> extends State<DropDown<T>> {
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       margin: EdgeInsets.symmetric(vertical: Dimens.space8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.hintIsVisible) ...{
             Text(
-              widget.hint ?? "",
+              widget.hint ?? '',
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -123,5 +119,4 @@ class _DropDownState<T> extends State<DropDown<T>> {
         ],
       ),
     );
-  }
 }

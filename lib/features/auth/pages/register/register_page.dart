@@ -32,25 +32,24 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formValidator = <String, bool>{};
 
   @override
-  Widget build(BuildContext context) {
-    return Parent(
+  Widget build(BuildContext context) => Parent(
       appBar: const MyAppBar().call(),
       child: BlocListener<RegisterCubit, RegisterState>(
         listener: (_, state) => switch (state) {
           RegisterStateLoading() => context.show(),
           RegisterStateSuccess(:final data) => (() {
-              context.dismiss();
+            context.dismiss();
 
-              data?.message?.toToastSuccess(context);
+            data?.message?.toToastSuccess(context);
 
-              /// back to login page after register success
-              context.pop();
-            })(),
+            /// back to login page after register success
+            context.pop();
+          })(),
           RegisterStateFailure(:final message) => (() {
-              context.dismiss();
-              message.toToastError(context);
-            })(),
-          _ => {}
+            context.dismiss();
+            message.toToastError(context);
+          })(),
+          _ => {},
         },
         child: Center(
           child: SingleChildScrollView(
@@ -73,15 +72,12 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
-  }
 
-  Widget _registerForm() {
-    return BlocBuilder<ReloadFormCubit, ReloadFormState>(
-      builder: (_, __) {
-        return Column(
+  Widget _registerForm() => BlocBuilder<ReloadFormCubit, ReloadFormState>(
+      builder: (_, _) => Column(
           children: [
             TextF(
-              key: const Key("name"),
+              key: const Key('name'),
               focusNode: _fnName,
               textInputAction: TextInputAction.next,
               controller: _conName,
@@ -92,18 +88,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               hint: 'Mudassir',
               label: Strings.of(context)!.name,
-              isValid: _formValidator.putIfAbsent(
-                "name",
-                () => false,
-              ),
+              isValid: _formValidator.putIfAbsent('name', () => false),
               validatorListener: (String value) {
-                _formValidator["name"] = value.isNotEmpty;
+                _formValidator['name'] = value.isNotEmpty;
                 context.read<ReloadFormCubit>().reload();
               },
               errorMessage: Strings.of(context)!.errorEmptyField,
             ),
             TextF(
-              key: const Key("email"),
+              key: const Key('email'),
               focusNode: _fnEmail,
               textInputAction: TextInputAction.next,
               controller: _conEmail,
@@ -114,18 +107,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               hint: 'mudassir@lazycatlabs.com',
               label: Strings.of(context)!.email,
-              isValid: _formValidator.putIfAbsent(
-                "email",
-                () => false,
-              ),
+              isValid: _formValidator.putIfAbsent('email', () => false),
               validatorListener: (String value) {
-                _formValidator["email"] = value.isValidEmail();
+                _formValidator['email'] = value.isValidEmail();
                 context.read<ReloadFormCubit>().reload();
               },
               errorMessage: Strings.of(context)!.errorInvalidEmail,
             ),
             TextF(
-              key: const Key("password"),
+              key: const Key('password'),
               focusNode: _fnPassword,
               textInputAction: TextInputAction.next,
               controller: _conPassword,
@@ -148,19 +138,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   !_isPasswordVisible ? Icons.visibility_off : Icons.visibility,
                 ),
               ),
-              isValid: _formValidator.putIfAbsent(
-                "password",
-                () => false,
-              ),
+              isValid: _formValidator.putIfAbsent('password', () => false),
               validatorListener: (String value) {
-                _formValidator["password"] = value.length > 5;
+                _formValidator['password'] = value.length > 5;
                 context.read<ReloadFormCubit>().reload();
               },
               errorMessage: Strings.of(context)!.errorPasswordLength,
-              semantic: "password",
+              semantic: 'password',
             ),
             TextF(
-              key: const Key("repeat_password"),
+              key: const Key('repeat_password'),
               focusNode: _fnPasswordRepeat,
               textInputAction: TextInputAction.done,
               controller: _conPasswordRepeat,
@@ -186,37 +173,35 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               isValid: _formValidator.putIfAbsent(
-                "repeat_password",
+                'repeat_password',
                 () => false,
               ),
               validatorListener: (String value) {
-                _formValidator["repeat_password"] = value == _conPassword.text;
+                _formValidator['repeat_password'] = value == _conPassword.text;
                 context.read<ReloadFormCubit>().reload();
               },
               errorMessage: Strings.of(context)!.errorPasswordNotMatch,
-              semantic: "repeat_password",
+              semantic: 'repeat_password',
             ),
             SpacerV(value: Dimens.space24),
             Button(
-              key: const Key("btn_register"),
+              key: const Key('btn_register'),
               width: double.maxFinite,
               title: Strings.of(context)!.register,
               onPressed: _formValidator.validate()
                   ? () {
                       /// Validate form first
                       context.read<RegisterCubit>().register(
-                            RegisterParams(
-                              name: _conName.text,
-                              email: _conEmail.text,
-                              password: _conPassword.text,
-                            ),
-                          );
+                        RegisterParams(
+                          name: _conName.text,
+                          email: _conEmail.text,
+                          password: _conPassword.text,
+                        ),
+                      );
                     }
                   : null,
             ),
           ],
-        );
-      },
+        ),
     );
-  }
 }

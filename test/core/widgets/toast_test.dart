@@ -7,25 +7,23 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/test_mock.mocks.dart';
 
 void main() {
-  Widget rootWidget(Widget body) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 667),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, __) => MaterialApp(
-        localizationsDelegates: const [
-          Strings.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: const Locale("en"),
-        supportedLocales: L10n.all,
-        theme: themeLight(MockBuildContext()),
-        home: body,
-      ),
-    );
-  }
+  Widget rootWidget(Widget body) => ScreenUtilInit(
+    designSize: const Size(375, 667),
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (_, _) => MaterialApp(
+      localizationsDelegates: const [
+        Strings.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: const Locale('en'),
+      supportedLocales: L10n.all,
+      theme: themeLight(MockBuildContext()),
+      home: body,
+    ),
+  );
 
   testWidgets('displays circle image', (WidgetTester tester) async {
     await tester.pumpWidget(
@@ -33,7 +31,7 @@ void main() {
         const Toast(
           bgColor: Colors.red,
           icon: Icons.error,
-          message: "Message",
+          message: 'Message',
           textColor: Colors.white,
         ),
       ),
@@ -41,6 +39,6 @@ void main() {
 
     expect(find.byType(Toast), findsOneWidget);
     expect(find.byType(Icon), findsOneWidget);
-    expect(find.text("Message"), findsOneWidget);
+    expect(find.text('Message'), findsOneWidget);
   });
 }

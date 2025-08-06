@@ -5,17 +5,15 @@ import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 
 extension StringExtension on String {
-  bool isValidEmail() {
-    return RegExp(
+  bool isValidEmail() => RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
     ).hasMatch(this);
-  }
 
   //https://github.com/ponnamkarthik/FlutterToast/issues/262
   //coverage:ignore-start
   void toToastError(BuildContext context, {bool isUnitTest = false}) {
     try {
-      final message = isEmpty ? "error" : this;
+      final message = isEmpty ? 'error' : this;
 
       //dismiss before show toast
       dismissAllToast(showAnim: true);
@@ -35,13 +33,13 @@ extension StringExtension on String {
       if (!isUnitTest) {
         FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       }
-      log.e("error $e");
+      log.e('error $e');
     }
   }
 
   void toToastSuccess(BuildContext context, {bool isUnitTest = false}) {
     try {
-      final message = isEmpty ? "success" : this;
+      final message = isEmpty ? 'success' : this;
 
       //dismiss before show toast
       dismissAllToast(showAnim: true);
@@ -62,13 +60,13 @@ extension StringExtension on String {
       if (!isUnitTest) {
         FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       }
-      log.e("$e");
+      log.e('$e');
     }
   }
 
   void toToastLoading(BuildContext context, {bool isUnitTest = false}) {
     try {
-      final message = isEmpty ? "loading" : this;
+      final message = isEmpty ? 'loading' : this;
       //dismiss before show toast
       dismissAllToast(showAnim: true);
 
@@ -87,7 +85,7 @@ extension StringExtension on String {
       if (!isUnitTest) {
         FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       }
-      log.e("$e");
+      log.e('$e');
     }
   }
 
@@ -102,10 +100,10 @@ extension StringExtension on String {
         object = DateTime.parse(this);
       }
 
-      return DateFormat("dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm", "id")
+      return DateFormat("dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm", 'id')
           .format(object);
     } catch (_) {
-      return "-";
+      return '-';
     }
   }
 }

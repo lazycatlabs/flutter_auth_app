@@ -9,18 +9,18 @@ import '../../../../../helpers/paths.dart';
 void main() {
   const registerResponse = RegisterResponse(
     diagnostic: Diagnostic(
-      status: "200",
-      message: "Success",
+      status: '200',
+      message: 'Success',
     ),
     data: DataRegister(
-      id: "8364aa6f-6887-4502-a6b0-62f082196476",
-      name: "Mudassir",
-      email: "mudassir@lazycatlabs.com",
+      id: '8364aa6f-6887-4502-a6b0-62f082196476',
+      name: 'Mudassir',
+      email: 'mudassir@lazycatlabs.com',
       photo:
-          "https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png",
+          'https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png',
       verified: false,
-      createdAt: "2024-08-25T15:04:28.191067",
-      updatedAt: "2024-08-25T15:04:28.191067",
+      createdAt: '2024-08-25T15:04:28.191067',
+      updatedAt: '2024-08-25T15:04:28.191067',
     ),
   );
 
@@ -41,19 +41,19 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      "diagnostic": {
-        "status": "200",
-        "message": "Success",
+      'diagnostic': {
+        'status': '200',
+        'message': 'Success',
       },
-      "data": {
-        "id": "8364aa6f-6887-4502-a6b0-62f082196476",
-        "name": "Mudassir",
-        "email": "mudassir@lazycatlabs.com",
-        "photo":
-            "https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png",
-        "verified": false,
-        "createdAt": "2024-08-25T15:04:28.191067",
-        "updatedAt": "2024-08-25T15:04:28.191067",
+      'data': {
+        'id': '8364aa6f-6887-4502-a6b0-62f082196476',
+        'name': 'Mudassir',
+        'email': 'mudassir@lazycatlabs.com',
+        'photo':
+            'https://user-images.githubusercontent.com/1531684/281937715-f53c55be-4b70-43b5-bb50-11706fb71ada.png',
+        'verified': false,
+        'createdAt': '2024-08-25T15:04:28.191067',
+        'updatedAt': '2024-08-25T15:04:28.191067',
       },
     };
 

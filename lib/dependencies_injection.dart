@@ -11,7 +11,9 @@ Future<void> serviceLocator({
   String prefixBox = '',
 }) async {
   /// For unit testing only
-  if (isUnitTest) await sl.reset();
+  if (isUnitTest) {
+    await sl.reset();
+  }
 
   if (isHiveEnable) {
     await _initHiveBoxes(isUnitTest: isUnitTest, prefixBox: prefixBox);

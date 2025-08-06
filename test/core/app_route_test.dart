@@ -31,18 +31,18 @@ void main() {
     expect(Routes.register.path, equals('/auth/register'));
   });
 
-  test("Check AppRoute setStream", () {
+  test('Check AppRoute setStream', () {
     final context = MockBuildContext();
     AppRoute.setStream(context, isTest: true);
     expect(AppRoute.context, equals(context));
     expect(AppRoute.isUnitTest, equals(true));
   });
 
-  test("Check AppRoute router", () {
+  test('Check AppRoute router', () {
     expect(AppRoute.router, isA<GoRouter>());
   });
 
-  test("Check initial route is splashscreen", () {
+  test('Check initial route is splashscreen', () {
     final context = MockBuildContext();
     AppRoute.setStream(context, isTest: true);
     expect(
@@ -51,8 +51,9 @@ void main() {
     );
   });
 
-  testWidgets('Dashboard route builds within shell correctly',
-      (WidgetTester tester) async {
+  testWidgets('Dashboard route builds within shell correctly', (
+    WidgetTester tester,
+  ) async {
     final context = MockBuildContext();
     //set login as true
     MainBoxMixin.mainBox?.put(MainBoxKeys.isLogin.name, true);
@@ -64,7 +65,7 @@ void main() {
         designSize: const Size(375, 667),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (_, __) => MaterialApp.router(
+        builder: (_, _) => MaterialApp.router(
           routerConfig: AppRoute.router,
           localizationsDelegates: const [
             Strings.delegate,
@@ -72,7 +73,7 @@ void main() {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          locale: const Locale("en"),
+          locale: const Locale('en'),
           supportedLocales: L10n.all,
           theme: themeLight(context),
         ),

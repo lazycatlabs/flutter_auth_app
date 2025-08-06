@@ -45,114 +45,89 @@ void main() {
     ).toEntity();
   });
 
-  Widget rootWidget(Widget body) {
-    return BlocProvider<UsersCubit>.value(
-      value: usersCubit,
-      child: ScreenUtilInit(
-        designSize: const Size(375, 667),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, __) => MaterialApp(
-          localizationsDelegates: const [
-            Strings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: const Locale("en"),
-          theme: themeLight(MockBuildContext()),
-          home: body,
-        ),
+  Widget rootWidget(Widget body) => BlocProvider<UsersCubit>.value(
+    value: usersCubit,
+    child: ScreenUtilInit(
+      designSize: const Size(375, 667),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, _) => MaterialApp(
+        localizationsDelegates: const [
+          Strings.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+        theme: themeLight(MockBuildContext()),
+        home: body,
       ),
-    );
-  }
-
-  testWidgets(
-    'renders DashboardPage for UsersStatus.loading',
-    (tester) async {
-      when(() => usersCubit.state).thenReturn(const UsersState.loading());
-      await tester.pumpWidget(rootWidget(const DashboardPage()));
-      await tester.pump();
-      expect(find.byType(Loading), findsOneWidget);
-    },
+    ),
   );
 
-  testWidgets(
-    'renders DashboardPage for UsersStatus.empty',
-    (tester) async {
-      when(() => usersCubit.state).thenReturn(const UsersState.empty());
-      await tester.pumpWidget(rootWidget(const DashboardPage()));
-      await tester.pump();
-      expect(find.byType(Empty), findsOneWidget);
-    },
-  );
+  testWidgets('renders DashboardPage for UsersStatus.loading', (tester) async {
+    when(() => usersCubit.state).thenReturn(const UsersState.loading());
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
+    await tester.pump();
+    expect(find.byType(Loading), findsOneWidget);
+  });
 
-  testWidgets(
-    'renders DashboardPage for UsersStatus.failure',
-    (tester) async {
-      when(() => usersCubit.state).thenReturn(const UsersState.failure(""));
-      await tester.pumpWidget(rootWidget(const DashboardPage()));
-      await tester.pump();
-      expect(find.byType(Empty), findsOneWidget);
-    },
-  );
+  testWidgets('renders DashboardPage for UsersStatus.empty', (tester) async {
+    when(() => usersCubit.state).thenReturn(const UsersState.empty());
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
+    await tester.pump();
+    expect(find.byType(Empty), findsOneWidget);
+  });
 
-  testWidgets(
-    'renders DashboardPage for UsersStatus.success',
-    (tester) async {
-      when(() => usersCubit.state).thenReturn(
-        UsersState.success(users),
-      );
-      when(() => usersCubit.fetchUsers(any())).thenAnswer((_) async {});
+  testWidgets('renders DashboardPage for UsersStatus.failure', (tester) async {
+    when(() => usersCubit.state).thenReturn(const UsersState.failure(''));
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
+    await tester.pump();
+    expect(find.byType(Empty), findsOneWidget);
+  });
 
-      await tester.pumpWidget(rootWidget(const DashboardPage()));
+  testWidgets('renders DashboardPage for UsersStatus.success', (tester) async {
+    when(() => usersCubit.state).thenReturn(UsersState.success(users));
+    when(() => usersCubit.fetchUsers(any())).thenAnswer((_) async {});
 
-      /// Do loops to waiting refresh indicator showing
-      /// instead using tester.pumpAndSettle it's will result time out error
-      for (int i = 0; i < 5; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
 
-      expect(find.byType(ListView), findsOneWidget);
-    },
-  );
+    /// Do loops to waiting refresh indicator showing
+    /// instead using tester.pumpAndSettle it's will result time out error
+    for (int i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
 
-  testWidgets(
-    'trigger refresh when pull to refresh',
-    (tester) async {
-      when(() => usersCubit.state).thenReturn(
-        UsersState.success(users),
-      );
-      when(() => usersCubit.refresh()).thenAnswer((_) async {});
+    expect(find.byType(ListView), findsOneWidget);
+  });
 
-      await tester.pumpWidget(rootWidget(const DashboardPage()));
+  testWidgets('trigger refresh when pull to refresh', (tester) async {
+    when(() => usersCubit.state).thenReturn(UsersState.success(users));
+    when(() => usersCubit.refresh()).thenAnswer((_) async {});
 
-      /// Do loops to waiting refresh indicator showing
-      /// instead using tester.pumpAndSettle it's will result time out error
-      for (int i = 0; i < 5; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
 
-      /// Simulate pull to refresh
+    /// Do loops to waiting refresh indicator showing
+    /// instead using tester.pumpAndSettle it's will result time out error
+    for (int i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
 
-      // Do loops to wait for the refresh indicator to show
-      for (int i = 0; i < 5; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
-      await tester.fling(
-        find.text('Mudassir'),
-        const Offset(0.0, 500.0),
-        1000.0,
-      );
+    /// Simulate pull to refresh
 
-      /// Do loops to waiting refresh indicator showing
-      /// instead using tester.pumpAndSettle it's will result time out error
-      for (int i = 0; i < 5; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
+    // Do loops to wait for the refresh indicator to show
+    for (int i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    await tester.fling(find.text('Mudassir'), const Offset(0.0, 500.0), 1000.0);
 
-      // Verify that the refresh method was called
-      verify(() => usersCubit.refresh()).called(1);
-    },
-  );
+    /// Do loops to waiting refresh indicator showing
+    /// instead using tester.pumpAndSettle it's will result time out error
+    for (int i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    // Verify that the refresh method was called
+    verify(() => usersCubit.refresh()).called(1);
+  });
 }

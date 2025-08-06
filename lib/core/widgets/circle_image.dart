@@ -7,11 +7,10 @@ class CircleImage extends StatelessWidget {
   final String url;
   final double? size;
 
-  const CircleImage({super.key, required this.url, this.size});
+  const CircleImage({required this.url, super.key, this.size});
 
   @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
+  Widget build(BuildContext context) => ClipRRect(
       borderRadius: BorderRadius.circular(360),
 
       /// 360 degree circle
@@ -30,5 +29,4 @@ class CircleImage extends StatelessWidget {
         //     new SvgPicture.asset(Images.icEmpty),
       ),
     );
-  }
 }

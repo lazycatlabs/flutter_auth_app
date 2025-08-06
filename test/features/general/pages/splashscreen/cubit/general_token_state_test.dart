@@ -14,8 +14,8 @@ void main() {
     });
 
     test('returns correct values for GeneralToken.failure', () {
-      const status = GeneralTokenState.failure("");
-      expect(status, const GeneralTokenState.failure(""));
+      const status = GeneralTokenState.failure('');
+      expect(status, const GeneralTokenState.failure(''));
     });
   });
 }

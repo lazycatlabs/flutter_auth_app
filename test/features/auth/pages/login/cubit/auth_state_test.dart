@@ -14,8 +14,8 @@ void main() {
     });
 
     test('returns correct values for AuthStatus.failure', () {
-      const status = AuthState.failure("");
-      expect(status, const AuthState.failure(""));
+      const status = AuthState.failure('');
+      expect(status, const AuthState.failure(''));
     });
   });
 }

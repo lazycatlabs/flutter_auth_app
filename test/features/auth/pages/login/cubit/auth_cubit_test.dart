@@ -24,10 +24,10 @@ void main() {
   late MockPostLogin mockPostLogin;
 
   const loginParams = LoginParams(
-    email: "mudassir@lazycatlabs.com",
-    password: "pass123",
+    email: 'mudassir@lazycatlabs.com',
+    password: 'pass123',
   );
-  const errorMessage = "Wrong username or password";
+  const errorMessage = 'Wrong username or password';
 
   /// Initialize data
   setUp(() async {
@@ -45,12 +45,12 @@ void main() {
   tearDown(() => authCubit.close());
 
   ///  Initial data should be loading
-  test("Initial data should be AuthStatus.loading", () {
+  test('Initial data should be AuthStatus.loading', () {
     expect(authCubit.state, const AuthState.loading());
   });
 
   blocTest<AuthCubit, AuthState>(
-    "When repo success get data should be return AuthState",
+    'When repo success get data should be return AuthState',
     build: () {
       when(mockPostLogin.call(loginParams))
           .thenAnswer((_) async => Right(login));
@@ -66,7 +66,7 @@ void main() {
   );
 
   blocTest<AuthCubit, AuthState>(
-    "When user input wrong credential should be return ServerFailure",
+    'When user input wrong credential should be return ServerFailure',
     build: () {
       when(mockPostLogin.call(loginParams))
           .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));

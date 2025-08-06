@@ -14,7 +14,7 @@ class UserCubit extends Cubit<UserState> {
     emit(const UserStateLoading());
     final data = await _getUser.call(NoParams());
     data.fold(
-      (l) => emit(UserStateFailure((l as ServerFailure).message ?? "")),
+      (l) => emit(UserStateFailure((l as ServerFailure).message ?? '')),
       (r) => emit(UserStateSuccess(r)),
     );
   }

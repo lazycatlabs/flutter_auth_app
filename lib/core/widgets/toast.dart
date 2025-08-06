@@ -11,8 +11,7 @@ class Toast extends StatelessWidget {
   const Toast({super.key, this.icon, this.bgColor, this.message, this.textColor});
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
+  Widget build(BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
@@ -49,5 +48,4 @@ class Toast extends StatelessWidget {
         ),
       ],
     );
-  }
 }

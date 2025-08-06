@@ -42,9 +42,9 @@ void main() {
     ).toEntity();
   });
 
-  group("general token", () {
+  group('general token', () {
     const generalTokenParams =
-        GeneralTokenParams(clientId: "apimock", clientSecret: "apimock_secret");
+        GeneralTokenParams(clientId: 'apimock', clientSecret: 'apimock_secret');
     test('should return general token when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.generalToken(generalTokenParams))
@@ -84,9 +84,9 @@ void main() {
     );
   });
 
-  group("login", () {
+  group('login', () {
     const loginParams =
-        LoginParams(email: "mudassir@lazycatlabs.com", password: "pass123");
+        LoginParams(email: 'mudassir@lazycatlabs.com', password: 'pass123');
     test('should return login when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
@@ -124,9 +124,9 @@ void main() {
     );
   });
 
-  group("register", () {
+  group('register', () {
     const registerParams =
-        RegisterParams(email: "mudassir@lazycatlabs.com", password: "pass123");
+        RegisterParams(email: 'mudassir@lazycatlabs.com', password: 'pass123');
     test('should return register when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(

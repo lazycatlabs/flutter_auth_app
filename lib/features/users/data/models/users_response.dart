@@ -8,9 +8,9 @@ part 'users_response.g.dart';
 @freezed
 sealed class UsersResponse with _$UsersResponse {
   const factory UsersResponse({
-    @JsonKey(name: "diagnostic") Diagnostic? diagnostic,
-    @JsonKey(name: "data") List<DataUser>? data,
-    @JsonKey(name: "page") Page? page,
+    @JsonKey(name: 'diagnostic') Diagnostic? diagnostic,
+    @JsonKey(name: 'data') List<DataUser>? data,
+    @JsonKey(name: 'page') Page? page,
   }) = _UsersResponse;
 
   const UsersResponse._();
@@ -38,13 +38,13 @@ sealed class UsersResponse with _$UsersResponse {
 @freezed
 sealed class DataUser with _$DataUser {
   const factory DataUser({
-    @JsonKey(name: "id") String? id,
-    @JsonKey(name: "name") String? name,
-    @JsonKey(name: "email") String? email,
-    @JsonKey(name: "photo") String? photo,
-    @JsonKey(name: "verified") bool? verified,
-    @JsonKey(name: "createdAt") String? createdAt,
-    @JsonKey(name: "updatedAt") String? updatedAt,
+    @JsonKey(name: 'id') String? id,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'email') String? email,
+    @JsonKey(name: 'photo') String? photo,
+    @JsonKey(name: 'verified') bool? verified,
+    @JsonKey(name: 'createdAt') String? createdAt,
+    @JsonKey(name: 'updatedAt') String? updatedAt,
   }) = _DataUser;
 
   factory DataUser.fromJson(Map<String, dynamic> json) =>

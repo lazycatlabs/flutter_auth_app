@@ -26,10 +26,10 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      "currentPage": 1,
-      "perPage": 20,
-      "lastPage": 5,
-      "total": 100,
+      'currentPage': 1,
+      'perPage': 20,
+      'lastPage': 5,
+      'total': 100,
     };
 
     /// assert

@@ -8,7 +8,7 @@ import '../../../../helpers/paths.dart';
 
 void main() {
   const diagnosticResponse = DiagnosticResponse(
-    diagnostic: Diagnostic(status: "200", message: "Success"),
+    diagnostic: Diagnostic(status: '200', message: 'Success'),
   );
 
   test('from json, should return a valid model from json', () {
@@ -28,9 +28,9 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      "diagnostic": {
-        "status": "200",
-        "message": "Success",
+      'diagnostic': {
+        'status': '200',
+        'message': 'Success',
       },
     };
 

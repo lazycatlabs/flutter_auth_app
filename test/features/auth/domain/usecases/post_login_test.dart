@@ -24,7 +24,7 @@ void main() {
     postLogin = PostLogin(mockAuthRepository);
   });
 
-  test("should get login from the repository", () async {
+  test('should get login from the repository', () async {
     /// arrange
     when(mockAuthRepository.login(loginParams))
         .thenAnswer((_) async => Right(login));
@@ -36,12 +36,12 @@ void main() {
     expect(result, equals(Right(login)));
   });
 
-  test("parse LoginParams to json", () {
+  test('parse LoginParams to json', () {
     /// act
     final result = loginParams.toJson();
     final expected = {
-      "email": "mudassir@lazycatlabs.com",
-      "password": "pass123",
+      'email': 'mudassir@lazycatlabs.com',
+      'password': 'pass123',
       'osInfo': null,
       'deviceInfo': null,
       'fcmToken': 'GeneratedFCMToken',
@@ -51,11 +51,11 @@ void main() {
     expect(result, equals(expected));
   });
 
-  test("parse LoginParams from json", () {
+  test('parse LoginParams from json', () {
     /// act
     final params = LoginParams.fromJson({
-      "email": "mudassir@lazycatlabs.com",
-      "password": "pass123",
+      'email': 'mudassir@lazycatlabs.com',
+      'password': 'pass123',
     });
 
     /// assert

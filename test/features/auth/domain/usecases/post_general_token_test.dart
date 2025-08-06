@@ -14,7 +14,7 @@ void main() {
   late PostGeneralToken postGeneralToken;
   late GeneralToken generalToken;
   const generalTokenParams =
-      GeneralTokenParams(clientId: "apimock", clientSecret: "apimock_secret");
+      GeneralTokenParams(clientId: 'apimock', clientSecret: 'apimock_secret');
 
   setUp(() {
     generalToken = GeneralTokenResponse.fromJson(
@@ -25,7 +25,7 @@ void main() {
     postGeneralToken = PostGeneralToken(mockAuthRepository);
   });
 
-  test("should get general_token from the repository", () async {
+  test('should get general_token from the repository', () async {
     /// arrange
     when(mockAuthRepository.generalToken(generalTokenParams))
         .thenAnswer((_) async => Right(generalToken));
@@ -37,20 +37,20 @@ void main() {
     expect(result, equals(Right(generalToken)));
   });
 
-  test("parse GeneralTokenParams to json", () {
+  test('parse GeneralTokenParams to json', () {
     /// act
     final result = generalTokenParams.toJson();
-    final expected = {"clientId": "apimock", "clientSecret": "apimock_secret"};
+    final expected = {'clientId': 'apimock', 'clientSecret': 'apimock_secret'};
 
     /// assert
     expect(result, equals(expected));
   });
 
-  test("parse GeneralTokenParams from json", () {
+  test('parse GeneralTokenParams from json', () {
     /// act
     final params = GeneralTokenParams.fromJson({
-      "clientId": "apimock",
-      "clientSecret": "apimock_secret",
+      'clientId': 'apimock',
+      'clientSecret': 'apimock_secret',
     });
 
     /// assert

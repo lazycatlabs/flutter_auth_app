@@ -12,9 +12,7 @@ class ButtonText extends StatelessWidget {
   final Color? splashColor;
 
   const ButtonText({
-    super.key,
-    required this.title,
-    required this.onPressed,
+    required this.title, required this.onPressed, super.key,
     this.width,
     this.color,
     this.titleColor,
@@ -23,8 +21,7 @@ class ButtonText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       margin: EdgeInsets.symmetric(vertical: Dimens.space8),
       child: TextButton(
         onPressed: onPressed,
@@ -38,5 +35,4 @@ class ButtonText extends StatelessWidget {
         ),
       ),
     );
-  }
 }

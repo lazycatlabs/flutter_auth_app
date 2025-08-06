@@ -38,7 +38,7 @@ void main() {
     ).toEntity();
   });
 
-  group("users", () {
+  group('users', () {
     const usersParams = UsersParams();
     const usersParamsEmpty = UsersParams(page: 3);
 
@@ -95,7 +95,7 @@ void main() {
     );
   });
 
-  group("user", () {
+  group('user', () {
     test('should return list users when call data is successful', () async {
       // arrange
       when(mockUsersRemoteDatasource.user()).thenAnswer(

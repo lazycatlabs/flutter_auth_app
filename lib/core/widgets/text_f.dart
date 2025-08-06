@@ -5,9 +5,8 @@ import 'package:flutter_auth_app/utils/utils.dart';
 
 class TextF extends StatefulWidget {
   const TextF({
-    super.key,
+    required this.label, super.key,
     this.controller,
-    required this.label,
     this.errorMessage,
     this.isValid = false,
     this.prefixIcon,
@@ -165,7 +164,7 @@ class TextFState extends State<TextF> {
                         top: Dimens.space4,
                       ),
                       child: Text(
-                        widget.errorMessage ?? "",
+                        widget.errorMessage ?? '',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Theme.of(context)
                                   .extension<LzyctColors>()!
@@ -182,8 +181,7 @@ class TextFState extends State<TextF> {
     );
   }
 
-  Widget get _textFormField {
-    return Semantics(
+  Widget get _textFormField => Semantics(
       label: widget.semantic,
       child: TextFormField(
         autofillHints: widget.autoFillHints,
@@ -237,8 +235,7 @@ class TextFState extends State<TextF> {
         ),
         onChanged: (String value) =>
             _debouncer.run(() => widget.validatorListener?.call(value)),
-        onSaved: (String? value) => widget.validatorListener?.call(value ?? ""),
+        onSaved: (String? value) => widget.validatorListener?.call(value ?? ''),
       ),
     );
-  }
 }

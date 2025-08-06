@@ -47,64 +47,58 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true, prefixBox: "main_page_test_");
+    await serviceLocator(isUnitTest: true, prefixBox: 'main_page_test_');
     mainCubit = MockMainCubit();
     userCubit = MockUserCubit();
     logoutCubit = MockLogoutCubit();
   });
 
-  Widget rootWidget(Widget body) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: mainCubit),
-        BlocProvider.value(value: userCubit),
-        BlocProvider.value(value: logoutCubit),
-      ],
-      child: ScreenUtilInit(
-        designSize: const Size(375, 667),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, __) => MaterialApp(
-          localizationsDelegates: const [
-            Strings.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: const Locale("en"),
-          supportedLocales: L10n.all,
-          theme: themeLight(MockBuildContext()),
-          home: body,
-        ),
+  Widget rootWidget(Widget body) => MultiBlocProvider(
+    providers: [
+      BlocProvider.value(value: mainCubit),
+      BlocProvider.value(value: userCubit),
+      BlocProvider.value(value: logoutCubit),
+    ],
+    child: ScreenUtilInit(
+      designSize: const Size(375, 667),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, _) => MaterialApp(
+        localizationsDelegates: const [
+          Strings.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: const Locale('en'),
+        supportedLocales: L10n.all,
+        theme: themeLight(MockBuildContext()),
+        home: body,
       ),
-    );
-  }
+    ),
+  );
 
   testWidgets('MainPage displays correctly', (WidgetTester tester) async {
     when(() => mainCubit.state).thenReturn(
       MainState.success(
         DataHelper(
-          title: Strings.of(MockBuildContext())?.settings ?? "Settings",
+          title: Strings.of(MockBuildContext())?.settings ?? 'Settings',
         ),
       ),
     );
-    when(() => mainCubit.initMenu(MockBuildContext())).thenAnswer((_) async {});
+    when(() => mainCubit.initMenu(MockBuildContext())).thenAnswer((_) {});
 
     when(() => userCubit.state).thenReturn(const UserState.success(null));
     when(() => userCubit.getUser()).thenAnswer((_) async {});
 
     when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
 
-    await tester.pumpWidget(
-      rootWidget(
-        const MainPage(child: SettingsPage()),
-      ),
-    );
+    await tester.pumpWidget(rootWidget(const MainPage(child: SettingsPage())));
 
     verifyNever(() => mainCubit.initMenu(MockBuildContext()));
     verifyNever(() => userCubit.getUser()).called(0);
 
-    expect(find.text("Settings"), findsOneWidget);
+    expect(find.text('Settings'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
     expect(find.byType(SettingsPage), findsOneWidget);
   });

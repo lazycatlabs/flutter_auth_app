@@ -23,11 +23,11 @@ void main() {
   late Register register;
 
   const registerParams = RegisterParams(
-    email: "mudassir@lazycatlabs.com",
-    password: "pass123",
+    email: 'mudassir@lazycatlabs.com',
+    password: 'pass123',
   );
 
-  const errorMessage = "Invalid data";
+  const errorMessage = 'Invalid data';
 
   /// Initialize data
   setUp(() async {
@@ -45,12 +45,12 @@ void main() {
   tearDown(() => registerCubit.close());
 
   /// Test init data should be loading
-  test("Initial state should be RegisterStatus.loading", () {
+  test('Initial state should be RegisterStatus.loading', () {
     expect(registerCubit.state, const RegisterState.loading());
   });
 
   blocTest<RegisterCubit, RegisterState>(
-    "When repo success get data should be return RegisterState",
+    'When repo success get data should be return RegisterState',
     build: () {
       when(
         mockPostRegister.call(registerParams),
@@ -69,7 +69,7 @@ void main() {
   );
 
   blocTest<RegisterCubit, RegisterState>(
-    "When repo success get data should be return ServerFailure",
+    'When repo success get data should be return ServerFailure',
     build: () {
       when(mockPostRegister.call(registerParams))
           .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));

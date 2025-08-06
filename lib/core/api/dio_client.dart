@@ -6,7 +6,7 @@ import 'package:flutter_auth_app/utils/utils.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  String baseUrl = const String.fromEnvironment("BASE_URL");
+  String baseUrl = const String.fromEnvironment('BASE_URL');
 
   String? _token;
   bool _isUnitTest = false;
@@ -21,7 +21,9 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
 
     _dio = _createDio();
 
-    if (!_isUnitTest) _dio.interceptors.add(DioInterceptor());
+    if (!_isUnitTest) {
+      _dio.interceptors.add(DioInterceptor());
+    }
   }
 
   String token() =>
@@ -39,34 +41,32 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
 
       final dio = _createDio();
 
-      if (!_isUnitTest) dio.interceptors.add(DioInterceptor());
+      if (!_isUnitTest) {
+        dio.interceptors.add(DioInterceptor());
+      }
 
       return dio;
     }
   }
 
   Dio _createDio() => Dio(
-        BaseOptions(
-          baseUrl: baseUrl,
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            if (_token != null) ...{
-              'Authorization': _token,
-            },
-          },
-          receiveTimeout: const Duration(minutes: 1),
-          connectTimeout: const Duration(minutes: 1),
-          validateStatus: (int? status) {
-            return status! > 0;
-          },
-        ),
-      );
+    BaseOptions(
+      baseUrl: baseUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        if (_token != null) ...{'Authorization': _token},
+      },
+      receiveTimeout: const Duration(minutes: 1),
+      connectTimeout: const Duration(minutes: 1),
+      validateStatus: (int? status) => status! > 0,
+    ),
+  );
 
   Future<Either<Failure, T>> getRequest<T>(
     String url, {
-    Map<String, dynamic>? queryParameters,
     required ResponseConverter<T> converter,
+    Map<String, dynamic>? queryParameters,
     bool isIsolate = true,
   }) async {
     try {
@@ -106,8 +106,8 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
 
   Future<Either<Failure, T>> postRequest<T>(
     String url, {
-    Map<String, dynamic>? data,
     required ResponseConverter<T> converter,
+    Map<String, dynamic>? data,
     bool isIsolate = true,
   }) async {
     try {

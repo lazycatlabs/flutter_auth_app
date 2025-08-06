@@ -11,9 +11,7 @@ class Button extends StatelessWidget {
   final Color? splashColor;
 
   const Button({
-    super.key,
-    required this.title,
-    required this.onPressed,
+    required this.title, required this.onPressed, super.key,
     this.width,
     this.color,
     this.titleColor,
@@ -22,8 +20,7 @@ class Button extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(BuildContext context) => SizedBox(
       width: width,
       child: TextButton(
         onPressed: onPressed,
@@ -54,5 +51,4 @@ class Button extends StatelessWidget {
         ),
       ),
     );
-  }
 }

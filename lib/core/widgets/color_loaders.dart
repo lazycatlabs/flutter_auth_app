@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
 class ColorLoader extends StatefulWidget {
@@ -72,8 +72,7 @@ class _ColorLoaderState extends State<ColorLoader>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(BuildContext context) => SizedBox(
       width: 100.0,
       height: 100.0,
       //color: Colors.black12,
@@ -176,7 +175,6 @@ class _ColorLoaderState extends State<ColorLoader>
         ),
       ),
     );
-  }
 
   @override
   void dispose() {
@@ -192,13 +190,11 @@ class Dot extends StatelessWidget {
   const Dot({this.radius, this.color});
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
+  Widget build(BuildContext context) => Center(
       child: Container(
         width: radius,
         height: radius,
         decoration: BoxDecoration(color: color, shape: BoxShape.circle),
       ),
     );
-  }
 }

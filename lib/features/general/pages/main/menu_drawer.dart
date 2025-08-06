@@ -7,10 +7,10 @@ import 'package:go_router/go_router.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
-    super.key,
     required this.dataMenu,
     required this.currentIndex,
     required this.onLogoutPressed,
+    super.key,
   });
 
   final List<DataHelper> dataMenu;
@@ -18,8 +18,7 @@ class MenuDrawer extends StatelessWidget {
   final VoidCallback onLogoutPressed;
 
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
+  Widget build(BuildContext context) => Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -33,47 +32,44 @@ class MenuDrawer extends StatelessWidget {
               child: BlocBuilder<UserCubit, UserState>(
                 builder: (_, state) => switch (state) {
                   UserStateLoading() => const Loading(),
-                  UserStateFailure(:final message) =>
-                    Center(child: Text(message)),
+                  UserStateFailure(:final message) => Center(
+                    child: Text(message),
+                  ),
                   UserStateSuccess(:final data) => Row(
-                      children: [
-                        CircleImage(
-                          url: data?.avatar ?? "",
-                          size: Dimens.profilePicture,
+                    children: [
+                      CircleImage(
+                        url: data?.avatar ?? '',
+                        size: Dimens.profilePicture,
+                      ),
+                      const SpacerH(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
+                              style: Theme.of(context).textTheme.titleLargeBold
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).extension<LzyctColors>()!.subtitle,
+                                  ),
+                            ),
+                            Text(
+                              data?.email ?? '',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).extension<LzyctColors>()!.subtitle,
+                                  ),
+                            ),
+                          ],
                         ),
-                        const SpacerH(),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLargeBold
-                                    ?.copyWith(
-                                      color: Theme.of(context)
-                                          .extension<LzyctColors>()!
-                                          .subtitle,
-                                    ),
-                              ),
-                              Text(
-                                data?.email ?? "",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                      color: Theme.of(context)
-                                          .extension<LzyctColors>()!
-                                          .subtitle,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 },
               ),
             ),
@@ -121,7 +117,6 @@ class MenuDrawer extends StatelessWidget {
         ],
       ),
     );
-  }
 
   void _selectedPage(BuildContext context, String title) {
     //Update page from selected Page

@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
     data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(AuthStateFailure(l.message ?? ""));
+          emit(AuthStateFailure(l.message ?? ''));
         }
       },
       (r) => emit(AuthStateSuccess(r.token)),

@@ -14,18 +14,19 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, Login>> login(LoginParams params) async {
     final response = await authRemoteDatasource.login(params);
 
-    return response.fold(
-      (failure) => Left(failure),
-      (loginResponse) {
-        mainBoxMixin.addData(MainBoxKeys.isLogin, true);
-        mainBoxMixin.addData(
-          MainBoxKeys.authToken,
-          '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
-        );
+    return response.fold((failure) => Left(failure), (loginResponse) {
+      mainBoxMixin.addData(MainBoxKeys.isLogin, true);
+      mainBoxMixin.addData(
+        MainBoxKeys.authToken,
+        '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
+      );
+      mainBoxMixin.addData(
+        MainBoxKeys.refreshToken,
+        '${loginResponse.data?.tokenType} ${loginResponse.data?.refreshToken}',
+      );
 
-        return Right(loginResponse.toEntity());
-      },
-    );
+      return Right(loginResponse.toEntity());
+    });
   }
 
   @override
@@ -44,17 +45,14 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     final response = await authRemoteDatasource.generalToken(params);
 
-    return response.fold(
-      (failure) => Left(failure),
-      (loginResponse) {
-        mainBoxMixin.addData(
-          MainBoxKeys.generalToken,
-          '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
-        );
+    return response.fold((failure) => Left(failure), (loginResponse) {
+      mainBoxMixin.addData(
+        MainBoxKeys.generalToken,
+        '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
+      );
 
-        return Right(loginResponse.toEntity());
-      },
-    );
+      return Right(loginResponse.toEntity());
+    });
   }
 
   @override

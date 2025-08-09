@@ -25,6 +25,7 @@ sealed class DataLogin with _$DataLogin {
   const factory DataLogin({
     @JsonKey(name: 'token') String? token,
     @JsonKey(name: 'tokenType') String? tokenType,
+    @JsonKey(name: 'refreshToken') String? refreshToken,
   }) = _DataLogin;
 
   factory DataLogin.fromJson(Map<String, dynamic> json) =>

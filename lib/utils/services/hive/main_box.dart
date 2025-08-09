@@ -14,6 +14,7 @@ enum ActiveTheme {
 enum MainBoxKeys {
   generalToken,
   authToken,
+  refreshToken,
   fcm,
   language,
   theme,

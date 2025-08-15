@@ -3,15 +3,15 @@
 <br>
 
 # Flutter App Auth 📱
+
 [![codecov](https://codecov.io/gh/lazycatlabs/flutter_auth_app/main/graph/badge.svg)](https://codecov.io/gh/lazycatlabs/flutter_auth_app)
 <br/><br/>
 <a href="https://www.linkedin.com/in/lzyct/" target="_blank">
-    <img src="https://github.com/ukieTux/ukieTux/blob/master/assets/linkedin.svg" alt="LinkedIn" style="vertical-align:top; margin:4px" height=24>
+<img src="https://github.com/ukieTux/ukieTux/blob/master/assets/linkedin.svg" alt="LinkedIn" style="vertical-align:top; margin:4px" height=24>
 </a>
 <a href = "https://www.upwork.com/freelancers/~01913209d41be922f1?viewMode=1">
-    <img src="https://img.shields.io/badge/UpWork-6FDA44?logo=Upwork&logoColor=white" height=24/>
-</a>  
-
+<img src="https://img.shields.io/badge/UpWork-6FDA44?logo=Upwork&logoColor=white" height=24/>
+</a>
 
 This app has Auth Functions like Login, Register, and Show pagination data.
 
@@ -19,22 +19,15 @@ The API using [apimock](https://apimock.lazycatlabs.com/) from [lazycatlabs](htt
 
 <br>This app also implementing **Flutter Clean Architecture with TDD.**
 
-
 https://github.com/user-attachments/assets/5b9e3559-aa18-4ba1-9e1a-d27d8d304149
-
-
 
 ### Light and dark theme icon launcher change
 
 https://github.com/user-attachments/assets/3e200e6e-0987-4c28-a285-64e905709535
 
-
 ### Light and dark theme splash change
 
 https://github.com/user-attachments/assets/2c72e060-8ee8-4c1a-9ed7-9f8e3547ecea
-
-
-
 
 ## Pre-requisites 📐
 
@@ -46,43 +39,59 @@ https://github.com/user-attachments/assets/2c72e060-8ee8-4c1a-9ed7-9f8e3547ecea
 ## Get Started 🚀
 
 - Clone this project
+
 ```bash 
   flutter pub get 
 ```
+
 - Run to generate localization files
+
 ```bash
 flutter gen-l10n
 ```
+
 - Run to generate freezes files
+
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
+
 - Run for **staging** or
+
 ```bash
 flutter run --flavor stg -t lib/main.dart --dart-define-from-file .env.stg.json 
 ```
+
 - Run for **production**
+
 ```bash
 flutter run --flavor prd -t lib/main.dart --dart-define-from-file .env.prd.json 
 ```
+
 - Test Coverage, we ignore some folders and files which is not necessary to test coverage because it are generated file
 - Note: on macOS, you need to have lcov installed on your system (`brew install lcov`) to use this:
+
 ```bash
  flutter test -j8 --coverage;lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' '**/*.g.dart' -o coverage/new_lcov.info ;genhtml coverage/new_lcov.info -o coverage/html
 ````
-- To generate a launcher icon based on Flavor 
+
+- To generate a launcher icon based on Flavor
+
 ```bash
 dart run flutter_launcher_icons 
 ```
+
 - To generate native splash screen
+
 ```bash
 dart run flutter_native_splash:create --flavors stg,prd
 ```
+
 - To generate mock class
+
 ```bash
 dart pub run build_runner build
 ```
-
 
 ## Feature ✅
 
@@ -102,11 +111,11 @@ dart pub run build_runner build
 - [x] Implement [Go Router](https://pub.dev/packages/go_router)
 
 ## TODO 📝
+
 - [ ] Login with Biometric / FaceID
 
-
-
 ## Maestro Test 🧪
+
 - Install Maestro on your machine [Maestro](https://maestro.mobile.dev/getting-started/installing-maestro)
 - Run this command to run the test
   ```bash
@@ -114,13 +123,15 @@ dart pub run build_runner build
    maestro test maestro-prd/main.yaml
   ```
 
-
-
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 
 <br>
 
 ![architecture-proposal](./architecture-proposal.png)
+
+## 💡Tips
+
+- **Flutter native splashscreen:** The brand image in Android > 12 the frame size is 5:2, if the width is 500px, the height should be 500/2,5 = 200px
 
 ## 📜 GNU General Public License v3.0
 

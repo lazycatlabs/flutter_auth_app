@@ -17,12 +17,10 @@ void main() {
       await serviceLocator();
       await FirebaseServices.init();
 
-      return SystemChrome.setPreferredOrientations(
-        [
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ],
-      ).then((_) => runApp(LzyctApp()));
+      return SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]).then((_) => runApp(LzyctApp()));
     },
     (error, stackTrace) =>
         FirebaseCrashlytics.instance.recordError(error, stackTrace),

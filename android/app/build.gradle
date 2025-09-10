@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.lazycatlabs.auth"
-    compileSdk 35
+    compileSdk 36
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

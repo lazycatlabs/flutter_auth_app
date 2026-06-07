@@ -112,7 +112,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(Parent), findsNWidgets(1));
-      expect(find.byType(ColoredBox), findsNWidgets(1));
+      expect(
+        find.byWidgetPredicate(
+          (widget) => widget is ColoredBox && widget.child is Center,
+        ),
+        findsOneWidget,
+      );
       expect(find.byType(Center), findsNWidgets(1));
       expect(find.byType(Image), findsNWidgets(1));
 

@@ -1,4 +1,4 @@
-import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:flutter_auth_app/utils/helper/debouncer.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -48,6 +48,18 @@ void main() {
 
       expect(firstActionCalled, isFalse);
       expect(secondActionCalled, isTrue);
+    });
+
+    test('action is not called after debouncer is disposed', () async {
+      bool actionCalled = false;
+      final debouncer = Debouncer(duration: const Duration(milliseconds: 100));
+
+      debouncer.run(() => actionCalled = true);
+      debouncer.dispose();
+
+      await Future.delayed(const Duration(milliseconds: 150));
+
+      expect(actionCalled, isFalse);
     });
   });
 }

@@ -20,14 +20,20 @@ class _LoginPageState extends State<LoginPage> {
   final _conEmail = TextEditingController();
   final _conPassword = TextEditingController();
 
-  bool _isPasswordVisible = false;
-
   final _formKey = GlobalKey<FormState>();
   final _isValid = ValueNotifier(false);
+  final _isPasswordVisible = ValueNotifier(false);
 
   /// Focus Node
   final _fnEmail = FocusNode();
   final _fnPassword = FocusNode();
+
+  @override
+  void dispose() {
+    _isPasswordVisible.dispose();
+    _isValid.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => Parent(
@@ -101,34 +107,34 @@ class _LoginPageState extends State<LoginPage> {
               ? Strings.of(context)!.errorInvalidEmail
               : null,
         ),
-        TextF(
-          autoFillHints: const [AutofillHints.password],
-          key: const Key('password'),
-          focusNode: _fnPassword,
-          textInputAction: TextInputAction.done,
-          controller: _conPassword,
-          textInputType: TextInputType.text,
-          prefixIcon: Icon(
-            Icons.lock_outline,
-            color: Theme.of(context).textTheme.bodyLarge?.color,
-          ),
-          obscureText: !_isPasswordVisible,
-          hint: 'pass123',
-          label: Strings.of(context)!.password,
-          suffixIcon: IconButton(
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-            onPressed: () {
-              _isPasswordVisible = !_isPasswordVisible;
-              context.read<ReloadFormCubit>().reload();
-            },
-            icon: Icon(
-              _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+        ValueListenableBuilder(
+          valueListenable: _isPasswordVisible,
+          builder: (_, bool isPasswordVisible, _) => TextF(
+            autoFillHints: const [AutofillHints.password],
+            key: const Key('password'),
+            focusNode: _fnPassword,
+            textInputAction: TextInputAction.done,
+            controller: _conPassword,
+            textInputType: TextInputType.text,
+            prefixIcon: Icon(
+              Icons.lock_outline,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
             ),
+            obscureText: !isPasswordVisible,
+            hint: 'pass123',
+            label: Strings.of(context)!.password,
+            suffixIcon: IconButton(
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              onPressed: () => _isPasswordVisible.value = !isPasswordVisible,
+              icon: Icon(
+                isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
+            validator: (String? value) => (value?.length ?? 0) < 5
+                ? Strings.of(context)!.errorPasswordLength
+                : null,
           ),
-          validator: (String? value) => (value?.length ?? 0) < 5
-              ? Strings.of(context)!.errorPasswordLength
-              : null,
         ),
         SpacerV(value: Dimens.space24),
         ValueListenableBuilder(

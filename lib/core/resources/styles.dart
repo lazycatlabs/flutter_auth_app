@@ -33,6 +33,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
     surfaceContainerHighest: Palette.surfaceVariant,
     onSurfaceVariant: Palette.onSurfaceVariant,
     outline: Palette.outline,
+    shadow: Palette.shadow,
   ),
   textTheme: TextTheme(
     displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
@@ -45,6 +46,10 @@ ThemeData themeLight(BuildContext context) => ThemeData(
     ),
     displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
       fontSize: Dimens.displaySmall,
+      color: Palette.textPrimary,
+    ),
+    headlineLarge: Theme.of(context).textTheme.headlineLarge?.copyWith(
+      fontSize: Dimens.headlineLarge,
       color: Palette.textPrimary,
     ),
     headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -81,6 +86,10 @@ ThemeData themeLight(BuildContext context) => ThemeData(
     ),
     labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
       fontSize: Dimens.labelLarge,
+      color: Palette.textPrimary,
+    ),
+    labelMedium: Theme.of(context).textTheme.labelMedium?.copyWith(
+      fontSize: Dimens.labelMedium,
       color: Palette.textPrimary,
     ),
     labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -176,6 +185,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
     surfaceContainerHighest: Palette.surfaceVariantDark,
     onSurfaceVariant: Palette.onSurfaceVariantDark,
     outline: Palette.outlineDark,
+    shadow: Palette.shadowDark,
   ),
   textTheme: TextTheme(
     displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
@@ -188,6 +198,10 @@ ThemeData themeDark(BuildContext context) => ThemeData(
     ),
     displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
       fontSize: Dimens.displaySmall,
+      color: Palette.textPrimaryDark,
+    ),
+    headlineLarge: Theme.of(context).textTheme.headlineLarge?.copyWith(
+      fontSize: Dimens.headlineLarge,
       color: Palette.textPrimaryDark,
     ),
     headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -224,6 +238,10 @@ ThemeData themeDark(BuildContext context) => ThemeData(
     ),
     labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
       fontSize: Dimens.labelLarge,
+      color: Palette.textPrimaryDark,
+    ),
+    labelMedium: Theme.of(context).textTheme.labelMedium?.copyWith(
+      fontSize: Dimens.labelMedium,
       color: Palette.textPrimaryDark,
     ),
     labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(

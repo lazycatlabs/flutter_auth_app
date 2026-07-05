@@ -65,6 +65,12 @@ class TextFState extends State<TextF> {
   final _debouncer = Debouncer();
 
   @override
+  void dispose() {
+    _debouncer.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => GestureDetector(
     onTap: widget.onTap,
     child: Column(

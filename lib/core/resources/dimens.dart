@@ -26,12 +26,17 @@ class Dimens {
   static double space8 = 8.w;
   static double space12 = 12.w;
   static double space16 = 16.w;
+  static double space20 = 20.w;
   static double space24 = 24.w;
   static double space30 = 30.w;
   static double space36 = 36.w;
   static double space40 = 40.w;
   static double space46 = 46.w;
   static double space50 = 50.w;
+  static double space64 = 64.w;
+  static double space70 = 70.w;
+  static double space76 = 76.w;
+  static double space96 = 96.w;
 
   static double selectedIndicatorW = 43.w;
   static double selectedIndicatorSmallW = 28.w;
@@ -46,12 +51,13 @@ class Dimens {
   static double header = 200.w;
   static double minLabel = 116.w;
   static double bottomBar = 80.w;
-  static double profilePicture = 86.w;
-  static double birthdayCalendar = 120.w;
+  static double profilePicture = 72.w;
+  static double birthdayCalendar = 200.w;
 
   static double buttonH = 40.w;
   static double imageW = 110.w;
 
-  static const double cornerRadius = 15;
+  static double cornerRadius = 16.w;
+  static double chartBox = 250.w;
   static const double cornerRadiusBottomSheet = 30;
 }

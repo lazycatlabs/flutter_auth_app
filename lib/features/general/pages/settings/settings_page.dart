@@ -37,7 +37,9 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
               value: _selectedTheme,
               prefixIcon: Icon(
                 Icons.light,
-                color: Theme.of(context).extension<LzyctColors>()!.subtitle,
+                color: Theme.of(
+                  context,
+                ).extension<LzyctColors>()!.textSecondary,
               ),
               items: ActiveTheme.values
                   .map(
@@ -45,11 +47,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                       value: data,
                       child: Text(
                         _getThemeName(data, context),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(
-                            context,
-                          ).extension<LzyctColors>()!.subtitle,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   )
@@ -69,7 +67,9 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
               value: _selectedLanguage,
               prefixIcon: Icon(
                 Icons.language_outlined,
-                color: Theme.of(context).extension<LzyctColors>()!.subtitle,
+                color: Theme.of(
+                  context,
+                ).extension<LzyctColors>()!.textSecondary,
               ),
               items: _listLanguage
                   .map(
@@ -77,11 +77,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                       value: data,
                       child: Text(
                         data.title ?? '-',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(
-                            context,
-                          ).extension<LzyctColors>()!.subtitle,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   )

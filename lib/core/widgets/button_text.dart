@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-
+import 'package:flutter_auth_app/utils/utils.dart';
 
 class ButtonText extends StatelessWidget {
   final String title;
@@ -12,7 +12,9 @@ class ButtonText extends StatelessWidget {
   final Color? splashColor;
 
   const ButtonText({
-    required this.title, required this.onPressed, super.key,
+    required this.title,
+    required this.onPressed,
+    super.key,
     this.width,
     this.color,
     this.titleColor,
@@ -22,17 +24,17 @@ class ButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-      margin: EdgeInsets.symmetric(vertical: Dimens.space8),
-      child: TextButton(
-        onPressed: onPressed,
-        style: TextButton.styleFrom(
-          foregroundColor: Theme.of(context).extension<LzyctColors>()!.pink,
-        ),
-        child: Text(
-          title.toUpperCase(),
-          style: Theme.of(context).textTheme.labelLarge,
-          textAlign: TextAlign.center,
-        ),
+    margin: EdgeInsets.symmetric(vertical: Dimens.space8),
+    child: TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        foregroundColor: titleColor ?? Theme.of(context).colorScheme.tertiary,
       ),
-    );
+      child: Text(
+        title.toUpperCase(),
+        style: Theme.of(context).textTheme.bodyMedium500,
+        textAlign: TextAlign.center,
+      ),
+    ),
+  );
 }

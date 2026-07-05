@@ -6,4 +6,7 @@ extension TextThemeExtension on TextTheme {
 
   TextStyle? get bodyMedium500 =>
       bodyMedium?.copyWith(fontWeight: FontWeight.w500);
+
+  TextStyle? get bodyLarge500 =>
+      bodyLarge?.copyWith(fontWeight: FontWeight.w500);
 }

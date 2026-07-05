@@ -6,8 +6,8 @@ import 'package:oktoast/oktoast.dart';
 
 extension StringExtension on String {
   bool isValidEmail() => RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
-    ).hasMatch(this);
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+  ).hasMatch(this);
 
   //https://github.com/ponnamkarthik/FlutterToast/issues/262
   //coverage:ignore-start
@@ -20,7 +20,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.red,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.error,
           icon: Icons.error,
           message: message,
           textColor: Colors.white,
@@ -47,7 +47,7 @@ extension StringExtension on String {
       // showToast(msg)
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.green,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.primary,
           icon: Icons.check_circle,
           message: message,
           textColor: Colors.white,
@@ -72,7 +72,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.pink,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.tertiary,
           icon: Icons.info,
           message: message,
           textColor: Colors.white,
@@ -100,8 +100,10 @@ extension StringExtension on String {
         object = DateTime.parse(this);
       }
 
-      return DateFormat("dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm", 'id')
-          .format(object);
+      return DateFormat(
+        "dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm",
+        'id',
+      ).format(object);
     } catch (_) {
       return '-';
     }

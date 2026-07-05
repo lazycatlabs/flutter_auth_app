@@ -19,104 +19,116 @@ class MenuDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: context.widthInPercent(100),
-            height: Dimens.header,
-            padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
-            color: Theme.of(context).extension<LzyctColors>()!.banner,
-            child: SafeArea(
-              child: BlocBuilder<UserCubit, UserState>(
-                builder: (_, state) => switch (state) {
-                  UserStateLoading() => const Loading(),
-                  UserStateFailure(:final message) => Center(
-                    child: Text(message),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: context.widthInPercent(100),
+          height: Dimens.header,
+          padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
+          color: Theme.of(context).extension<LzyctColors>()!.primary,
+          child: SafeArea(
+            child: BlocBuilder<UserCubit, UserState>(
+              builder: (_, state) => switch (state) {
+                UserStateLoading() => Loading(
+                  color: Theme.of(
+                    context,
+                  ).extension<LzyctColors>()!.textOnPrimary,
+                ),
+                UserStateFailure(:final message) => Center(
+                  child: Text(
+                    message,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).extension<LzyctColors>()!.textOnPrimary,
+                    ),
                   ),
-                  UserStateSuccess(:final data) => Row(
-                    children: [
-                      CircleImage(
-                        url: data?.avatar ?? '',
-                        size: Dimens.profilePicture,
+                ),
+                UserStateSuccess(:final data) => Row(
+                  spacing: Dimens.space12,
+                  children: [
+                    CircleImage(
+                      url: data?.avatar ?? '',
+                      size: Dimens.profilePicture,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
+                            style: Theme.of(context).textTheme.titleLargeBold
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).extension<LzyctColors>()!.textOnPrimary,
+                                ),
+                          ),
+                          Text(
+                            data?.email ?? '',
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).extension<LzyctColors>()!.textOnPrimary,
+                                ),
+                          ),
+                        ],
                       ),
-                      const SpacerH(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
-                              style: Theme.of(context).textTheme.titleLargeBold
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).extension<LzyctColors>()!.subtitle,
-                                  ),
-                            ),
-                            Text(
-                              data?.email ?? '',
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).extension<LzyctColors>()!.subtitle,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                },
-              ),
+                    ),
+                  ],
+                ),
+              },
             ),
           ),
-          const SpacerV(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: dataMenu
-                    .map<Widget>(
-                      (value) => SizedBox(
-                        width: double.maxFinite,
-                        child: InkWell(
-                          onTap: () {
-                            for (final menu in dataMenu) {
-                              menu.isSelected = menu.title == value.title;
+        ),
+        const SpacerV(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: dataMenu
+                  .map<Widget>(
+                    (value) => SizedBox(
+                      width: double.maxFinite,
+                      child: InkWell(
+                        onTap: () {
+                          for (final menu in dataMenu) {
+                            menu.isSelected = menu.title == value.title;
 
-                              if (value.title != null) {
-                                currentIndex(dataMenu.indexOf(value));
-                              }
+                            if (value.title != null) {
+                              currentIndex(dataMenu.indexOf(value));
                             }
+                          }
 
-                            _selectedPage(context, value.title!);
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: Dimens.space12,
-                              horizontal: Dimens.space24,
-                            ),
-                            child: Text(
-                              value.title!,
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
+                          _selectedPage(context, value.title!);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: Dimens.space12,
+                            horizontal: Dimens.space24,
+                          ),
+                          child: Text(
+                            value.title!,
+                            style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
                       ),
-                    )
-                    .toList(),
-              ),
+                    ),
+                  )
+                  .toList(),
             ),
-          ), //
-          const SpacerH(),
-        ],
-      ),
-    );
+          ),
+        ), //
+        const SpacerH(),
+      ],
+    ),
+  );
 
   void _selectedPage(BuildContext context, String title) {
     //Update page from selected Page

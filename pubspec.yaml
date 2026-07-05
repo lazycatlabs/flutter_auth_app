@@ -37,7 +37,7 @@ dependencies:
   dartz: ^0.10.1
 
   # Use as Network Client
-  dio: ^5.9.2
+  dio: ^5.10.0
 
   # Use hive to save local data
   hive_ce: ^2.19.3
@@ -62,9 +62,9 @@ dependencies:
   logger: ^2.7.0
 
   # Firebase
-  firebase_core: ^4.10.0
-  firebase_analytics: ^12.4.2
-  firebase_crashlytics: ^5.2.3
+  firebase_core: ^4.11.0
+  firebase_analytics: ^12.4.3
+  firebase_crashlytics: ^5.2.4
 
   # router
   go_router: ^17.3.0

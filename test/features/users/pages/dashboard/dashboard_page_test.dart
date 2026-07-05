@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
@@ -99,6 +100,24 @@ void main() {
     }
 
     expect(find.byType(ListView), findsOneWidget);
+  });
+
+  testWidgets('renders DashboardPage success without pagination loader', (
+    tester,
+  ) async {
+    when(() => usersCubit.state).thenReturn(
+      UsersState.success(users.copyWith(lastPage: users.currentPage)),
+    );
+    when(() => usersCubit.fetchUsers(any())).thenAnswer((_) async {});
+
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
+
+    for (int i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    expect(find.byType(ListView), findsOneWidget);
+    expect(find.byType(CupertinoActivityIndicator), findsNothing);
   });
 
   testWidgets('trigger refresh when pull to refresh', (tester) async {

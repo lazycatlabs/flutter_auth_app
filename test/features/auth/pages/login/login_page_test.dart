@@ -25,6 +25,15 @@ class FakeAuthCubit extends Fake implements AuthCubit {}
 void main() {
   late AuthCubit authCubit;
 
+  bool obscureText(WidgetTester tester, Key key) => tester
+      .widget<EditableText>(
+        find.descendant(
+          of: find.byKey(key),
+          matching: find.byType(EditableText),
+        ),
+      )
+      .obscureText;
+
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeAuthCubit());
@@ -40,9 +49,7 @@ void main() {
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthCubit>.value(value: authCubit),
-        ],
+        providers: [BlocProvider<AuthCubit>.value(value: authCubit)],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
           minTextAdapt: true,
@@ -109,6 +116,28 @@ void main() {
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, null);
+  });
+
+  testWidgets('toggles password visibility', (tester) async {
+    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+
+    await tester.pumpWidget(rootWidget(const LoginPage()));
+    await tester.pumpAndSettle();
+
+    expect(obscureText(tester, const Key('password')), isTrue);
+
+    await tester.ensureVisible(find.byKey(const Key('password')));
+    await tester.pump();
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('password')),
+        matching: find.byType(IconButton),
+      ),
+    );
+    await tester.pump();
+
+    expect(obscureText(tester, const Key('password')), isFalse);
+    expect(find.byIcon(Icons.visibility), findsOneWidget);
   });
 
   testWidgets('renders LoginPage for form validation fill email', (

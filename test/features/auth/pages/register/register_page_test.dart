@@ -26,6 +26,15 @@ class FakeRegisterState extends Fake {}
 void main() {
   late RegisterCubit registerCubit;
 
+  bool obscureText(WidgetTester tester, Key key) => tester
+      .widget<EditableText>(
+        find.descendant(
+          of: find.byKey(key),
+          matching: find.byType(EditableText),
+        ),
+      )
+      .obscureText;
+
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeRegisterState());
@@ -41,9 +50,7 @@ void main() {
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
-        providers: [
-          BlocProvider<RegisterCubit>.value(value: registerCubit),
-        ],
+        providers: [BlocProvider<RegisterCubit>.value(value: registerCubit)],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
           minTextAdapt: true,
@@ -147,6 +154,42 @@ void main() {
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
+  });
+
+  testWidgets('toggles password visibility fields', (tester) async {
+    when(
+      () => registerCubit.state,
+    ).thenReturn(const RegisterState.success(null));
+
+    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.pumpAndSettle();
+
+    expect(obscureText(tester, const Key('password')), isTrue);
+    expect(obscureText(tester, const Key('repeat_password')), isTrue);
+
+    await tester.ensureVisible(find.byKey(const Key('password')));
+    await tester.pump();
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('password')),
+        matching: find.byType(IconButton),
+      ),
+    );
+    await tester.pump();
+
+    expect(obscureText(tester, const Key('password')), isFalse);
+
+    await tester.ensureVisible(find.byKey(const Key('repeat_password')));
+    await tester.pump();
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('repeat_password')),
+        matching: find.byType(IconButton),
+      ),
+    );
+    await tester.pump();
+
+    expect(obscureText(tester, const Key('repeat_password')), isFalse);
   });
 
   testWidgets('renders RegisterPage for form validation fill name', (

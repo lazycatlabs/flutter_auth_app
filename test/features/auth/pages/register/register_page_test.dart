@@ -23,19 +23,12 @@ class MockRegisterCubit extends MockCubit<RegisterState>
 
 class FakeRegisterState extends Fake {}
 
-class MockReloadFormCubit extends MockCubit<ReloadFormState>
-    implements ReloadFormCubit {}
-
-class FakeReloadFormState extends Fake {}
-
 void main() {
   late RegisterCubit registerCubit;
-  late ReloadFormCubit reloadFormCubit;
 
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeRegisterState());
-    registerFallbackValue(FakeReloadFormState());
     registerFallbackValue(const RegisterParams());
   });
 
@@ -44,14 +37,12 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     registerCubit = MockRegisterCubit();
-    reloadFormCubit = MockReloadFormCubit();
   });
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
         providers: [
           BlocProvider<RegisterCubit>.value(value: registerCubit),
-          BlocProvider<ReloadFormCubit>.value(value: reloadFormCubit),
         ],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
@@ -79,9 +70,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const RegisterPage()));
     await tester.pumpAndSettle();
@@ -119,9 +107,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.formUpdated());
     await tester.pumpWidget(rootWidget(const RegisterPage()));
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 500));
@@ -172,10 +157,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const RegisterPage()));
 
@@ -231,10 +212,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const RegisterPage()));
 
@@ -299,9 +276,6 @@ void main() {
       when(
         () => registerCubit.state,
       ).thenReturn(const RegisterState.success(null));
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       // Build the widget
       await tester.pumpWidget(rootWidget(const RegisterPage()));
@@ -355,9 +329,6 @@ void main() {
       when(
         () => registerCubit.state,
       ).thenReturn(const RegisterState.success(null));
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
 
@@ -416,10 +387,6 @@ void main() {
 
       when(() => registerCubit.state).thenReturn(const RegisterState.loading());
       when(() => registerCubit.register(any())).thenAnswer((_) async {});
-
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
 

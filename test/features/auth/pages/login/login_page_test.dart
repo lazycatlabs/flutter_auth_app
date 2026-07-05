@@ -22,19 +22,12 @@ class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
 class FakeAuthCubit extends Fake implements AuthCubit {}
 
-class FakeReloadFormCubit extends Fake implements ReloadFormCubit {}
-
-class MockReloadFormCubit extends MockCubit<ReloadFormState>
-    implements ReloadFormCubit {}
-
 void main() {
   late AuthCubit authCubit;
-  late ReloadFormCubit reloadFormCubit;
 
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeAuthCubit());
-    registerFallbackValue(FakeReloadFormCubit());
     registerFallbackValue(const LoginParams());
   });
 
@@ -43,14 +36,12 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'login_page_test_');
     authCubit = MockAuthCubit();
-    reloadFormCubit = MockReloadFormCubit();
   });
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
         providers: [
           BlocProvider<AuthCubit>.value(value: authCubit),
-          BlocProvider<ReloadFormCubit>.value(value: reloadFormCubit),
         ],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
@@ -75,9 +66,6 @@ void main() {
 
   testWidgets('renders LoginPage for in Light and Dark Theme', (tester) async {
     when(() => authCubit.state).thenReturn(const AuthState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -110,9 +98,6 @@ void main() {
   });
   testWidgets('renders LoginPage for form validation blank', (tester) async {
     when(() => authCubit.state).thenReturn(const AuthState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -133,9 +118,6 @@ void main() {
 
     when(() => authCubit.state).thenReturn(const AuthState.success(null));
     when(() => authCubit.login(any())).thenAnswer((_) async {});
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -169,9 +151,6 @@ void main() {
 
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
       when(() => authCubit.login(any())).thenAnswer((_) async {});
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.pumpAndSettle();

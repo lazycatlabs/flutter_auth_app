@@ -137,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
               !_isPasswordVisible ? Icons.visibility_off : Icons.visibility,
             ),
           ),
-          validator: (value) => !(value?.isValidEmail() ?? true)
+          validator: (String? value) => (value?.length ?? 0) < 5
               ? Strings.of(context)!.errorPasswordLength
               : null,
           semantic: 'password',

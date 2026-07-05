@@ -135,8 +135,8 @@ void main() {
     /// validate name
     await tester.tap(find.byKey(const Key('name')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.tap(find.byKey(const Key('email')));
+    await tester.pumpAndSettle();
     expect(find.text("Can't be empty"), findsOneWidget);
 
     await tester.dragUntilVisible(
@@ -146,25 +146,19 @@ void main() {
     );
 
     /// validate email
-    await tester.tap(find.byKey(const Key('email')));
+    await tester.tap(find.byKey(const Key('password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
     expect(find.text('Email is not valid'), findsOneWidget);
 
     /// validate password
-    await tester.tap(find.byKey(const Key('password')));
+    await tester.tap(find.byKey(const Key('repeat_password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// validate repeat password
     await tester.tap(find.byKey(const Key('repeat_password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
-    expect(find.text("Password doesn't match"), findsOneWidget);
+    expect(find.text("Password doesn't match"), findsNothing);
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
@@ -222,7 +216,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 450));
     await tester.pumpWidget(rootWidget(const RegisterPage()));
-    expect(find.text("Password doesn't match"), findsOneWidget);
+    expect(find.text("Password doesn't match"), findsNothing);
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
@@ -288,7 +282,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 450));
     await tester.pumpWidget(rootWidget(const RegisterPage()));
-    expect(find.text("Password doesn't match"), findsOneWidget);
+    expect(find.text("Password doesn't match"), findsNothing);
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
@@ -343,7 +337,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.pump(const Duration(milliseconds: 450));
       await tester.pumpWidget(rootWidget(const RegisterPage()));
-      expect(find.text("Password doesn't match"), findsNothing);
+      expect(find.text("Password doesn't match"), findsOneWidget);
 
       /// the button should be disable
       expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);

@@ -26,44 +26,45 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) => Parent(
-      child: RefreshIndicator(
-        color: Theme.of(context).extension<LzyctColors>()!.pink,
-        backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
-        onRefresh: () => context.read<UsersCubit>().refresh(),
-        child: BlocBuilder<UsersCubit, UsersState>(
-          builder: (_, state) => switch (state) {
-            UsersStateLoading() => const Center(child: Loading()),
-            UsersStateInitial() => const SizedBox.shrink(),
-            UsersStateSuccess(:final data) => ListView.builder(
-                controller: _scrollController,
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: data.currentPage == data.lastPage
-                    ? data.users?.length //coverage:ignore-line
-                    : ((data.users?.length ?? 0) + 1),
-                padding: EdgeInsets.symmetric(vertical: Dimens.space16),
-                itemBuilder: (_, index) => index < (data.users?.length ?? 0)
-                      ? userItem(data.users![index])
-                      : Padding(
-                          padding: EdgeInsets.all(Dimens.space16),
-                          child: const Center(
-                            child: CupertinoActivityIndicator(),
-                          ),
-                        ),
-              ),
-            UsersStateFailure(:final message) =>
-              Center(child: Empty(errorMessage: message)),
-            UsersStateEmpty() => const Center(child: Empty()),
-          },
-        ),
+    child: RefreshIndicator(
+      color: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
+      onRefresh: () => context.read<UsersCubit>().refresh(),
+      child: BlocBuilder<UsersCubit, UsersState>(
+        builder: (_, state) => switch (state) {
+          UsersStateLoading() => const Center(child: Loading()),
+          UsersStateInitial() => const SizedBox.shrink(),
+          UsersStateSuccess(:final data) => ListView.builder(
+            controller: _scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: data.currentPage == data.lastPage
+                ? data
+                      .users
+                      ?.length //coverage:ignore-line
+                : ((data.users?.length ?? 0) + 1),
+            padding: EdgeInsets.symmetric(vertical: Dimens.space16),
+            itemBuilder: (_, index) => index < (data.users?.length ?? 0)
+                ? userItem(data.users![index])
+                : Padding(
+                    padding: EdgeInsets.all(Dimens.space16),
+                    child: const Center(child: CupertinoActivityIndicator()),
+                  ),
+          ),
+          UsersStateFailure(:final message) => Center(
+            child: Empty(errorMessage: message),
+          ),
+          UsersStateEmpty() => const Center(child: Empty()),
+        },
       ),
-    );
+    ),
+  );
 
-  Container userItem(User user) => Container(
-      decoration: BoxDecorations(context).card,
-      margin: EdgeInsets.symmetric(
-        vertical: Dimens.space12,
-        horizontal: Dimens.space16,
-      ),
+  Widget userItem(User user) => Padding(
+    padding: EdgeInsets.symmetric(
+      vertical: Dimens.space12,
+      horizontal: Dimens.space16,
+    ),
+    child: LzyctCard(
       child: Row(
         children: [
           ClipRRect(
@@ -89,28 +90,25 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 Text(
                   user.email ?? '',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: Theme.of(context).hintColor),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).hintColor,
+                  ),
                 ),
                 const SpacerV(),
                 Row(
                   children: [
                     Text(
                       Strings.of(context)!.lastUpdate,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelSmall
-                          ?.copyWith(color: Theme.of(context).hintColor),
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
                     ),
                     Flexible(
                       child: Text(
                         (user.updatedAt ?? '').toStringDateAlt(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall
-                            ?.copyWith(color: Theme.of(context).hintColor),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
                         textAlign: TextAlign.end,
                       ),
                     ),
@@ -121,5 +119,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
       ),
-    );
+    ),
+  );
 }

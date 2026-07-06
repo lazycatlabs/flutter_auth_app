@@ -16,4 +16,8 @@ class Debouncer {
     }
     _timer = Timer(duration ?? const Duration(milliseconds: 300), action);
   }
+
+  void dispose() {
+    _timer?.cancel();
+  }
 }

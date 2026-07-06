@@ -105,6 +105,63 @@ void main() {
       }
     });
 
+    testWidgets('displays loading header', (WidgetTester tester) async {
+      when(() => userCubit.state).thenReturn(const UserState.loading());
+
+      await tester.pumpWidget(
+        rootWidget(
+          MenuDrawer(
+            dataMenu: const [],
+            currentIndex: (_) {},
+            onLogoutPressed: () {},
+          ),
+        ),
+      );
+
+      expect(find.byType(Loading), findsOneWidget);
+    });
+
+    testWidgets('displays failure header message', (WidgetTester tester) async {
+      when(() => userCubit.state).thenReturn(const UserState.failure('Failed'));
+
+      await tester.pumpWidget(
+        rootWidget(
+          MenuDrawer(
+            dataMenu: const [],
+            currentIndex: (_) {},
+            onLogoutPressed: () {},
+          ),
+        ),
+      );
+
+      expect(find.text('Failed'), findsOneWidget);
+    });
+
+    testWidgets('updates selected menu index when menu is tapped', (
+      WidgetTester tester,
+    ) async {
+      int? selectedIndex;
+      when(() => userCubit.state).thenReturn(const UserState.success(null));
+
+      final dataMenu = [DataHelper(title: 'Logout')];
+
+      await tester.pumpWidget(
+        rootWidget(
+          MenuDrawer(
+            dataMenu: dataMenu,
+            currentIndex: (index) => selectedIndex = index,
+            onLogoutPressed: () {},
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Logout'));
+      await tester.pump();
+
+      expect(selectedIndex, 0);
+      expect(dataMenu.first.isSelected, isTrue);
+    });
+
     testWidgets('calls onLogoutPressed when logout is tapped', (
       WidgetTester tester,
     ) async {

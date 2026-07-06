@@ -22,19 +22,21 @@ class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
 class FakeAuthCubit extends Fake implements AuthCubit {}
 
-class FakeReloadFormCubit extends Fake implements ReloadFormCubit {}
-
-class MockReloadFormCubit extends MockCubit<ReloadFormState>
-    implements ReloadFormCubit {}
-
 void main() {
   late AuthCubit authCubit;
-  late ReloadFormCubit reloadFormCubit;
+
+  bool obscureText(WidgetTester tester, Key key) => tester
+      .widget<EditableText>(
+        find.descendant(
+          of: find.byKey(key),
+          matching: find.byType(EditableText),
+        ),
+      )
+      .obscureText;
 
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeAuthCubit());
-    registerFallbackValue(FakeReloadFormCubit());
     registerFallbackValue(const LoginParams());
   });
 
@@ -43,15 +45,11 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'login_page_test_');
     authCubit = MockAuthCubit();
-    reloadFormCubit = MockReloadFormCubit();
   });
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthCubit>.value(value: authCubit),
-          BlocProvider<ReloadFormCubit>.value(value: reloadFormCubit),
-        ],
+        providers: [BlocProvider<AuthCubit>.value(value: authCubit)],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
           minTextAdapt: true,
@@ -75,9 +73,6 @@ void main() {
 
   testWidgets('renders LoginPage for in Light and Dark Theme', (tester) async {
     when(() => authCubit.state).thenReturn(const AuthState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -110,9 +105,6 @@ void main() {
   });
   testWidgets('renders LoginPage for form validation blank', (tester) async {
     when(() => authCubit.state).thenReturn(const AuthState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -126,6 +118,28 @@ void main() {
     expect(tester.widget<Button>(find.byType(Button)).onPressed, null);
   });
 
+  testWidgets('toggles password visibility', (tester) async {
+    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+
+    await tester.pumpWidget(rootWidget(const LoginPage()));
+    await tester.pumpAndSettle();
+
+    expect(obscureText(tester, const Key('password')), isTrue);
+
+    await tester.ensureVisible(find.byKey(const Key('password')));
+    await tester.pump();
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('password')),
+        matching: find.byType(IconButton),
+      ),
+    );
+    await tester.pump();
+
+    expect(obscureText(tester, const Key('password')), isFalse);
+    expect(find.byIcon(Icons.visibility), findsOneWidget);
+  });
+
   testWidgets('renders LoginPage for form validation fill email', (
     tester,
   ) async {
@@ -133,9 +147,6 @@ void main() {
 
     when(() => authCubit.state).thenReturn(const AuthState.success(null));
     when(() => authCubit.login(any())).thenAnswer((_) async {});
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -153,8 +164,9 @@ void main() {
     expect(find.text('Email is not valid'), findsNothing);
 
     await tester.tap(find.byKey(const Key('password')));
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const LoginPage()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('email')));
+    await tester.pumpAndSettle();
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// the button should be disable
@@ -169,9 +181,6 @@ void main() {
 
       when(() => authCubit.state).thenReturn(const AuthState.success(null));
       when(() => authCubit.login(any())).thenAnswer((_) async {});
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.pumpAndSettle();

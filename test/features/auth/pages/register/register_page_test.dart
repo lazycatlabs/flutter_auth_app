@@ -23,19 +23,21 @@ class MockRegisterCubit extends MockCubit<RegisterState>
 
 class FakeRegisterState extends Fake {}
 
-class MockReloadFormCubit extends MockCubit<ReloadFormState>
-    implements ReloadFormCubit {}
-
-class FakeReloadFormState extends Fake {}
-
 void main() {
   late RegisterCubit registerCubit;
-  late ReloadFormCubit reloadFormCubit;
+
+  bool obscureText(WidgetTester tester, Key key) => tester
+      .widget<EditableText>(
+        find.descendant(
+          of: find.byKey(key),
+          matching: find.byType(EditableText),
+        ),
+      )
+      .obscureText;
 
   setUpAll(() {
     HttpOverrides.global = null;
     registerFallbackValue(FakeRegisterState());
-    registerFallbackValue(FakeReloadFormState());
     registerFallbackValue(const RegisterParams());
   });
 
@@ -44,15 +46,11 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true);
     registerCubit = MockRegisterCubit();
-    reloadFormCubit = MockReloadFormCubit();
   });
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
-        providers: [
-          BlocProvider<RegisterCubit>.value(value: registerCubit),
-          BlocProvider<ReloadFormCubit>.value(value: reloadFormCubit),
-        ],
+        providers: [BlocProvider<RegisterCubit>.value(value: registerCubit)],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
           minTextAdapt: true,
@@ -79,9 +77,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const RegisterPage()));
     await tester.pumpAndSettle();
@@ -119,9 +114,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.formUpdated());
     await tester.pumpWidget(rootWidget(const RegisterPage()));
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 500));
@@ -133,10 +125,20 @@ void main() {
     );
 
     /// validate name
-    await tester.tap(find.byKey(const Key('name')));
+    final nameField = find.descendant(
+      of: find.byKey(const Key('name')),
+      matching: find.byType(TextFormField),
+    );
+    await tester.enterText(nameField, 'A');
+    await tester.enterText(nameField, '');
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('email')),
+        matching: find.byType(TextFormField),
+      ),
+    );
+    await tester.pumpAndSettle();
     expect(find.text("Can't be empty"), findsOneWidget);
 
     await tester.dragUntilVisible(
@@ -146,28 +148,58 @@ void main() {
     );
 
     /// validate email
-    await tester.tap(find.byKey(const Key('email')));
+    await tester.tap(find.byKey(const Key('password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
     expect(find.text('Email is not valid'), findsOneWidget);
 
     /// validate password
-    await tester.tap(find.byKey(const Key('password')));
+    await tester.tap(find.byKey(const Key('repeat_password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// validate repeat password
     await tester.tap(find.byKey(const Key('repeat_password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
-    expect(find.text("Password doesn't match"), findsOneWidget);
+    expect(find.text("Password doesn't match"), findsNothing);
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
+  });
+
+  testWidgets('toggles password visibility fields', (tester) async {
+    when(
+      () => registerCubit.state,
+    ).thenReturn(const RegisterState.success(null));
+
+    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.pumpAndSettle();
+
+    expect(obscureText(tester, const Key('password')), isTrue);
+    expect(obscureText(tester, const Key('repeat_password')), isTrue);
+
+    await tester.ensureVisible(find.byKey(const Key('password')));
+    await tester.pump();
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('password')),
+        matching: find.byType(IconButton),
+      ),
+    );
+    await tester.pump();
+
+    expect(obscureText(tester, const Key('password')), isFalse);
+
+    await tester.ensureVisible(find.byKey(const Key('repeat_password')));
+    await tester.pump();
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('repeat_password')),
+        matching: find.byType(IconButton),
+      ),
+    );
+    await tester.pump();
+
+    expect(obscureText(tester, const Key('repeat_password')), isFalse);
   });
 
   testWidgets('renders RegisterPage for form validation fill name', (
@@ -178,10 +210,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const RegisterPage()));
 
@@ -206,15 +234,13 @@ void main() {
     /// validate email
     await tester.enterText(find.byKey(const Key('email')), name);
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.tap(find.byKey(const Key('password')));
+    await tester.pumpAndSettle();
     expect(find.text('Email is not valid'), findsOneWidget);
 
     /// validate password
-    await tester.tap(find.byKey(const Key('password')));
+    await tester.tap(find.byKey(const Key('repeat_password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// validate repeat password
@@ -222,7 +248,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 450));
     await tester.pumpWidget(rootWidget(const RegisterPage()));
-    expect(find.text("Password doesn't match"), findsOneWidget);
+    expect(find.text("Password doesn't match"), findsNothing);
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
@@ -237,10 +263,6 @@ void main() {
     when(
       () => registerCubit.state,
     ).thenReturn(const RegisterState.success(null));
-
-    when(
-      () => reloadFormCubit.state,
-    ).thenReturn(const ReloadFormState.initial());
 
     await tester.pumpWidget(rootWidget(const RegisterPage()));
 
@@ -279,8 +301,8 @@ void main() {
     /// validate password
     await tester.tap(find.byKey(const Key('password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.tap(find.byKey(const Key('repeat_password')));
+    await tester.pumpAndSettle();
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// validate repeat password
@@ -288,7 +310,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 450));
     await tester.pumpWidget(rootWidget(const RegisterPage()));
-    expect(find.text("Password doesn't match"), findsOneWidget);
+    expect(find.text("Password doesn't match"), findsNothing);
 
     /// the button should be disable
     expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
@@ -305,9 +327,6 @@ void main() {
       when(
         () => registerCubit.state,
       ).thenReturn(const RegisterState.success(null));
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       // Build the widget
       await tester.pumpWidget(rootWidget(const RegisterPage()));
@@ -340,10 +359,11 @@ void main() {
       expect(find.text('Password must be at least 6 characters'), findsNothing);
 
       // Simulate an invalid repeat password and check validation
+      await tester.enterText(find.byKey(const Key('repeat_password')), 'wrong');
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(milliseconds: 450));
-      await tester.pumpWidget(rootWidget(const RegisterPage()));
-      expect(find.text("Password doesn't match"), findsNothing);
+      await tester.tap(find.byKey(const Key('password')));
+      await tester.pumpAndSettle();
+      expect(find.text("Password doesn't match"), findsOneWidget);
 
       /// the button should be disable
       expect(tester.widget<Button>(find.byType(Button)).onPressed, isNull);
@@ -361,9 +381,6 @@ void main() {
       when(
         () => registerCubit.state,
       ).thenReturn(const RegisterState.success(null));
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
 
@@ -401,10 +418,10 @@ void main() {
       expect(find.text('Password must be at least 6 characters'), findsNothing);
 
       /// validate repeat password
-      await tester.enterText(find.byKey(const Key('repeat_password')), '');
+      await tester.enterText(find.byKey(const Key('repeat_password')), 'wrong');
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(milliseconds: 450));
-      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.tap(find.byKey(const Key('password')));
+      await tester.pumpAndSettle();
       expect(find.text("Password doesn't match"), findsOneWidget);
 
       /// the button should be disable
@@ -422,10 +439,6 @@ void main() {
 
       when(() => registerCubit.state).thenReturn(const RegisterState.loading());
       when(() => registerCubit.register(any())).thenAnswer((_) async {});
-
-      when(
-        () => reloadFormCubit.state,
-      ).thenReturn(const ReloadFormState.initial());
 
       await tester.pumpWidget(rootWidget(const RegisterPage()));
 

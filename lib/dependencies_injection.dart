@@ -70,9 +70,6 @@ void _cubit() {
   sl.registerFactory(() => GeneralTokenCubit(sl()));
   sl.registerFactory(() => LogoutCubit(sl()));
 
-  /// General
-  sl.registerFactory(() => ReloadFormCubit());
-
   /// Users
   sl.registerFactory(() => UserCubit(sl()));
   sl.registerFactory(() => UsersCubit(sl()));

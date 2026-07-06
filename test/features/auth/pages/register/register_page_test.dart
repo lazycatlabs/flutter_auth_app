@@ -224,15 +224,13 @@ void main() {
     /// validate email
     await tester.enterText(find.byKey(const Key('email')), name);
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.tap(find.byKey(const Key('password')));
+    await tester.pumpAndSettle();
     expect(find.text('Email is not valid'), findsOneWidget);
 
     /// validate password
-    await tester.tap(find.byKey(const Key('password')));
+    await tester.tap(find.byKey(const Key('repeat_password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// validate repeat password
@@ -293,8 +291,8 @@ void main() {
     /// validate password
     await tester.tap(find.byKey(const Key('password')));
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const RegisterPage()));
+    await tester.tap(find.byKey(const Key('repeat_password')));
+    await tester.pumpAndSettle();
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// validate repeat password
@@ -351,9 +349,10 @@ void main() {
       expect(find.text('Password must be at least 6 characters'), findsNothing);
 
       // Simulate an invalid repeat password and check validation
+      await tester.enterText(find.byKey(const Key('repeat_password')), 'wrong');
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(milliseconds: 450));
-      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.tap(find.byKey(const Key('password')));
+      await tester.pumpAndSettle();
       expect(find.text("Password doesn't match"), findsOneWidget);
 
       /// the button should be disable
@@ -409,10 +408,10 @@ void main() {
       expect(find.text('Password must be at least 6 characters'), findsNothing);
 
       /// validate repeat password
-      await tester.enterText(find.byKey(const Key('repeat_password')), '');
+      await tester.enterText(find.byKey(const Key('repeat_password')), 'wrong');
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(milliseconds: 450));
-      await tester.pumpWidget(rootWidget(const RegisterPage()));
+      await tester.tap(find.byKey(const Key('password')));
+      await tester.pumpAndSettle();
       expect(find.text("Password doesn't match"), findsOneWidget);
 
       /// the button should be disable

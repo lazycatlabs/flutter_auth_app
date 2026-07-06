@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
                 title: Text(
                   Strings.of(context)!.logout,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).extension<LzyctColors>()!.error,
+                    color: Theme.of(context).colorScheme.error,
                   ),
                 ),
                 content: Text(
@@ -97,9 +97,7 @@ class _MainPageState extends State<MainPage> {
                       child: Text(
                         Strings.of(context)!.yes,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(
-                            context,
-                          ).extension<LzyctColors>()!.error,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                     ),

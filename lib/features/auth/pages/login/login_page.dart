@@ -32,6 +32,10 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     _isPasswordVisible.dispose();
     _isValid.dispose();
+    _conEmail.dispose();
+    _conPassword.dispose();
+    _fnEmail.dispose();
+    _fnPassword.dispose();
     super.dispose();
   }
 
@@ -87,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
     key: _formKey,
     onChanged: () =>
         _isValid.value = _formKey.currentState?.validate() ?? false,
-    autovalidateMode: AutovalidateMode.onUnfocus,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     child: Column(
       children: [
         TextF(

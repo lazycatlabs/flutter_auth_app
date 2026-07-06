@@ -20,7 +20,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.error,
+          bgColor: Theme.of(context).colorScheme.error,
           icon: Icons.error,
           message: message,
           textColor: Colors.white,
@@ -47,7 +47,7 @@ extension StringExtension on String {
       // showToast(msg)
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.primary,
+          bgColor: Theme.of(context).colorScheme.primary,
           icon: Icons.check_circle,
           message: message,
           textColor: Colors.white,
@@ -72,7 +72,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.tertiary,
+          bgColor: Theme.of(context).colorScheme.tertiary,
           icon: Icons.info,
           message: message,
           textColor: Colors.white,

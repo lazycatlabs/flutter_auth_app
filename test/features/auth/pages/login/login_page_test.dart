@@ -164,8 +164,9 @@ void main() {
     expect(find.text('Email is not valid'), findsNothing);
 
     await tester.tap(find.byKey(const Key('password')));
-    await tester.pump(const Duration(milliseconds: 450));
-    await tester.pumpWidget(rootWidget(const LoginPage()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('email')));
+    await tester.pumpAndSettle();
     expect(find.text('Password must be at least 6 characters'), findsOneWidget);
 
     /// the button should be disable

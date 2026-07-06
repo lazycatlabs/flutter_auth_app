@@ -145,10 +145,6 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       textError: Palette.textError,
       textWarning: Palette.textWarning,
       shadow: Palette.shadow,
-      primary: Palette.primary,
-      tertiary: Palette.tertiary,
-      error: Palette.error,
-      errorContainer: Palette.errorContainer,
       warning: Palette.warning,
     ),
   ],
@@ -298,10 +294,6 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       textError: Palette.textErrorDark,
       textWarning: Palette.textWarningDark,
       shadow: Palette.shadowDark,
-      primary: Palette.primaryDark,
-      tertiary: Palette.tertiaryDark,
-      error: Palette.errorDark,
-      errorContainer: Palette.errorContainerDark,
       warning: Palette.warningDark,
     ),
   ],
@@ -323,10 +315,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
   final Color? textError;
   final Color? textWarning;
   final Color? shadow;
-  final Color? primary;
-  final Color? tertiary;
-  final Color? error;
-  final Color? errorContainer;
   final Color? warning;
 
   const LzyctColors({
@@ -345,10 +333,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
     this.textError,
     this.textWarning,
     this.shadow,
-    this.primary,
-    this.tertiary,
-    this.error,
-    this.errorContainer,
     this.warning,
   });
 
@@ -369,10 +353,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
     Color? textError,
     Color? textWarning,
     Color? shadow,
-    Color? primary,
-    Color? tertiary,
-    Color? error,
-    Color? errorContainer,
     Color? warning,
   }) => LzyctColors(
     background: background ?? this.background,
@@ -390,10 +370,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
     textError: textError ?? this.textError,
     textWarning: textWarning ?? this.textWarning,
     shadow: shadow ?? this.shadow,
-    primary: primary ?? this.primary,
-    tertiary: tertiary ?? this.tertiary,
-    error: error ?? this.error,
-    errorContainer: errorContainer ?? this.errorContainer,
     warning: warning ?? this.warning,
   );
 
@@ -421,10 +397,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
       textError: Color.lerp(textError, other.textError, t),
       textWarning: Color.lerp(textWarning, other.textWarning, t),
       shadow: Color.lerp(shadow, other.shadow, t),
-      primary: Color.lerp(primary, other.primary, t),
-      tertiary: Color.lerp(tertiary, other.tertiary, t),
-      error: Color.lerp(error, other.error, t),
-      errorContainer: Color.lerp(errorContainer, other.errorContainer, t),
       warning: Color.lerp(warning, other.warning, t),
     );
   }

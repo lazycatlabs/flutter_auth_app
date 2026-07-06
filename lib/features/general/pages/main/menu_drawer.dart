@@ -27,7 +27,7 @@ class MenuDrawer extends StatelessWidget {
           width: context.widthInPercent(100),
           height: Dimens.header,
           padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
-          color: Theme.of(context).extension<LzyctColors>()!.primary,
+          color: Theme.of(context).colorScheme.primary,
           child: SafeArea(
             child: BlocBuilder<UserCubit, UserState>(
               builder: (_, state) => switch (state) {

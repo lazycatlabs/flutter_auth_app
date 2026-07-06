@@ -37,6 +37,18 @@ class _RegisterPageState extends State<RegisterPage> {
     _isPasswordVisible.dispose();
     _isPasswordRepeatVisible.dispose();
     _isValid.dispose();
+
+    _conName.dispose();
+    _conEmail.dispose();
+    _conPassword.dispose();
+    _conPasswordRepeat.dispose();
+
+    /// Focus Node
+    _fnName.dispose();
+    _fnEmail.dispose();
+    _fnPassword.dispose();
+    _fnPasswordRepeat.dispose();
+
     super.dispose();
   }
 
@@ -86,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
     key: _formKey,
     onChanged: () =>
         _isValid.value = _formKey.currentState?.validate() ?? false,
-    autovalidateMode: AutovalidateMode.onUnfocus,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     child: Column(
       children: [
         TextF(

@@ -27,7 +27,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) => Parent(
     child: RefreshIndicator(
-      color: Theme.of(context).extension<LzyctColors>()!.primary,
+      color: Theme.of(context).colorScheme.primary,
       backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
       onRefresh: () => context.read<UsersCubit>().refresh(),
       child: BlocBuilder<UsersCubit, UsersState>(

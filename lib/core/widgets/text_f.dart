@@ -7,6 +7,7 @@ class TextF extends StatefulWidget {
   const TextF({
     required this.label,
     super.key,
+    this.formFieldKey,
     this.controller,
     this.prefixIcon,
     this.suffixIcon,
@@ -33,6 +34,7 @@ class TextF extends StatefulWidget {
   });
 
   final TextEditingController? controller;
+  final GlobalKey<FormFieldState<String>>? formFieldKey;
   final String label;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -95,6 +97,7 @@ class TextFState extends State<TextF> {
   Widget get _textFormField => Semantics(
     label: widget.semantic,
     child: TextFormField(
+      key: widget.formFieldKey,
       autofillHints: widget.autoFillHints,
       textInputAction: widget.textInputAction,
       onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),

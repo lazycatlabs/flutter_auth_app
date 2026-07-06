@@ -125,9 +125,19 @@ void main() {
     );
 
     /// validate name
-    await tester.tap(find.byKey(const Key('name')));
+    final nameField = find.descendant(
+      of: find.byKey(const Key('name')),
+      matching: find.byType(TextFormField),
+    );
+    await tester.enterText(nameField, 'A');
+    await tester.enterText(nameField, '');
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('email')));
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const Key('email')),
+        matching: find.byType(TextFormField),
+      ),
+    );
     await tester.pumpAndSettle();
     expect(find.text("Can't be empty"), findsOneWidget);
 

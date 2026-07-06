@@ -19,15 +19,11 @@ The API using [apimock](https://apimock.lazycatlabs.com/) from [lazycatlabs](htt
 
 <br>This app also implementing **Flutter Clean Architecture with TDD.**
 
-https://github.com/user-attachments/assets/5b9e3559-aa18-4ba1-9e1a-d27d8d304149
 
-### Light and dark theme icon launcher change
 
-https://github.com/user-attachments/assets/3e200e6e-0987-4c28-a285-64e905709535
+https://github.com/user-attachments/assets/f994e992-9161-46c3-8f0b-cd582c56bea2
 
-### Light and dark theme splash change
 
-https://github.com/user-attachments/assets/2c72e060-8ee8-4c1a-9ed7-9f8e3547ecea
 
 ## Pre-requisites 📐
 

@@ -157,9 +157,9 @@ class TextFState extends State<TextF> {
         floatingLabelBehavior: widget.hint != null
             ? FloatingLabelBehavior.always
             : null,
-        hintStyle: Theme.of(
+        hintStyle: TextTheme.of(
           context,
-        ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).hintColor),
+        ).bodyMedium?.copyWith(color: Theme.of(context).hintColor),
       ),
       validator: widget.validator,
       onChanged: (String value) =>

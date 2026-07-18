@@ -30,9 +30,9 @@ class Button extends StatelessWidget {
       style: TextButton.styleFrom(
         backgroundColor: color ?? ColorScheme.of(context).primary,
         foregroundColor: titleColor ?? ColorScheme.of(context).onPrimary,
-        disabledBackgroundColor: Theme.of(
+        disabledBackgroundColor: ColorScheme.of(
           context,
-        ).colorScheme.primary.withValues(alpha: 0.5),
+        ).primary.withValues(alpha: 0.5),
         padding: EdgeInsets.symmetric(
           horizontal: Dimens.space24,
           vertical: Dimens.space12,

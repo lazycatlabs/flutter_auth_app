@@ -45,7 +45,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.hintIsVisible && widget.hint != null) ...{
-          Text(widget.hint ?? '', style: Theme.of(context).textTheme.bodySmall),
+          Text(widget.hint ?? '', style: TextTheme.of(context).bodySmall),
           SpacerV(value: Dimens.space6),
         },
         ButtonTheme(
@@ -58,22 +58,19 @@ class _DropDownState<T> extends State<DropDown<T>> {
             focusNode: _fnDropdown,
             dropdownColor: Theme.of(context).scaffoldBackgroundColor,
             icon: _fnDropdown.hasFocus
-                ? Icon(
-                    Icons.check,
-                    color: Theme.of(context).colorScheme.primary,
-                  )
+                ? Icon(Icons.check, color: ColorScheme.of(context).primary)
                 : const Icon(Icons.keyboard_arrow_down),
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).hintColor,
-            ),
+            style: TextTheme.of(
+              context,
+            ).bodyMedium?.copyWith(color: Theme.of(context).hintColor),
             decoration: InputDecoration(
               alignLabelWithHint: true,
               isDense: true,
               isCollapsed: true,
               filled: true,
-              labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).hintColor,
-              ),
+              labelStyle: TextTheme.of(
+                context,
+              ).bodyMedium?.copyWith(color: Theme.of(context).hintColor),
               fillColor: Theme.of(context).cardColor,
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: Dimens.space12),
@@ -103,7 +100,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
                 gapPadding: 0,
                 borderRadius: BorderRadius.circular(Dimens.space16),
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.error,
+                  color: ColorScheme.of(context).error,
                   width: Dimens.space2,
                 ),
               ),
@@ -111,7 +108,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
                 gapPadding: 0,
                 borderRadius: BorderRadius.circular(Dimens.space16),
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.error,
+                  color: ColorScheme.of(context).error,
                   width: Dimens.space2,
                 ),
               ),
@@ -119,7 +116,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
                 gapPadding: 0,
                 borderRadius: BorderRadius.circular(Dimens.space16),
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: ColorScheme.of(context).primary,
                   width: Dimens.space2,
                 ),
               ),

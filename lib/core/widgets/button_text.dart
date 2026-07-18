@@ -28,11 +28,11 @@ class ButtonText extends StatelessWidget {
     child: TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: titleColor ?? Theme.of(context).colorScheme.tertiary,
+        foregroundColor: titleColor ?? ColorScheme.of(context).tertiary,
       ),
       child: Text(
         title.toUpperCase(),
-        style: Theme.of(context).textTheme.bodyMedium500,
+        style: TextTheme.of(context).bodyMedium500,
         textAlign: TextAlign.center,
       ),
     ),

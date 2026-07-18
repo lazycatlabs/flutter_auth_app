@@ -58,20 +58,20 @@ class _MainPageState extends State<MainPage> {
               builder: (_) => AlertDialog(
                 title: Text(
                   Strings.of(context)!.logout,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: TextTheme.of(
+                    context,
+                  ).bodyLarge?.copyWith(color: ColorScheme.of(context).error),
                 ),
                 content: Text(
                   Strings.of(context)!.logoutDesc,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextTheme.of(context).bodyMedium,
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => context.pop(),
                     child: Text(
                       Strings.of(context)!.cancel,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      style: TextTheme.of(context).bodyMedium?.copyWith(
                         color: Theme.of(context).hintColor,
                       ),
                     ),
@@ -96,8 +96,8 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: Text(
                         Strings.of(context)!.yes,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.error,
+                        style: TextTheme.of(context).bodyMedium?.copyWith(
+                          color: ColorScheme.of(context).error,
                         ),
                       ),
                     ),
@@ -122,7 +122,7 @@ class _MainPageState extends State<MainPage> {
         builder: (_, state) => Text(switch (state) {
           MainStateLoading() => '-',
           MainStateSuccess(:final data) => data?.title ?? '-',
-        }, style: Theme.of(context).textTheme.titleLarge),
+        }, style: TextTheme.of(context).titleLarge),
       ),
       leading: IconButton(
         icon: Icon(Icons.sort, size: Dimens.space24, semanticLabel: 'Menu'),

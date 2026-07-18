@@ -47,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                       value: data,
                       child: Text(
                         _getThemeName(data, context),
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: TextTheme.of(context).bodyMedium,
                       ),
                     ),
                   )
@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                       value: data,
                       child: Text(
                         data.title ?? '-',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: TextTheme.of(context).bodyMedium,
                       ),
                     ),
                   )

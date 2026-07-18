@@ -27,7 +27,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) => Parent(
     child: RefreshIndicator(
-      color: Theme.of(context).colorScheme.primary,
+      color: ColorScheme.of(context).primary,
       backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
       onRefresh: () => context.read<UsersCubit>().refresh(),
       child: BlocBuilder<UsersCubit, UsersState>(
@@ -86,27 +86,27 @@ class _DashboardPageState extends State<DashboardPage> {
               children: [
                 Text(
                   user.name ?? '',
-                  style: Theme.of(context).textTheme.titleLargeBold,
+                  style: TextTheme.of(context).titleLargeBold,
                 ),
                 Text(
                   user.email ?? '',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).hintColor,
-                  ),
+                  style: TextTheme.of(
+                    context,
+                  ).bodySmall?.copyWith(color: Theme.of(context).hintColor),
                 ),
                 const SpacerV(),
                 Row(
                   children: [
                     Text(
                       Strings.of(context)!.lastUpdate,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      style: TextTheme.of(context).labelSmall?.copyWith(
                         color: Theme.of(context).hintColor,
                       ),
                     ),
                     Flexible(
                       child: Text(
                         (user.updatedAt ?? '').toStringDateAlt(),
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        style: TextTheme.of(context).labelSmall?.copyWith(
                           color: Theme.of(context).hintColor,
                         ),
                         textAlign: TextAlign.end,

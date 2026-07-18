@@ -36,63 +36,63 @@ ThemeData themeLight(BuildContext context) => ThemeData(
     shadow: Palette.shadow,
   ),
   textTheme: TextTheme(
-    displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
+    displayLarge: TextTheme.of(context).displayLarge?.copyWith(
       fontSize: Dimens.displayLarge,
       color: Palette.textPrimary,
     ),
-    displayMedium: Theme.of(context).textTheme.displayMedium?.copyWith(
+    displayMedium: TextTheme.of(context).displayMedium?.copyWith(
       fontSize: Dimens.displayMedium,
       color: Palette.textPrimary,
     ),
-    displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
+    displaySmall: TextTheme.of(context).displaySmall?.copyWith(
       fontSize: Dimens.displaySmall,
       color: Palette.textPrimary,
     ),
-    headlineLarge: Theme.of(context).textTheme.headlineLarge?.copyWith(
+    headlineLarge: TextTheme.of(context).headlineLarge?.copyWith(
       fontSize: Dimens.headlineLarge,
       color: Palette.textPrimary,
     ),
-    headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
+    headlineMedium: TextTheme.of(context).headlineMedium?.copyWith(
       fontSize: Dimens.headlineMedium,
       color: Palette.textPrimary,
     ),
-    headlineSmall: Theme.of(context).textTheme.headlineSmall?.copyWith(
+    headlineSmall: TextTheme.of(context).headlineSmall?.copyWith(
       fontSize: Dimens.headlineSmall,
       color: Palette.textPrimary,
     ),
-    titleLarge: Theme.of(context).textTheme.titleLarge?.copyWith(
+    titleLarge: TextTheme.of(context).titleLarge?.copyWith(
       fontSize: Dimens.titleLarge,
       color: Palette.textPrimary,
     ),
-    titleMedium: Theme.of(context).textTheme.titleMedium?.copyWith(
+    titleMedium: TextTheme.of(context).titleMedium?.copyWith(
       fontSize: Dimens.titleMedium,
       color: Palette.textPrimary,
     ),
-    titleSmall: Theme.of(context).textTheme.titleSmall?.copyWith(
+    titleSmall: TextTheme.of(context).titleSmall?.copyWith(
       fontSize: Dimens.titleSmall,
       color: Palette.textPrimary,
     ),
-    bodyLarge: Theme.of(context).textTheme.bodyLarge?.copyWith(
+    bodyLarge: TextTheme.of(context).bodyLarge?.copyWith(
       fontSize: Dimens.bodyLarge,
       color: Palette.textPrimary,
     ),
-    bodyMedium: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    bodyMedium: TextTheme.of(context).bodyMedium?.copyWith(
       fontSize: Dimens.bodyMedium,
       color: Palette.textPrimary,
     ),
-    bodySmall: Theme.of(context).textTheme.bodySmall?.copyWith(
+    bodySmall: TextTheme.of(context).bodySmall?.copyWith(
       fontSize: Dimens.bodySmall,
       color: Palette.textPrimary,
     ),
-    labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
+    labelLarge: TextTheme.of(context).labelLarge?.copyWith(
       fontSize: Dimens.labelLarge,
       color: Palette.textPrimary,
     ),
-    labelMedium: Theme.of(context).textTheme.labelMedium?.copyWith(
+    labelMedium: TextTheme.of(context).labelMedium?.copyWith(
       fontSize: Dimens.labelMedium,
       color: Palette.textPrimary,
     ),
-    labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
+    labelSmall: TextTheme.of(context).labelSmall?.copyWith(
       fontSize: Dimens.labelSmall,
       letterSpacing: 0.25,
       color: Palette.textPrimary,
@@ -184,63 +184,63 @@ ThemeData themeDark(BuildContext context) => ThemeData(
     shadow: Palette.shadowDark,
   ),
   textTheme: TextTheme(
-    displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
+    displayLarge: TextTheme.of(context).displayLarge?.copyWith(
       fontSize: Dimens.displayLarge,
       color: Palette.textPrimaryDark,
     ),
-    displayMedium: Theme.of(context).textTheme.displayMedium?.copyWith(
+    displayMedium: TextTheme.of(context).displayMedium?.copyWith(
       fontSize: Dimens.displayMedium,
       color: Palette.textPrimaryDark,
     ),
-    displaySmall: Theme.of(context).textTheme.displaySmall?.copyWith(
+    displaySmall: TextTheme.of(context).displaySmall?.copyWith(
       fontSize: Dimens.displaySmall,
       color: Palette.textPrimaryDark,
     ),
-    headlineLarge: Theme.of(context).textTheme.headlineLarge?.copyWith(
+    headlineLarge: TextTheme.of(context).headlineLarge?.copyWith(
       fontSize: Dimens.headlineLarge,
       color: Palette.textPrimaryDark,
     ),
-    headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
+    headlineMedium: TextTheme.of(context).headlineMedium?.copyWith(
       fontSize: Dimens.headlineMedium,
       color: Palette.textPrimaryDark,
     ),
-    headlineSmall: Theme.of(context).textTheme.headlineSmall?.copyWith(
+    headlineSmall: TextTheme.of(context).headlineSmall?.copyWith(
       fontSize: Dimens.headlineSmall,
       color: Palette.textPrimaryDark,
     ),
-    titleLarge: Theme.of(context).textTheme.titleLarge?.copyWith(
+    titleLarge: TextTheme.of(context).titleLarge?.copyWith(
       fontSize: Dimens.titleLarge,
       color: Palette.textPrimaryDark,
     ),
-    titleMedium: Theme.of(context).textTheme.titleMedium?.copyWith(
+    titleMedium: TextTheme.of(context).titleMedium?.copyWith(
       fontSize: Dimens.titleMedium,
       color: Palette.textPrimaryDark,
     ),
-    titleSmall: Theme.of(context).textTheme.titleSmall?.copyWith(
+    titleSmall: TextTheme.of(context).titleSmall?.copyWith(
       fontSize: Dimens.titleSmall,
       color: Palette.textPrimaryDark,
     ),
-    bodyLarge: Theme.of(context).textTheme.bodyLarge?.copyWith(
+    bodyLarge: TextTheme.of(context).bodyLarge?.copyWith(
       fontSize: Dimens.bodyLarge,
       color: Palette.textPrimaryDark,
     ),
-    bodyMedium: Theme.of(context).textTheme.bodyMedium?.copyWith(
+    bodyMedium: TextTheme.of(context).bodyMedium?.copyWith(
       fontSize: Dimens.bodyMedium,
       color: Palette.textPrimaryDark,
     ),
-    bodySmall: Theme.of(context).textTheme.bodySmall?.copyWith(
+    bodySmall: TextTheme.of(context).bodySmall?.copyWith(
       fontSize: Dimens.bodySmall,
       color: Palette.textPrimaryDark,
     ),
-    labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
+    labelLarge: TextTheme.of(context).labelLarge?.copyWith(
       fontSize: Dimens.labelLarge,
       color: Palette.textPrimaryDark,
     ),
-    labelMedium: Theme.of(context).textTheme.labelMedium?.copyWith(
+    labelMedium: TextTheme.of(context).labelMedium?.copyWith(
       fontSize: Dimens.labelMedium,
       color: Palette.textPrimaryDark,
     ),
-    labelSmall: Theme.of(context).textTheme.labelSmall?.copyWith(
+    labelSmall: TextTheme.of(context).labelSmall?.copyWith(
       fontSize: Dimens.labelSmall,
       letterSpacing: 0.25,
       color: Palette.textPrimaryDark,
@@ -408,7 +408,7 @@ class BoxDecorations {
   final BuildContext context;
 
   BoxDecoration get button => BoxDecoration(
-    color: Theme.of(context).colorScheme.primary,
+    color: ColorScheme.of(context).primary,
     borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
     boxShadow: [BoxShadows(context).button],
   );
@@ -437,36 +437,36 @@ class BoxShadows {
   final BuildContext context;
 
   BoxShadow get button => BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withAlpha(10),
+    color: ColorScheme.of(context).shadow.withAlpha(10),
     blurRadius: 16.0,
     spreadRadius: 1.0,
   );
 
   BoxShadow get card => BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withAlpha(10),
+    color: ColorScheme.of(context).shadow.withAlpha(10),
     blurRadius: 5.0,
     spreadRadius: 0.5,
   );
 
   BoxShadow get dialog => BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withAlpha(30),
+    color: ColorScheme.of(context).shadow.withAlpha(30),
     offset: const Offset(0, -4),
     blurRadius: 16.0,
   );
 
   BoxShadow get dialogAlt => BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withAlpha(30),
+    color: ColorScheme.of(context).shadow.withAlpha(30),
     offset: const Offset(0, 4),
     blurRadius: 16.0,
   );
 
   BoxShadow get buttonMenu => BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withAlpha(10),
+    color: ColorScheme.of(context).shadow.withAlpha(10),
     blurRadius: 4.0,
   );
 
   BoxShadow get navigation => BoxShadow(
-    color: Theme.of(context).colorScheme.shadow.withAlpha(30),
+    color: ColorScheme.of(context).shadow.withAlpha(30),
     blurRadius: Dimens.space6,
     offset: Offset(0, Dimens.space6),
   );

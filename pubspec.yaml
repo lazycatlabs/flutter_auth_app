@@ -62,9 +62,9 @@ dependencies:
   logger: ^2.7.0
 
   # Firebase
-  firebase_core: ^4.11.0
-  firebase_analytics: ^12.4.3
-  firebase_crashlytics: ^5.2.4
+  firebase_core: ^4.12.1
+  firebase_analytics: ^12.4.5
+  firebase_crashlytics: ^5.2.6
 
   # router
   go_router: ^17.3.0
@@ -84,7 +84,7 @@ dev_dependencies:
   lint: ^2.8.0
   flutter_lints: ^6.0.0
   bloc_test: ^10.0.0
-  build_runner: ^2.15.0
+  build_runner: ^2.15.1
   http_mock_adapter: ^0.6.1
 
   # Pinned until Freezed supports Analyzer 13.

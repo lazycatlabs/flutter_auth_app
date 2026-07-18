@@ -4,14 +4,14 @@ PODS:
   - Firebase/Crashlytics (12.15.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 12.15.0)
-  - firebase_analytics (12.4.3):
+  - firebase_analytics (12.4.5):
     - firebase_core
     - FirebaseAnalytics (= 12.15.0)
     - Flutter
-  - firebase_core (4.11.0):
+  - firebase_core (4.12.1):
     - Firebase/CoreOnly (= 12.15.0)
     - Flutter
-  - firebase_crashlytics (5.2.4):
+  - firebase_crashlytics (5.2.6):
     - Firebase/Crashlytics (= 12.15.0)
     - firebase_core
     - Flutter
@@ -175,9 +175,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Firebase: a8539b633d474fbeb654c7043f9c1649e274045b
-  firebase_analytics: 5e356f558625ce2d8b21deff00946b56d6e8d0d5
-  firebase_core: fc23178af8ea070194d09031ae4198a9608a3d22
-  firebase_crashlytics: 344bb168f55aee1086c6cdd0b105a9db018cd344
+  firebase_analytics: eb8345c126a25cd1914597079faf3e64c2e6835f
+  firebase_core: 1c1e250a77e2df9e80bb8bf0875c8b427044a697
+  firebase_crashlytics: 4d38aa785af57b2687a460778303d3b459707192
   FirebaseAnalytics: 9c9fa7915fc52ea03077000d5a7b6a8947b2d76e
   FirebaseCore: 2e86a4ea1684d4381707069e4a6d89ac808e901e
   FirebaseCoreExtension: 10d2a627977b39418759ad88ada80fbbd34f1c4f
@@ -198,4 +198,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0dbd5a87e0ace00c9610d2037ac22083a01f861d
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0

@@ -109,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
           textInputType: TextInputType.text,
           prefixIcon: Icon(
             Icons.person,
-            color: Theme.of(context).textTheme.bodyLarge?.color,
+            color: TextTheme.of(context).bodyLarge?.color,
           ),
           hint: 'Mudassir',
           label: Strings.of(context)!.name,
@@ -125,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
           textInputType: TextInputType.emailAddress,
           prefixIcon: Icon(
             Icons.alternate_email,
-            color: Theme.of(context).textTheme.bodyLarge?.color,
+            color: TextTheme.of(context).bodyLarge?.color,
           ),
           hint: 'mudassir@lazycatlabs.com',
           label: Strings.of(context)!.email,
@@ -143,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
             textInputType: TextInputType.text,
             prefixIcon: Icon(
               Icons.lock_outline,
-              color: Theme.of(context).textTheme.bodyLarge?.color,
+              color: TextTheme.of(context).bodyLarge?.color,
             ),
             obscureText: !isPasswordVisible,
             hint: '••••••••••••',
@@ -172,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
             textInputType: TextInputType.text,
             prefixIcon: Icon(
               Icons.lock_outline,
-              color: Theme.of(context).textTheme.bodyLarge?.color,
+              color: TextTheme.of(context).bodyLarge?.color,
             ),
             obscureText: !isPasswordRepeatVisible,
             hint: '••••••••••••',

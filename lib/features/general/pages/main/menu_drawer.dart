@@ -27,7 +27,7 @@ class MenuDrawer extends StatelessWidget {
           width: context.widthInPercent(100),
           height: Dimens.header,
           padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
-          color: Theme.of(context).colorScheme.primary,
+          color: ColorScheme.of(context).primary,
           child: SafeArea(
             child: BlocBuilder<UserCubit, UserState>(
               builder: (_, state) => switch (state) {
@@ -39,7 +39,7 @@ class MenuDrawer extends StatelessWidget {
                 UserStateFailure(:final message) => Center(
                   child: Text(
                     message,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    style: TextTheme.of(context).bodyMedium?.copyWith(
                       color: Theme.of(
                         context,
                       ).extension<LzyctColors>()!.textOnPrimary,
@@ -61,7 +61,7 @@ class MenuDrawer extends StatelessWidget {
                         children: [
                           Text(
                             "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
-                            style: Theme.of(context).textTheme.titleLargeBold
+                            style: TextTheme.of(context).titleLargeBold
                                 ?.copyWith(
                                   color: Theme.of(
                                     context,
@@ -70,12 +70,11 @@ class MenuDrawer extends StatelessWidget {
                           ),
                           Text(
                             data?.email ?? '',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).extension<LzyctColors>()!.textOnPrimary,
-                                ),
+                            style: TextTheme.of(context).bodySmall?.copyWith(
+                              color: Theme.of(
+                                context,
+                              ).extension<LzyctColors>()!.textOnPrimary,
+                            ),
                           ),
                         ],
                       ),
@@ -115,7 +114,7 @@ class MenuDrawer extends StatelessWidget {
                           ),
                           child: Text(
                             value.title!,
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: TextTheme.of(context).bodyLarge,
                           ),
                         ),
                       ),

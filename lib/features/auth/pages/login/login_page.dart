@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
           textInputType: TextInputType.emailAddress,
           prefixIcon: Icon(
             Icons.alternate_email,
-            color: Theme.of(context).textTheme.bodyLarge?.color,
+            color: TextTheme.of(context).bodyLarge?.color,
           ),
           hint: 'mudassir@lazycatlabs.com',
           label: Strings.of(context)!.email,
@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
             textInputType: TextInputType.text,
             prefixIcon: Icon(
               Icons.lock_outline,
-              color: Theme.of(context).textTheme.bodyLarge?.color,
+              color: TextTheme.of(context).bodyLarge?.color,
             ),
             obscureText: !isPasswordVisible,
             hint: 'pass123',

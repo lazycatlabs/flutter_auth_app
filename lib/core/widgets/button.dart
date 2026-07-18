@@ -28,8 +28,8 @@ class Button extends StatelessWidget {
     child: TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        backgroundColor: color ?? Theme.of(context).colorScheme.primary,
-        foregroundColor: titleColor ?? Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: color ?? ColorScheme.of(context).primary,
+        foregroundColor: titleColor ?? ColorScheme.of(context).onPrimary,
         disabledBackgroundColor: Theme.of(
           context,
         ).colorScheme.primary.withValues(alpha: 0.5),
@@ -43,8 +43,8 @@ class Button extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.bodyMedium500?.copyWith(
-          color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
+        style: TextTheme.of(context).bodyMedium500?.copyWith(
+          color: titleColor ?? ColorScheme.of(context).onPrimary,
           fontSize: fontSize,
         ),
         textAlign: TextAlign.center,

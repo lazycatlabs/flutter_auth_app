@@ -81,14 +81,11 @@ class TextFState extends State<TextF> {
       children: [
         Text(
           widget.label,
-          style: widget.labelTextStyle ?? Theme.of(context).textTheme.bodySmall,
+          style: widget.labelTextStyle ?? TextTheme.of(context).bodySmall,
         ),
         _textFormField,
         if (widget.description != null)
-          Text(
-            widget.description!,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          Text(widget.description!, style: TextTheme.of(context).bodySmall),
         SpacerV(value: Dimens.space4),
       ],
     ),
@@ -110,7 +107,7 @@ class TextFState extends State<TextF> {
       maxLines: widget.maxLines,
       onTap: widget.onTap,
       textAlignVertical: TextAlignVertical.center,
-      style: widget.textStyle ?? Theme.of(context).textTheme.bodyMedium500,
+      style: widget.textStyle ?? TextTheme.of(context).bodyMedium500,
       decoration: InputDecoration(
         isDense: true,
         filled: true,
@@ -121,23 +118,23 @@ class TextFState extends State<TextF> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(Dimens.space16),
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
+          borderSide: BorderSide(color: ColorScheme.of(context).outline),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(Dimens.space16),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
+            color: ColorScheme.of(context).primary,
             width: Dimens.space2,
           ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(Dimens.space16),
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
+          borderSide: BorderSide(color: ColorScheme.of(context).outline),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(Dimens.space16),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
+            color: ColorScheme.of(context).error,
             width: Dimens.space2,
           ),
         ),

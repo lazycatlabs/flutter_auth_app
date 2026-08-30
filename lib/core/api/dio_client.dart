@@ -68,9 +68,17 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     required ResponseConverter<T> converter,
     Map<String, dynamic>? queryParameters,
     bool isIsolate = true,
+    bool includeAuthorization = true,
   }) async {
     try {
-      final response = await dio.get(url, queryParameters: queryParameters);
+      final requestDio = dio;
+      if (!includeAuthorization) {
+        requestDio.options.headers.remove('Authorization');
+      }
+      final response = await requestDio.get(
+        url,
+        queryParameters: queryParameters,
+      );
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -109,9 +117,14 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     required ResponseConverter<T> converter,
     Map<String, dynamic>? data,
     bool isIsolate = true,
+    bool includeAuthorization = true,
   }) async {
     try {
-      final response = await dio.post(url, data: data);
+      final requestDio = dio;
+      if (!includeAuthorization) {
+        requestDio.options.headers.remove('Authorization');
+      }
+      final response = await requestDio.post(url, data: data);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(

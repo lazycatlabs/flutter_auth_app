@@ -4,14 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('ListAPI', () {
     test('Auth endpoints', () {
-      expect(ListAPI.generalToken, equals('/v1/api/auth/general'));
-      expect(ListAPI.user, equals('/v1/api/user'));
-      expect(ListAPI.login, equals('/v1/api/auth/login'));
-      expect(ListAPI.logout, equals('/v1/api/auth/logout'));
+      expect(ListAPI.generalToken, equals('/api/auth/general'));
+      expect(ListAPI.refreshToken, equals('/api/auth/refresh'));
+      expect(ListAPI.user, equals('/api/user'));
+      expect(ListAPI.login, equals('/api/auth/login-email'));
+      expect(ListAPI.logout, equals('/api/auth/logout'));
     });
 
     test('User endpoints', () {
-      expect(ListAPI.users, equals('/v1/api/user/all'));
+      expect(ListAPI.users, equals('https://dummyjson.com/users'));
     });
   });
 }

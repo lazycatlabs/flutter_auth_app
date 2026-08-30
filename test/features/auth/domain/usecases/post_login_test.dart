@@ -45,6 +45,7 @@ void main() {
       'osInfo': null,
       'deviceInfo': null,
       'fcmToken': 'GeneratedFCMToken',
+      'loginType': 'email',
     };
 
     /// assert

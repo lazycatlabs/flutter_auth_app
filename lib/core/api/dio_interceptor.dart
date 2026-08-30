@@ -79,7 +79,7 @@ class DioInterceptor extends Interceptor
   Future<void> refreshToken() async {
     /// Call API Refresh token
     final response = await DioClient().postRequest(
-      ListAPI.generalToken,
+      ListAPI.refreshToken,
       data: {
         'clientId': const String.fromEnvironment('USER_CLIENT_ID'),
         'clientSecret': const String.fromEnvironment('USER_CLIENT_SECRET'),

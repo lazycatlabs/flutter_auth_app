@@ -25,8 +25,8 @@ void main() {
   late MockPostGeneralToken mockPostGeneralToken;
 
   const generalTokenParams = GeneralTokenParams(
-    clientId: 'apimock',
-    clientSecret: 'apimock_secret',
+    clientId: 'base_auth_app',
+    clientSecret: 'base_auth_secret_789',
   );
   const errorMessage = 'Unauthorized';
 

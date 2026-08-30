@@ -9,6 +9,8 @@ abstract class UsersRemoteDatasource {
 }
 
 class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
+  static const int _usersPerPage = 20;
+
   final DioClient _client;
 
   UsersRemoteDatasourceImpl(this._client);
@@ -17,9 +19,15 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
   Future<Either<Failure, UsersResponse>> users(UsersParams userParams) async {
     final response = await _client.getRequest(
       ListAPI.users,
-      queryParameters: userParams.toJson(),
-      converter: (response) =>
-          UsersResponse.fromJson(response as Map<String, dynamic>),
+      queryParameters: {
+        'limit': _usersPerPage,
+        'skip': (userParams.page - 1) * _usersPerPage,
+      },
+      converter: (response) => UsersResponse.fromDummyJson(
+        response as Map<String, dynamic>,
+        currentPage: userParams.page,
+      ),
+      includeAuthorization: false,
     );
 
     return response;

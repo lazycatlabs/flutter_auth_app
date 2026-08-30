@@ -13,6 +13,7 @@ enum ActiveTheme {
 
 enum MainBoxKeys {
   generalToken,
+  apiClientId,
   authToken,
   refreshToken,
   fcm,

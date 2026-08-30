@@ -8,6 +8,9 @@ const pathLoginResponse200 = 'helpers/stubs/login_response_200.json';
 const pathLoginResponse401 = 'helpers/stubs/login_response_401.json';
 const pathUsersEmptyResponse200 = 'helpers/stubs/users_empty_response_200.json';
 const pathUsersResponse200 = 'helpers/stubs/users_response_200.json';
+const pathDummyUsersResponse200 = 'helpers/stubs/dummy_users_response_200.json';
+const pathDummyUsersEmptyResponse200 =
+    'helpers/stubs/dummy_users_empty_response_200.json';
 const pathDiagnostic = 'helpers/stubs/diagnostic.json';
 const pathPage = 'helpers/stubs/page.json';
 const pathDiagnosticResponse200 = 'helpers/stubs/diagnostic_response_200.json';

@@ -15,7 +15,8 @@
 
 This app has Auth Functions like Login, Register, and Show pagination data.
 
-The API using [apimock](https://apimock.lazycatlabs.com/) from [lazycatlabs](https://lazycatlabs.com).
+Authentication uses [LazyAuth](https://lazyauth.lazycatlabs.com/), while the
+paginated Dashboard user list uses [DummyJSON](https://dummyjson.com/docs/users).
 
 <br>This app also implementing **Flutter Clean Architecture with TDD.**
 

@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Emily",
+      "lastName": "Johnson",
+      "email": "emily.johnson@x.dummyjson.com",
+      "image": "https://dummyjson.com/icon/emilys/128"
+    }
+  ],
+  "total": 208,
+  "skip": 0,
+  "limit": 20
+}

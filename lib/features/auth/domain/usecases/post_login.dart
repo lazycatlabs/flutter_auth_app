@@ -24,6 +24,7 @@ sealed class LoginParams with _$LoginParams {
     String? osInfo,
     String? deviceInfo,
     @Default('GeneratedFCMToken') String fcmToken,
+    @Default('email') String loginType,
   }) = _LoginParams;
 
   factory LoginParams.fromJson(Map<String, dynamic> json) =>

@@ -71,4 +71,25 @@ void main() {
     /// assert
     expect(result, equals(exceptedJson));
   });
+
+  test('from DummyJSON, should adapt users and pagination', () {
+    /// arrange
+    final jsonMap = json.decode(jsonReader(pathDummyUsersResponse200));
+
+    /// act
+    final result = UsersResponse.fromDummyJson(
+      jsonMap as Map<String, dynamic>,
+      currentPage: 2,
+    );
+
+    /// assert
+    expect(result.data?.single.id, '1');
+    expect(result.data?.single.name, 'Emily Johnson');
+    expect(result.data?.single.email, 'emily.johnson@x.dummyjson.com');
+    expect(result.data?.single.photo, 'https://dummyjson.com/icon/emilys/128');
+    expect(
+      result.page,
+      const Page(currentPage: 2, perPage: 20, lastPage: 11, total: 208),
+    );
+  });
 }

@@ -54,6 +54,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       data: params.toJson(),
       converter: (response) =>
           GeneralTokenResponse.fromJson(response as Map<String, dynamic>),
+      includeAuthorization: false,
     );
 
     return response;

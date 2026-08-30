@@ -30,12 +30,16 @@ void main() {
 
   group('users', () {
     const usersParams = UsersParams();
-    final usersModel = UsersResponse.fromJson(
-      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
-    );
-    final usersEmptyModel = UsersResponse.fromJson(
-      json.decode(jsonReader(pathUsersEmptyResponse200))
+    const paginationQuery = {'limit': 20, 'skip': 0};
+    final usersModel = UsersResponse.fromDummyJson(
+      json.decode(jsonReader(pathDummyUsersResponse200))
           as Map<String, dynamic>,
+      currentPage: usersParams.page,
+    );
+    final usersEmptyModel = UsersResponse.fromDummyJson(
+      json.decode(jsonReader(pathDummyUsersEmptyResponse200))
+          as Map<String, dynamic>,
+      currentPage: usersParams.page,
     );
 
     test(
@@ -46,9 +50,9 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(pathUsersResponse200)),
+            json.decode(jsonReader(pathDummyUsersResponse200)),
           ),
-          queryParameters: usersParams.toJson(),
+          queryParameters: paginationQuery,
         );
 
         /// act
@@ -70,9 +74,9 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(pathUsersEmptyResponse200)),
+            json.decode(jsonReader(pathDummyUsersEmptyResponse200)),
           ),
-          queryParameters: usersParams.toJson(),
+          queryParameters: paginationQuery,
         );
 
         /// act
@@ -86,6 +90,47 @@ void main() {
       },
     );
 
+    test('should convert page to DummyJSON skip parameter', () async {
+      /// arrange
+      const secondPageParams = UsersParams(page: 2);
+      dioAdapter.onGet(
+        ListAPI.users,
+        (server) => server.reply(
+          200,
+          json.decode(jsonReader(pathDummyUsersResponse200)),
+        ),
+        queryParameters: const {'limit': 20, 'skip': 20},
+      );
+
+      /// act
+      final result = await dataSource.users(secondPageParams);
+
+      /// assert
+      result.fold(
+        (l) => expect(l, null),
+        (r) => expect(r.page?.currentPage, 2),
+      );
+    });
+
+    test('should not send the LazyAuth token to DummyJSON', () async {
+      /// arrange
+      sl<DioClient>().dio.options.headers['Authorization'] = 'Bearer secret';
+      dioAdapter.onGet(
+        ListAPI.users,
+        (server) => server.replyCallback(200, (request) {
+          expect(request.headers.containsKey('Authorization'), isFalse);
+          return json.decode(jsonReader(pathDummyUsersResponse200));
+        }),
+        queryParameters: paginationQuery,
+      );
+
+      /// act
+      final result = await dataSource.users(usersParams);
+
+      /// assert
+      expect(result.isRight(), isTrue);
+    });
+
     test(
       'should return user unsuccessful model when response code is 400',
       () async {
@@ -96,7 +141,7 @@ void main() {
             400,
             json.decode(jsonReader(pathUsersResponse200)),
           ),
-          queryParameters: usersParams.toJson(),
+          queryParameters: paginationQuery,
         );
 
         /// act

@@ -1,10 +1,17 @@
 appId: com.lazycatlabs.auths.stg
 ---
-- launchApp
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "mudassir@lazycatlabs.com"
+    timeout: 15000
 - tapOn: "mudassir@lazycatlabs.com"
-- inputText: "mudassir@lazycatlabs.com"
+- inputText: "hey.mudassir@gmail.com"
 - tapOn: "pass123"
-- inputText: "pass123"
-- tapOn:
-    point: 15%,12%
+- inputText: "Password123"
+- hideKeyboard
 - tapOn: "Login"
+- extendedWaitUntil:
+    visible: "Dashboard"
+    timeout: 15000
+- assertVisible: "(?s)Emily Johnson.*"

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
+import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 /// ignore: depend_on_referenced_packages
@@ -43,12 +44,25 @@ void main() {
   });
 
   group('general token', () {
-    const generalTokenParams =
-        GeneralTokenParams(clientId: 'apimock', clientSecret: 'apimock_secret');
+    const generalTokenParams = GeneralTokenParams(
+      clientId: 'base_auth_app',
+      clientSecret: 'base_auth_secret_789',
+    );
     test('should return general token when call data is successful', () async {
       // arrange
-      when(mockAuthRemoteDatasource.generalToken(generalTokenParams))
-          .thenAnswer(
+      await MainBoxMixin.mainBox?.put(MainBoxKeys.apiClientId.name, 'apimock');
+      await MainBoxMixin.mainBox?.put(
+        MainBoxKeys.authToken.name,
+        'Bearer stale-auth-token',
+      );
+      await MainBoxMixin.mainBox?.put(
+        MainBoxKeys.refreshToken.name,
+        'Bearer stale-refresh-token',
+      );
+      await MainBoxMixin.mainBox?.put(MainBoxKeys.isLogin.name, true);
+      when(
+        mockAuthRemoteDatasource.generalToken(generalTokenParams),
+      ).thenAnswer(
         (_) async => Right(
           GeneralTokenResponse.fromJson(
             json.decode(jsonReader(pathGeneralTokenResponse200))
@@ -64,6 +78,13 @@ void main() {
       verify(mockAuthRemoteDatasource.generalToken(generalTokenParams));
 
       expect(result, Right(generalToken));
+      expect(
+        MainBoxMixin.mainBox?.get(MainBoxKeys.apiClientId.name),
+        'base_auth_app',
+      );
+      expect(MainBoxMixin.mainBox?.get(MainBoxKeys.authToken.name), isNull);
+      expect(MainBoxMixin.mainBox?.get(MainBoxKeys.refreshToken.name), isNull);
+      expect(MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name), isNull);
     });
 
     test(

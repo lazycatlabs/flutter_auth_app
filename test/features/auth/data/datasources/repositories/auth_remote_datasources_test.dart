@@ -142,8 +142,10 @@ void main() {
   });
 
   group('general token', () {
-    const generalTokenParams =
-        GeneralTokenParams(clientId: 'apimock', clientSecret: 'apimock_secret');
+    const generalTokenParams = GeneralTokenParams(
+      clientId: 'base_auth_app',
+      clientSecret: 'base_auth_secret_789',
+    );
     final generalTokenResponse = GeneralTokenResponse.fromJson(
       json.decode(jsonReader(pathGeneralTokenResponse200))
           as Map<String, dynamic>,
@@ -178,7 +180,7 @@ void main() {
       () async {
         /// arrange
         dioAdapter.onPost(
-          ListAPI.login,
+          ListAPI.generalToken,
           (server) => server.reply(
             401,
             json.decode(jsonReader(pathGeneralTokenResponse401)),
@@ -196,5 +198,25 @@ void main() {
         );
       },
     );
+
+    test('should not send a cached token when requesting a new one', () async {
+      /// arrange
+      sl<DioClient>().dio.options.headers['Authorization'] =
+          'Bearer stale-token';
+      dioAdapter.onPost(
+        ListAPI.generalToken,
+        (server) => server.replyCallback(200, (request) {
+          expect(request.headers.containsKey('Authorization'), isFalse);
+          return json.decode(jsonReader(pathGeneralTokenResponse200));
+        }),
+        data: generalTokenParams.toJson(),
+      );
+
+      /// act
+      final result = await dataSource.generalToken(generalTokenParams);
+
+      /// assert
+      expect(result.isRight(), isTrue);
+    });
   });
 }

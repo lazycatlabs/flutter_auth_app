@@ -45,14 +45,27 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     final response = await authRemoteDatasource.generalToken(params);
 
-    return response.fold((failure) => Left(failure), (loginResponse) {
-      mainBoxMixin.addData(
-        MainBoxKeys.generalToken,
-        '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
-      );
+    return response.fold<Future<Either<Failure, GeneralToken>>>(
+      (failure) async => Left(failure),
+      (loginResponse) async {
+        final storedClientId = mainBoxMixin.getData<String?>(
+          MainBoxKeys.apiClientId,
+        );
+        if (storedClientId != params.clientId) {
+          await mainBoxMixin.removeData(MainBoxKeys.isLogin);
+          await mainBoxMixin.removeData(MainBoxKeys.authToken);
+          await mainBoxMixin.removeData(MainBoxKeys.refreshToken);
+        }
 
-      return Right(loginResponse.toEntity());
-    });
+        await mainBoxMixin.addData(MainBoxKeys.apiClientId, params.clientId);
+        await mainBoxMixin.addData(
+          MainBoxKeys.generalToken,
+          '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
+        );
+
+        return Right(loginResponse.toEntity());
+      },
+    );
   }
 
   @override

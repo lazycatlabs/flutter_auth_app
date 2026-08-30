@@ -13,7 +13,10 @@ class Loading extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: Dimens.space16,
       children: [
-        CircularProgressIndicator(color: color),
+        CircularProgressIndicator(
+          color: color,
+          padding: EdgeInsets.all(Dimens.space16),
+        ),
         Visibility(
           visible: showMessage,
           child: Text(

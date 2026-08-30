@@ -1,8 +1,17 @@
 appId: com.lazycatlabs.auths.stg
 ---
-- swipe:
-    direction: "UP"
-- swipe:
-    direction: "UP"
-- swipe:
-    direction: "UP"
+- assertVisible: "Dashboard"
+- scrollUntilVisible:
+    element:
+      text: "(?s)Emily Johnson.*"
+    direction: UP
+    timeout: 15000
+    speed: 60
+- assertVisible: "(?s)Emily Johnson.*"
+- scrollUntilVisible:
+    element:
+      text: "(?s)Madison Collins.*"
+    direction: DOWN
+    timeout: 30000
+    speed: 60
+- assertVisible: "(?s)Madison Collins.*"

@@ -12,7 +12,7 @@ void main() {
     });
 
     test('User endpoints', () {
-      expect(ListAPI.users, equals('https://dummyjson.com/users'));
+      expect(ListAPI.users, equals('/users'));
     });
   });
 }

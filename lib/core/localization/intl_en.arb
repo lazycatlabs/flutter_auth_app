@@ -27,5 +27,11 @@
   "logoutDesc": "Do you want to logout from the app?",
   "yes": "Yes",
   "lastUpdate": "Last Update: ",
-  "name": "Name"
+  "name": "Name",
+  "nameHint": "Mudassir",
+  "emailHint": "mudassir@lazycatlabs.com",
+  "passwordHint": "••••••••••••",
+  "menu": "Menu",
+  "english": "English",
+  "bahasa": "Bahasa"
 }

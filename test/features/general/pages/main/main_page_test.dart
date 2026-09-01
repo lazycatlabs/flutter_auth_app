@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,20 +85,28 @@ void main() {
         ),
       ),
     );
-    when(() => mainCubit.initMenu(MockBuildContext())).thenAnswer((_) {});
+    when(() => mainCubit.currentIndex).thenReturn(1);
+    when(() => mainCubit.dataMenus).thenReturn(const [
+      DataHelper(title: 'Dashboard'),
+      DataHelper(title: 'Settings', isSelected: true),
+      DataHelper(title: 'Logout'),
+    ]);
+    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
 
     when(() => userCubit.state).thenReturn(const UserState.success(null));
     when(() => userCubit.getUser()).thenAnswer((_) async {});
 
     when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
 
-    await tester.pumpWidget(rootWidget(const MainPage(child: SettingsPage())));
+    await tester.pumpWidget(
+      rootWidget(const MainPage(child: Text('Page content'))),
+    );
 
-    verifyNever(() => mainCubit.initMenu(MockBuildContext()));
+    verify(() => mainCubit.initMenu(any())).called(1);
     verifyNever(() => userCubit.getUser()).called(0);
 
     expect(find.text('Settings'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
-    expect(find.byType(SettingsPage), findsOneWidget);
+    expect(find.text('Page content'), findsOneWidget);
   });
 }

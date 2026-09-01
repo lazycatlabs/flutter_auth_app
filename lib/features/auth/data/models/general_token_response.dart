@@ -1,4 +1,3 @@
-import 'package:flutter_auth_app/features/auth/auth.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,10 +10,6 @@ sealed class GeneralTokenResponse with _$GeneralTokenResponse {
     @JsonKey(name: 'diagnostic') Diagnostic? diagnostic,
     @JsonKey(name: 'data') DataGeneralToken? data,
   }) = _GeneralTokenResponse;
-
-  const GeneralTokenResponse._();
-
-  GeneralToken toEntity() => GeneralToken(token: '${data?.tokenType} ${data?.token}');
 
   factory GeneralTokenResponse.fromJson(Map<String, dynamic> json) =>
       _$GeneralTokenResponseFromJson(json);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,17 +11,30 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
-  late final ActiveTheme _selectedTheme = sl<SettingsCubit>().getActiveTheme();
+class _SettingsPageState extends State<SettingsPage> {
+  late ActiveTheme _selectedTheme;
 
-  late final List<DataHelper> _listLanguage = [
-    DataHelper(title: Constants.get.english, type: 'en'),
-    DataHelper(title: Constants.get.bahasa, type: 'id'),
-  ];
-  late DataHelper _selectedLanguage =
-      (getData(MainBoxKeys.locale) ?? 'en') == 'en'
-      ? _listLanguage[0]
-      : _listLanguage[1];
+  late final List<DataHelper> _listLanguage;
+  late DataHelper _selectedLanguage;
+  bool _isInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isInitialized) {
+      return;
+    }
+    _listLanguage = [
+      DataHelper(title: Strings.of(context)!.english, type: 'en'),
+      DataHelper(title: Strings.of(context)!.bahasa, type: 'id'),
+    ];
+    final settings = context.read<SettingsCubit>().settings;
+    _selectedTheme = settings.activeTheme;
+    _selectedLanguage = settings.type == 'id'
+        ? _listLanguage[1]
+        : _listLanguage[0];
+    _isInitialized = true;
+  }
 
   @override
   Widget build(BuildContext context) => Parent(
@@ -37,9 +49,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
               value: _selectedTheme,
               prefixIcon: Icon(
                 Icons.light,
-                color: Theme.of(
-                  context,
-                ).extension<LzyctColors>()!.textSecondary,
+                color: ColorScheme.of(context).onSurfaceVariant,
               ),
               items: ActiveTheme.values
                   .map(
@@ -67,9 +77,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
               value: _selectedLanguage,
               prefixIcon: Icon(
                 Icons.language_outlined,
-                color: Theme.of(
-                  context,
-                ).extension<LzyctColors>()!.textSecondary,
+                color: ColorScheme.of(context).onSurfaceVariant,
               ),
               items: _listLanguage
                   .map(

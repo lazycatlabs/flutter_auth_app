@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:flutter_auth_app/utils/services/hive/hive.dart';

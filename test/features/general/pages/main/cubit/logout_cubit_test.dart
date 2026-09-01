@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
@@ -29,7 +29,8 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'logout_cubit_test_');
-    message = DiagnosticResponse.fromJson(
+    message =
+        DiagnosticResponse.fromJson(
           json.decode(jsonReader(pathDiagnosticResponse200))
               as Map<String, dynamic>,
         ).diagnostic?.message ??
@@ -55,17 +56,15 @@ void main() {
     },
     act: (cubit) => cubit.postLogout(),
     wait: const Duration(milliseconds: 100),
-    expect: () => [
-      const LogoutState.loading(),
-      LogoutState.success(message),
-    ],
+    expect: () => [const LogoutState.loading(), LogoutState.success(message)],
   );
 
   blocTest<LogoutCubit, LogoutState>(
     'When user input wrong credential should be return ServerFailure',
     build: () {
-      when(mockPostLogout.call(any))
-          .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
+      when(
+        mockPostLogout.call(any),
+      ).thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
 
       return logoutCubit;
     },

@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
@@ -30,17 +30,24 @@ void main() {
       prefixBox: 'auth_repository_impl_test_',
     );
     mockAuthRemoteDatasource = MockAuthRemoteDatasource();
-    authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource, sl());
-    login = LoginResponse.fromJson(
-      json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
-    ).toEntity();
-    register = RegisterResponse.fromJson(
-      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
-    ).toEntity();
-    generalToken = GeneralTokenResponse.fromJson(
-      json.decode(jsonReader(pathGeneralTokenResponse200))
-          as Map<String, dynamic>,
-    ).toEntity();
+    authRepositoryImpl = AuthRepositoryImpl(mockAuthRemoteDatasource);
+    login = buildLoginFixture(
+      LoginResponse.fromJson(
+        json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
+      ),
+    );
+    register = buildRegisterFixture(
+      RegisterResponse.fromJson(
+        json.decode(jsonReader(pathRegisterResponse200))
+            as Map<String, dynamic>,
+      ),
+    );
+    generalToken = buildGeneralTokenFixture(
+      GeneralTokenResponse.fromJson(
+        json.decode(jsonReader(pathGeneralTokenResponse200))
+            as Map<String, dynamic>,
+      ),
+    );
   });
 
   group('general token', () {
@@ -50,16 +57,6 @@ void main() {
     );
     test('should return general token when call data is successful', () async {
       // arrange
-      await MainBoxMixin.mainBox?.put(MainBoxKeys.apiClientId.name, 'apimock');
-      await MainBoxMixin.mainBox?.put(
-        MainBoxKeys.authToken.name,
-        'Bearer stale-auth-token',
-      );
-      await MainBoxMixin.mainBox?.put(
-        MainBoxKeys.refreshToken.name,
-        'Bearer stale-refresh-token',
-      );
-      await MainBoxMixin.mainBox?.put(MainBoxKeys.isLogin.name, true);
       when(
         mockAuthRemoteDatasource.generalToken(generalTokenParams),
       ).thenAnswer(
@@ -78,25 +75,20 @@ void main() {
       verify(mockAuthRemoteDatasource.generalToken(generalTokenParams));
 
       expect(result, Right(generalToken));
-      expect(
-        MainBoxMixin.mainBox?.get(MainBoxKeys.apiClientId.name),
-        'base_auth_app',
-      );
-      expect(MainBoxMixin.mainBox?.get(MainBoxKeys.authToken.name), isNull);
-      expect(MainBoxMixin.mainBox?.get(MainBoxKeys.refreshToken.name), isNull);
-      expect(MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name), isNull);
     });
 
     test(
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
-        when(mockAuthRemoteDatasource.generalToken(generalTokenParams))
-            .thenAnswer((_) async => const Left(ServerFailure('')));
+        when(
+          mockAuthRemoteDatasource.generalToken(generalTokenParams),
+        ).thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
-        final result =
-            await authRepositoryImpl.generalToken(generalTokenParams);
+        final result = await authRepositoryImpl.generalToken(
+          generalTokenParams,
+        );
 
         // assert
         verify(mockAuthRemoteDatasource.generalToken(generalTokenParams));
@@ -106,8 +98,10 @@ void main() {
   });
 
   group('login', () {
-    const loginParams =
-        LoginParams(email: 'mudassir@lazycatlabs.com', password: 'pass123');
+    const loginParams = LoginParams(
+      email: 'mudassir@lazycatlabs.com',
+      password: 'pass123',
+    );
     test('should return login when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.login(loginParams)).thenAnswer(
@@ -132,8 +126,9 @@ void main() {
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
-        when(mockAuthRemoteDatasource.login(loginParams))
-            .thenAnswer((_) async => const Left(ServerFailure('')));
+        when(
+          mockAuthRemoteDatasource.login(loginParams),
+        ).thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.login(loginParams);
@@ -146,8 +141,10 @@ void main() {
   });
 
   group('register', () {
-    const registerParams =
-        RegisterParams(email: 'mudassir@lazycatlabs.com', password: 'pass123');
+    const registerParams = RegisterParams(
+      email: 'mudassir@lazycatlabs.com',
+      password: 'pass123',
+    );
     test('should return register when call data is successful', () async {
       // arrange
       when(mockAuthRemoteDatasource.register(registerParams)).thenAnswer(
@@ -171,8 +168,9 @@ void main() {
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
-        when(mockAuthRemoteDatasource.register(registerParams))
-            .thenAnswer((_) async => const Left(ServerFailure('')));
+        when(
+          mockAuthRemoteDatasource.register(registerParams),
+        ).thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.register(registerParams);

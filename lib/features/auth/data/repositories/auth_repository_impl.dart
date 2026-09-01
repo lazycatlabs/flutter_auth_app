@@ -1,31 +1,28 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/auth/auth.dart';
-import 'package:flutter_auth_app/utils/services/hive/hive.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   /// Data Source
   final AuthRemoteDatasource authRemoteDatasource;
-  final MainBoxMixin mainBoxMixin;
-
-  const AuthRepositoryImpl(this.authRemoteDatasource, this.mainBoxMixin);
+  const AuthRepositoryImpl(this.authRemoteDatasource);
 
   @override
   Future<Either<Failure, Login>> login(LoginParams params) async {
     final response = await authRemoteDatasource.login(params);
 
     return response.fold((failure) => Left(failure), (loginResponse) {
-      mainBoxMixin.addData(MainBoxKeys.isLogin, true);
-      mainBoxMixin.addData(
-        MainBoxKeys.authToken,
-        '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
+      if (loginResponse.data == null) {
+        return Left(NoDataFailure());
+      }
+      return Right(
+        Login(
+          token:
+              '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
+          refreshToken:
+              '${loginResponse.data?.tokenType} ${loginResponse.data?.refreshToken}',
+        ),
       );
-      mainBoxMixin.addData(
-        MainBoxKeys.refreshToken,
-        '${loginResponse.data?.tokenType} ${loginResponse.data?.refreshToken}',
-      );
-
-      return Right(loginResponse.toEntity());
     });
   }
 
@@ -35,7 +32,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return response.fold(
       (failure) => Left(failure),
-      (registerResponse) => Right(registerResponse.toEntity()),
+      (registerResponse) =>
+          Right(Register(message: registerResponse.diagnostic?.message ?? '')),
     );
   }
 
@@ -45,27 +43,17 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     final response = await authRemoteDatasource.generalToken(params);
 
-    return response.fold<Future<Either<Failure, GeneralToken>>>(
-      (failure) async => Left(failure),
-      (loginResponse) async {
-        final storedClientId = mainBoxMixin.getData<String?>(
-          MainBoxKeys.apiClientId,
-        );
-        if (storedClientId != params.clientId) {
-          await mainBoxMixin.removeData(MainBoxKeys.isLogin);
-          await mainBoxMixin.removeData(MainBoxKeys.authToken);
-          await mainBoxMixin.removeData(MainBoxKeys.refreshToken);
-        }
-
-        await mainBoxMixin.addData(MainBoxKeys.apiClientId, params.clientId);
-        await mainBoxMixin.addData(
-          MainBoxKeys.generalToken,
-          '${loginResponse.data?.tokenType} ${loginResponse.data?.token}',
-        );
-
-        return Right(loginResponse.toEntity());
-      },
-    );
+    return response.fold((failure) => Left(failure), (tokenResponse) {
+      if (tokenResponse.data == null) {
+        return Left(NoDataFailure());
+      }
+      return Right(
+        GeneralToken(
+          token:
+              '${tokenResponse.data?.tokenType} ${tokenResponse.data?.token}',
+        ),
+      );
+    });
   }
 
   @override

@@ -25,10 +25,7 @@ void main() {
     final result = diagnostic.toJson();
 
     /// arrange
-    final exceptedJson = {
-      'status': '200',
-      'message': 'Success',
-    };
+    final exceptedJson = {'status': '200', 'message': 'Success'};
 
     /// assert
     expect(result, equals(exceptedJson));

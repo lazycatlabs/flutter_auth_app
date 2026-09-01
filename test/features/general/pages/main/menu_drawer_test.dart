@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,7 +83,7 @@ void main() {
 
       when(() => userCubit.getUser()).thenAnswer((_) async {});
 
-      final dataMenu = [
+      const dataMenu = [
         DataHelper(title: 'Dashboard'),
         DataHelper(title: 'Settings'),
         DataHelper(title: 'Logout'),
@@ -143,7 +142,7 @@ void main() {
       int? selectedIndex;
       when(() => userCubit.state).thenReturn(const UserState.success(null));
 
-      final dataMenu = [DataHelper(title: 'Logout')];
+      const dataMenu = [DataHelper(title: 'Logout')];
 
       await tester.pumpWidget(
         rootWidget(
@@ -159,7 +158,6 @@ void main() {
       await tester.pump();
 
       expect(selectedIndex, 0);
-      expect(dataMenu.first.isSelected, isTrue);
     });
 
     testWidgets('calls onLogoutPressed when logout is tapped', (
@@ -173,7 +171,7 @@ void main() {
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: [DataHelper(title: 'Logout')],
+            dataMenu: const [DataHelper(title: 'Logout')],
             currentIndex: (_) {},
             onLogoutPressed: () {
               logoutCalled = true;

@@ -37,7 +37,7 @@ class Button extends StatelessWidget {
           horizontal: Dimens.space24,
           vertical: Dimens.space12,
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
         ),
       ),

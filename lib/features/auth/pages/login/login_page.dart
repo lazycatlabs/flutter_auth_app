@@ -8,6 +8,8 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+part 'login_form.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -55,7 +57,6 @@ class _LoginPageState extends State<LoginPage> {
           context.dismiss();
           message.toToastError(context);
         })(),
-        _ => {},
       },
       child: Center(
         child: SingleChildScrollView(
@@ -66,13 +67,21 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    Theme.of(context).brightness == Brightness.dark
+                    Theme.brightnessOf(context) == Brightness.dark
                         ? Images.icLauncherDark
                         : Images.icLauncher,
                     width: context.widthInPercent(70),
                   ),
                   SpacerV(value: Dimens.space50),
-                  _loginForm(),
+                  _LoginForm(
+                    formKey: _formKey,
+                    isValid: _isValid,
+                    isPasswordVisible: _isPasswordVisible,
+                    emailController: _conEmail,
+                    passwordController: _conPassword,
+                    emailFocusNode: _fnEmail,
+                    passwordFocusNode: _fnPassword,
+                  ),
                   SpacerV(value: Dimens.space16),
                   ButtonText(
                     title: Strings.of(context)!.askRegister,
@@ -84,81 +93,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    ),
-  );
-
-  Widget _loginForm() => Form(
-    key: _formKey,
-    onChanged: () =>
-        _isValid.value = _formKey.currentState?.validate() ?? false,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    child: Column(
-      children: [
-        TextF(
-          autoFillHints: const [AutofillHints.email],
-          key: const Key('email'),
-          focusNode: _fnEmail,
-          textInputAction: TextInputAction.next,
-          controller: _conEmail,
-          textInputType: TextInputType.emailAddress,
-          prefixIcon: Icon(
-            Icons.alternate_email,
-            color: TextTheme.of(context).bodyLarge?.color,
-          ),
-          hint: 'mudassir@lazycatlabs.com',
-          label: Strings.of(context)!.email,
-          validator: (String? value) => !value.toString().isValidEmail()
-              ? Strings.of(context)!.errorInvalidEmail
-              : null,
-        ),
-        ValueListenableBuilder(
-          valueListenable: _isPasswordVisible,
-          builder: (_, bool isPasswordVisible, _) => TextF(
-            autoFillHints: const [AutofillHints.password],
-            key: const Key('password'),
-            focusNode: _fnPassword,
-            textInputAction: TextInputAction.done,
-            controller: _conPassword,
-            textInputType: TextInputType.text,
-            prefixIcon: Icon(
-              Icons.lock_outline,
-              color: TextTheme.of(context).bodyLarge?.color,
-            ),
-            obscureText: !isPasswordVisible,
-            hint: 'pass123',
-            label: Strings.of(context)!.password,
-            suffixIcon: IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () => _isPasswordVisible.value = !isPasswordVisible,
-              icon: Icon(
-                isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-              ),
-            ),
-            validator: (String? value) => (value?.length ?? 0) < 5
-                ? Strings.of(context)!.errorPasswordLength
-                : null,
-          ),
-        ),
-        SpacerV(value: Dimens.space24),
-        ValueListenableBuilder(
-          valueListenable: _isValid,
-          builder: (_, bool isValid, _) => Button(
-            title: Strings.of(context)!.login,
-            width: double.maxFinite,
-            onPressed: isValid
-                ? () => context.read<AuthCubit>().login(
-                    LoginParams(
-                      email: _conEmail.text,
-                      password: _conPassword.text,
-                      osInfo: Platform.operatingSystem,
-                      deviceInfo: Platform.localHostname,
-                    ),
-                  )
-                : null,
-          ),
-        ),
-      ],
     ),
   );
 }

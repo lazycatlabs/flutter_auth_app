@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
+import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,18 +24,13 @@ void main() {
     build: () => settingsCubit,
     act: (SettingsCubit settingsCubit) =>
         settingsCubit.updateTheme(ActiveTheme.system),
-    expect: () => [
-      isA<DataHelper>(),
-    ],
+    expect: () => [isA<SettingsStateSuccess>()],
   );
 
   blocTest(
     'The language should be updated',
     build: () => settingsCubit,
     act: (SettingsCubit settingsCubit) => settingsCubit.updateLanguage('en'),
-    expect: () => [
-      isA<DataHelper>(),
-      isA<DataHelper>(),
-    ],
+    expect: () => [isA<SettingsStateSuccess>()],
   );
 }

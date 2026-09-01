@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
@@ -14,7 +13,8 @@ import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
 
 void main() {
-  late DioAdapter dioAdapter;
+  late DioAdapter primaryAdapter;
+  late DioAdapter dummyJsonAdapter;
   late UsersRemoteDatasourceImpl dataSource;
 
   setUp(() async {
@@ -24,8 +24,12 @@ void main() {
       isUnitTest: true,
       prefixBox: 'users_remote_datasource_test_',
     );
-    dioAdapter = DioAdapter(dio: sl<DioClient>().dio);
-    dataSource = UsersRemoteDatasourceImpl(sl<DioClient>());
+    primaryAdapter = DioAdapter(dio: sl<DioClient>().dio);
+    dummyJsonAdapter = DioAdapter(dio: sl<DioClientDummyJson>().dio);
+    dataSource = UsersRemoteDatasourceImpl(
+      sl<DioClient>(),
+      sl<DioClientDummyJson>(),
+    );
   });
 
   group('users', () {
@@ -46,7 +50,7 @@ void main() {
       'should return list user success model when response code is 200',
       () async {
         /// arrange
-        dioAdapter.onGet(
+        dummyJsonAdapter.onGet(
           ListAPI.users,
           (server) => server.reply(
             200,
@@ -59,10 +63,7 @@ void main() {
         final result = await dataSource.users(usersParams);
 
         /// assert
-        result.fold(
-          (l) => expect(l, null),
-          (r) => expect(r, usersModel),
-        );
+        result.fold((l) => expect(l, null), (r) => expect(r, usersModel));
       },
     );
 
@@ -70,7 +71,7 @@ void main() {
       'should return empty list user success model when response code is 200',
       () async {
         /// arrange
-        dioAdapter.onGet(
+        dummyJsonAdapter.onGet(
           ListAPI.users,
           (server) => server.reply(
             200,
@@ -83,17 +84,14 @@ void main() {
         final result = await dataSource.users(usersParams);
 
         /// assert
-        result.fold(
-          (l) => expect(l, null),
-          (r) => expect(r, usersEmptyModel),
-        );
+        result.fold((l) => expect(l, null), (r) => expect(r, usersEmptyModel));
       },
     );
 
     test('should convert page to DummyJSON skip parameter', () async {
       /// arrange
       const secondPageParams = UsersParams(page: 2);
-      dioAdapter.onGet(
+      dummyJsonAdapter.onGet(
         ListAPI.users,
         (server) => server.reply(
           200,
@@ -114,8 +112,9 @@ void main() {
 
     test('should not send the LazyAuth token to DummyJSON', () async {
       /// arrange
-      sl<DioClient>().dio.options.headers['Authorization'] = 'Bearer secret';
-      dioAdapter.onGet(
+      sl<DioClientDummyJson>().dio.options.headers['Authorization'] =
+          'Bearer secret';
+      dummyJsonAdapter.onGet(
         ListAPI.users,
         (server) => server.replyCallback(200, (request) {
           expect(request.headers.containsKey('Authorization'), isFalse);
@@ -135,12 +134,10 @@ void main() {
       'should return user unsuccessful model when response code is 400',
       () async {
         /// arrange
-        dioAdapter.onGet(
+        dummyJsonAdapter.onGet(
           ListAPI.users,
-          (server) => server.reply(
-            400,
-            json.decode(jsonReader(pathUsersResponse200)),
-          ),
+          (server) =>
+              server.reply(400, json.decode(jsonReader(pathUsersResponse200))),
           queryParameters: paginationQuery,
         );
 
@@ -165,22 +162,17 @@ void main() {
       'should return list user success model when response code is 200',
       () async {
         /// arrange
-        dioAdapter.onGet(
+        primaryAdapter.onGet(
           ListAPI.user,
-          (server) => server.reply(
-            200,
-            json.decode(jsonReader(pathUserResponse200)),
-          ),
+          (server) =>
+              server.reply(200, json.decode(jsonReader(pathUserResponse200))),
         );
 
         /// act
         final result = await dataSource.user();
 
         /// assert
-        result.fold(
-          (l) => expect(l, null),
-          (r) => expect(r, userModel),
-        );
+        result.fold((l) => expect(l, null), (r) => expect(r, userModel));
       },
     );
 
@@ -188,12 +180,10 @@ void main() {
       'should return user unsuccessful model when response code is 400',
       () async {
         /// arrange
-        dioAdapter.onGet(
+        primaryAdapter.onGet(
           ListAPI.user,
-          (server) => server.reply(
-            400,
-            json.decode(jsonReader(pathUsersResponse200)),
-          ),
+          (server) =>
+              server.reply(400, json.decode(jsonReader(pathUsersResponse200))),
         );
 
         /// act

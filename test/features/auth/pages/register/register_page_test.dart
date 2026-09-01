@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -83,7 +82,7 @@ void main() {
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == AssetImage(Images.icLauncher);
+          return widget.image == const AssetImage(Images.icLauncher);
         }
         return false;
       }),
@@ -99,7 +98,7 @@ void main() {
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == AssetImage(Images.icLauncherDark);
+          return widget.image == const AssetImage(Images.icLauncherDark);
         }
         return false;
       }),

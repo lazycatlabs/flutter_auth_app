@@ -111,7 +111,7 @@ class TextFState extends State<TextF> {
       decoration: InputDecoration(
         isDense: true,
         filled: true,
-        fillColor: Theme.of(context).extension<LzyctColors>()!.surface,
+        fillColor: ColorScheme.of(context).surfaceContainer,
         contentPadding: EdgeInsets.symmetric(
           horizontal: Dimens.space6,
           vertical: Dimens.space12,
@@ -159,7 +159,7 @@ class TextFState extends State<TextF> {
             : null,
         hintStyle: TextTheme.of(
           context,
-        ).bodyMedium?.copyWith(color: Theme.of(context).hintColor),
+        ).bodyMedium?.copyWith(color: ColorScheme.of(context).onSurfaceVariant),
       ),
       validator: widget.validator,
       onChanged: (String value) =>

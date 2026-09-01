@@ -14,7 +14,7 @@ class MenuDrawer extends StatelessWidget {
   });
 
   final List<DataHelper> dataMenu;
-  final Function(int) currentIndex;
+  final ValueChanged<int> currentIndex;
   final VoidCallback onLogoutPressed;
 
   @override
@@ -32,17 +32,13 @@ class MenuDrawer extends StatelessWidget {
             child: BlocBuilder<UserCubit, UserState>(
               builder: (_, state) => switch (state) {
                 UserStateLoading() => Loading(
-                  color: Theme.of(
-                    context,
-                  ).extension<LzyctColors>()!.textOnPrimary,
+                  color: ColorScheme.of(context).onPrimary,
                 ),
                 UserStateFailure(:final message) => Center(
                   child: Text(
                     message,
                     style: TextTheme.of(context).bodyMedium?.copyWith(
-                      color: Theme.of(
-                        context,
-                      ).extension<LzyctColors>()!.textOnPrimary,
+                      color: ColorScheme.of(context).onPrimary,
                     ),
                   ),
                 ),
@@ -60,20 +56,16 @@ class MenuDrawer extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "${data?.name ?? ""} ${data?.isVerified ?? false ? "✅" : ""}",
+                            '${data?.name ?? ''} ${data?.isVerified ?? false ? '✅' : ''}',
                             style: TextTheme.of(context).titleLargeBold
                                 ?.copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).extension<LzyctColors>()!.textOnPrimary,
+                                  color: ColorScheme.of(context).onPrimary,
                                 ),
                           ),
                           Text(
                             data?.email ?? '',
                             style: TextTheme.of(context).bodySmall?.copyWith(
-                              color: Theme.of(
-                                context,
-                              ).extension<LzyctColors>()!.textOnPrimary,
+                              color: ColorScheme.of(context).onPrimary,
                             ),
                           ),
                         ],
@@ -97,14 +89,9 @@ class MenuDrawer extends StatelessWidget {
                       width: double.maxFinite,
                       child: InkWell(
                         onTap: () {
-                          for (final menu in dataMenu) {
-                            menu.isSelected = menu.title == value.title;
-
-                            if (value.title != null) {
-                              currentIndex(dataMenu.indexOf(value));
-                            }
+                          if (value.title != null) {
+                            currentIndex(dataMenu.indexOf(value));
                           }
-
                           _selectedPage(context, value.title!);
                         },
                         child: Padding(

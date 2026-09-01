@@ -1,4 +1,3 @@
-import 'package:flutter_auth_app/features/auth/auth.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,10 +10,6 @@ sealed class RegisterResponse with _$RegisterResponse {
     @JsonKey(name: 'diagnostic') Diagnostic? diagnostic,
     @JsonKey(name: 'data') DataRegister? data,
   }) = _RegisterResponse;
-
-  const RegisterResponse._();
-
-  Register toEntity() => Register(message: diagnostic?.message ?? '');
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
       _$RegisterResponseFromJson(json);

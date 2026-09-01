@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
@@ -29,8 +28,10 @@ void main() {
   });
 
   group('register', () {
-    const registerParams =
-        RegisterParams(email: 'mudassir@lazycatlabs.com', password: 'Pass123');
+    const registerParams = RegisterParams(
+      email: 'mudassir@lazycatlabs.com',
+      password: 'Pass123',
+    );
     final registerModel = RegisterResponse.fromJson(
       json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
     );
@@ -52,10 +53,7 @@ void main() {
         final result = await dataSource.register(registerParams);
 
         /// assert
-        result.fold(
-          (l) => expect(l, null),
-          (r) => expect(r, registerModel),
-        );
+        result.fold((l) => expect(l, null), (r) => expect(r, registerModel));
       },
     );
 
@@ -86,8 +84,10 @@ void main() {
   });
 
   group('login', () {
-    const loginParams =
-        LoginParams(email: 'mudassir@lazycatlabs.com', password: 'Pass123');
+    const loginParams = LoginParams(
+      email: 'mudassir@lazycatlabs.com',
+      password: 'Pass123',
+    );
     final loginModel = LoginResponse.fromJson(
       json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
     );
@@ -98,10 +98,8 @@ void main() {
         /// arrange
         dioAdapter.onPost(
           ListAPI.login,
-          (server) => server.reply(
-            200,
-            json.decode(jsonReader(pathLoginResponse200)),
-          ),
+          (server) =>
+              server.reply(200, json.decode(jsonReader(pathLoginResponse200))),
           data: loginParams.toJson(),
         );
 
@@ -109,10 +107,7 @@ void main() {
         final result = await dataSource.login(loginParams);
 
         /// assert
-        result.fold(
-          (l) => expect(l, null),
-          (r) => expect(r, loginModel),
-        );
+        result.fold((l) => expect(l, null), (r) => expect(r, loginModel));
       },
     );
 
@@ -122,10 +117,8 @@ void main() {
         /// arrange
         dioAdapter.onPost(
           ListAPI.login,
-          (server) => server.reply(
-            401,
-            json.decode(jsonReader(pathLoginResponse401)),
-          ),
+          (server) =>
+              server.reply(401, json.decode(jsonReader(pathLoginResponse401))),
           data: loginParams.toJson(),
         );
 

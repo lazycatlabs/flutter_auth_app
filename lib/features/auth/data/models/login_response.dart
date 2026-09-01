@@ -1,4 +1,3 @@
-import 'package:flutter_auth_app/features/auth/auth.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,10 +10,6 @@ sealed class LoginResponse with _$LoginResponse {
     @JsonKey(name: 'diagnostic') Diagnostic? diagnostic,
     @JsonKey(name: 'data') DataLogin? data,
   }) = _LoginResponse;
-
-  const LoginResponse._();
-
-  Login toEntity() => Login(token: '${data?.tokenType} ${data?.token}');
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);

@@ -23,8 +23,8 @@ class ButtonText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Container(
-    margin: EdgeInsets.symmetric(vertical: Dimens.space8),
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.symmetric(vertical: Dimens.space8),
     child: TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(

@@ -18,30 +18,30 @@ extension ContextExtensions on BuildContext {
   static late BuildContext ctx;
 
   Future<void> show() => showDialog(
-        context: this,
-        barrierDismissible: false,
-        builder: (c) {
-          ctx = c;
+    context: this,
+    barrierDismissible: false,
+    builder: (c) {
+      ctx = c;
 
-          return PopScope(
-            canPop: false,
-            child: Material(
-              color: Colors.transparent,
-              child: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(c).extension<LzyctColors>()!.background,
-                    borderRadius: BorderRadius.circular(Dimens.cornerRadius),
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: Dimens.space30),
-                  padding: EdgeInsets.all(Dimens.space24),
-                  child: const Loading(),
-                ),
+      return PopScope(
+        canPop: false,
+        child: Material(
+          color: Colors.transparent,
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: ColorScheme.of(c).surface,
+                borderRadius: BorderRadius.circular(Dimens.cornerRadius),
               ),
+              margin: EdgeInsets.symmetric(horizontal: Dimens.space30),
+              padding: EdgeInsets.all(Dimens.space24),
+              child: const Loading(),
             ),
-          );
-        },
+          ),
+        ),
       );
+    },
+  );
 
   void dismiss() {
     try {

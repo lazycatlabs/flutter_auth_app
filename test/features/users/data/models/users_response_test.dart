@@ -3,15 +3,12 @@ import 'dart:convert';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../helpers/json_reader.dart';
-import '../../../../../helpers/paths.dart';
+import '../../../../helpers/json_reader.dart';
+import '../../../../helpers/paths.dart';
 
 void main() {
   const usersResponse = UsersResponse(
-    diagnostic: Diagnostic(
-      status: '200',
-      message: 'Success',
-    ),
+    diagnostic: Diagnostic(status: '200', message: 'Success'),
     data: [
       DataUser(
         id: '8364aa6f-6887-4502-a6b0-62f082196476',
@@ -44,10 +41,7 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      'diagnostic': {
-        'status': '200',
-        'message': 'Success',
-      },
+      'diagnostic': {'status': '200', 'message': 'Success'},
       'data': [
         {
           'id': '8364aa6f-6887-4502-a6b0-62f082196476',
@@ -58,14 +52,9 @@ void main() {
           'verified': false,
           'createdAt': '2024-08-25T15:04:28.191067',
           'updatedAt': '2024-08-25T15:04:28.191067',
-        }
+        },
       ],
-      'page': {
-        'currentPage': 1,
-        'perPage': 20,
-        'lastPage': 5,
-        'total': 100,
-      },
+      'page': {'currentPage': 1, 'perPage': 20, 'lastPage': 5, 'total': 100},
     };
 
     /// assert

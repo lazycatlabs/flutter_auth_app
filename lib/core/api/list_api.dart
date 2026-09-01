@@ -9,5 +9,5 @@ class ListAPI {
   static const String logout = '/api/auth/logout';
 
   /// User
-  static const String users = 'https://dummyjson.com/users';
+  static const String users = '/users';
 }

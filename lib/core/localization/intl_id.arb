@@ -27,5 +27,11 @@
   "logoutDesc": "Apakah anda ingin keluar dari aplikasi?",
   "yes": "Ya",
   "lastUpdate": "Terakhir diperbarui: ",
-  "name": "Nama"
+  "name": "Nama",
+  "nameHint": "Mudassir",
+  "emailHint": "mudassir@lazycatlabs.com",
+  "passwordHint": "••••••••••••",
+  "menu": "Menu",
+  "english": "English",
+  "bahasa": "Bahasa"
 }

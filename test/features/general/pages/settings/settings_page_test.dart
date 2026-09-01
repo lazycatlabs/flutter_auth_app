@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,7 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/test_mock.mocks.dart';
 
-class MockSettingsCubit extends MockCubit<DataHelper>
+class MockSettingsCubit extends MockCubit<SettingsState>
     implements SettingsCubit {}
 
 void main() {
@@ -59,7 +58,11 @@ void main() {
   testWidgets('trigger update theme when dropdown theme tapped ', (
     tester,
   ) async {
-    when(() => settingsCubit.state).thenReturn(DataHelper());
+    const settings = DataHelper(type: 'en', activeTheme: ActiveTheme.system);
+    when(
+      () => settingsCubit.state,
+    ).thenReturn(const SettingsState.success(settings));
+    when(() => settingsCubit.settings).thenReturn(settings);
 
     await tester.pumpWidget(rootWidget(const SettingsPage()));
     await tester.pumpAndSettle();
@@ -80,7 +83,11 @@ void main() {
   testWidgets(
     'trigger update language when dropdown language tapped in English',
     (tester) async {
-      when(() => settingsCubit.state).thenReturn(DataHelper());
+      const settings = DataHelper(type: 'en', activeTheme: ActiveTheme.system);
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const SettingsState.success(settings));
+      when(() => settingsCubit.settings).thenReturn(settings);
 
       await tester.pumpWidget(rootWidget(const SettingsPage()));
       await tester.pumpAndSettle();
@@ -102,7 +109,11 @@ void main() {
   testWidgets(
     'trigger update language when dropdown language tapped in Bahasa ',
     (tester) async {
-      when(() => settingsCubit.state).thenReturn(DataHelper());
+      const settings = DataHelper(type: 'id', activeTheme: ActiveTheme.system);
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const SettingsState.success(settings));
+      when(() => settingsCubit.settings).thenReturn(settings);
 
       MainBoxMixin().addData(MainBoxKeys.locale, 'id');
       await tester.pumpWidget(rootWidget(const SettingsPage()));

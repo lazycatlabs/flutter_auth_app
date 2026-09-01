@@ -3,15 +3,12 @@ import 'dart:convert';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../helpers/json_reader.dart';
-import '../../../../../helpers/paths.dart';
+import '../../../../helpers/json_reader.dart';
+import '../../../../helpers/paths.dart';
 
 void main() {
   const registerResponse = RegisterResponse(
-    diagnostic: Diagnostic(
-      status: '200',
-      message: 'Success',
-    ),
+    diagnostic: Diagnostic(status: '200', message: 'Success'),
     data: DataRegister(
       id: '8364aa6f-6887-4502-a6b0-62f082196476',
       name: 'Mudassir',
@@ -41,10 +38,7 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      'diagnostic': {
-        'status': '200',
-        'message': 'Success',
-      },
+      'diagnostic': {'status': '200', 'message': 'Success'},
       'data': {
         'id': '8364aa6f-6887-4502-a6b0-62f082196476',
         'name': 'Mudassir',

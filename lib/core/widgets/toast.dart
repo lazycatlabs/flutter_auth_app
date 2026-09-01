@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_auth_app/core/core.dart';
 
 class Toast extends StatelessWidget {
   final IconData? icon;
@@ -8,36 +7,40 @@ class Toast extends StatelessWidget {
   final Color? textColor;
   final String? message;
 
-  const Toast({super.key, this.icon, this.bgColor, this.message, this.textColor});
+  const Toast({
+    super.key,
+    this.icon,
+    this.bgColor,
+    this.message,
+    this.textColor,
+  });
 
   @override
   Widget build(BuildContext context) => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(15),
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      DecoratedBox(
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(Dimens.cornerRadius),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: Dimens.space8,
+            horizontal: Dimens.space16,
           ),
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                icon,
-                color: textColor,
-              ),
-              SizedBox(
-                width: 4.w,
-              ),
-              Container(
-                constraints: BoxConstraints(maxWidth: 250.w),
+              Icon(icon, color: textColor),
+              SpacerH(value: Dimens.space4),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: Dimens.menuContainer),
                 child: Text(
-                  message!,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: textColor),
+                  message ?? '',
+                  style: TextTheme.of(
+                    context,
+                  ).bodyMedium?.copyWith(color: textColor),
                   textAlign: TextAlign.start,
                   maxLines: 5,
                   softWrap: true,
@@ -46,6 +49,7 @@ class Toast extends StatelessWidget {
             ],
           ),
         ),
-      ],
-    );
+      ),
+    ],
+  );
 }

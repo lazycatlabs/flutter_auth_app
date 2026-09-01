@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -71,12 +70,12 @@ void main() {
     ).thenReturn(const GeneralTokenState.success(null));
     when(() => generalTokenCubit.generalToken(any())).thenAnswer((_) async {});
 
-    await tester.pumpWidget(rootWidget(SplashScreenPage()));
+    await tester.pumpWidget(rootWidget(const SplashScreenPage()));
     await tester.pumpAndSettle();
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == AssetImage(Images.icLauncher);
+          return widget.image == const AssetImage(Images.icLauncher);
         }
         return false;
       }),
@@ -84,13 +83,15 @@ void main() {
     );
 
     /// change theme to dark
-    await tester.pumpWidget(rootWidget(SplashScreenPage(), isDarkTheme: true));
+    await tester.pumpWidget(
+      rootWidget(const SplashScreenPage(), isDarkTheme: true),
+    );
     await tester
         .pumpAndSettle(); // Verify that the dark theme image is displayed
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == AssetImage(Images.icLauncherDark);
+          return widget.image == const AssetImage(Images.icLauncherDark);
         }
         return false;
       }),
@@ -108,7 +109,7 @@ void main() {
         () => generalTokenCubit.generalToken(any()),
       ).thenAnswer((_) async {});
 
-      await tester.pumpWidget(rootWidget(SplashScreenPage()));
+      await tester.pumpWidget(rootWidget(const SplashScreenPage()));
       await tester.pumpAndSettle();
 
       expect(find.byType(Parent), findsNWidgets(1));

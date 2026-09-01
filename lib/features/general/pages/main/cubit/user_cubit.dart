@@ -12,13 +12,14 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> getUser() async {
     emit(const UserStateLoading());
-    final data = await _getUser.call(NoParams());
+    final data = await _getUser.call(const NoParams());
     data.fold(
-      (l) => emit(UserStateFailure((l as ServerFailure).message ?? '')),
+      (l) => emit(UserStateFailure(l is ServerFailure ? l.message ?? '' : '')),
       (r) => emit(UserStateSuccess(r)),
     );
   }
 }
+
 @freezed
 sealed class UserState with _$UserState {
   const factory UserState.loading() = UserStateLoading;

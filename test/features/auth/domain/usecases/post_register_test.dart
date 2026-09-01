@@ -5,6 +5,7 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
 import '../../../../helpers/test_mock.mocks.dart';
@@ -20,17 +21,21 @@ void main() {
   );
 
   setUp(() {
-    register = RegisterResponse.fromJson(
-      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
-    ).toEntity();
+    register = buildRegisterFixture(
+      RegisterResponse.fromJson(
+        json.decode(jsonReader(pathRegisterResponse200))
+            as Map<String, dynamic>,
+      ),
+    );
     mockAuthRepository = MockAuthRepository();
     postRegister = PostRegister(mockAuthRepository);
   });
 
   test('should get register from the repository', () async {
     /// arrange
-    when(mockAuthRepository.register(registerParams))
-        .thenAnswer((_) async => Right(register));
+    when(
+      mockAuthRepository.register(registerParams),
+    ).thenAnswer((_) async => Right(register));
 
     /// act
     final result = await postRegister.call(registerParams);

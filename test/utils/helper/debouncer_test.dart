@@ -15,22 +15,26 @@ void main() {
       expect(actionCalled, isTrue);
     });
 
-    test('action is not called if debouncer is reset before duration',
-        () async {
-      bool actionCalled = false;
-      final debouncer = Debouncer(duration: const Duration(milliseconds: 100));
+    test(
+      'action is not called if debouncer is reset before duration',
+      () async {
+        bool actionCalled = false;
+        final debouncer = Debouncer(
+          duration: const Duration(milliseconds: 100),
+        );
 
-      debouncer.run(() => actionCalled = true);
+        debouncer.run(() => actionCalled = true);
 
-      // Reset the debouncer before the duration passes
-      await Future.delayed(const Duration(milliseconds: 50));
-      debouncer.run(() {});
+        // Reset the debouncer before the duration passes
+        await Future.delayed(const Duration(milliseconds: 50));
+        debouncer.run(() {});
 
-      // Wait for the original duration to pass
-      await Future.delayed(const Duration(milliseconds: 100));
+        // Wait for the original duration to pass
+        await Future.delayed(const Duration(milliseconds: 100));
 
-      expect(actionCalled, isFalse);
-    });
+        expect(actionCalled, isFalse);
+      },
+    );
 
     test('new action is called after debouncer is reset', () async {
       bool firstActionCalled = false;

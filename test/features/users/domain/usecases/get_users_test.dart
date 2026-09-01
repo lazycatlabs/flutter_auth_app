@@ -5,6 +5,7 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
 import '../../../../helpers/test_mock.mocks.dart';
@@ -16,17 +17,20 @@ void main() {
   const usersParams = UsersParams();
 
   setUp(() {
-    users = UsersResponse.fromJson(
-      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
-    ).toEntity();
+    users = buildUsersFixture(
+      UsersResponse.fromJson(
+        json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
+      ),
+    );
     mockUsersRepository = MockUsersRepository();
     getUsers = GetUsers(mockUsersRepository);
   });
 
   test('should get users from the repository', () async {
     /// arrange
-    when(mockUsersRepository.users(usersParams))
-        .thenAnswer((_) async => Right(users));
+    when(
+      mockUsersRepository.users(usersParams),
+    ).thenAnswer((_) async => Right(users));
 
     /// act
     final result = await getUsers.call(usersParams);

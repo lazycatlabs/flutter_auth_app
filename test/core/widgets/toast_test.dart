@@ -26,12 +26,13 @@ void main() {
   );
 
   testWidgets('displays circle image', (WidgetTester tester) async {
+    final message = StringBuffer('Message').toString();
     await tester.pumpWidget(
       rootWidget(
-        const Toast(
+        Toast(
           bgColor: Colors.red,
           icon: Icons.error,
-          message: 'Message',
+          message: message,
           textColor: Colors.white,
         ),
       ),

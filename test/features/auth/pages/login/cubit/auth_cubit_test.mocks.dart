@@ -8,7 +8,9 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:flutter_auth_app/core/core.dart' as _i5;
 import 'package:flutter_auth_app/features/features.dart' as _i3;
+import 'package:flutter_auth_app/utils/utils.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -52,4 +54,42 @@ class MockPostLogin extends _i1.Mock implements _i3.PostLogin {
             ),
           )
           as _i4.Future<_i2.Either<_i5.Failure, _i3.Login>>);
+
+  @override
+  _i4.Future<void> addData<T>(_i6.MainBoxKeys? key, T? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#addData, [key, value]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> removeData(_i6.MainBoxKeys? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#removeData, [key]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  T getData<T>(_i6.MainBoxKeys? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#getData, [key]),
+            returnValue: _i7.dummyValue<T>(
+              this,
+              Invocation.method(#getData, [key]),
+            ),
+          )
+          as T);
+
+  @override
+  _i4.Future<void> logoutBox() =>
+      (super.noSuchMethod(
+            Invocation.method(#logoutBox, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }

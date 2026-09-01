@@ -6,6 +6,10 @@ import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+part 'dashboard_empty.dart';
+part 'dashboard_loading.dart';
+part 'dashboard_user_item.dart';
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
@@ -25,14 +29,20 @@ class _DashboardPageState extends State<DashboardPage> {
     });
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Parent(
     child: RefreshIndicator(
       color: ColorScheme.of(context).primary,
-      backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
+      backgroundColor: ColorScheme.of(context).surface,
       onRefresh: () => context.read<UsersCubit>().refresh(),
       child: BlocBuilder<UsersCubit, UsersState>(
         builder: (_, state) => switch (state) {
-          UsersStateLoading() => const Center(child: Loading()),
+          UsersStateLoading() => const _DashboardLoading(),
           UsersStateInitial() => const SizedBox.shrink(),
           UsersStateSuccess(:final data) => ListView.builder(
             controller: _scrollController,
@@ -44,80 +54,17 @@ class _DashboardPageState extends State<DashboardPage> {
                 : ((data.users?.length ?? 0) + 1),
             padding: EdgeInsets.symmetric(vertical: Dimens.space16),
             itemBuilder: (_, index) => index < (data.users?.length ?? 0)
-                ? userItem(data.users![index])
+                ? _DashboardUserItem(user: data.users![index])
                 : Padding(
                     padding: EdgeInsets.all(Dimens.space16),
                     child: const Center(child: CupertinoActivityIndicator()),
                   ),
           ),
-          UsersStateFailure(:final message) => Center(
-            child: Empty(errorMessage: message),
+          UsersStateFailure(:final message) => _DashboardEmpty(
+            message: message,
           ),
-          UsersStateEmpty() => const Center(child: Empty()),
+          UsersStateEmpty() => const _DashboardEmpty(),
         },
-      ),
-    ),
-  );
-
-  Widget userItem(User user) => Padding(
-    padding: EdgeInsets.symmetric(
-      vertical: Dimens.space12,
-      horizontal: Dimens.space16,
-    ),
-    child: LzyctCard(
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Dimens.space8),
-              bottomLeft: Radius.circular(Dimens.space8),
-            ),
-            child: CachedNetworkImage(
-              imageUrl: user.avatar ?? '',
-              width: Dimens.profilePicture,
-              height: Dimens.profilePicture,
-              fit: BoxFit.cover,
-            ),
-          ),
-          SpacerH(value: Dimens.space16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  user.name ?? '',
-                  style: TextTheme.of(context).titleLargeBold,
-                ),
-                Text(
-                  user.email ?? '',
-                  style: TextTheme.of(
-                    context,
-                  ).bodySmall?.copyWith(color: Theme.of(context).hintColor),
-                ),
-                const SpacerV(),
-                Row(
-                  children: [
-                    Text(
-                      Strings.of(context)!.lastUpdate,
-                      style: TextTheme.of(context).labelSmall?.copyWith(
-                        color: Theme.of(context).hintColor,
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        (user.updatedAt ?? '').toStringDateAlt(),
-                        style: TextTheme.of(context).labelSmall?.copyWith(
-                          color: Theme.of(context).hintColor,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     ),
   );

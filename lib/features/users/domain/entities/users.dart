@@ -4,11 +4,8 @@ part 'users.freezed.dart';
 
 @freezed
 sealed class Users with _$Users {
-  const factory Users({
-    List<User>? users,
-    int? currentPage,
-    int? lastPage,
-  }) = _Users;
+  const factory Users({List<User>? users, int? currentPage, int? lastPage}) =
+      _Users;
 }
 
 @freezed

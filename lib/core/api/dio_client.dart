@@ -6,13 +6,14 @@ import 'package:flutter_auth_app/utils/utils.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  String baseUrl = const String.fromEnvironment('BASE_URL');
+  final String baseUrl;
 
   String? _token;
   bool _isUnitTest = false;
   late Dio _dio;
 
-  DioClient({bool isUnitTest = false}) {
+  DioClient({bool isUnitTest = false, String? baseUrl})
+    : baseUrl = baseUrl ?? const String.fromEnvironment('BASE_URL') {
     _isUnitTest = isUnitTest;
 
     try {

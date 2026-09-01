@@ -1,5 +1,4 @@
 import 'package:flutter_auth_app/features/general/general.dart';
-import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'users_response.freezed.dart';
@@ -12,24 +11,6 @@ sealed class UsersResponse with _$UsersResponse {
     @JsonKey(name: 'data') List<DataUser>? data,
     @JsonKey(name: 'page') Page? page,
   }) = _UsersResponse;
-
-  const UsersResponse._();
-
-  Users toEntity() => Users(
-        users: data
-            ?.map(
-              (data) => User(
-                name: data.name,
-                email: data.email,
-                avatar: data.photo,
-                isVerified: data.verified,
-                updatedAt: data.updatedAt,
-              ),
-            )
-            .toList(),
-        currentPage: page?.currentPage,
-        lastPage: page?.lastPage,
-      );
 
   factory UsersResponse.fromJson(Map<String, dynamic> json) =>
       _$UsersResponseFromJson(json);

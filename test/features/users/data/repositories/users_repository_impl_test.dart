@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -10,6 +9,7 @@ import 'package:mockito/mockito.dart';
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
@@ -30,12 +30,16 @@ void main() {
     );
     mockUsersRemoteDatasource = MockUsersRemoteDatasource();
     authRepositoryImpl = UsersRepositoryImpl(mockUsersRemoteDatasource);
-    users = UsersResponse.fromJson(
-      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
-    ).toEntity();
-    user = UserResponse.fromJson(
-      json.decode(jsonReader(pathUserResponse200)) as Map<String, dynamic>,
-    ).toEntity();
+    users = buildUsersFixture(
+      UsersResponse.fromJson(
+        json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
+      ),
+    );
+    user = buildUserFixture(
+      UserResponse.fromJson(
+        json.decode(jsonReader(pathUserResponse200)) as Map<String, dynamic>,
+      ),
+    );
   });
 
   group('users', () {
@@ -65,9 +69,9 @@ void main() {
       'should return empty list users when call data is successful',
       () async {
         // arrange
-        when(mockUsersRemoteDatasource.users(usersParamsEmpty)).thenAnswer(
-          (_) async => Left(NoDataFailure()),
-        );
+        when(
+          mockUsersRemoteDatasource.users(usersParamsEmpty),
+        ).thenAnswer((_) async => Left(NoDataFailure()));
 
         // act
         final result = await authRepositoryImpl.users(usersParamsEmpty);
@@ -82,8 +86,9 @@ void main() {
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
-        when(mockUsersRemoteDatasource.users(usersParams))
-            .thenAnswer((_) async => const Left(ServerFailure('')));
+        when(
+          mockUsersRemoteDatasource.users(usersParams),
+        ).thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.users(usersParams);
@@ -115,13 +120,23 @@ void main() {
       expect(result, equals(Right(user)));
     });
 
+    test('should return no data failure when user data is null', () async {
+      when(
+        mockUsersRemoteDatasource.user(),
+      ).thenAnswer((_) async => const Right(UserResponse()));
+
+      final result = await authRepositoryImpl.user();
+
+      expect(result, Left(NoDataFailure()));
+    });
+
     test(
       'should return empty list users when call data is successful',
       () async {
         // arrange
-        when(mockUsersRemoteDatasource.user()).thenAnswer(
-          (_) async => Left(NoDataFailure()),
-        );
+        when(
+          mockUsersRemoteDatasource.user(),
+        ).thenAnswer((_) async => Left(NoDataFailure()));
 
         // act
         final result = await authRepositoryImpl.user();
@@ -136,8 +151,9 @@ void main() {
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
-        when(mockUsersRemoteDatasource.user())
-            .thenAnswer((_) async => const Left(ServerFailure('')));
+        when(
+          mockUsersRemoteDatasource.user(),
+        ).thenAnswer((_) async => const Left(ServerFailure('')));
 
         // act
         final result = await authRepositoryImpl.user();

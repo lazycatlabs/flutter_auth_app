@@ -5,6 +5,8 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+part 'register_form.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -70,7 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
           context.dismiss();
           message.toToastError(context);
         })(),
-        _ => {},
       },
       child: Center(
         child: SingleChildScrollView(
@@ -80,140 +81,30 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  Theme.of(context).brightness == Brightness.dark
+                  Theme.brightnessOf(context) == Brightness.dark
                       ? Images.icLauncherDark
                       : Images.icLauncher,
                   width: context.widthInPercent(70),
                 ),
-                _registerForm(),
+                _RegisterForm(
+                  formKey: _formKey,
+                  isValid: _isValid,
+                  isPasswordVisible: _isPasswordVisible,
+                  isPasswordRepeatVisible: _isPasswordRepeatVisible,
+                  nameController: _conName,
+                  emailController: _conEmail,
+                  passwordController: _conPassword,
+                  passwordRepeatController: _conPasswordRepeat,
+                  nameFocusNode: _fnName,
+                  emailFocusNode: _fnEmail,
+                  passwordFocusNode: _fnPassword,
+                  passwordRepeatFocusNode: _fnPasswordRepeat,
+                ),
               ],
             ),
           ),
         ),
       ),
-    ),
-  );
-
-  Widget _registerForm() => Form(
-    key: _formKey,
-    onChanged: () =>
-        _isValid.value = _formKey.currentState?.validate() ?? false,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    child: Column(
-      children: [
-        TextF(
-          key: const Key('name'),
-          focusNode: _fnName,
-          textInputAction: TextInputAction.next,
-          controller: _conName,
-          textInputType: TextInputType.text,
-          prefixIcon: Icon(
-            Icons.person,
-            color: TextTheme.of(context).bodyLarge?.color,
-          ),
-          hint: 'Mudassir',
-          label: Strings.of(context)!.name,
-          validator: (value) => (value?.isEmpty ?? true)
-              ? Strings.of(context)!.errorEmptyField
-              : null,
-        ),
-        TextF(
-          key: const Key('email'),
-          focusNode: _fnEmail,
-          textInputAction: TextInputAction.next,
-          controller: _conEmail,
-          textInputType: TextInputType.emailAddress,
-          prefixIcon: Icon(
-            Icons.alternate_email,
-            color: TextTheme.of(context).bodyLarge?.color,
-          ),
-          hint: 'mudassir@lazycatlabs.com',
-          label: Strings.of(context)!.email,
-          validator: (value) => !(value?.isValidEmail() ?? true)
-              ? Strings.of(context)!.errorInvalidEmail
-              : null,
-        ),
-        ValueListenableBuilder(
-          valueListenable: _isPasswordVisible,
-          builder: (_, bool isPasswordVisible, _) => TextF(
-            key: const Key('password'),
-            focusNode: _fnPassword,
-            textInputAction: TextInputAction.next,
-            controller: _conPassword,
-            textInputType: TextInputType.text,
-            prefixIcon: Icon(
-              Icons.lock_outline,
-              color: TextTheme.of(context).bodyLarge?.color,
-            ),
-            obscureText: !isPasswordVisible,
-            hint: '••••••••••••',
-            label: Strings.of(context)!.password,
-            suffixIcon: IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () => _isPasswordVisible.value = !isPasswordVisible,
-              icon: Icon(
-                !isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-              ),
-            ),
-            validator: (String? value) => (value?.length ?? 0) < 5
-                ? Strings.of(context)!.errorPasswordLength
-                : null,
-            semantic: 'password',
-          ),
-        ),
-        ValueListenableBuilder(
-          valueListenable: _isPasswordRepeatVisible,
-          builder: (_, bool isPasswordRepeatVisible, _) => TextF(
-            key: const Key('repeat_password'),
-            focusNode: _fnPasswordRepeat,
-            textInputAction: TextInputAction.done,
-            controller: _conPasswordRepeat,
-            textInputType: TextInputType.text,
-            prefixIcon: Icon(
-              Icons.lock_outline,
-              color: TextTheme.of(context).bodyLarge?.color,
-            ),
-            obscureText: !isPasswordRepeatVisible,
-            hint: '••••••••••••',
-            label: Strings.of(context)!.passwordRepeat,
-            suffixIcon: IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              onPressed: () {
-                _isPasswordRepeatVisible.value = !isPasswordRepeatVisible;
-              },
-              icon: Icon(
-                !isPasswordRepeatVisible
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-              ),
-            ),
-            validator: (value) => (value ?? '') != _conPassword.text
-                ? Strings.of(context)!.errorPasswordNotMatch
-                : null,
-            semantic: 'repeat_password',
-          ),
-        ),
-        SpacerV(value: Dimens.space24),
-        ValueListenableBuilder(
-          valueListenable: _isValid,
-          builder: (_, bool isValid, _) => Button(
-            key: const Key('btn_register'),
-            width: double.maxFinite,
-            title: Strings.of(context)!.register,
-            onPressed: isValid
-                ? () => context.read<RegisterCubit>().register(
-                    RegisterParams(
-                      name: _conName.text,
-                      email: _conEmail.text,
-                      password: _conPassword.text,
-                    ),
-                  )
-                : null,
-          ),
-        ),
-      ],
     ),
   );
 }

@@ -5,7 +5,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,6 +16,7 @@ import 'package:mocktail/mocktail.dart';
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../helpers/paths.dart';
@@ -41,9 +41,11 @@ void main() {
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'dashboard_page_test_');
     usersCubit = MockUsersCubit();
-    users = UsersResponse.fromJson(
-      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
-    ).toEntity();
+    users = buildUsersFixture(
+      UsersResponse.fromJson(
+        json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
+      ),
+    );
   });
 
   Widget rootWidget(Widget body) => BlocProvider<UsersCubit>.value(

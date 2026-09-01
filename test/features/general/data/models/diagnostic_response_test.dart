@@ -28,10 +28,7 @@ void main() {
 
     /// arrange
     final exceptedJson = {
-      'diagnostic': {
-        'status': '200',
-        'message': 'Success',
-      },
+      'diagnostic': {'status': '200', 'message': 'Success'},
     };
 
     /// assert

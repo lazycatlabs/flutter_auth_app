@@ -12,12 +12,13 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
   static const int _usersPerPage = 20;
 
   final DioClient _client;
+  final DioClientDummyJson _clientDummyJson;
 
-  UsersRemoteDatasourceImpl(this._client);
+  UsersRemoteDatasourceImpl(this._client, this._clientDummyJson);
 
   @override
   Future<Either<Failure, UsersResponse>> users(UsersParams userParams) async {
-    final response = await _client.getRequest(
+    final response = await _clientDummyJson.getRequest(
       ListAPI.users,
       queryParameters: {
         'limit': _usersPerPage,

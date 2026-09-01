@@ -21,9 +21,7 @@ class Loading extends StatelessWidget {
           visible: showMessage,
           child: Text(
             Strings.of(context)!.pleaseWait,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: color),
+            style: TextTheme.of(context).bodySmall?.copyWith(color: color),
           ),
         ),
       ],

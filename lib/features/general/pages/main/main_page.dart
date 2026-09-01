@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+part 'main_app_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({required this.child, super.key});
@@ -21,37 +22,42 @@ class _MainPageState extends State<MainPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<MainCubit>().initMenu(context);
+    context.read<MainCubit>().initMenu([
+      DataHelper(title: Strings.of(context)!.dashboard, isSelected: true),
+      DataHelper(title: Strings.of(context)!.settings),
+      DataHelper(title: Strings.of(context)!.logout),
+    ]);
   }
 
   @override
   Widget build(BuildContext context) => PopScope(
-    onPopInvokedWithResult: (_, _) =>
-        context.read<MainCubit>().onBackPressed(context, _scaffoldKey),
+    canPop: context.select<MainCubit, bool>((cubit) => cubit.currentIndex == 0),
+    onPopInvokedWithResult: (didPop, _) {
+      if (!didPop) {
+        context.read<MainCubit>().updateIndex(0);
+        context.goNamed(Routes.dashboard.name);
+      }
+    },
     child: Parent(
       scaffoldKey: _scaffoldKey,
-      appBar: _appBar(),
+      appBar: _MainAppBar(
+        onMenuPressed: () => _scaffoldKey.currentState?.openDrawer(),
+      ),
       drawer: SizedBox(
         width: context.widthInPercent(80),
         child: BlocProvider(
           //coverage:ignore-start
           create: (_) => sl<UserCubit>()..getUser(),
           child: MenuDrawer(
-            dataMenu:
-                context.read<MainCubit>().dataMenus ??
-                [
-                  DataHelper(title: 'Dashboard', isSelected: true),
-                  DataHelper(title: 'Settings'),
-                  DataHelper(title: 'Logout'),
-                ],
+            dataMenu: context.read<MainCubit>().dataMenus,
             currentIndex: (int index) {
               /// don't update when index is logout
               if (index != 2) {
-                context.read<MainCubit>().updateIndex(index, null);
+                context.read<MainCubit>().updateIndex(index);
               }
 
               /// hide navigation drawer
-              _scaffoldKey.currentState?.openEndDrawer();
+              _scaffoldKey.currentState?.closeDrawer();
             },
             onLogoutPressed: () => showDialog(
               context: context,
@@ -72,7 +78,7 @@ class _MainPageState extends State<MainPage> {
                     child: Text(
                       Strings.of(context)!.cancel,
                       style: TextTheme.of(context).bodyMedium?.copyWith(
-                        color: Theme.of(context).hintColor,
+                        color: ColorScheme.of(context).onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -110,30 +116,6 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       child: widget.child,
-    ),
-  );
-
-  PreferredSize _appBar() => PreferredSize(
-    preferredSize: const Size.fromHeight(kToolbarHeight),
-    child: AppBar(
-      automaticallyImplyLeading: false,
-      centerTitle: true,
-      title: BlocBuilder<MainCubit, MainState>(
-        builder: (_, state) => Text(switch (state) {
-          MainStateLoading() => '-',
-          MainStateSuccess(:final data) => data?.title ?? '-',
-        }, style: TextTheme.of(context).titleLarge),
-      ),
-      leading: IconButton(
-        icon: Icon(Icons.sort, size: Dimens.space24, semanticLabel: 'Menu'),
-        //coverage:ignore-start
-        onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-        //coverage:ignore-end
-      ),
-      actions: const [
-        /// Notification on Dashboard
-        ButtonNotification(),
-      ],
     ),
   );
 }

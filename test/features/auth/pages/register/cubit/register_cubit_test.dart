@@ -3,14 +3,15 @@ import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import '../../../../../helpers/entity_fixtures.dart';
 import '../../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
@@ -34,9 +35,12 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'register_cubit_test_');
-    register = RegisterResponse.fromJson(
-      json.decode(jsonReader(pathRegisterResponse200)) as Map<String, dynamic>,
-    ).toEntity();
+    register = buildRegisterFixture(
+      RegisterResponse.fromJson(
+        json.decode(jsonReader(pathRegisterResponse200))
+            as Map<String, dynamic>,
+      ),
+    );
     mockPostRegister = MockPostRegister();
     registerCubit = RegisterCubit(mockPostRegister);
   });
@@ -58,9 +62,8 @@ void main() {
 
       return registerCubit;
     },
-    act: (RegisterCubit registerCubit) => registerCubit.register(
-      registerParams,
-    ),
+    act: (RegisterCubit registerCubit) =>
+        registerCubit.register(registerParams),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       const RegisterState.loading(),
@@ -71,15 +74,17 @@ void main() {
   blocTest<RegisterCubit, RegisterState>(
     'When repo success get data should be return ServerFailure',
     build: () {
-      when(mockPostRegister.call(registerParams))
-          .thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
+      when(
+        mockPostRegister.call(registerParams),
+      ).thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
 
       return registerCubit;
     },
-    act: (RegisterCubit registerCubit) => registerCubit.register(
-      registerParams,
-    ),
-    expect: () =>
-        const [RegisterState.loading(), RegisterState.failure(errorMessage)],
+    act: (RegisterCubit registerCubit) =>
+        registerCubit.register(registerParams),
+    expect: () => const [
+      RegisterState.loading(),
+      RegisterState.failure(errorMessage),
+    ],
   );
 }

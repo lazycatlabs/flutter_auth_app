@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/dependencies_injection.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -79,7 +78,7 @@ void main() {
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == AssetImage(Images.icLauncher);
+          return widget.image == const AssetImage(Images.icLauncher);
         }
         return false;
       }),
@@ -93,7 +92,7 @@ void main() {
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == AssetImage(Images.icLauncherDark);
+          return widget.image == const AssetImage(Images.icLauncherDark);
         }
         return false;
       }),
@@ -138,6 +137,16 @@ void main() {
 
     expect(obscureText(tester, const Key('password')), isFalse);
     expect(find.byIcon(Icons.visibility), findsOneWidget);
+  });
+
+  testWidgets('shows an error for an invalid email', (tester) async {
+    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+
+    await tester.pumpWidget(rootWidget(const LoginPage()));
+    await tester.enterText(find.byKey(const Key('email')), 'invalid-email');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Email is not valid'), findsOneWidget);
   });
 
   testWidgets('renders LoginPage for form validation fill email', (

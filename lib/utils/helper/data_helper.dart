@@ -4,9 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'data_helper.freezed.dart';
 
-@unfreezed
-abstract class DataHelper with _$DataHelper {
-  factory DataHelper({
+@freezed
+sealed class DataHelper with _$DataHelper {
+  const factory DataHelper({
     String? title,
     String? desc,
     String? iconPath,

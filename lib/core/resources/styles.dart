@@ -409,23 +409,23 @@ class BoxDecorations {
 
   BoxDecoration get button => BoxDecoration(
     color: ColorScheme.of(context).primary,
-    borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
+    borderRadius: const BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
     boxShadow: [BoxShadows(context).button],
   );
 
   BoxDecoration get card => BoxDecoration(
-    color: Theme.of(context).cardColor,
-    borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
+    color: ColorScheme.of(context).surfaceContainer,
+    borderRadius: const BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
     boxShadow: [BoxShadows(context).card],
   );
 
   BoxDecoration get item => BoxDecoration(
-    color: Theme.of(context).cardColor,
-    borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
+    color: ColorScheme.of(context).surfaceContainer,
+    borderRadius: const BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
   );
 
   BoxDecoration get navigation => BoxDecoration(
-    color: Theme.of(context).cardColor,
+    color: ColorScheme.of(context).surfaceContainer,
     borderRadius: BorderRadius.all(Radius.circular(Dimens.space16)),
     boxShadow: [BoxShadows(context).navigation],
   );

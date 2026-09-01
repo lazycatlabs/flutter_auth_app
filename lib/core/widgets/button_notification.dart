@@ -22,15 +22,13 @@ class ButtonNotification extends StatelessWidget {
             bottom: Dimens.space6,
             child: Visibility(
               child: CircleAvatar(
-                backgroundColor: Palette.secondary,
+                backgroundColor: ColorScheme.of(context).secondary,
                 maxRadius: Dimens.space8,
                 child: Center(
                   child: Text(
                     '1',
                     style: TextTheme.of(context).labelSmall?.copyWith(
-                      color: Theme.of(
-                        context,
-                      ).extension<LzyctColors>()!.background,
+                      color: ColorScheme.of(context).onSecondary,
                     ),
                     textAlign: TextAlign.center,
                   ),

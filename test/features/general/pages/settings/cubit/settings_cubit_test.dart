@@ -33,4 +33,12 @@ void main() {
     act: (SettingsCubit settingsCubit) => settingsCubit.updateLanguage('en'),
     expect: () => [isA<SettingsStateSuccess>()],
   );
+
+  blocTest<SettingsCubit, SettingsState>(
+    'loadSettings emits the current settings',
+    build: () => settingsCubit,
+    act: (cubit) => cubit.loadSettings(),
+    expect: () => [isA<SettingsStateSuccess>()],
+    verify: (cubit) => expect(cubit.settings, isA<DataHelper>()),
+  );
 }

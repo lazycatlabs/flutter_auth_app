@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 
 /// ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
@@ -77,6 +78,34 @@ void main() {
     ),
   );
 
+  Widget routedRootWidget(Widget body, GoRouter router) => MultiBlocProvider(
+    providers: [
+      BlocProvider.value(value: mainCubit),
+      BlocProvider.value(value: userCubit),
+      BlocProvider.value(value: logoutCubit),
+    ],
+    child: ScreenUtilInit(
+      designSize: const Size(375, 667),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, _) => InheritedGoRouter(
+        goRouter: router,
+        child: MaterialApp(
+          localizationsDelegates: const [
+            Strings.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: const Locale('en'),
+          supportedLocales: L10n.all,
+          theme: themeLight(MockBuildContext()),
+          home: body,
+        ),
+      ),
+    ),
+  );
+
   testWidgets('MainPage displays correctly', (WidgetTester tester) async {
     when(() => mainCubit.state).thenReturn(
       MainState.success(
@@ -108,5 +137,75 @@ void main() {
     expect(find.text('Settings'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
     expect(find.text('Page content'), findsOneWidget);
+  });
+
+  testWidgets('menu button opens the drawer', (tester) async {
+    when(
+      () => mainCubit.state,
+    ).thenReturn(const MainState.success(DataHelper(title: 'Dashboard')));
+    when(() => mainCubit.currentIndex).thenReturn(0);
+    when(() => mainCubit.dataMenus).thenReturn(const [
+      DataHelper(title: 'Dashboard', isSelected: true),
+      DataHelper(title: 'Settings'),
+      DataHelper(title: 'Logout'),
+    ]);
+    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
+    when(() => userCubit.state).thenReturn(const UserState.success(null));
+    when(() => userCubit.getUser()).thenAnswer((_) async {});
+    when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
+    sl.unregister<UserCubit>();
+    sl.registerFactory<UserCubit>(() => userCubit);
+
+    await tester.pumpWidget(
+      rootWidget(const MainPage(child: Text('Page content'))),
+    );
+    await tester.tap(find.byIcon(Icons.sort));
+    await tester.pump();
+
+    expect(find.byType(Drawer), findsOneWidget);
+  });
+
+  testWidgets('back navigation returns to dashboard', (tester) async {
+    when(
+      () => mainCubit.state,
+    ).thenReturn(const MainState.success(DataHelper(title: 'Settings')));
+    when(() => mainCubit.currentIndex).thenReturn(1);
+    when(() => mainCubit.dataMenus).thenReturn(const []);
+    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
+    when(() => mainCubit.updateIndex(0)).thenAnswer((_) {});
+    when(() => userCubit.state).thenReturn(const UserState.success(null));
+    when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
+
+    final router = GoRouter(
+      initialLocation: '/settings',
+      routes: [
+        GoRoute(
+          path: '/settings',
+          builder: (_, _) => const MainPage(child: Text('Settings route')),
+        ),
+        GoRoute(
+          path: Routes.dashboard.path,
+          name: Routes.dashboard.name,
+          builder: (_, _) => const Text('Dashboard route'),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      routedRootWidget(const MainPage(child: Text('Settings route')), router),
+    );
+    await tester.pumpAndSettle();
+    final popScope = tester.widget<PopScope<dynamic>>(
+      find.byWidgetPredicate((widget) => widget is PopScope),
+    );
+    popScope.onPopInvokedWithResult?.call(false, null);
+    await tester.pump();
+
+    verify(() => mainCubit.updateIndex(0)).called(1);
+    expect(
+      router.routeInformationProvider.value.uri.path,
+      Routes.dashboard.path,
+    );
   });
 }

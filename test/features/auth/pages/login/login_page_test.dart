@@ -139,6 +139,16 @@ void main() {
     expect(find.byIcon(Icons.visibility), findsOneWidget);
   });
 
+  testWidgets('shows an error for an invalid email', (tester) async {
+    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+
+    await tester.pumpWidget(rootWidget(const LoginPage()));
+    await tester.enterText(find.byKey(const Key('email')), 'invalid-email');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Email is not valid'), findsOneWidget);
+  });
+
   testWidgets('renders LoginPage for form validation fill email', (
     tester,
   ) async {

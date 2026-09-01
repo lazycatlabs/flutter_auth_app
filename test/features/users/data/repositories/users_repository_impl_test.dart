@@ -120,6 +120,16 @@ void main() {
       expect(result, equals(Right(user)));
     });
 
+    test('should return no data failure when user data is null', () async {
+      when(
+        mockUsersRemoteDatasource.user(),
+      ).thenAnswer((_) async => const Right(UserResponse()));
+
+      final result = await authRepositoryImpl.user();
+
+      expect(result, Left(NoDataFailure()));
+    });
+
     test(
       'should return empty list users when call data is successful',
       () async {

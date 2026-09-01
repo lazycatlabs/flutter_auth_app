@@ -78,6 +78,21 @@ void main() {
     });
 
     test(
+      'should return no data failure when general token data is null',
+      () async {
+        when(
+          mockAuthRemoteDatasource.generalToken(generalTokenParams),
+        ).thenAnswer((_) async => const Right(GeneralTokenResponse()));
+
+        final result = await authRepositoryImpl.generalToken(
+          generalTokenParams,
+        );
+
+        expect(result, Left(NoDataFailure()));
+      },
+    );
+
+    test(
       'should return server failure when call data is unsuccessful',
       () async {
         // arrange
@@ -120,6 +135,16 @@ void main() {
       verify(mockAuthRemoteDatasource.login(loginParams));
 
       expect(result, Right(login));
+    });
+
+    test('should return no data failure when login data is null', () async {
+      when(
+        mockAuthRemoteDatasource.login(loginParams),
+      ).thenAnswer((_) async => const Right(LoginResponse()));
+
+      final result = await authRepositoryImpl.login(loginParams);
+
+      expect(result, Left(NoDataFailure()));
     });
 
     test(

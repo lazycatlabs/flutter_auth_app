@@ -30,8 +30,8 @@ https://github.com/user-attachments/assets/f994e992-9161-46c3-8f0b-cd582c56bea2
 
 | Technology | Recommended Version | Installation Guide                                                    |
 |------------|---------------------|-----------------------------------------------------------------------|
-| Flutter    | v3.24.x             | [Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
-| Dart       | v3.5.x              | Installed automatically with Flutter                                  |
+| Flutter    | v3.44.x             | [Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
+| Dart       | v3.12.x             | Installed automatically with Flutter                                  |
 
 ## Get Started 🚀
 

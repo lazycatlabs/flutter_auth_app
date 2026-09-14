@@ -38,10 +38,10 @@ dependencies:
   dartz: ^0.10.1
 
   # Use as Network Client
-  dio: ^5.11.0
+  dio: ^5.11.1
 
   # Use hive to save local data
-  hive_ce: ^2.19.3
+  hive_ce: ^2.20.0
   hive_ce_flutter: ^2.3.4
 
   # Use for Dependencies Injection
@@ -60,7 +60,7 @@ dependencies:
   cached_network_image: ^3.4.1
 
   # logger
-  logger: ^2.7.0
+  logger: ^2.8.0
 
   # Firebase
   firebase_core: ^4.14.0
@@ -76,13 +76,13 @@ dependencies:
 
   flutter_native_splash: ^2.4.8
 
-  intl: ^0.20.2
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
-  lint: ^2.8.0
+  lint: ^2.14.0
   flutter_lints: ^6.0.0
   bloc_test: ^10.0.0
   build_runner: ^2.15.1

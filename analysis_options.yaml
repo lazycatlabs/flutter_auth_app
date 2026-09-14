@@ -5,6 +5,9 @@ analyzer:
     - '**.g.dart'
     - '**.mocks.dart'
     - '**/core/localization/generated/**'
+    - build/**
+    - android/**
+    - ios/**
   errors:
     invalid_annotation_target: ignore
 linter:

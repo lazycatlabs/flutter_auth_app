@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   testWidgets('tapping the parent dismisses focus', (tester) async {

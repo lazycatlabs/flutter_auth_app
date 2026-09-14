@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:flutter_auth_app/utils/services/hive/hive.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
@@ -69,8 +68,6 @@ void main() {
           localizationsDelegates: const [
             Strings.delegate,
             GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
           ],
           locale: const Locale('en'),
           supportedLocales: L10n.all,

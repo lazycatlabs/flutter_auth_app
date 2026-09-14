@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../helpers/test_mock.mocks.dart';
 
@@ -15,8 +14,6 @@ void main() {
       localizationsDelegates: const [
         Strings.delegate,
         GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
       ],
       locale: const Locale('en'),
       supportedLocales: L10n.all,

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TextF extends StatefulWidget {
   const TextF({

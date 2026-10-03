@@ -31,7 +31,7 @@ https://github.com/user-attachments/assets/f994e992-9161-46c3-8f0b-cd582c56bea2
 | Technology | Recommended Version | Installation Guide                                                    |
 |------------|---------------------|-----------------------------------------------------------------------|
 | Flutter    | v3.47.x             | [Flutter Official Docs](https://flutter.dev/docs/get-started/install) |
-| Dart       | v3.3.x              | Installed automatically with Flutter                                  |
+| Dart       | v3.13.x             | Installed automatically with Flutter                                  |
 
 ## Get Started 🚀
 

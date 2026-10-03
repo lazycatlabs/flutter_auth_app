@@ -46,7 +46,7 @@ class LzyctApp extends StatelessWidget {
                   routerConfig: AppRoute.router,
                   localizationsDelegates: const [
                     Strings.delegate,
-                    GlobalMaterialLocalizations.delegate,
+                    ...GlobalMaterialLocalizations.delegates,
                   ],
                   debugShowCheckedModeBanner: false,
                   builder: (BuildContext context, Widget? child) {

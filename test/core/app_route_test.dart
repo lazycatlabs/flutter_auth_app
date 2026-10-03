@@ -67,7 +67,7 @@ void main() {
           routerConfig: AppRoute.router,
           localizationsDelegates: const [
             Strings.delegate,
-            GlobalMaterialLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
           ],
           locale: const Locale('en'),
           supportedLocales: L10n.all,

@@ -65,7 +65,7 @@ void main() {
       builder: (_, _) => MaterialApp(
         localizationsDelegates: const [
           Strings.delegate,
-          GlobalMaterialLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
         ],
         locale: const Locale('en'),
         supportedLocales: L10n.all,
@@ -90,7 +90,7 @@ void main() {
         child: MaterialApp(
           localizationsDelegates: const [
             Strings.delegate,
-            GlobalMaterialLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
           ],
           locale: const Locale('en'),
           supportedLocales: L10n.all,

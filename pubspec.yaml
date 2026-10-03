@@ -41,11 +41,11 @@ dependencies:
   dio: ^5.11.1
 
   # Use hive to save local data
-  hive_ce: ^2.20.0
-  hive_ce_flutter: ^2.3.4
+  hive_ce: ^2.20.1
+  hive_ce_flutter: ^2.4.0
 
   # Use for Dependencies Injection
-  get_it: ^9.2.1
+  get_it: ^9.3.0
 
   # Use for State Management with BLoC pattern
   flutter_bloc: ^9.1.1
@@ -63,9 +63,9 @@ dependencies:
   logger: ^2.8.0
 
   # Firebase
-  firebase_core: ^4.14.0
-  firebase_analytics: ^12.5.0
-  firebase_crashlytics: ^5.3.0
+  firebase_core: ^4.15.0
+  firebase_analytics: ^12.6.0
+  firebase_crashlytics: ^5.4.0
 
   # router
   go_router: ^17.5.0

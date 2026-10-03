@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:material_ui/material_ui.dart';
 
 class Button extends StatelessWidget {
   final String title;

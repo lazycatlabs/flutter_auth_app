@@ -1,14 +1,12 @@
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-// ignore: depend_on_referenced_packages
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 /// ignore: depend_on_referenced_packages
@@ -56,9 +54,7 @@ void main() {
           builder: (_, _) => MaterialApp(
             localizationsDelegates: const [
               Strings.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
             ],
             locale: const Locale('en'),
             supportedLocales: L10n.all,

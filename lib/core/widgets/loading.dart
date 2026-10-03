@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
+import 'package:material_ui/material_ui.dart';
 
 class Loading extends StatelessWidget {
   const Loading({this.showMessage = true, this.color});

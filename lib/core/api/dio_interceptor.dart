@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/auth/auth.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
+import 'package:material_ui/material_ui.dart';
 
 // coverage:ignore-start
 class DioInterceptor extends Interceptor
@@ -19,10 +19,9 @@ class DioInterceptor extends Interceptor
 
   DioInterceptor({
     Dio Function()? dioFactory,
-    Future<void> Function()? onLogout,
+    this._onLogout,
     String Function()? deviceInfo,
   }) : _dioFactory = dioFactory ?? (() => DioClient().dio),
-       _onLogout = onLogout,
        _deviceInfo = deviceInfo ?? (() => Platform.localHostname);
 
   @override
@@ -37,8 +36,7 @@ class DioInterceptor extends Interceptor
       const JsonEncoder encoder = JsonEncoder.withIndent('  ');
       final String prettyJson = encoder.convert(options.data);
       log.d(
-        // ignore: unnecessary_null_comparison
-        "REQUEST ► ︎ ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"${options.baseUrl}${options.path}"}\n\n"
+        "REQUEST ► ︎ ${options.method.toUpperCase()} ${"${options.baseUrl}${options.path}"}\n\n"
         'Headers:\n'
         '$headerMessage\n'
         '❖ QueryParameters : \n'
@@ -189,7 +187,7 @@ class DioInterceptor extends Interceptor
   Future<bool> _refreshOnce() async {
     final activeRefresh = _activeRefresh;
     if (activeRefresh != null) {
-      return activeRefresh;
+      return await activeRefresh;
     }
 
     final refresh = refreshToken();
@@ -233,8 +231,7 @@ class DioInterceptor extends Interceptor
     const JsonEncoder encoder = JsonEncoder.withIndent('  ');
     final String prettyJson = encoder.convert(response.data);
     log.d(
-      // ignore: unnecessary_null_comparison
-      "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
+      '◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions.baseUrl + response.requestOptions.path}\n\n'
       'Headers:\n'
       '$headerMessage\n'
       '❖ Results : \n'

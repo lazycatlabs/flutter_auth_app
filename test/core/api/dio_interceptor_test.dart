@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart' hide DioInterceptor;
-// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../helpers/fake_path_provider_platform.dart';
@@ -198,4 +199,79 @@ void main() {
       expect(refreshCount, 0);
     },
   );
+
+  test('overlapping 401 responses share one refresh and both retry', () async {
+    var protectedRequestCount = 0;
+    dioAdapter.onGet(
+      '/protected',
+      (server) => server.replyCallback(200, (request) {
+        protectedRequestCount++;
+        return {'result': 'retried'};
+      }),
+      headers: const {'Authorization': newAuthToken},
+    );
+    dioAdapter.onGet(
+      '/protected',
+      (server) => server.replyCallback(401, (request) {
+        protectedRequestCount++;
+        return const {
+          'diagnostic': {
+            'status': '401 Unauthorized',
+            'message': 'Token expired',
+          },
+        };
+      }),
+      headers: const {'Authorization': oldAuthToken},
+    );
+    final interceptor = _ControlledRefreshInterceptor(dioFactory: () => dio);
+    dio.interceptors.add(interceptor);
+
+    final responses = Future.wait([
+      dio.get<dynamic>('/protected'),
+      dio.get<dynamic>('/protected'),
+    ]);
+
+    // Both requests are parked on the shared refresh before it resolves.
+    await interceptor.bothUnauthorized.future;
+    expect(interceptor.refreshCount, 1);
+
+    await MainBoxMixin.mainBox?.put(MainBoxKeys.authToken.name, newAuthToken);
+    interceptor.pendingRefresh.complete(true);
+
+    final results = await responses;
+
+    expect(interceptor.refreshCount, 1);
+    expect(results.map((response) => response.statusCode), [200, 200]);
+    expect(results.map((response) => response.data), [
+      {'result': 'retried'},
+      {'result': 'retried'},
+    ]);
+    expect(protectedRequestCount, 4);
+  });
+}
+
+/// Holds the refresh open until the test releases it, so overlapping 401s
+/// are guaranteed to meet on the shared in-flight refresh.
+class _ControlledRefreshInterceptor extends DioInterceptor {
+  _ControlledRefreshInterceptor({super.dioFactory});
+
+  final pendingRefresh = Completer<bool>();
+  final bothUnauthorized = Completer<void>();
+  int refreshCount = 0;
+  var _unauthorizedCount = 0;
+
+  @override
+  Future<bool> refreshToken() {
+    refreshCount++;
+    return pendingRefresh.future;
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    // super runs synchronously up to the await on the shared refresh.
+    super.onResponse(response, handler);
+    if (response.statusCode == 401 && ++_unauthorizedCount == 2) {
+      bothUnauthorized.complete();
+    }
+  }
 }

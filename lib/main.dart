@@ -17,7 +17,7 @@ void main() {
       await serviceLocator();
       await FirebaseServices.init();
 
-      return SystemChrome.setPreferredOrientations([
+      return await SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]).then((_) => runApp(LzyctApp()));

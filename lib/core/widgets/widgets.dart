@@ -1,9 +1,11 @@
+export 'brand_logo.dart';
 export 'button.dart';
 export 'button_notification.dart';
 export 'button_text.dart';
 export 'circle_image.dart';
 export 'drop_down.dart';
 export 'empty.dart';
+export 'fade_slide_in.dart';
 export 'loading.dart';
 export 'lzyct_card.dart';
 export 'my_appbar.dart';

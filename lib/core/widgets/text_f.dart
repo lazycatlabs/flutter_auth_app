@@ -81,11 +81,20 @@ class TextFState extends State<TextF> {
       children: [
         Text(
           widget.label,
-          style: widget.labelTextStyle ?? TextTheme.of(context).bodySmall,
+          style:
+              widget.labelTextStyle ??
+              TextTheme.of(context).labelMedium?.copyWith(
+                color: ColorScheme.of(context).onSurfaceVariant,
+              ),
         ),
         _textFormField,
         if (widget.description != null)
-          Text(widget.description!, style: TextTheme.of(context).bodySmall),
+          Text(
+            widget.description!,
+            style: TextTheme.of(context).bodySmall?.copyWith(
+              color: ColorScheme.of(context).onSurfaceVariant,
+            ),
+          ),
         SpacerV(value: Dimens.space4),
       ],
     ),
@@ -107,45 +116,18 @@ class TextFState extends State<TextF> {
       maxLines: widget.maxLines,
       onTap: widget.onTap,
       textAlignVertical: TextAlignVertical.center,
-      style: widget.textStyle ?? TextTheme.of(context).bodyMedium500,
+      style: widget.textStyle ?? TextTheme.of(context).bodyLarge,
       decoration: InputDecoration(
-        isDense: true,
-        filled: true,
-        fillColor: ColorScheme.of(context).surfaceContainer,
+        fillColor: widget.backgroundColor,
         contentPadding: EdgeInsets.symmetric(
-          horizontal: Dimens.space6,
-          vertical: Dimens.space12,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Dimens.space16),
-          borderSide: BorderSide(color: ColorScheme.of(context).outline),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Dimens.space16),
-          borderSide: BorderSide(
-            color: ColorScheme.of(context).primary,
-            width: Dimens.space2,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Dimens.space16),
-          borderSide: BorderSide(color: ColorScheme.of(context).outline),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Dimens.space16),
-          borderSide: BorderSide(
-            color: ColorScheme.of(context).error,
-            width: Dimens.space2,
-          ),
+          horizontal: Dimens.space16,
+          vertical: Dimens.space16,
         ),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon == null
             ? null
             : Padding(
-                padding: EdgeInsets.only(
-                  left: Dimens.space8,
-                  right: Dimens.space8,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: Dimens.space12),
                 child: Center(
                   widthFactor: 1,
                   heightFactor: 1,
@@ -157,9 +139,6 @@ class TextFState extends State<TextF> {
         floatingLabelBehavior: widget.hint != null
             ? FloatingLabelBehavior.always
             : null,
-        hintStyle: TextTheme.of(
-          context,
-        ).bodyMedium?.copyWith(color: ColorScheme.of(context).onSurfaceVariant),
       ),
       validator: widget.validator,
       onChanged: (String value) =>

@@ -7,10 +7,20 @@ appId: com.lazycatlabs.auths.stg
     timeout: 15000
 - tapOn: "mudassir@lazycatlabs.com"
 - inputText: "hey.mudassir@gmail.com"
-- tapOn: "pass123"
+- tapOn: "Welcome back"
+- tapOn: "••••••••••••"
+- waitForAnimationToEnd
 - inputText: "Password123"
-- hideKeyboard
+- tapOn: "Welcome back"
 - tapOn: "Login"
+# iOS may offer to save the password; dismiss it when it appears
+- extendedWaitUntil:
+    visible: "Not Now"
+    timeout: 10000
+    optional: true
+- tapOn:
+    text: "Not Now"
+    optional: true
 - extendedWaitUntil:
     visible: "Dashboard"
     timeout: 15000

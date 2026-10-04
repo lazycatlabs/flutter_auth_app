@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/features/general/general.dart';
+import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -185,6 +185,34 @@ void main() {
       await tester.pump();
 
       expect(logoutCalled, isTrue);
+    });
+
+    testWidgets('shows the verified badge and menu icons', (tester) async {
+      when(() => userCubit.state).thenReturn(
+        const UserState.success(
+          User(name: 'Mudassir', email: 'mudassir@mail.com', isVerified: true),
+        ),
+      );
+
+      await tester.pumpWidget(
+        rootWidget(
+          MenuDrawer(
+            dataMenu: const [
+              DataHelper(
+                title: 'Dashboard',
+                icon: Icons.space_dashboard_outlined,
+                isSelected: true,
+              ),
+            ],
+            currentIndex: (_) {},
+            onLogoutPressed: () {},
+          ),
+        ),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(find.byIcon(Icons.verified_rounded), findsOneWidget);
+      expect(find.byIcon(Icons.space_dashboard_outlined), findsOneWidget);
     });
   });
 }

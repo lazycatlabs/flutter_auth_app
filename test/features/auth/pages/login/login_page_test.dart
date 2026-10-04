@@ -6,6 +6,7 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -225,4 +226,53 @@ void main() {
       verify(() => authCubit.login(any())).called(1);
     },
   );
+
+  testWidgets('sign-up link opens the register page', (tester) async {
+    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+
+    final router = GoRouter(
+      initialLocation: Routes.login.path,
+      routes: [
+        GoRoute(
+          path: Routes.login.path,
+          name: Routes.login.name,
+          builder: (_, _) => const LoginPage(),
+        ),
+        GoRoute(
+          path: Routes.register.path,
+          name: Routes.register.name,
+          builder: (_, _) => const Text('Register route'),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      BlocProvider<AuthCubit>.value(
+        value: authCubit,
+        child: ScreenUtilInit(
+          designSize: const Size(375, 667),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, _) => MaterialApp.router(
+            localizationsDelegates: const [
+              Strings.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            locale: const Locale('en'),
+            supportedLocales: L10n.all,
+            theme: themeLight(MockBuildContext()),
+            routerConfig: router,
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.byType(ButtonText));
+    await tester.tap(find.byType(ButtonText));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Register route'), findsOneWidget);
+  });
 }

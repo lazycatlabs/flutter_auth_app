@@ -203,4 +203,33 @@ void main() {
       Routes.dashboard.path,
     );
   });
+
+  testWidgets('app bar keeps the last title while the menu reloads', (
+    tester,
+  ) async {
+    when(
+      () => mainCubit.state,
+    ).thenReturn(const MainState.success(DataHelper(title: 'Dashboard')));
+    whenListen(
+      mainCubit,
+      Stream<MainState>.fromIterable(const [
+        MainState.loading(),
+        MainState.success(DataHelper(title: 'Settings')),
+      ]),
+      initialState: const MainState.success(DataHelper(title: 'Dashboard')),
+    );
+    when(() => mainCubit.currentIndex).thenReturn(0);
+    when(() => mainCubit.dataMenus).thenReturn(const []);
+    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
+    when(() => userCubit.state).thenReturn(const UserState.success(null));
+    when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
+
+    await tester.pumpWidget(
+      rootWidget(const MainPage(child: Text('Page content'))),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Settings'), findsOneWidget);
+    expect(find.text('-'), findsNothing);
+  });
 }

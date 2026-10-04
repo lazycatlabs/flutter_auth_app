@@ -10,7 +10,7 @@
   "email": "Email",
   "password": "Kata Sandi",
   "register": "Daftar",
-  "askRegister": "Belum punya akun?",
+  "askRegister": "Belum punya akun? Daftar",
   "errorInvalidEmail": "Email tidak valid",
   "errorEmptyField": "Tidak boleh kosong",
   "errorPasswordLength": "Kata Sandi minimal 6 karakter",
@@ -33,5 +33,9 @@
   "passwordHint": "••••••••••••",
   "menu": "Menu",
   "english": "English",
-  "bahasa": "Bahasa"
+  "bahasa": "Bahasa",
+  "welcomeBack": "Selamat datang kembali",
+  "loginSubtitle": "Masuk untuk melanjutkan ke akun anda",
+  "createAccount": "Buat akun",
+  "registerSubtitle": "Hanya butuh satu menit untuk memulai"
 }

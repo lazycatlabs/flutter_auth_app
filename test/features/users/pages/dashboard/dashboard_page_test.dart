@@ -13,6 +13,7 @@ import 'package:mocktail/mocktail.dart';
 
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/fake_path_provider_platform.dart';
@@ -68,7 +69,10 @@ void main() {
     when(() => usersCubit.state).thenReturn(const UsersState.loading());
     await tester.pumpWidget(rootWidget(const DashboardPage()));
     await tester.pump();
-    expect(find.byType(Loading), findsOneWidget);
+    expect(
+      find.byWidgetPredicate((widget) => widget is Skeletonizer),
+      findsOneWidget,
+    );
   });
 
   testWidgets('renders DashboardPage for UsersStatus.empty', (tester) async {
@@ -146,5 +150,23 @@ void main() {
 
     // Verify that the refresh method was called
     verify(() => usersCubit.refresh()).called(1);
+  });
+
+  testWidgets('shows the verified badge for verified users', (tester) async {
+    final verifiedUsers = users.copyWith(
+      lastPage: users.currentPage,
+      users: [
+        for (final user in users.users ?? <User>[])
+          user.copyWith(isVerified: true),
+      ],
+    );
+    when(() => usersCubit.state).thenReturn(UsersState.success(verifiedUsers));
+
+    await tester.pumpWidget(rootWidget(const DashboardPage()));
+    for (int i = 0; i < 10; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    expect(find.byIcon(Icons.verified_rounded), findsWidgets);
   });
 }

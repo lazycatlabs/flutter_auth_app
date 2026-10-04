@@ -22,7 +22,11 @@ paginated Dashboard user list uses [DummyJSON](https://dummyjson.com/docs/users)
 
 
 
-https://github.com/user-attachments/assets/f994e992-9161-46c3-8f0b-cd582c56bea2
+<p align="center">
+  <img src="maestro-recordings/stg/demo.gif" alt="Flutter Auth App demo: login, dashboard, settings, logout and register" width="300">
+</p>
+
+<p align="center"><sub>Recorded from the Maestro E2E run (<code>maestro-stg/main.yaml</code>) on iPhone 18 Pro Max, iOS 27 · <a href="maestro-recordings/stg/demo.mp4">MP4 version</a></sub></p>
 
 
 
@@ -106,6 +110,7 @@ dart pub run build_runner build
 - [x] Implement multi-flavor
 - [x] Auto routing based on login status
 - [x] Implement [Go Router](https://pub.dev/packages/go_router)
+- [x] Burgundy minimalist theme with [Instrument Sans](https://github.com/Instrument/instrument-sans), animated transitions and [Skeletonizer](https://pub.dev/packages/skeletonizer) loading
 
 ## TODO 📝
 

@@ -23,9 +23,19 @@ class _MainPageState extends State<MainPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     context.read<MainCubit>().initMenu([
-      DataHelper(title: Strings.of(context)!.dashboard, isSelected: true),
-      DataHelper(title: Strings.of(context)!.settings),
-      DataHelper(title: Strings.of(context)!.logout),
+      DataHelper(
+        title: Strings.of(context)!.dashboard,
+        icon: Icons.space_dashboard_outlined,
+        isSelected: true,
+      ),
+      DataHelper(
+        title: Strings.of(context)!.settings,
+        icon: Icons.tune_rounded,
+      ),
+      DataHelper(
+        title: Strings.of(context)!.logout,
+        icon: Icons.logout_rounded,
+      ),
     ]);
   }
 
@@ -44,7 +54,7 @@ class _MainPageState extends State<MainPage> {
         onMenuPressed: () => _scaffoldKey.currentState?.openDrawer(),
       ),
       drawer: SizedBox(
-        width: context.widthInPercent(80),
+        width: context.widthInPercent(78),
         child: BlocProvider(
           //coverage:ignore-start
           create: (_) => sl<UserCubit>()..getUser(),
@@ -62,22 +72,18 @@ class _MainPageState extends State<MainPage> {
             onLogoutPressed: () => showDialog(
               context: context,
               builder: (_) => AlertDialog(
-                title: Text(
-                  Strings.of(context)!.logout,
-                  style: TextTheme.of(
-                    context,
-                  ).bodyLarge?.copyWith(color: ColorScheme.of(context).error),
+                icon: Icon(
+                  Icons.logout_rounded,
+                  color: ColorScheme.of(context).error,
                 ),
-                content: Text(
-                  Strings.of(context)!.logoutDesc,
-                  style: TextTheme.of(context).bodyMedium,
-                ),
+                title: Text(Strings.of(context)!.logout),
+                content: Text(Strings.of(context)!.logoutDesc),
                 actions: [
                   TextButton(
                     onPressed: () => context.pop(),
                     child: Text(
                       Strings.of(context)!.cancel,
-                      style: TextTheme.of(context).bodyMedium?.copyWith(
+                      style: TextTheme.of(context).bodyMedium600?.copyWith(
                         color: ColorScheme.of(context).onSurfaceVariant,
                       ),
                     ),
@@ -102,7 +108,7 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: Text(
                         Strings.of(context)!.yes,
-                        style: TextTheme.of(context).bodyMedium?.copyWith(
+                        style: TextTheme.of(context).bodyMedium600?.copyWith(
                           color: ColorScheme.of(context).error,
                         ),
                       ),

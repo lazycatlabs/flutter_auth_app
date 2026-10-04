@@ -58,21 +58,19 @@ class _LoginPageState extends State<LoginPage> {
           message.toToastError(context);
         })(),
       },
-      child: Center(
-        child: SingleChildScrollView(
-          child: Padding(
+      child: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
             padding: EdgeInsets.all(Dimens.space24),
             child: AutofillGroup(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    Theme.brightnessOf(context) == Brightness.dark
-                        ? Images.icLauncherDark
-                        : Images.icLauncher,
-                    width: context.widthInPercent(70),
+                  AuthHeader(
+                    title: Strings.of(context)!.welcomeBack,
+                    subtitle: Strings.of(context)!.loginSubtitle,
                   ),
-                  SpacerV(value: Dimens.space50),
+                  SpacerV(value: Dimens.space36),
                   _LoginForm(
                     formKey: _formKey,
                     isValid: _isValid,
@@ -83,9 +81,15 @@ class _LoginPageState extends State<LoginPage> {
                     passwordFocusNode: _fnPassword,
                   ),
                   SpacerV(value: Dimens.space16),
-                  ButtonText(
-                    title: Strings.of(context)!.askRegister,
-                    onPressed: () => context.pushNamed(Routes.register.name),
+                  FadeSlideIn(
+                    delay: Motion.stagger * 6,
+                    child: Center(
+                      child: ButtonText(
+                        title: Strings.of(context)!.askRegister,
+                        onPressed: () =>
+                            context.pushNamed(Routes.register.name),
+                      ),
+                    ),
                   ),
                 ],
               ),

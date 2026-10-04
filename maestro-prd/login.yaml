@@ -3,8 +3,9 @@ appId: com.lazycatlabs.auths
 - launchApp
 - tapOn: "mudassir@lazycatlabs.com"
 - inputText: "mudassir@lazycatlabs.com"
-- tapOn: "pass123"
+- tapOn: "Welcome back"
+- tapOn: "••••••••••••"
+- waitForAnimationToEnd
 - inputText: "pass123"
-- tapOn:
-    point: 15%,12%
+- tapOn: "Welcome back"
 - tapOn: "Login"

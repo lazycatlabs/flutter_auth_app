@@ -4,6 +4,10 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+part 'menu_drawer_header.dart';
+part 'menu_drawer_item.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -19,100 +23,61 @@ class MenuDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Drawer(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: context.widthInPercent(100),
-          height: Dimens.header,
-          padding: EdgeInsets.symmetric(horizontal: Dimens.space16),
-          color: ColorScheme.of(context).primary,
-          child: SafeArea(
+    child: SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(Dimens.space24),
             child: BlocBuilder<UserCubit, UserState>(
-              builder: (_, state) => switch (state) {
-                UserStateLoading() => Loading(
-                  color: ColorScheme.of(context).onPrimary,
-                ),
-                UserStateFailure(:final message) => Center(
-                  child: Text(
-                    message,
-                    style: TextTheme.of(context).bodyMedium?.copyWith(
-                      color: ColorScheme.of(context).onPrimary,
+              builder: (_, state) => AnimatedSwitcher(
+                duration: Motion.medium,
+                child: switch (state) {
+                  UserStateLoading() => const Skeletonizer(
+                    child: _MenuDrawerHeader(
+                      user: User(
+                        name: 'Placeholder Name',
+                        email: 'placeholder@mail.com',
+                      ),
                     ),
                   ),
-                ),
-                UserStateSuccess(:final data) => Row(
-                  spacing: Dimens.space12,
-                  children: [
-                    CircleImage(
-                      url: data?.avatar ?? '',
-                      size: Dimens.profilePicture,
+                  UserStateFailure(:final message) => Text(
+                    message,
+                    style: TextTheme.of(context).bodyMedium?.copyWith(
+                      color: ColorScheme.of(context).error,
                     ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '${data?.name ?? ''} ${data?.isVerified ?? false ? '✅' : ''}',
-                            style: TextTheme.of(context).titleLargeBold
-                                ?.copyWith(
-                                  color: ColorScheme.of(context).onPrimary,
-                                ),
-                          ),
-                          Text(
-                            data?.email ?? '',
-                            style: TextTheme.of(context).bodySmall?.copyWith(
-                              color: ColorScheme.of(context).onPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              },
+                  ),
+                  UserStateSuccess(:final data) => _MenuDrawerHeader(
+                    user: data,
+                  ),
+                },
+              ),
             ),
           ),
-        ),
-        const SpacerV(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: dataMenu
-                  .map<Widget>(
-                    (value) => SizedBox(
-                      width: double.maxFinite,
-                      child: InkWell(
-                        onTap: () {
-                          if (value.title != null) {
-                            currentIndex(dataMenu.indexOf(value));
-                          }
-                          _selectedPage(context, value.title!);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: Dimens.space12,
-                            horizontal: Dimens.space24,
-                          ),
-                          child: Text(
-                            value.title!,
-                            style: TextTheme.of(context).bodyLarge,
-                          ),
-                        ),
-                      ),
+          Divider(indent: Dimens.space24, endIndent: Dimens.space24),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.all(Dimens.space12),
+              children: [
+                for (final (index, value) in dataMenu.indexed)
+                  FadeSlideIn(
+                    delay: Motion.stagger * index,
+                    offset: Dimens.space12,
+                    child: _MenuDrawerItem(
+                      menu: value,
+                      onTap: () {
+                        if (value.title != null) {
+                          currentIndex(index);
+                        }
+                        _selectedPage(context, value.title!);
+                      },
                     ),
-                  )
-                  .toList(),
+                  ),
+              ],
             ),
           ),
-        ), //
-        const SpacerH(),
-      ],
+        ],
+      ),
     ),
   );
 

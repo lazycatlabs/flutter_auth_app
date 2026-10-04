@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_auth_app/core/core.dart';
-import 'package:flutter_auth_app/features/general/general.dart';
+import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +14,7 @@ import 'package:mocktail/mocktail.dart';
 
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/test_mock.mocks.dart';
@@ -114,7 +115,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(Loading), findsOneWidget);
+      expect(
+        find.byWidgetPredicate((widget) => widget is Skeletonizer),
+        findsOneWidget,
+      );
     });
 
     testWidgets('displays failure header message', (WidgetTester tester) async {
@@ -181,6 +185,34 @@ void main() {
       await tester.pump();
 
       expect(logoutCalled, isTrue);
+    });
+
+    testWidgets('shows the verified badge and menu icons', (tester) async {
+      when(() => userCubit.state).thenReturn(
+        const UserState.success(
+          User(name: 'Mudassir', email: 'mudassir@mail.com', isVerified: true),
+        ),
+      );
+
+      await tester.pumpWidget(
+        rootWidget(
+          MenuDrawer(
+            dataMenu: const [
+              DataHelper(
+                title: 'Dashboard',
+                icon: Icons.space_dashboard_outlined,
+                isSelected: true,
+              ),
+            ],
+            currentIndex: (_) {},
+            onLogoutPressed: () {},
+          ),
+        ),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(find.byIcon(Icons.verified_rounded), findsOneWidget);
+      expect(find.byIcon(Icons.space_dashboard_outlined), findsOneWidget);
     });
   });
 }

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class LzyctApp extends StatelessWidget {
   @override
@@ -52,12 +53,15 @@ class LzyctApp extends StatelessWidget {
                   builder: (BuildContext context, Widget? child) {
                     final MediaQueryData data = MediaQuery.of(context);
 
-                    return MediaQuery(
-                      data: data.copyWith(
-                        textScaler: TextScaler.noScaling,
-                        alwaysUse24HourFormat: true,
+                    return SkeletonizerConfig(
+                      data: skeletonConfig(context),
+                      child: MediaQuery(
+                        data: data.copyWith(
+                          textScaler: TextScaler.noScaling,
+                          alwaysUse24HourFormat: true,
+                        ),
+                        child: child!,
                       ),
-                      child: child!,
                     );
                   },
                   title: Constants.appName,
@@ -66,6 +70,8 @@ class LzyctApp extends StatelessWidget {
                   locale: Locale(data.type ?? 'en'),
                   supportedLocales: L10n.all,
                   themeMode: data.activeTheme.mode,
+                  themeAnimationDuration: Motion.slow,
+                  themeAnimationCurve: Motion.standard,
                 );
               },
             );

@@ -1,22 +1,21 @@
 appId: com.lazycatlabs.auths.stg
 ---
 - evalScript: ${output.email = 'flutter-auth-maestro-' + Date.now() + '@example.com'}
-- tapOn: "DON'T HAVE AN ACCOUNT?"
+- tapOn: "Don't have an account.*"
 - tapOn: "Mudassir"
 - inputText: "Maestro Test User"
 - tapOn: "mudassir@lazycatlabs.com"
 - inputText: ${output.email}
-- tapOn:
-    point: 15%,15%
+- tapOn: "Create account"
 - tapOn: "password\n••••••••••••"
+- waitForAnimationToEnd
 - inputText: "pass123"
-- tapOn:
-    point: "50%,38%"
+- tapOn: "Create account"
 - tapOn: "repeat_password\n••••••••••••"
+- waitForAnimationToEnd
 - inputText: "pass123"
-- tapOn:
-    point: "50%,38%"
+- tapOn: "Create account"
 - tapOn: "Register"
 - extendedWaitUntil:
-    visible: "DON'T HAVE AN ACCOUNT?"
+    visible: "Don't have an account.*"
     timeout: 15000

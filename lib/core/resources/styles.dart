@@ -1,16 +1,15 @@
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+const String _fontFamily = 'InstrumentSans';
 
 /// Light theme
-ThemeData themeLight(BuildContext context) => ThemeData(
-  fontFamily: 'BeVietnamPro',
-  useMaterial3: true,
-  primaryColor: Palette.primary,
-  disabledColor: Palette.outline,
-  hintColor: Palette.onSurfaceVariant,
-  cardColor: Palette.surface,
-  scaffoldBackgroundColor: Palette.background,
+// ignore: avoid_unused_parameters
+ThemeData themeLight(BuildContext context) => _buildTheme(
+  brightness: Brightness.light,
   colorScheme: const ColorScheme.light().copyWith(
     primary: Palette.primary,
     onPrimary: Palette.onPrimary,
@@ -30,135 +29,42 @@ ThemeData themeLight(BuildContext context) => ThemeData(
     onErrorContainer: Palette.onErrorContainer,
     surface: Palette.background,
     onSurface: Palette.onSurface,
+    surfaceContainerLowest: Palette.surface,
+    surfaceContainerLow: Palette.surface,
+    surfaceContainer: Palette.surfaceContainer,
+    surfaceContainerHigh: Palette.surfaceContainerHigh,
     surfaceContainerHighest: Palette.surfaceVariant,
     onSurfaceVariant: Palette.onSurfaceVariant,
     outline: Palette.outline,
+    outlineVariant: Palette.outline,
     shadow: Palette.shadow,
   ),
-  textTheme: TextTheme(
-    displayLarge: TextTheme.of(context).displayLarge?.copyWith(
-      fontSize: Dimens.displayLarge,
-      color: Palette.textPrimary,
-    ),
-    displayMedium: TextTheme.of(context).displayMedium?.copyWith(
-      fontSize: Dimens.displayMedium,
-      color: Palette.textPrimary,
-    ),
-    displaySmall: TextTheme.of(context).displaySmall?.copyWith(
-      fontSize: Dimens.displaySmall,
-      color: Palette.textPrimary,
-    ),
-    headlineLarge: TextTheme.of(context).headlineLarge?.copyWith(
-      fontSize: Dimens.headlineLarge,
-      color: Palette.textPrimary,
-    ),
-    headlineMedium: TextTheme.of(context).headlineMedium?.copyWith(
-      fontSize: Dimens.headlineMedium,
-      color: Palette.textPrimary,
-    ),
-    headlineSmall: TextTheme.of(context).headlineSmall?.copyWith(
-      fontSize: Dimens.headlineSmall,
-      color: Palette.textPrimary,
-    ),
-    titleLarge: TextTheme.of(context).titleLarge?.copyWith(
-      fontSize: Dimens.titleLarge,
-      color: Palette.textPrimary,
-    ),
-    titleMedium: TextTheme.of(context).titleMedium?.copyWith(
-      fontSize: Dimens.titleMedium,
-      color: Palette.textPrimary,
-    ),
-    titleSmall: TextTheme.of(context).titleSmall?.copyWith(
-      fontSize: Dimens.titleSmall,
-      color: Palette.textPrimary,
-    ),
-    bodyLarge: TextTheme.of(context).bodyLarge?.copyWith(
-      fontSize: Dimens.bodyLarge,
-      color: Palette.textPrimary,
-    ),
-    bodyMedium: TextTheme.of(context).bodyMedium?.copyWith(
-      fontSize: Dimens.bodyMedium,
-      color: Palette.textPrimary,
-    ),
-    bodySmall: TextTheme.of(context).bodySmall?.copyWith(
-      fontSize: Dimens.bodySmall,
-      color: Palette.textPrimary,
-    ),
-    labelLarge: TextTheme.of(context).labelLarge?.copyWith(
-      fontSize: Dimens.labelLarge,
-      color: Palette.textPrimary,
-    ),
-    labelMedium: TextTheme.of(context).labelMedium?.copyWith(
-      fontSize: Dimens.labelMedium,
-      color: Palette.textPrimary,
-    ),
-    labelSmall: TextTheme.of(context).labelSmall?.copyWith(
-      fontSize: Dimens.labelSmall,
-      letterSpacing: 0.25,
-      color: Palette.textPrimary,
-    ),
+  colors: const LzyctColors(
+    background: Palette.background,
+    surface: Palette.surface,
+    surfaceVariant: Palette.surfaceVariant,
+    onPrimary: Palette.onPrimary,
+    onSurfaceVariant: Palette.onSurfaceVariant,
+    textPrimary: Palette.textPrimary,
+    textSecondary: Palette.textSecondary,
+    textOnPrimary: Palette.textOnPrimary,
+    textOnSecondary: Palette.textOnSecondary,
+    textOnTertiary: Palette.textOnTertiary,
+    textOnError: Palette.textOnError,
+    textLink: Palette.textLink,
+    textError: Palette.textError,
+    textWarning: Palette.textWarning,
+    shadow: Palette.shadow,
+    warning: Palette.warning,
   ),
-  appBarTheme: const AppBarTheme().copyWith(
-    titleTextStyle: Theme.of(
-      context,
-    ).textTheme.bodyLarge?.copyWith(color: Palette.textPrimary),
-    backgroundColor: Palette.background,
-    iconTheme: const IconThemeData(color: Palette.onSurface),
-    systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.transparent,
-    ),
-    surfaceTintColor: Palette.background,
-    shadowColor: Palette.shadow.withValues(alpha: 0.1),
-  ),
-  drawerTheme: const DrawerThemeData().copyWith(
-    elevation: Dimens.zero,
-    surfaceTintColor: Palette.surface,
-    backgroundColor: Palette.background,
-  ),
-  bottomSheetTheme: const BottomSheetThemeData().copyWith(
-    backgroundColor: Palette.surface,
-    surfaceTintColor: Colors.transparent,
-    elevation: Dimens.zero,
-  ),
-  dialogTheme: const DialogThemeData().copyWith(
-    backgroundColor: Palette.surface,
-    surfaceTintColor: Colors.transparent,
-    elevation: Dimens.zero,
-  ),
-  brightness: Brightness.light,
-  iconTheme: const IconThemeData(color: Palette.onSurface),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  extensions: const <ThemeExtension<dynamic>>[
-    LzyctColors(
-      background: Palette.background,
-      surface: Palette.surface,
-      surfaceVariant: Palette.surfaceVariant,
-      onPrimary: Palette.onPrimary,
-      onSurfaceVariant: Palette.onSurfaceVariant,
-      textPrimary: Palette.textPrimary,
-      textSecondary: Palette.textSecondary,
-      textOnPrimary: Palette.textOnPrimary,
-      textOnSecondary: Palette.textOnSecondary,
-      textOnTertiary: Palette.textOnTertiary,
-      textOnError: Palette.textOnError,
-      textLink: Palette.textLink,
-      textError: Palette.textError,
-      textWarning: Palette.textWarning,
-      shadow: Palette.shadow,
-      warning: Palette.warning,
-    ),
-  ],
+  cardColor: Palette.surface,
+  overlayStyle: SystemUiOverlayStyle.dark,
 );
 
 /// Dark theme
-ThemeData themeDark(BuildContext context) => ThemeData(
-  fontFamily: 'BeVietnamPro',
-  useMaterial3: true,
-  primaryColor: Palette.primaryDark,
-  disabledColor: Palette.outlineDark,
-  hintColor: Palette.onSurfaceVariantDark,
-  cardColor: Palette.surfaceDark,
-  scaffoldBackgroundColor: Palette.backgroundDark,
+// ignore: avoid_unused_parameters
+ThemeData themeDark(BuildContext context) => _buildTheme(
+  brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark().copyWith(
     primary: Palette.primaryDark,
     onPrimary: Palette.onPrimaryDark,
@@ -178,126 +84,222 @@ ThemeData themeDark(BuildContext context) => ThemeData(
     onErrorContainer: Palette.onErrorContainerDark,
     surface: Palette.backgroundDark,
     onSurface: Palette.onSurfaceDark,
+    surfaceContainerLowest: Palette.surfaceDark,
+    surfaceContainerLow: Palette.surfaceDark,
+    surfaceContainer: Palette.surfaceContainerDark,
+    surfaceContainerHigh: Palette.surfaceContainerHighDark,
     surfaceContainerHighest: Palette.surfaceVariantDark,
     onSurfaceVariant: Palette.onSurfaceVariantDark,
     outline: Palette.outlineDark,
+    outlineVariant: Palette.outlineDark,
     shadow: Palette.shadowDark,
   ),
-  textTheme: TextTheme(
-    displayLarge: TextTheme.of(context).displayLarge?.copyWith(
-      fontSize: Dimens.displayLarge,
-      color: Palette.textPrimaryDark,
-    ),
-    displayMedium: TextTheme.of(context).displayMedium?.copyWith(
-      fontSize: Dimens.displayMedium,
-      color: Palette.textPrimaryDark,
-    ),
-    displaySmall: TextTheme.of(context).displaySmall?.copyWith(
-      fontSize: Dimens.displaySmall,
-      color: Palette.textPrimaryDark,
-    ),
-    headlineLarge: TextTheme.of(context).headlineLarge?.copyWith(
-      fontSize: Dimens.headlineLarge,
-      color: Palette.textPrimaryDark,
-    ),
-    headlineMedium: TextTheme.of(context).headlineMedium?.copyWith(
-      fontSize: Dimens.headlineMedium,
-      color: Palette.textPrimaryDark,
-    ),
-    headlineSmall: TextTheme.of(context).headlineSmall?.copyWith(
-      fontSize: Dimens.headlineSmall,
-      color: Palette.textPrimaryDark,
-    ),
-    titleLarge: TextTheme.of(context).titleLarge?.copyWith(
-      fontSize: Dimens.titleLarge,
-      color: Palette.textPrimaryDark,
-    ),
-    titleMedium: TextTheme.of(context).titleMedium?.copyWith(
-      fontSize: Dimens.titleMedium,
-      color: Palette.textPrimaryDark,
-    ),
-    titleSmall: TextTheme.of(context).titleSmall?.copyWith(
-      fontSize: Dimens.titleSmall,
-      color: Palette.textPrimaryDark,
-    ),
-    bodyLarge: TextTheme.of(context).bodyLarge?.copyWith(
-      fontSize: Dimens.bodyLarge,
-      color: Palette.textPrimaryDark,
-    ),
-    bodyMedium: TextTheme.of(context).bodyMedium?.copyWith(
-      fontSize: Dimens.bodyMedium,
-      color: Palette.textPrimaryDark,
-    ),
-    bodySmall: TextTheme.of(context).bodySmall?.copyWith(
-      fontSize: Dimens.bodySmall,
-      color: Palette.textPrimaryDark,
-    ),
-    labelLarge: TextTheme.of(context).labelLarge?.copyWith(
-      fontSize: Dimens.labelLarge,
-      color: Palette.textPrimaryDark,
-    ),
-    labelMedium: TextTheme.of(context).labelMedium?.copyWith(
-      fontSize: Dimens.labelMedium,
-      color: Palette.textPrimaryDark,
-    ),
-    labelSmall: TextTheme.of(context).labelSmall?.copyWith(
-      fontSize: Dimens.labelSmall,
-      letterSpacing: 0.25,
-      color: Palette.textPrimaryDark,
-    ),
+  colors: const LzyctColors(
+    background: Palette.backgroundDark,
+    surface: Palette.surfaceDark,
+    surfaceVariant: Palette.surfaceVariantDark,
+    onPrimary: Palette.onPrimaryDark,
+    onSurfaceVariant: Palette.onSurfaceVariantDark,
+    textPrimary: Palette.textPrimaryDark,
+    textSecondary: Palette.textSecondaryDark,
+    textOnPrimary: Palette.textOnPrimaryDark,
+    textOnSecondary: Palette.textOnSecondaryDark,
+    textOnTertiary: Palette.textOnTertiaryDark,
+    textOnError: Palette.textOnErrorDark,
+    textLink: Palette.textLinkDark,
+    textError: Palette.textErrorDark,
+    textWarning: Palette.textWarningDark,
+    shadow: Palette.shadowDark,
+    warning: Palette.warningDark,
   ),
-  appBarTheme: const AppBarTheme().copyWith(
-    titleTextStyle: Theme.of(
-      context,
-    ).textTheme.bodyLarge?.copyWith(color: Palette.textPrimaryDark),
-    iconTheme: const IconThemeData(color: Palette.onSurfaceDark),
-    backgroundColor: Palette.backgroundDark,
-    systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: Colors.transparent,
-    ),
-    surfaceTintColor: Palette.backgroundDark,
-    shadowColor: Palette.shadowDark.withValues(alpha: 0.28),
-  ),
-  drawerTheme: const DrawerThemeData().copyWith(
-    elevation: Dimens.zero,
-    surfaceTintColor: Palette.surfaceDark,
-    backgroundColor: Palette.backgroundDark,
-    shadowColor: Palette.shadowDark.withValues(alpha: 0.28),
-  ),
-  bottomSheetTheme: const BottomSheetThemeData().copyWith(
-    backgroundColor: Palette.surfaceDark,
-    surfaceTintColor: Colors.transparent,
-    elevation: Dimens.zero,
-  ),
-  dialogTheme: const DialogThemeData().copyWith(
-    backgroundColor: Palette.surfaceDark,
-    surfaceTintColor: Colors.transparent,
-    elevation: Dimens.zero,
-  ),
-  brightness: Brightness.dark,
-  iconTheme: const IconThemeData(color: Palette.onSurfaceDark),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  extensions: const <ThemeExtension<dynamic>>[
-    LzyctColors(
-      background: Palette.backgroundDark,
-      surface: Palette.surfaceDark,
-      surfaceVariant: Palette.surfaceVariantDark,
-      onPrimary: Palette.onPrimaryDark,
-      onSurfaceVariant: Palette.onSurfaceVariantDark,
-      textPrimary: Palette.textPrimaryDark,
-      textSecondary: Palette.textSecondaryDark,
-      textOnPrimary: Palette.textOnPrimaryDark,
-      textOnSecondary: Palette.textOnSecondaryDark,
-      textOnTertiary: Palette.textOnTertiaryDark,
-      textOnError: Palette.textOnErrorDark,
-      textLink: Palette.textLinkDark,
-      textError: Palette.textErrorDark,
-      textWarning: Palette.textWarningDark,
-      shadow: Palette.shadowDark,
-      warning: Palette.warningDark,
-    ),
-  ],
+  cardColor: Palette.surfaceDark,
+  overlayStyle: SystemUiOverlayStyle.light,
 );
+
+ThemeData _buildTheme({
+  required Brightness brightness,
+  required ColorScheme colorScheme,
+  required LzyctColors colors,
+  required Color cardColor,
+  required SystemUiOverlayStyle overlayStyle,
+}) {
+  final textTheme = _textTheme(colorScheme.onSurface);
+  const fieldRadius = BorderRadius.all(Radius.circular(Dimens.cornerRadius));
+  const shape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
+  );
+
+  return ThemeData(
+    useMaterial3: true,
+    brightness: brightness,
+    fontFamily: _fontFamily,
+    colorScheme: colorScheme,
+    textTheme: textTheme,
+    primaryColor: colorScheme.primary,
+    disabledColor: colorScheme.outline,
+    hintColor: colorScheme.onSurfaceVariant,
+    cardColor: cardColor,
+    dividerColor: colorScheme.outline,
+    scaffoldBackgroundColor: colorScheme.surface,
+    splashFactory: InkSparkle.splashFactory,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    iconTheme: IconThemeData(color: colorScheme.onSurface),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
+    appBarTheme: AppBarTheme(
+      backgroundColor: colorScheme.surface,
+      foregroundColor: colorScheme.onSurface,
+      surfaceTintColor: Colors.transparent,
+      elevation: Dimens.zero,
+      scrolledUnderElevation: Dimens.zero,
+      centerTitle: true,
+      titleTextStyle: textTheme.titleMedium?.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
+      iconTheme: IconThemeData(color: colorScheme.onSurface),
+      systemOverlayStyle: overlayStyle.copyWith(
+        statusBarColor: Colors.transparent,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: colorScheme.surfaceContainer,
+      isDense: true,
+      hintStyle: textTheme.bodyMedium?.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
+      prefixIconColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.focused)
+            ? colorScheme.primary
+            : colorScheme.onSurfaceVariant,
+      ),
+      suffixIconColor: colorScheme.onSurfaceVariant,
+      border: const OutlineInputBorder(
+        borderRadius: fieldRadius,
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: fieldRadius,
+        borderSide: BorderSide(color: colorScheme.surfaceContainer),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: fieldRadius,
+        borderSide: BorderSide(color: colorScheme.primary, width: 1.5),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: fieldRadius,
+        borderSide: BorderSide(color: colorScheme.error),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: fieldRadius,
+        borderSide: BorderSide(color: colorScheme.error, width: 1.5),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: colorScheme.primary,
+        textStyle: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+        shape: shape,
+      ),
+    ),
+    dialogTheme: DialogThemeData(
+      backgroundColor: cardColor,
+      surfaceTintColor: Colors.transparent,
+      elevation: Dimens.zero,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(Dimens.cornerRadiusLg)),
+      ),
+      titleTextStyle: textTheme.titleLarge?.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
+      contentTextStyle: textTheme.bodyMedium?.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
+    ),
+    drawerTheme: DrawerThemeData(
+      elevation: Dimens.zero,
+      backgroundColor: colorScheme.surface,
+      surfaceTintColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.horizontal(
+          right: Radius.circular(Dimens.cornerRadiusLg),
+        ),
+      ),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: cardColor,
+      surfaceTintColor: Colors.transparent,
+      elevation: Dimens.zero,
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: colorScheme.primary,
+      circularTrackColor: colorScheme.primaryContainer,
+      strokeCap: StrokeCap.round,
+    ),
+    dividerTheme: DividerThemeData(
+      color: colorScheme.outline,
+      thickness: 1,
+      space: 1,
+    ),
+    extensions: <ThemeExtension<dynamic>>[colors],
+  );
+}
+
+/// Skeleton loading look, derived from the active theme so the shimmer
+/// follows the in-app theme mode rather than the platform brightness.
+SkeletonizerConfigData skeletonConfig(BuildContext context) {
+  final colorScheme = ColorScheme.of(context);
+
+  return SkeletonizerConfigData(
+    brightness: Theme.brightnessOf(context),
+    effectResolver: (_) => ShimmerEffect(
+      baseColor: colorScheme.surfaceContainerHigh,
+      highlightColor: colorScheme.surfaceContainerLowest,
+      duration: const Duration(milliseconds: 1400),
+    ),
+    justifyMultiLineText: false,
+    enableSwitchAnimation: true,
+  );
+}
+
+TextTheme _textTheme(Color color) {
+  TextStyle style(double size, FontWeight weight, {double spacing = 0}) =>
+      TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: size,
+        fontWeight: weight,
+        letterSpacing: spacing,
+        color: color,
+        height: 1.3,
+      );
+
+  return TextTheme(
+    displayLarge: style(Dimens.displayLarge, FontWeight.w600, spacing: -1.5),
+    displayMedium: style(Dimens.displayMedium, FontWeight.w600, spacing: -1),
+    displaySmall: style(Dimens.displaySmall, FontWeight.w600, spacing: -0.8),
+    headlineLarge: style(Dimens.headlineLarge, FontWeight.w600, spacing: -0.6),
+    headlineMedium: style(
+      Dimens.headlineMedium,
+      FontWeight.w600,
+      spacing: -0.6,
+    ),
+    headlineSmall: style(Dimens.headlineSmall, FontWeight.w600, spacing: -0.4),
+    titleLarge: style(Dimens.titleLarge, FontWeight.w600, spacing: -0.2),
+    titleMedium: style(Dimens.titleMedium, FontWeight.w500, spacing: -0.1),
+    titleSmall: style(Dimens.titleSmall, FontWeight.w500),
+    bodyLarge: style(Dimens.bodyLarge, FontWeight.w400),
+    bodyMedium: style(Dimens.bodyMedium, FontWeight.w400),
+    bodySmall: style(Dimens.bodySmall, FontWeight.w400),
+    labelLarge: style(Dimens.labelLarge, FontWeight.w500),
+    labelMedium: style(Dimens.labelMedium, FontWeight.w500, spacing: 0.1),
+    labelSmall: style(Dimens.labelSmall, FontWeight.w500, spacing: 0.25),
+  );
+}
 
 class LzyctColors extends ThemeExtension<LzyctColors> {
   final Color? background;
@@ -410,13 +412,13 @@ class BoxDecorations {
   BoxDecoration get button => BoxDecoration(
     color: ColorScheme.of(context).primary,
     borderRadius: const BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
-    boxShadow: [BoxShadows(context).button],
   );
 
+  /// Flat card: hairline border instead of a drop shadow.
   BoxDecoration get card => BoxDecoration(
-    color: ColorScheme.of(context).surfaceContainer,
+    color: Theme.of(context).cardColor,
     borderRadius: const BorderRadius.all(Radius.circular(Dimens.cornerRadius)),
-    boxShadow: [BoxShadows(context).card],
+    border: Border.all(color: ColorScheme.of(context).outline),
   );
 
   BoxDecoration get item => BoxDecoration(
@@ -437,9 +439,10 @@ class BoxShadows {
   final BuildContext context;
 
   BoxShadow get button => BoxShadow(
-    color: ColorScheme.of(context).shadow.withAlpha(10),
-    blurRadius: 16.0,
-    spreadRadius: 1.0,
+    color: ColorScheme.of(context).primary.withValues(alpha: 0.24),
+    offset: Offset(0, Dimens.space6),
+    blurRadius: Dimens.space16,
+    spreadRadius: -Dimens.space4,
   );
 
   BoxShadow get card => BoxShadow(

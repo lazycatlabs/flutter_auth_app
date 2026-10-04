@@ -73,36 +73,36 @@ class _RegisterPageState extends State<RegisterPage> {
           message.toToastError(context);
         })(),
       },
-      child: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(Dimens.space24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  Theme.brightnessOf(context) == Brightness.dark
-                      ? Images.icLauncherDark
-                      : Images.icLauncher,
-                  width: context.widthInPercent(70),
-                ),
-                _RegisterForm(
-                  formKey: _formKey,
-                  isValid: _isValid,
-                  isPasswordVisible: _isPasswordVisible,
-                  isPasswordRepeatVisible: _isPasswordRepeatVisible,
-                  nameController: _conName,
-                  emailController: _conEmail,
-                  passwordController: _conPassword,
-                  passwordRepeatController: _conPasswordRepeat,
-                  nameFocusNode: _fnName,
-                  emailFocusNode: _fnEmail,
-                  passwordFocusNode: _fnPassword,
-                  passwordRepeatFocusNode: _fnPasswordRepeat,
-                ),
-              ],
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          Dimens.space24,
+          Dimens.space8,
+          Dimens.space24,
+          Dimens.space24,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AuthHeader(
+              title: Strings.of(context)!.createAccount,
+              subtitle: Strings.of(context)!.registerSubtitle,
             ),
-          ),
+            SpacerV(value: Dimens.space30),
+            _RegisterForm(
+              formKey: _formKey,
+              isValid: _isValid,
+              isPasswordVisible: _isPasswordVisible,
+              isPasswordRepeatVisible: _isPasswordRepeatVisible,
+              nameController: _conName,
+              emailController: _conEmail,
+              passwordController: _conPassword,
+              passwordRepeatController: _conPasswordRepeat,
+              nameFocusNode: _fnName,
+              emailFocusNode: _fnEmail,
+              passwordFocusNode: _fnPassword,
+              passwordRepeatFocusNode: _fnPasswordRepeat,
+            ),
+          ],
         ),
       ),
     ),

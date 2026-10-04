@@ -8,11 +8,38 @@ class Empty extends StatelessWidget {
   const Empty({super.key, this.errorMessage});
 
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Image.asset(Images.icLauncher, width: context.widthInPercent(45)),
-      Text(errorMessage ?? Strings.of(context)!.errorNoData),
-    ],
+  Widget build(BuildContext context) => FadeSlideIn(
+    child: Padding(
+      padding: EdgeInsets.all(Dimens.space24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: Dimens.space16,
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: ColorScheme.of(context).primaryContainer,
+              shape: BoxShape.circle,
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(Dimens.space24),
+              child: Icon(
+                Icons.inbox_outlined,
+                size: Dimens.space36,
+                color: ColorScheme.of(context).onPrimaryContainer,
+              ),
+            ),
+          ),
+          Text(
+            errorMessage?.isNotEmpty ?? false
+                ? errorMessage!
+                : Strings.of(context)!.errorNoData,
+            style: TextTheme.of(context).bodyMedium500?.copyWith(
+              color: ColorScheme.of(context).onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ),
   );
 }

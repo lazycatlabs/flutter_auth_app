@@ -78,6 +78,9 @@ dependencies:
 
   intl: ^0.20.3
 
+  # Use for skeleton loading placeholders
+  skeletonizer: ^3.0.0
+
   material_ui: 1.2.0
   cupertino_ui: 1.0.2
 dev_dependencies:
@@ -139,26 +142,16 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins
+    - family: InstrumentSans
       fonts:
-        - asset: assets/fonts/Poppins-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/Poppins-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Poppins-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/InstrumentSans-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/InstrumentSans-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/InstrumentSans-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/InstrumentSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Poppins-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Poppins-Black.ttf
-          weight: 900
 
   #
   # For details regarding fonts from package dependencies,

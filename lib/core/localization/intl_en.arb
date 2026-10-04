@@ -10,7 +10,7 @@
   "email": "Email",
   "password": "Password",
   "register": "Register",
-  "askRegister": "Don't have an Account?",
+  "askRegister": "Don't have an account? Sign up",
   "errorInvalidEmail": "Email is not valid",
   "errorEmptyField": "Can't be empty",
   "errorPasswordLength": "Password must be at least 6 characters",
@@ -33,5 +33,9 @@
   "passwordHint": "••••••••••••",
   "menu": "Menu",
   "english": "English",
-  "bahasa": "Bahasa"
+  "bahasa": "Bahasa",
+  "welcomeBack": "Welcome back",
+  "loginSubtitle": "Sign in to continue to your account",
+  "createAccount": "Create account",
+  "registerSubtitle": "It only takes a minute to get started"
 }

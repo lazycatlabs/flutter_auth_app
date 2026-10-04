@@ -47,11 +47,12 @@ void main() {
     );
     final context = tester.element(find.byType(CachedNetworkImage));
     final fallback = image.errorWidget!(context, image.imageUrl, Exception());
-    final coloredBox = fallback as ColoredBox;
+    final coloredBox = (fallback as SizedBox).child! as ColoredBox;
     final icon = coloredBox.child! as Icon;
 
-    expect(coloredBox.color, Theme.of(context).colorScheme.tertiary);
-    expect(icon.icon, Icons.person);
-    expect(icon.size, Dimens.space36);
+    expect(fallback.width, 50);
+    expect(coloredBox.color, Theme.of(context).colorScheme.primaryContainer);
+    expect(icon.icon, Icons.person_rounded);
+    expect(icon.size, 25);
   });
 }

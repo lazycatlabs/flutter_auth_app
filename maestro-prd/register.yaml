@@ -1,18 +1,17 @@
 appId: com.lazycatlabs.auths
 ---
-- tapOn: "DON'T HAVE AN ACCOUNT?"
+- tapOn: "Don't have an account.*"
 - tapOn: "Mudassir"
 - inputText: "Mudassir"
 - tapOn: "mudassir@lazycatlabs.com"
 - inputText: "mudassir@lazycatlabs.com"
-- tapOn:
-      point: 15%,15%
+- tapOn: "Create account"
 - tapOn: "password\n••••••••••••"
+- waitForAnimationToEnd
 - inputText: "pass123"
-- tapOn:
-      point: "50%,38%"
+- tapOn: "Create account"
 - tapOn: "repeat_password\n••••••••••••"
+- waitForAnimationToEnd
 - inputText: "pass123"
-- tapOn:
-      point: "50%,38%"
+- tapOn: "Create account"
 - tapOn: "Register"

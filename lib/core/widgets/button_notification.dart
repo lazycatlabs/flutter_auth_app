@@ -15,20 +15,20 @@ class ButtonNotification extends StatelessWidget {
             left: 0,
             top: 0,
             bottom: 0,
-            child: Icon(Icons.notifications_outlined, size: Dimens.space30),
+            child: Icon(Icons.notifications_none_rounded, size: Dimens.space24),
           ),
           Positioned(
-            right: Dimens.space4,
-            bottom: Dimens.space6,
+            right: Dimens.space6,
+            top: Dimens.space6,
             child: Visibility(
               child: CircleAvatar(
-                backgroundColor: ColorScheme.of(context).secondary,
-                maxRadius: Dimens.space8,
+                backgroundColor: ColorScheme.of(context).primary,
+                maxRadius: Dimens.space6,
                 child: Center(
                   child: Text(
                     '1',
                     style: TextTheme.of(context).labelSmall?.copyWith(
-                      color: ColorScheme.of(context).onSecondary,
+                      color: ColorScheme.of(context).onPrimary,
                     ),
                     textAlign: TextAlign.center,
                   ),

@@ -39,8 +39,13 @@ class _DropDownState<T> extends State<DropDown<T>> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.hintIsVisible && widget.hint != null) ...{
-          Text(widget.hint ?? '', style: TextTheme.of(context).bodySmall),
-          SpacerV(value: Dimens.space6),
+          Text(
+            widget.hint ?? '',
+            style: TextTheme.of(context).labelMedium?.copyWith(
+              color: ColorScheme.of(context).onSurfaceVariant,
+            ),
+          ),
+          const SpacerV(),
         },
         ListenableBuilder(
           listenable: _fnDropdown,
@@ -53,75 +58,42 @@ class _DropDownState<T> extends State<DropDown<T>> {
               isExpanded: true,
               focusNode: _fnDropdown,
               dropdownColor: ColorScheme.of(context).surface,
-              icon: _fnDropdown.hasFocus
-                  ? Icon(Icons.check, color: ColorScheme.of(context).primary)
-                  : const Icon(Icons.keyboard_arrow_down),
-              style: TextTheme.of(context).bodyMedium?.copyWith(
-                color: ColorScheme.of(context).onSurfaceVariant,
-              ),
-              decoration: InputDecoration(
-                alignLabelWithHint: true,
-                isDense: true,
-                isCollapsed: true,
-                filled: true,
-                labelStyle: TextTheme.of(context).bodyMedium?.copyWith(
-                  color: ColorScheme.of(context).onSurfaceVariant,
+              icon: AnimatedSwitcher(
+                duration: Motion.medium,
+                transitionBuilder: (child, animation) => RotationTransition(
+                  turns: Tween<double>(begin: 0.75, end: 1).animate(animation),
+                  child: FadeTransition(opacity: animation, child: child),
                 ),
-                fillColor: ColorScheme.of(context).surfaceContainer,
+                child: _fnDropdown.hasFocus
+                    ? Icon(
+                        Icons.check_rounded,
+                        key: const ValueKey('check'),
+                        color: ColorScheme.of(context).primary,
+                      )
+                    : Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        key: const ValueKey('arrow'),
+                        color: ColorScheme.of(context).onSurfaceVariant,
+                      ),
+              ),
+              style: TextTheme.of(context).bodyLarge,
+              decoration: InputDecoration(
+                isCollapsed: true,
                 prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: Dimens.space12),
+                  padding: EdgeInsets.only(
+                    left: Dimens.space16,
+                    right: Dimens.space4,
+                  ),
                   child: widget.prefixIcon,
                 ),
                 prefixIconConstraints: BoxConstraints(
                   minHeight: Dimens.space24,
                   maxHeight: Dimens.space24,
                 ),
-                contentPadding: EdgeInsets.symmetric(vertical: Dimens.space12),
-                enabledBorder: OutlineInputBorder(
-                  gapPadding: 0,
-                  borderRadius: BorderRadius.circular(Dimens.space16),
-                  borderSide: BorderSide(
-                    color: ColorScheme.of(context).surfaceContainer,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  gapPadding: 0,
-                  borderRadius: BorderRadius.circular(Dimens.space16),
-                  borderSide: BorderSide(
-                    color: ColorScheme.of(context).surfaceContainer,
-                  ),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  gapPadding: 0,
-                  borderRadius: BorderRadius.circular(Dimens.space16),
-                  borderSide: BorderSide(
-                    color: ColorScheme.of(context).surfaceContainer,
-                  ),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  gapPadding: 0,
-                  borderRadius: BorderRadius.circular(Dimens.space16),
-                  borderSide: BorderSide(
-                    color: ColorScheme.of(context).error,
-                    width: Dimens.space2,
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  gapPadding: 0,
-                  borderRadius: BorderRadius.circular(Dimens.space16),
-                  borderSide: BorderSide(
-                    color: ColorScheme.of(context).error,
-                    width: Dimens.space2,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  gapPadding: 0,
-                  borderRadius: BorderRadius.circular(Dimens.space16),
-                  borderSide: BorderSide(
-                    color: ColorScheme.of(context).primary,
-                    width: Dimens.space2,
-                  ),
-                ),
+                contentPadding: EdgeInsets.symmetric(vertical: Dimens.space16),
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(Dimens.cornerRadius),
               ),
               initialValue: widget.value,
               items: widget.items,

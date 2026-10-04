@@ -154,7 +154,7 @@ void main() {
     await tester.pumpWidget(
       rootWidget(const MainPage(child: Text('Page content'))),
     );
-    await tester.tap(find.byIcon(Icons.sort));
+    await tester.tap(find.byIcon(Icons.menu_rounded));
     await tester.pump();
 
     expect(find.byType(Drawer), findsOneWidget);

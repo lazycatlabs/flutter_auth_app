@@ -74,7 +74,8 @@ void main() {
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == const AssetImage(Images.icLauncher);
+          return widget.image == const AssetImage(Images.icLogo) &&
+              widget.color == Palette.primary;
         }
         return false;
       }),
@@ -88,7 +89,8 @@ void main() {
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is Image) {
-          return widget.image == const AssetImage(Images.icLauncherDark);
+          return widget.image == const AssetImage(Images.icLogo) &&
+              widget.color == Palette.primaryDark;
         }
         return false;
       }),
@@ -132,7 +134,7 @@ void main() {
     await tester.pump();
 
     expect(obscureText(tester, const Key('password')), isFalse);
-    expect(find.byIcon(Icons.visibility), findsOneWidget);
+    expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
   });
 
   testWidgets('shows an error for an invalid email', (tester) async {

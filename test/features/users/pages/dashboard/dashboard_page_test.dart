@@ -13,6 +13,7 @@ import 'package:mocktail/mocktail.dart';
 
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../helpers/entity_fixtures.dart';
 import '../../../../helpers/fake_path_provider_platform.dart';
@@ -68,7 +69,10 @@ void main() {
     when(() => usersCubit.state).thenReturn(const UsersState.loading());
     await tester.pumpWidget(rootWidget(const DashboardPage()));
     await tester.pump();
-    expect(find.byType(Loading), findsOneWidget);
+    expect(
+      find.byWidgetPredicate((widget) => widget is Skeletonizer),
+      findsOneWidget,
+    );
   });
 
   testWidgets('renders DashboardPage for UsersStatus.empty', (tester) async {

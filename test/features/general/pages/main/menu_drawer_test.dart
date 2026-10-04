@@ -14,6 +14,7 @@ import 'package:mocktail/mocktail.dart';
 
 /// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/test_mock.mocks.dart';
@@ -114,7 +115,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(Loading), findsOneWidget);
+      expect(
+        find.byWidgetPredicate((widget) => widget is Skeletonizer),
+        findsOneWidget,
+      );
     });
 
     testWidgets('displays failure header message', (WidgetTester tester) async {

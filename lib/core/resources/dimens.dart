@@ -60,6 +60,9 @@ class Dimens {
   static double get imageW => 110.w;
 
   static const double cornerRadius = 16;
+  static const double cornerRadiusLg = 28;
+  static double get avatar => 48.w;
+  static double get logo => 64.w;
   static double get chartBox => 250.w;
   static const double cornerRadiusBottomSheet = 30;
 }

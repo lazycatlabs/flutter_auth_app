@@ -4,8 +4,14 @@ extension TextThemeExtension on TextTheme {
   TextStyle? get titleLargeBold =>
       titleLarge?.copyWith(fontWeight: FontWeight.bold);
 
+  TextStyle? get titleMedium600 =>
+      titleMedium?.copyWith(fontWeight: FontWeight.w600);
+
   TextStyle? get bodyMedium500 =>
       bodyMedium?.copyWith(fontWeight: FontWeight.w500);
+
+  TextStyle? get bodyMedium600 =>
+      bodyMedium?.copyWith(fontWeight: FontWeight.w600);
 
   TextStyle? get bodyLarge500 =>
       bodyLarge?.copyWith(fontWeight: FontWeight.w500);

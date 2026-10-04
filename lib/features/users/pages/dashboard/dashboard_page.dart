@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 part 'dashboard_empty.dart';
 part 'dashboard_loading.dart';
@@ -41,30 +41,44 @@ class _DashboardPageState extends State<DashboardPage> {
       backgroundColor: ColorScheme.of(context).surface,
       onRefresh: () => context.read<UsersCubit>().refresh(),
       child: BlocBuilder<UsersCubit, UsersState>(
-        builder: (_, state) => switch (state) {
-          UsersStateLoading() => const _DashboardLoading(),
-          UsersStateInitial() => const SizedBox.shrink(),
-          UsersStateSuccess(:final data) => ListView.builder(
-            controller: _scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemCount: data.currentPage == data.lastPage
-                ? data
-                      .users
-                      ?.length //coverage:ignore-line
-                : ((data.users?.length ?? 0) + 1),
-            padding: EdgeInsets.symmetric(vertical: Dimens.space16),
-            itemBuilder: (_, index) => index < (data.users?.length ?? 0)
-                ? _DashboardUserItem(user: data.users![index])
-                : Padding(
-                    padding: EdgeInsets.all(Dimens.space16),
-                    child: const Center(child: CupertinoActivityIndicator()),
-                  ),
+        builder: (_, state) => AnimatedSwitcher(
+          duration: Motion.medium,
+          switchInCurve: Motion.emphasized,
+          switchOutCurve: Motion.standard,
+          child: KeyedSubtree(
+            /// Only animate between skeleton and content; pagination
+            /// re-emits success and must not replay the transition.
+            key: ValueKey(state is UsersStateLoading),
+            child: switch (state) {
+              UsersStateLoading() => const _DashboardLoading(),
+              UsersStateInitial() => const SizedBox.shrink(),
+              UsersStateSuccess(:final data) => ListView.builder(
+                controller: _scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: data.currentPage == data.lastPage
+                    ? data
+                          .users
+                          ?.length //coverage:ignore-line
+                    : ((data.users?.length ?? 0) + 1),
+                padding: EdgeInsets.all(Dimens.space16),
+                itemBuilder: (_, index) => index < (data.users?.length ?? 0)
+                    ? _DashboardUserItem(user: data.users![index], index: index)
+                    : Padding(
+                        padding: EdgeInsets.all(Dimens.space16),
+                        child: Center(
+                          child: CupertinoActivityIndicator(
+                            color: ColorScheme.of(context).primary,
+                          ),
+                        ),
+                      ),
+              ),
+              UsersStateFailure(:final message) => _DashboardEmpty(
+                message: message,
+              ),
+              UsersStateEmpty() => const _DashboardEmpty(),
+            },
           ),
-          UsersStateFailure(:final message) => _DashboardEmpty(
-            message: message,
-          ),
-          UsersStateEmpty() => const _DashboardEmpty(),
-        },
+        ),
       ),
     ),
   );

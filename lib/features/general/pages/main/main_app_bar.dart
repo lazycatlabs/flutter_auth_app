@@ -13,14 +13,33 @@ class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     automaticallyImplyLeading: false,
     centerTitle: true,
     title: BlocBuilder<MainCubit, MainState>(
-      builder: (_, state) => Text(switch (state) {
-        MainStateLoading() => '-',
-        MainStateSuccess(:final data) => data?.title ?? '-',
-      }, style: TextTheme.of(context).titleLarge),
+      buildWhen: (_, current) => current is MainStateSuccess,
+      builder: (_, state) {
+        final title = switch (state) {
+          MainStateLoading() => '-',
+          MainStateSuccess(:final data) => data?.title ?? '-',
+        };
+
+        return AnimatedSwitcher(
+          duration: Motion.medium,
+          switchInCurve: Motion.emphasized,
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position: Tween(
+                begin: const Offset(0, 0.4),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            ),
+          ),
+          child: Text(title, key: ValueKey(title)),
+        );
+      },
     ),
     leading: IconButton(
       icon: Icon(
-        Icons.sort,
+        Icons.menu_rounded,
         size: Dimens.space24,
         semanticLabel: Strings.of(context)!.menu,
       ),

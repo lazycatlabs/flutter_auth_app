@@ -42,65 +42,71 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Padding(
         padding: EdgeInsets.all(Dimens.space16),
         child: Column(
+          spacing: Dimens.space8,
           children: [
-            DropDown<ActiveTheme>(
-              key: const Key('dropdown_theme'),
-              hint: Strings.of(context)!.chooseTheme,
-              value: _selectedTheme,
-              prefixIcon: Icon(
-                Icons.light,
-                color: ColorScheme.of(context).onSurfaceVariant,
-              ),
-              items: ActiveTheme.values
-                  .map(
-                    (data) => DropdownMenuItem(
-                      value: data,
-                      child: Text(
-                        _getThemeName(data, context),
-                        style: TextTheme.of(context).bodyMedium,
+            FadeSlideIn(
+              child: DropDown<ActiveTheme>(
+                key: const Key('dropdown_theme'),
+                hint: Strings.of(context)!.chooseTheme,
+                value: _selectedTheme,
+                prefixIcon: Icon(
+                  Icons.contrast_rounded,
+                  color: ColorScheme.of(context).onSurfaceVariant,
+                ),
+                items: ActiveTheme.values
+                    .map(
+                      (data) => DropdownMenuItem(
+                        value: data,
+                        child: Text(
+                          _getThemeName(data, context),
+                          style: TextTheme.of(context).bodyLarge,
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                /// Reload theme
-                context.read<SettingsCubit>().updateTheme(
-                  value ?? ActiveTheme.system,
-                );
-              },
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  /// Reload theme
+                  context.read<SettingsCubit>().updateTheme(
+                    value ?? ActiveTheme.system,
+                  );
+                },
+              ),
             ),
 
             /// Language
-            DropDown<DataHelper>(
-              key: const Key('dropdown_language'),
-              hint: Strings.of(context)!.chooseLanguage,
-              value: _selectedLanguage,
-              prefixIcon: Icon(
-                Icons.language_outlined,
-                color: ColorScheme.of(context).onSurfaceVariant,
-              ),
-              items: _listLanguage
-                  .map(
-                    (data) => DropdownMenuItem(
-                      value: data,
-                      child: Text(
-                        data.title ?? '-',
-                        style: TextTheme.of(context).bodyMedium,
+            FadeSlideIn(
+              delay: Motion.stagger,
+              child: DropDown<DataHelper>(
+                key: const Key('dropdown_language'),
+                hint: Strings.of(context)!.chooseLanguage,
+                value: _selectedLanguage,
+                prefixIcon: Icon(
+                  Icons.translate_rounded,
+                  color: ColorScheme.of(context).onSurfaceVariant,
+                ),
+                items: _listLanguage
+                    .map(
+                      (data) => DropdownMenuItem(
+                        value: data,
+                        child: Text(
+                          data.title ?? '-',
+                          style: TextTheme.of(context).bodyLarge,
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (DataHelper? value) {
-                _selectedLanguage = value ?? _listLanguage[0];
+                    )
+                    .toList(),
+                onChanged: (DataHelper? value) {
+                  _selectedLanguage = value ?? _listLanguage[0];
 
-                /// Reload theme
-                if (!mounted) {
-                  return;
-                }
-                context.read<SettingsCubit>().updateLanguage(
-                  value?.type ?? 'en',
-                );
-              },
+                  /// Reload theme
+                  if (!mounted) {
+                    return;
+                  }
+                  context.read<SettingsCubit>().updateLanguage(
+                    value?.type ?? 'en',
+                  );
+                },
+              ),
             ),
           ],
         ),

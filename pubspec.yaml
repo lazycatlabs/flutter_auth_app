@@ -32,7 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.9
 
   # Use as default SVG image loader, prefer use SVG as image asset
-  flutter_svg: ^2.3.0
+  flutter_svg: ^2.3.2
 
   # Functional programming thingies
   dartz: ^0.10.1
@@ -41,8 +41,8 @@ dependencies:
   dio: ^5.11.1
 
   # Use hive to save local data
-  hive_ce: ^2.20.1
-  hive_ce_flutter: ^2.4.0
+  hive_ce: ^2.23.3
+  hive_ce_flutter: ^2.5.0
 
   # Use for Dependencies Injection
   get_it: ^9.3.0
@@ -63,9 +63,9 @@ dependencies:
   logger: ^2.8.0
 
   # Firebase
-  firebase_core: ^4.15.0
-  firebase_analytics: ^12.6.0
-  firebase_crashlytics: ^5.4.0
+  firebase_core: ^4.15.2
+  firebase_analytics: ^12.6.1
+  firebase_crashlytics: ^5.4.1
 
   # router
   go_router: ^17.5.0
@@ -98,7 +98,7 @@ dev_dependencies:
 
   # Freezed
   freezed: ^3.2.5
-  json_serializable: ^6.14.1
+  json_serializable: ^6.15.2
 
   # Pinned until freezed support latest hive_ce_generator
   hive_ce_generator: 1.11.1

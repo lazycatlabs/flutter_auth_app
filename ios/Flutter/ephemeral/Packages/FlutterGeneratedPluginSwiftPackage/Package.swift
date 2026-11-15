@@ -15,9 +15,9 @@ let package = Package(
         .library(name: "FlutterGeneratedPluginSwiftPackage", type: .static, targets: ["FlutterGeneratedPluginSwiftPackage"])
     ],
     dependencies: [
-        .package(name: "firebase_analytics", path: "../.packages/firebase_analytics-12.6.1"),
-        .package(name: "firebase_core", path: "../.packages/firebase_core-4.15.2"),
-        .package(name: "firebase_crashlytics", path: "../.packages/firebase_crashlytics-5.4.1"),
+        .package(name: "firebase_core", path: "../.packages/firebase_core"),
+        .package(name: "firebase_analytics", path: "../.packages/firebase_analytics-13.0.1"),
+        .package(name: "firebase_crashlytics", path: "../.packages/firebase_crashlytics-6.0.1"),
         .package(name: "sqflite_darwin", path: "../.packages/sqflite_darwin-2.4.6"),
         .package(name: "FlutterFramework", path: "../.packages/FlutterFramework")
     ],
@@ -25,8 +25,8 @@ let package = Package(
         .target(
             name: "FlutterGeneratedPluginSwiftPackage",
             dependencies: [
-                .product(name: "firebase-analytics", package: "firebase_analytics"),
                 .product(name: "firebase-core", package: "firebase_core"),
+                .product(name: "firebase-analytics", package: "firebase_analytics"),
                 .product(name: "firebase-crashlytics", package: "firebase_crashlytics"),
                 .product(name: "sqflite-darwin", package: "sqflite_darwin"),
                 .product(name: "FlutterFramework", package: "FlutterFramework")

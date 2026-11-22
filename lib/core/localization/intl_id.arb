@@ -39,5 +39,7 @@
   "createAccount": "Buat akun",
   "registerSubtitle": "Hanya butuh satu menit untuk memulai",
   "loginSuccess": "Berhasil masuk",
-  "retry": "Coba lagi"
+  "retry": "Coba lagi",
+  "errorGeneric": "Terjadi kesalahan",
+  "success": "Berhasil"
 }

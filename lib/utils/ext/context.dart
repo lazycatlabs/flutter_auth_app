@@ -14,14 +14,14 @@ extension ContextExtensions on BuildContext {
     return MediaQuery.of(this).size.height * toDouble;
   }
 
-  //Start Loading Dialog
-  static late BuildContext ctx;
+  /// Context of the loading dialog currently shown, if any
+  static BuildContext? _loadingContext;
 
   Future<void> show() => showDialog(
     context: this,
     barrierDismissible: false,
     builder: (c) {
-      ctx = c;
+      _loadingContext = c;
 
       return PopScope(
         canPop: false,
@@ -44,8 +44,10 @@ extension ContextExtensions on BuildContext {
   );
 
   void dismiss() {
-    try {
-      Navigator.pop(ctx);
-    } catch (_) {}
+    final loadingContext = _loadingContext;
+    _loadingContext = null;
+    if (loadingContext != null && loadingContext.mounted) {
+      Navigator.pop(loadingContext);
+    }
   }
 }

@@ -17,7 +17,7 @@ void main() {
 
     /// disable isToLocal since the local time is different with GitHub Actions
     expect(
-      '2023-10-01T12:34:56Z'.toStringDateAlt(isToLocal: false),
+      '2023-10-01T12:34:56Z'.toStringDateAlt(isToLocal: false, locale: 'id'),
       '01 Oktober 2023 12:34',
     );
   });

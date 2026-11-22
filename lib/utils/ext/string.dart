@@ -13,7 +13,7 @@ extension StringExtension on String {
   //coverage:ignore-start
   void toToastError(BuildContext context, {bool isUnitTest = false}) {
     try {
-      final message = isEmpty ? 'error' : this;
+      final message = isEmpty ? Strings.of(context)!.errorGeneric : this;
 
       //dismiss before show toast
       dismissAllToast(showAnim: true);
@@ -23,7 +23,7 @@ extension StringExtension on String {
           bgColor: ColorScheme.of(context).error,
           icon: Icons.error,
           message: message,
-          textColor: Colors.white,
+          textColor: ColorScheme.of(context).onError,
         ),
         dismissOtherToast: true,
         position: ToastPosition.top,
@@ -33,13 +33,13 @@ extension StringExtension on String {
       if (!isUnitTest) {
         FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       }
-      log.e('error $e');
+      log.e('Failed to show toast', error: e, stackTrace: stackTrace);
     }
   }
 
   void toToastSuccess(BuildContext context, {bool isUnitTest = false}) {
     try {
-      final message = isEmpty ? 'success' : this;
+      final message = isEmpty ? Strings.of(context)!.success : this;
 
       //dismiss before show toast
       dismissAllToast(showAnim: true);
@@ -50,7 +50,7 @@ extension StringExtension on String {
           bgColor: ColorScheme.of(context).primary,
           icon: Icons.check_circle,
           message: message,
-          textColor: Colors.white,
+          textColor: ColorScheme.of(context).onPrimary,
         ),
         dismissOtherToast: true,
         position: ToastPosition.top,
@@ -60,13 +60,13 @@ extension StringExtension on String {
       if (!isUnitTest) {
         FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       }
-      log.e('$e');
+      log.e('Failed to show toast', error: e, stackTrace: stackTrace);
     }
   }
 
   void toToastLoading(BuildContext context, {bool isUnitTest = false}) {
     try {
-      final message = isEmpty ? 'loading' : this;
+      final message = isEmpty ? Strings.of(context)!.pleaseWait : this;
       //dismiss before show toast
       dismissAllToast(showAnim: true);
 
@@ -75,7 +75,7 @@ extension StringExtension on String {
           bgColor: ColorScheme.of(context).tertiary,
           icon: Icons.info,
           message: message,
-          textColor: Colors.white,
+          textColor: ColorScheme.of(context).onTertiary,
         ),
         dismissOtherToast: true,
         position: ToastPosition.top,
@@ -85,27 +85,26 @@ extension StringExtension on String {
       if (!isUnitTest) {
         FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
       }
-      log.e('$e');
+      log.e('Failed to show toast', error: e, stackTrace: stackTrace);
     }
   }
 
   //coverage:ignore-end
 
-  String toStringDateAlt({bool isShort = false, bool isToLocal = true}) {
-    try {
-      DateTime object;
-      if (isToLocal) {
-        object = DateTime.parse(this).toLocal();
-      } else {
-        object = DateTime.parse(this);
-      }
-
-      return DateFormat(
-        "dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm",
-        'id',
-      ).format(object);
-    } catch (_) {
+  /// Formats an ISO-8601 string; returns `-` when it cannot be parsed.
+  /// [locale] defaults to `Intl.defaultLocale`.
+  String toStringDateAlt({
+    bool isShort = false,
+    bool isToLocal = true,
+    String? locale,
+  }) {
+    final date = DateTime.tryParse(this);
+    if (date == null) {
       return '-';
     }
+    return DateFormat(
+      "dd ${isShort ? "MMM" : "MMMM"} yyyy HH:mm",
+      locale,
+    ).format(isToLocal ? date.toLocal() : date);
   }
 }

@@ -39,5 +39,7 @@
   "createAccount": "Create account",
   "registerSubtitle": "It only takes a minute to get started",
   "loginSuccess": "Signed in successfully",
-  "retry": "Retry"
+  "retry": "Retry",
+  "errorGeneric": "Something went wrong",
+  "success": "Success"
 }

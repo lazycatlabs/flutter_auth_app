@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 class FakePathProvider extends PathProviderPlatform {

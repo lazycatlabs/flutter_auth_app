@@ -8,7 +8,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../../helpers/entity_fixtures.dart';
@@ -33,7 +32,10 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true, prefixBox: 'auth_cubit_test_');
+    await serviceLocator(
+      isUnitTest: true,
+      prefixBox: 'general_token_cubit_test_',
+    );
     generalToken = buildGeneralTokenFixture(
       GeneralTokenResponse.fromJson(
         json.decode(jsonReader(pathGeneralTokenResponse200))

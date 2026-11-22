@@ -30,18 +30,26 @@ jobs:
 
       # Get flutter dependencies.
       - name: Run initialize flutter project
-        run: flutter pub get ;flutter gen-l10n;flutter pub run build_runner build --delete-conflicting-outputs
+        run: flutter pub get && flutter gen-l10n && dart run build_runner build --delete-conflicting-outputs
+
+      # Fail when code is not formatted (run `dart format lib test` locally)
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed lib test
 
       # Statically analyze the Dart code for any errors.
       - name: Run flutter analyze
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        run: flutter analyze --no-fatal-infos
 
       # Run widget tests for our flutter project.
       - name: Install LCOV
         run: sudo apt-get update && sudo apt-get install -y lcov
 
       - name: Run flutter test --machine --coverage
-        run: flutter test --coverage;lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' '**/*.g.dart' -o coverage/new_lcov.info ;genhtml coverage/new_lcov.info -o coverage/html
+        run: |
+          set -e
+          flutter test --coverage
+          lcov --remove coverage/lcov.info 'lib/core/localization/generated/' 'lib/core/resources/*' 'lib/utils/services/firebase/*' '**/*.g.dart' -o coverage/new_lcov.info
+          genhtml coverage/new_lcov.info -o coverage/html
 
 
       - name: Upload coverage to Codecov

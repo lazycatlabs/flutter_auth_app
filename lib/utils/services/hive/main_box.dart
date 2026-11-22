@@ -24,7 +24,7 @@ enum MainBoxKeys {
 }
 
 mixin class MainBoxMixin {
-  static late Box? mainBox;
+  static Box? mainBox;
   static const _boxName = 'flutter_auth_app';
 
   static Future<void> initHive(String prefixBox) async {

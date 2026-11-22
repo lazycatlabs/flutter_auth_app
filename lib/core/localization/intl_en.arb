@@ -38,5 +38,6 @@
   "loginSubtitle": "Sign in to continue to your account",
   "createAccount": "Create account",
   "registerSubtitle": "It only takes a minute to get started",
-  "loginSuccess": "Signed in successfully"
+  "loginSuccess": "Signed in successfully",
+  "retry": "Retry"
 }

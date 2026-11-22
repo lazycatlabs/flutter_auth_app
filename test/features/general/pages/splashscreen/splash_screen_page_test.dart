@@ -123,4 +123,22 @@ void main() {
       await tester.pumpAndSettle();
     },
   );
+
+  testWidgets('shows the error and retries when general token fails', (
+    tester,
+  ) async {
+    when(
+      () => generalTokenCubit.state,
+    ).thenReturn(const GeneralTokenState.failure('Server down'));
+    when(() => generalTokenCubit.generalToken(any())).thenAnswer((_) async {});
+
+    await tester.pumpWidget(rootWidget(const SplashScreenPage()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Server down'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('btn_retry')));
+    verify(
+      () => generalTokenCubit.generalToken(GeneralTokenParams.fromEnvironment),
+    ).called(1);
+  });
 }

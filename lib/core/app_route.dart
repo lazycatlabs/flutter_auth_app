@@ -38,13 +38,9 @@ class AppRoute {
         path: Routes.splashScreen.path,
         name: Routes.splashScreen.name,
         builder: (_, _) => BlocProvider(
-          create: (_) => sl<GeneralTokenCubit>()
-            ..generalToken(
-              const GeneralTokenParams(
-                clientId: String.fromEnvironment('CLIENT_ID'),
-                clientSecret: String.fromEnvironment('CLIENT_SECRET'),
-              ),
-            ),
+          create: (_) =>
+              sl<GeneralTokenCubit>()
+                ..generalToken(GeneralTokenParams.fromEnvironment),
           child: const SplashScreenPage(),
         ),
       ),

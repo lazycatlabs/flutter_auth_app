@@ -35,6 +35,14 @@ sealed class GeneralTokenParams with _$GeneralTokenParams {
   const factory GeneralTokenParams({String? clientId, String? clientSecret}) =
       _GeneralTokenParams;
 
+  const GeneralTokenParams._();
+
+  /// Client credentials from `--dart-define-from-file .env.<flavor>.json`
+  static const fromEnvironment = GeneralTokenParams(
+    clientId: String.fromEnvironment('CLIENT_ID'),
+    clientSecret: String.fromEnvironment('CLIENT_SECRET'),
+  );
+
   factory GeneralTokenParams.fromJson(Map<String, dynamic> json) =>
       _$GeneralTokenParamsFromJson(json);
 }

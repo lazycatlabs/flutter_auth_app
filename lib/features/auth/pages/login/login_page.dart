@@ -24,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
   final _isValid = ValueNotifier(false);
-  final _isPasswordVisible = ValueNotifier(false);
 
   /// Focus Node
   final _fnEmail = FocusNode();
@@ -32,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _isPasswordVisible.dispose();
     _isValid.dispose();
     _conEmail.dispose();
     _conPassword.dispose();
@@ -74,7 +72,6 @@ class _LoginPageState extends State<LoginPage> {
                   _LoginForm(
                     formKey: _formKey,
                     isValid: _isValid,
-                    isPasswordVisible: _isPasswordVisible,
                     emailController: _conEmail,
                     passwordController: _conPassword,
                     emailFocusNode: _fnEmail,

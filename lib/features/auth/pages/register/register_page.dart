@@ -30,14 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _isValid = ValueNotifier(false);
 
-  /// isPasswordVisible
-  final _isPasswordVisible = ValueNotifier(false);
-  final _isPasswordRepeatVisible = ValueNotifier(false);
-
   @override
   void dispose() {
-    _isPasswordVisible.dispose();
-    _isPasswordRepeatVisible.dispose();
     _isValid.dispose();
 
     _conName.dispose();
@@ -91,8 +85,6 @@ class _RegisterPageState extends State<RegisterPage> {
             _RegisterForm(
               formKey: _formKey,
               isValid: _isValid,
-              isPasswordVisible: _isPasswordVisible,
-              isPasswordRepeatVisible: _isPasswordRepeatVisible,
               nameController: _conName,
               emailController: _conEmail,
               passwordController: _conPassword,

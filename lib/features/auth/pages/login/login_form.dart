@@ -4,7 +4,6 @@ class _LoginForm extends StatelessWidget {
   const _LoginForm({
     required this.formKey,
     required this.isValid,
-    required this.isPasswordVisible,
     required this.emailController,
     required this.passwordController,
     required this.emailFocusNode,
@@ -13,7 +12,6 @@ class _LoginForm extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final ValueNotifier<bool> isValid;
-  final ValueNotifier<bool> isPasswordVisible;
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final FocusNode emailFocusNode;
@@ -38,46 +36,22 @@ class _LoginForm extends StatelessWidget {
             prefixIcon: const Icon(Icons.alternate_email_rounded),
             hint: Strings.of(context)!.emailHint,
             label: Strings.of(context)!.email,
-            validator: (value) => !value.toString().isValidEmail()
+            validator: (value) => !(value ?? '').isValidEmail()
                 ? Strings.of(context)!.errorInvalidEmail
                 : null,
           ),
         ),
         FadeSlideIn(
           delay: Motion.stagger * 4,
-          child: ValueListenableBuilder(
-            valueListenable: isPasswordVisible,
-            builder: (_, passwordIsVisible, _) => TextF(
-              autoFillHints: const [AutofillHints.password],
-              key: const Key('password'),
-              focusNode: passwordFocusNode,
-              textInputAction: TextInputAction.done,
-              controller: passwordController,
-              textInputType: TextInputType.text,
-              prefixIcon: const Icon(Icons.lock_outline_rounded),
-              obscureText: !passwordIsVisible,
-              hint: Strings.of(context)!.passwordHint,
-              label: Strings.of(context)!.password,
-              suffixIcon: IconButton(
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-                onPressed: () => isPasswordVisible.value = !passwordIsVisible,
-                icon: AnimatedSwitcher(
-                  duration: Motion.fast,
-                  transitionBuilder: (child, animation) =>
-                      ScaleTransition(scale: animation, child: child),
-                  child: Icon(
-                    passwordIsVisible
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
-                    key: ValueKey(passwordIsVisible),
-                  ),
-                ),
-              ),
-              validator: (value) => (value?.length ?? 0) < 5
-                  ? Strings.of(context)!.errorPasswordLength
-                  : null,
-            ),
+          child: PasswordField(
+            fieldKey: const Key('password'),
+            autoFillHints: const [AutofillHints.password],
+            focusNode: passwordFocusNode,
+            controller: passwordController,
+            label: Strings.of(context)!.password,
+            validator: (value) => (value?.length ?? 0) < 5
+                ? Strings.of(context)!.errorPasswordLength
+                : null,
           ),
         ),
         SpacerV(value: Dimens.space24),

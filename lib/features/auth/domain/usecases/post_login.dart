@@ -15,10 +15,10 @@ class PostLogin extends UseCase<Login, LoginParams> with MainBoxMixin {
   @override
   Future<Either<Failure, Login>> call(LoginParams params) async {
     final result = await _repo.login(params);
-    return result.fold((failure) => Left(failure), (login) {
-      addData(MainBoxKeys.isLogin, true);
-      addData(MainBoxKeys.authToken, login.token);
-      addData(MainBoxKeys.refreshToken, login.refreshToken);
+    return await result.thenAsync((login) async {
+      await addData(MainBoxKeys.isLogin, true);
+      await addData(MainBoxKeys.authToken, login.token);
+      await addData(MainBoxKeys.refreshToken, login.refreshToken);
       return Right(login);
     });
   }

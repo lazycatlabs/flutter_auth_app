@@ -16,7 +16,7 @@ class PostGeneralToken extends UseCase<GeneralToken, GeneralTokenParams>
   @override
   Future<Either<Failure, GeneralToken>> call(GeneralTokenParams params) async {
     final result = await _repo.generalToken(params);
-    return result.fold((failure) => Left(failure), (token) async {
+    return await result.thenAsync((token) async {
       final storedClientId = getData<String?>(MainBoxKeys.apiClientId);
       if (storedClientId != params.clientId) {
         await removeData(MainBoxKeys.isLogin);

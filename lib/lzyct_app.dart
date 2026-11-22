@@ -23,6 +23,9 @@ class LzyctApp extends StatelessWidget {
         BlocProvider(create: (_) => sl<LogoutCubit>()),
       ],
       child: ToastificationWrapper(
+        /// toastification defaults to a fixed 400px width, which overflows
+        /// narrow phones; span the screen and let Toast center itself.
+        config: const ToastificationConfig(itemWidth: double.infinity),
         child: ScreenUtilInit(
           /// Set screen size to make responsive
           /// Almost all device

@@ -19,34 +19,38 @@ class Toast extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      DecoratedBox(
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(Dimens.cornerRadius),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: Dimens.space8,
-            horizontal: Dimens.space16,
+      Flexible(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(Dimens.cornerRadius),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, color: textColor),
-              SpacerH(value: Dimens.space4),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: Dimens.menuContainer),
-                child: Text(
-                  message ?? '',
-                  style: TextTheme.of(
-                    context,
-                  ).bodyMedium?.copyWith(color: textColor),
-                  textAlign: TextAlign.start,
-                  maxLines: 5,
-                  softWrap: true,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: Dimens.space8,
+              horizontal: Dimens.space16,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, color: textColor),
+                SpacerH(value: Dimens.space4),
+                Flexible(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: Dimens.menuContainer),
+                    child: Text(
+                      message ?? '',
+                      style: TextTheme.of(
+                        context,
+                      ).bodyMedium?.copyWith(color: textColor),
+                      textAlign: TextAlign.start,
+                      maxLines: 5,
+                      softWrap: true,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

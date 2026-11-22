@@ -34,8 +34,8 @@ dependencies:
   # Use as default SVG image loader, prefer use SVG as image asset
   flutter_svg: ^2.3.2
 
-  # Functional programming thingies
-  dartz: ^0.10.1
+  # Functional programming thingies (Either)
+  either_dart: ^1.0.0
 
   # Use as Network Client
   dio: ^5.11.1

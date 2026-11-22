@@ -209,7 +209,7 @@ void main() {
       final result = await dataSource.generalToken(generalTokenParams);
 
       /// assert
-      expect(result.isRight(), isTrue);
+      expect(result.isRight, isTrue);
     });
   });
 }

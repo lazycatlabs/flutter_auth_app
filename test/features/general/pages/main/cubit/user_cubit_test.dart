@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';

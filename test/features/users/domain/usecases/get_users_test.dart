@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

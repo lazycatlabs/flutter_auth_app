@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 
 abstract class UseCase<Result, Params> {

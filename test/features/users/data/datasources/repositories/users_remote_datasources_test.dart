@@ -127,7 +127,7 @@ void main() {
       final result = await dataSource.users(usersParams);
 
       /// assert
-      expect(result.isRight(), isTrue);
+      expect(result.isRight, isTrue);
     });
 
     test(

@@ -1,18 +1,23 @@
 part of 'menu_drawer.dart';
 
 class _MenuDrawerItem extends StatelessWidget {
-  const _MenuDrawerItem({required this.menu, required this.onTap});
+  const _MenuDrawerItem({
+    required this.menu,
+    required this.isSelected,
+    required this.onTap,
+  });
 
-  final DataHelper menu;
+  final MainMenu menu;
+  final bool isSelected;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
-    final isDestructive = menu.title == Strings.of(context)!.logout;
+    final isDestructive = menu == MainMenu.logout;
     final foreground = isDestructive
         ? colorScheme.error
-        : menu.isSelected
+        : isSelected
         ? colorScheme.onPrimaryContainer
         : colorScheme.onSurface;
 
@@ -22,7 +27,7 @@ class _MenuDrawerItem extends StatelessWidget {
         duration: Motion.medium,
         curve: Motion.standard,
         decoration: BoxDecoration(
-          color: menu.isSelected
+          color: isSelected
               ? colorScheme.primaryContainer
               : colorScheme.primaryContainer.withValues(alpha: 0),
           borderRadius: const BorderRadius.all(
@@ -44,18 +49,17 @@ class _MenuDrawerItem extends StatelessWidget {
               child: Row(
                 spacing: Dimens.space12,
                 children: [
-                  if (menu.icon != null)
-                    Icon(menu.icon, size: Dimens.space20, color: foreground),
+                  Icon(menu.icon, size: Dimens.space20, color: foreground),
                   Expanded(
                     child: AnimatedDefaultTextStyle(
                       duration: Motion.medium,
                       style:
-                          (menu.isSelected
+                          (isSelected
                                   ? TextTheme.of(context).bodyLarge500
                                   : TextTheme.of(context).bodyLarge)
                               ?.copyWith(color: foreground) ??
                           const TextStyle(),
-                      child: Text(menu.title ?? ''),
+                      child: Text(menu.title(context)),
                     ),
                   ),
                 ],

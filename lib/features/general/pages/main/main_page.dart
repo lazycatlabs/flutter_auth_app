@@ -20,31 +20,13 @@ class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    context.read<MainCubit>().initMenu([
-      DataHelper(
-        title: Strings.of(context)!.dashboard,
-        icon: Icons.space_dashboard_outlined,
-        isSelected: true,
-      ),
-      DataHelper(
-        title: Strings.of(context)!.settings,
-        icon: Icons.tune_rounded,
-      ),
-      DataHelper(
-        title: Strings.of(context)!.logout,
-        icon: Icons.logout_rounded,
-      ),
-    ]);
-  }
-
-  @override
   Widget build(BuildContext context) => PopScope(
-    canPop: context.select<MainCubit, bool>((cubit) => cubit.currentIndex == 0),
+    canPop: context.select<MainCubit, bool>(
+      (cubit) => cubit.state == MainMenu.dashboard,
+    ),
     onPopInvokedWithResult: (didPop, _) {
       if (!didPop) {
-        context.read<MainCubit>().updateIndex(0);
+        context.read<MainCubit>().select(MainMenu.dashboard);
         context.goNamed(Routes.dashboard.name);
       }
     },
@@ -59,11 +41,10 @@ class _MainPageState extends State<MainPage> {
           //coverage:ignore-start
           create: (_) => sl<UserCubit>()..getUser(),
           child: MenuDrawer(
-            dataMenu: context.read<MainCubit>().dataMenus,
-            currentIndex: (int index) {
-              /// don't update when index is logout
-              if (index != 2) {
-                context.read<MainCubit>().updateIndex(index);
+            selected: context.watch<MainCubit>().state,
+            onSelected: (menu) {
+              if (menu.route != null) {
+                context.read<MainCubit>().select(menu);
               }
 
               /// hide navigation drawer

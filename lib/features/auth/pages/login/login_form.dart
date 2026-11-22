@@ -89,7 +89,7 @@ class _LoginForm extends StatelessWidget {
               title: Strings.of(context)!.login,
               width: double.maxFinite,
               onPressed: formIsValid
-                  ? () => context.read<AuthCubit>().login(
+                  ? () => context.read<LoginCubit>().login(
                       LoginParams(
                         email: emailController.text,
                         password: passwordController.text,

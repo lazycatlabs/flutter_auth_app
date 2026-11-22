@@ -43,17 +43,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) => Parent(
-    child: BlocListener<AuthCubit, AuthState>(
+    child: BlocListener<LoginCubit, LoginState>(
       listener: (_, state) => switch (state) {
-        AuthStateLoading() => context.show(),
-        AuthStateSuccess() => (() {
+        LoginStateLoading() => context.show(),
+        LoginStateSuccess() => (() {
           context.dismiss();
           Strings.of(context)!.loginSuccess.toToastSuccess(context);
 
           TextInput.finishAutofillContext();
           context.goNamed(Routes.root.name);
         })(),
-        AuthStateFailure(:final message) => (() {
+        LoginStateFailure(:final message) => (() {
           context.dismiss();
           message.toToastError(context);
         })(),

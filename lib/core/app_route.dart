@@ -91,7 +91,7 @@ class AppRoute {
         ? null
         //coverage:ignore-start
         : GoRouterRefreshStream([
-            context.read<AuthCubit>().stream,
+            context.read<LoginCubit>().stream,
             context.read<LogoutCubit>().stream,
           ]),
     //coverage:ignore-end

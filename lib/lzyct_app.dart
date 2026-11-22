@@ -19,7 +19,7 @@ class LzyctApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..loadSettings()),
-        BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<LoginCubit>()),
         BlocProvider(create: (_) => sl<LogoutCubit>()),
       ],
       child: OKToast(

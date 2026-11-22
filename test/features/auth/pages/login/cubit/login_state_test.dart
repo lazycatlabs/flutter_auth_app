@@ -4,18 +4,18 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('AuthStatusX', () {
     test('returns correct values for AuthStatus.loading', () {
-      const status = AuthState.loading();
-      expect(status, const AuthState.loading());
+      const status = LoginState.loading();
+      expect(status, const LoginState.loading());
     });
 
     test('returns correct values for AuthStatus.success', () {
-      const status = AuthState.success(null);
-      expect(status, const AuthState.success(null));
+      const status = LoginState.success(null);
+      expect(status, const LoginState.success(null));
     });
 
     test('returns correct values for AuthStatus.failure', () {
-      const status = AuthState.failure('');
-      expect(status, const AuthState.failure(''));
+      const status = LoginState.failure('');
+      expect(status, const LoginState.failure(''));
     });
   });
 }

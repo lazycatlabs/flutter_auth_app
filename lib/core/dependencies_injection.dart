@@ -61,7 +61,7 @@ void _useCases() {
 void _cubits() {
   sl
     ..registerFactory(() => RegisterCubit(sl()))
-    ..registerFactory(() => AuthCubit(sl()))
+    ..registerFactory(() => LoginCubit(sl()))
     ..registerFactory(() => GeneralTokenCubit(sl()))
     ..registerFactory(() => LogoutCubit(sl()))
     ..registerFactory(() => UserCubit(sl()))

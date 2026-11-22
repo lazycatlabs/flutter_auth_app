@@ -16,12 +16,12 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/test_mock.mocks.dart';
 
-class MockAuthCubit extends MockCubit<AuthState> implements AuthCubit {}
+class MockLoginCubit extends MockCubit<LoginState> implements LoginCubit {}
 
-class FakeAuthCubit extends Fake implements AuthCubit {}
+class FakeLoginCubit extends Fake implements LoginCubit {}
 
 void main() {
-  late AuthCubit authCubit;
+  late LoginCubit loginCubit;
 
   bool obscureText(WidgetTester tester, Key key) => tester
       .widget<EditableText>(
@@ -34,7 +34,7 @@ void main() {
 
   setUpAll(() {
     HttpOverrides.global = null;
-    registerFallbackValue(FakeAuthCubit());
+    registerFallbackValue(FakeLoginCubit());
     registerFallbackValue(const LoginParams());
   });
 
@@ -42,12 +42,12 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
     await serviceLocator(isUnitTest: true, prefixBox: 'login_page_test_');
-    authCubit = MockAuthCubit();
+    loginCubit = MockLoginCubit();
   });
 
   Widget rootWidget(Widget body, {bool isDarkTheme = false}) =>
       MultiBlocProvider(
-        providers: [BlocProvider<AuthCubit>.value(value: authCubit)],
+        providers: [BlocProvider<LoginCubit>.value(value: loginCubit)],
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
           minTextAdapt: true,
@@ -68,7 +68,7 @@ void main() {
       );
 
   testWidgets('renders LoginPage for in Light and Dark Theme', (tester) async {
-    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+    when(() => loginCubit.state).thenReturn(const LoginState.success(null));
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -102,7 +102,7 @@ void main() {
     expect(tester.widget<Button>(find.byType(Button)).onPressed, null);
   });
   testWidgets('renders LoginPage for form validation blank', (tester) async {
-    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+    when(() => loginCubit.state).thenReturn(const LoginState.success(null));
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -117,7 +117,7 @@ void main() {
   });
 
   testWidgets('toggles password visibility', (tester) async {
-    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+    when(() => loginCubit.state).thenReturn(const LoginState.success(null));
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -139,7 +139,7 @@ void main() {
   });
 
   testWidgets('shows an error for an invalid email', (tester) async {
-    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+    when(() => loginCubit.state).thenReturn(const LoginState.success(null));
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.enterText(find.byKey(const Key('email')), 'invalid-email');
@@ -153,8 +153,8 @@ void main() {
   ) async {
     const email = 'mudassir@lazycatlabs.com';
 
-    when(() => authCubit.state).thenReturn(const AuthState.success(null));
-    when(() => authCubit.login(any())).thenAnswer((_) async {});
+    when(() => loginCubit.state).thenReturn(const LoginState.success(null));
+    when(() => loginCubit.login(any())).thenAnswer((_) async {});
 
     await tester.pumpWidget(rootWidget(const LoginPage()));
     await tester.pumpAndSettle();
@@ -187,8 +187,8 @@ void main() {
       const email = 'mudassir@lazycatlabs.com';
       const password = 'password';
 
-      when(() => authCubit.state).thenReturn(const AuthState.success(null));
-      when(() => authCubit.login(any())).thenAnswer((_) async {});
+      when(() => loginCubit.state).thenReturn(const LoginState.success(null));
+      when(() => loginCubit.login(any())).thenAnswer((_) async {});
 
       await tester.pumpWidget(rootWidget(const LoginPage()));
       await tester.pumpAndSettle();
@@ -222,13 +222,13 @@ void main() {
       await tester.pump(const Duration(milliseconds: 450));
       await tester.tap(find.byType(Button));
 
-      /// verify if authCubit.login is called
-      verify(() => authCubit.login(any())).called(1);
+      /// verify if loginCubit.login is called
+      verify(() => loginCubit.login(any())).called(1);
     },
   );
 
   testWidgets('sign-up link opens the register page', (tester) async {
-    when(() => authCubit.state).thenReturn(const AuthState.success(null));
+    when(() => loginCubit.state).thenReturn(const LoginState.success(null));
 
     final router = GoRouter(
       initialLocation: Routes.login.path,
@@ -248,8 +248,8 @@ void main() {
     addTearDown(router.dispose);
 
     await tester.pumpWidget(
-      BlocProvider<AuthCubit>.value(
-        value: authCubit,
+      BlocProvider<LoginCubit>.value(
+        value: loginCubit,
         child: ScreenUtilInit(
           designSize: const Size(375, 667),
           minTextAdapt: true,

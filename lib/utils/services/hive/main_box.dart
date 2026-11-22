@@ -17,7 +17,6 @@ enum MainBoxKeys {
   authToken,
   refreshToken,
   fcm,
-  language,
   theme,
   locale,
   isLogin,

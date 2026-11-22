@@ -1,9 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
 extension TextThemeExtension on TextTheme {
-  TextStyle? get titleLargeBold =>
-      titleLarge?.copyWith(fontWeight: FontWeight.bold);
-
   TextStyle? get titleMedium600 =>
       titleMedium?.copyWith(fontWeight: FontWeight.w600);
 

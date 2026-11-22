@@ -88,7 +88,6 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
   lint: ^2.14.0
-  flutter_lints: ^6.0.0
   bloc_test: ^10.0.0
   build_runner: ^2.15.1
   http_mock_adapter: ^0.6.1
@@ -102,13 +101,9 @@ dev_dependencies:
 
   # Pinned until freezed support latest hive_ce_generator
   hive_ce_generator: ^1.12.0
-
-# TODO: Remove these overrides after packages are updated
   path_provider_platform_interface: ^2.1.3
+  # bloc_test's MockCubit is mocktail-based; widget tests stub cubits with it
   mocktail: ^1.0.5
-dependency_overrides:
-#  intl: ^0.20.2
-#  meta: ^1.18.3
 
 
 # For information on the generic Dart part of this file, see the

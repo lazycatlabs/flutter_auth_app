@@ -40,29 +40,12 @@ class Dimens {
   static double get space76 => 76.w;
   static double get space96 => 96.w;
 
-  static double get selectedIndicatorW => 43.w;
-  static double get selectedIndicatorSmallW => 28.w;
-  static double get heightAppbarHome => 65.w;
-  static double get tab => 38.w;
-  static double get menu => 72.w;
   static double get menuContainer => 250.w;
-  static double get carousel => 167.w;
-  static double get newsHeight => 185.w;
-  static double get textField => 50.w;
 
-  static double get header => 200.w;
-  static double get minLabel => 116.w;
-  static double get bottomBar => 80.w;
   static double get profilePicture => 72.w;
-  static double get birthdayCalendar => 200.w;
-
-  static double get buttonH => 40.w;
-  static double get imageW => 110.w;
 
   static const double cornerRadius = 16;
   static const double cornerRadiusLg = 28;
   static double get avatar => 48.w;
   static double get logo => 64.w;
-  static double get chartBox => 250.w;
-  static const double cornerRadiusBottomSheet = 30;
 }

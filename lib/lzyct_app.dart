@@ -37,8 +37,7 @@ class LzyctApp extends StatelessWidget {
               builder: (_, state) {
                 final data = switch (state) {
                   SettingsStateSuccess(:final data) => data,
-                  SettingsStateLoading() ||
-                  SettingsStateFailure() => const DataHelper(
+                  SettingsStateLoading() => const DataHelper(
                     type: 'en',
                     activeTheme: ActiveTheme.system,
                   ),

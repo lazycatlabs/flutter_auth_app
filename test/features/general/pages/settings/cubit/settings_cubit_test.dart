@@ -40,4 +40,10 @@ void main() {
     expect: () => [isA<SettingsStateSuccess>()],
     verify: (cubit) => expect(cubit.settings, isA<DataHelper>()),
   );
+
+  test('falls back to the system theme for an unknown stored value', () async {
+    await settingsCubit.addData(MainBoxKeys.theme, 'neon');
+
+    expect(settingsCubit.getActiveTheme(), ActiveTheme.system);
+  });
 }

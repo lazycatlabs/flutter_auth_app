@@ -38,7 +38,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       ),
     );
     if (!_isUnitTest) {
-      dio.interceptors.add(DioInterceptor());
+      dio.interceptors.add(DioInterceptor()); // coverage:ignore-line
     }
     return dio;
   }
@@ -99,7 +99,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       return Right(result);
     } on DioException catch (e, stackTrace) {
       if (!_isUnitTest) {
-        nonFatalError(error: e, stackTrace: stackTrace);
+        nonFatalError(error: e, stackTrace: stackTrace); // coverage:ignore-line
       }
       return Left(ServerFailure(errorMessage(e)));
     }

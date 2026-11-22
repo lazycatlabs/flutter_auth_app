@@ -99,6 +99,20 @@ void main() {
     );
   });
 
+  test('users should return NoDataFailure for an empty page', () async {
+    const params = UsersParams();
+    when(mockUsersRemoteDatasource.users(params)).thenAnswer(
+      (_) async => Right(
+        UsersResponse.fromJson(
+          json.decode(jsonReader(pathUsersEmptyResponse200))
+              as Map<String, dynamic>,
+        ),
+      ),
+    );
+
+    expect(await authRepositoryImpl.users(params), Left(NoDataFailure()));
+  });
+
   group('user', () {
     test('should return list users when call data is successful', () async {
       // arrange

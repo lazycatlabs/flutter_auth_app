@@ -274,4 +274,53 @@ void main() {
 
     expect(find.text('Register route'), findsOneWidget);
   });
+
+  testWidgets('reacts to loading, success and failure states', (tester) async {
+    whenListen(
+      loginCubit,
+      Stream<LoginState>.fromIterable(const [
+        LoginState.loading(),
+        LoginState.failure('Wrong password'),
+        LoginState.loading(),
+        LoginState.success('Bearer token'),
+      ]),
+      initialState: const LoginState.success(null),
+    );
+    final router = GoRouter(
+      initialLocation: Routes.login.path,
+      routes: [
+        GoRoute(path: Routes.login.path, builder: (_, _) => const LoginPage()),
+        GoRoute(
+          path: Routes.root.path,
+          name: Routes.root.name,
+          builder: (_, _) => const Text('home'),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      BlocProvider<LoginCubit>.value(
+        value: loginCubit,
+        child: ScreenUtilInit(
+          designSize: const Size(375, 667),
+          builder: (_, _) => MaterialApp.router(
+            routerConfig: router,
+            localizationsDelegates: const [
+              Strings.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            locale: const Locale('en'),
+            supportedLocales: L10n.all,
+            theme: themeLight(MockBuildContext()),
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(seconds: 4));
+    await tester.pumpAndSettle();
+
+    expect(find.text('home'), findsOneWidget);
+    expect(find.text('Bearer token', skipOffstage: false), findsNothing);
+  });
 }

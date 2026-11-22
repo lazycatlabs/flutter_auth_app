@@ -205,4 +205,28 @@ void main() {
       },
     );
   });
+
+  group('logout', () {
+    test('should return the server message', () async {
+      final response = DiagnosticResponse.fromJson(
+        json.decode(jsonReader(pathDiagnosticResponse200))
+            as Map<String, dynamic>,
+      );
+      when(
+        mockAuthRemoteDatasource.logout(),
+      ).thenAnswer((_) async => Right(response));
+
+      final result = await authRepositoryImpl.logout();
+
+      expect(result, Right(response.diagnostic?.message ?? ''));
+    });
+
+    test('should forward a server failure', () async {
+      when(
+        mockAuthRemoteDatasource.logout(),
+      ).thenAnswer((_) async => const Left(ServerFailure('')));
+
+      expect(await authRepositoryImpl.logout(), const Left(ServerFailure('')));
+    });
+  });
 }

@@ -1,7 +1,9 @@
 import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/features/auth/auth.dart';
 import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:flutter_auth_app/utils/services/hive/hive.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -80,5 +82,38 @@ void main() {
 
     expect(find.byType(MainPage), findsOneWidget);
     expect(find.byType(DashboardPage), findsOneWidget);
+  });
+
+  testWidgets('Splash and register routes build when logged out', (
+    tester,
+  ) async {
+    MainBoxMixin.mainBox?.put(MainBoxKeys.isLogin.name, false);
+    AppRoute.setStream(MockBuildContext(), isTest: true);
+    await tester.pumpWidget(
+      BlocProvider(
+        create: (_) => sl<LoginCubit>(),
+        child: ScreenUtilInit(
+          designSize: const Size(375, 667),
+          builder: (_, _) => MaterialApp.router(
+            routerConfig: AppRoute.router,
+            localizationsDelegates: const [
+              Strings.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            locale: const Locale('en'),
+            supportedLocales: L10n.all,
+            theme: themeLight(MockBuildContext()),
+          ),
+        ),
+      ),
+    );
+
+    AppRoute.router.goNamed(Routes.splashScreen.name);
+    await tester.pumpAndSettle();
+    expect(find.byType(SplashScreenPage), findsOneWidget);
+
+    AppRoute.router.goNamed(Routes.register.name);
+    await tester.pumpAndSettle();
+    expect(find.byType(RegisterPage), findsOneWidget);
   });
 }

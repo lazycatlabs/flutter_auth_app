@@ -211,4 +211,26 @@ void main() {
       expect(result.isRight, isTrue);
     });
   });
+
+  group('logout', () {
+    test('should return the diagnostic when response code is 200', () async {
+      dioAdapter.onPost(
+        ListAPI.logout,
+        (server) => server.reply(
+          200,
+          json.decode(jsonReader(pathDiagnosticResponse200)),
+        ),
+      );
+
+      final result = await dataSource.logout();
+
+      expect(
+        result.right,
+        DiagnosticResponse.fromJson(
+          json.decode(jsonReader(pathDiagnosticResponse200))
+              as Map<String, dynamic>,
+        ),
+      );
+    });
+  });
 }

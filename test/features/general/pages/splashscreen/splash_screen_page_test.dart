@@ -6,6 +6,7 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -139,5 +140,50 @@ void main() {
     verify(
       () => generalTokenCubit.generalToken(GeneralTokenParams.fromEnvironment),
     ).called(1);
+  });
+
+  testWidgets('goes to root once the general token succeeds', (tester) async {
+    whenListen(
+      generalTokenCubit,
+      Stream<GeneralTokenState>.value(const GeneralTokenState.success('t')),
+      initialState: const GeneralTokenState.loading(),
+    );
+    final router = GoRouter(
+      initialLocation: Routes.splashScreen.path,
+      routes: [
+        GoRoute(
+          path: Routes.splashScreen.path,
+          builder: (_, _) => const SplashScreenPage(),
+        ),
+        GoRoute(
+          path: Routes.root.path,
+          name: Routes.root.name,
+          builder: (_, _) => const Text('root route'),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      BlocProvider<GeneralTokenCubit>.value(
+        value: generalTokenCubit,
+        child: ScreenUtilInit(
+          designSize: const Size(375, 667),
+          builder: (_, _) => MaterialApp.router(
+            routerConfig: router,
+            localizationsDelegates: const [
+              Strings.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            locale: const Locale('en'),
+            supportedLocales: L10n.all,
+            theme: themeLight(MockBuildContext()),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('root route'), findsOneWidget);
   });
 }

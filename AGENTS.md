@@ -3,8 +3,8 @@
 Guide for AI agents working on this Flutter app.
 
 This file is a **portable template** for Flutter projects built with Clean Architecture + Cubit +
-GetIt + Dio + Freezed. To reuse it in another project: fill in §1, replace `<package_name>` in the
-examples, write §11, and delete whatever does not apply. Everything in between is written to hold for
+GetIt + Dio + Freezed. To reuse it in another project: rewrite §1 and §11, replace `flutter_auth_app` in
+the examples, and delete whatever does not apply. Everything in between is written to hold for
 any project on this stack.
 
 > **Rule of thumb for agents:** when this document and the code disagree, the code wins — copy the
@@ -12,21 +12,21 @@ any project on this stack.
 
 ---
 
-## 1. Project facts — fill this in
+## 1. Project facts
 
-| Item               | Value                                                                                           |
-|--------------------|-------------------------------------------------------------------------------------------------|
-| App / package name | `<package_name>` — imports use `package:<package_name>/...`                                     |
-| Version            | `<version+build from pubspec.yaml>`                                                             |
-| Dart SDK           | `<constraint from pubspec.yaml>`                                                                |
-| Flavors            | `<e.g. stg, prd — or "none">`                                                                   |
-| Env / config       | `<e.g. --dart-define-from-file .env.<flavor>.json, flutter_dotenv, or hardcoded>`               |
-| Reference feature  | `<lib/features/<the most complete feature>>` — features: `<list>`                               |
-| Localization       | `<languages; ARB template path; generated class name>`                                          |
-| Backend clients    | `<base URLs and the client class that owns each — see §6>`                                      |
-| Functional types   | `<either_dart or dartz — pick one, never both>`                                                 |
-| Branch / PR title  | `<branch "<type>/<ticket-id>_<slug>" → PR title "<type>: <ticket-id> <description>" — see §10>` |
-| CI                 | `<the exact commands CI runs>`                                                                  |
+| Item               | Value                                                                                                                           |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| App / package name | `flutter_auth_app` — imports use `package:flutter_auth_app/...`                                                                 |
+| Version            | `1.0.0+1`                                                                                                                       |
+| Dart SDK           | `^3.12.0` (Flutter `>=3.44.0`)                                                                                                  |
+| Flavors            | `stg`, `prd`                                                                                                                    |
+| Env / config       | `--dart-define-from-file .env.<flavor>.json`, read with `String.fromEnvironment` (`BASE_URL`, `CLIENT_ID`, `CLIENT_SECRET`, …)  |
+| Reference feature  | `lib/features/auth` — features: `auth`, `users`, `general` (splash, main shell, settings)                                       |
+| Localization       | `en`, `id`; template `lib/core/localization/intl_en.arb`; generated class `Strings` (`Strings.of(context)!`)                    |
+| Backend clients    | `DioClient` → `BASE_URL` (auth, user); `DioClientDummyJson` → `https://dummyjson.com` (users list) — see §6                     |
+| Functional types   | `either_dart` (`package:either_dart/either.dart`) — never `dartz`                                                               |
+| Branch / PR title  | branch `<type>/<ticket-id>_<slug>` → PR title `<type>: <ticket-id> <description>`, e.g. `feat/laz-348_…` → `feat: laz-348 …`    |
+| CI                 | `flutter pub get && flutter gen-l10n && dart run build_runner build --delete-conflicting-outputs`, `dart format --output=none --set-exit-if-changed lib test`, `flutter analyze --no-fatal-infos`, `flutter test --coverage` |
 
 ---
 
@@ -96,7 +96,7 @@ lib/
 ├── main.dart, app.dart, app_cubit.dart
 ├── core/                       # cross-feature infrastructure, no feature knowledge
 │   ├── api/                    # Dio client(s), interceptors, endpoint constants, isolate parser
-│   ├── error/failure.dart      # ServerFailure, ErrorFailure, NoDataFailure, CacheFailure
+│   ├── error/failure.dart      # ServerFailure, NoDataFailure, CacheFailure
 │   ├── localization/           # ARB files + generated strings
 │   ├── resources/              # Dimens, Palette, Images, themes
 │   ├── usecase/usecase.dart    # abstract UseCase<DataType, Params>, NoParams
@@ -124,8 +124,8 @@ re-exported upward into a few top-level barrels (`core/core.dart`, `features/fea
 `utils/utils.dart`). Import through barrels, not deep paths:
 
 ```dart
-import 'package:<package_name>/core/core.dart';
-import 'package:<package_name>/features/<feature>/<feature>.dart';
+import 'package:flutter_auth_app/core/core.dart';
+import 'package:flutter_auth_app/features/<feature>/<feature>.dart';
 ```
 
 When you add a file, add its `export` to the sibling barrel. A file that is not exported is invisible
@@ -187,9 +187,9 @@ object, already assembled at the call site. Loose positional arguments are the e
 ```dart
 // preferred — the page builds the params object
 context.read<LoginCubit>().login(
-  AuthTokenParams(
-    username: _emailController.text,
-    password: _passwordController.text,
+  LoginParams(
+    email: emailController.text,
+    password: passwordController.text,
   ),
 );
 
@@ -267,20 +267,28 @@ Future<Either<Failure, ItemDetailResponse>> itemDetail(ItemDetailParams params) 
     );
 ```
 
-**3 — Repository impl**: folds the datasource result, maps model → entity inline, and returns a
-failure for empty payloads.
+**3 — Repository impl**: chains on the datasource result, maps model → entity inline, and returns a
+failure for empty payloads. With `either_dart`, use `then` when the mapping can fail and `map` when it
+cannot — don't write `fold((l) => Left(l), …)` to forward the left side by hand.
 
 ```dart
-return response.fold((l) => Left(l), (r) {
-  if (r.data?.isEmpty ?? true) return Left(NoDataFailure());
-  return Right(
-    ItemDetail(
-      id: r.data?.itemId,
-      name: r.data?.itemName,
-    ),
-  );
-});
+@override
+Future<Either<Failure, ItemDetail>> itemDetail(ItemDetailParams params) async =>
+    (await _datasource.itemDetail(params)).then((r) {
+      final data = r.data;
+      if (data == null) {
+        return Left(NoDataFailure());
+      }
+      return Right(ItemDetail(id: data.itemId, name: data.itemName));
+    });
+
+// mapping that cannot fail
+(await _datasource.logout()).map((r) => r.diagnostic?.message ?? '');
 ```
+
+A backend with a different paging/envelope shape (DummyJSON's `users/total/skip/limit`) still gets a
+plain response model; the repository derives `currentPage`/`lastPage` from it. Never add a custom
+`fromXxx` factory that maps on the model.
 
 **4 — Entity** (`domain/entities/`): freezed, UI-shaped, no `@JsonKey`, no API vocabulary.
 
@@ -303,20 +311,28 @@ sealed class ItemDetailParams with _$ItemDetailParams {
 }
 ```
 
-When the action has a side effect, fold and act before returning:
+When the action has a side effect, act on the right side with `thenAsync` and **await** every
+storage write — the router reads the box right after the cubit emits:
 
 ```dart
-class GetUser extends UseCase<UserData, NoParams> with MainBoxMixin {
+class PostLogin extends UseCase<Login, LoginParams> with MainBoxMixin {
   @override
-  Future<Either<Failure, UserData>> call(NoParams _) async {
-    final result = await _repository.user();
-    return result.fold((l) => Left(l), (userData) {
-      hasCompleteProfile = userData.hasCompleteProfile ?? false;
-      return Right(userData);
+  Future<Either<Failure, Login>> call(LoginParams params) async {
+    final result = await _repo.login(params);
+    return await result.thenAsync((login) async {
+      await addData(MainBoxKeys.isLogin, true);
+      await addData(MainBoxKeys.authToken, login.token);
+      return Right(login);
     });
   }
 }
 ```
+
+Params that come from build-time config get a `static const` on the params class
+(`GeneralTokenParams.fromEnvironment`), so the route and a retry button send the same value. A field
+the UI needs but the API names differently becomes an excluded field plus a serialized getter
+(`UsersParams.page` → `@JsonKey(name: 'skip', includeToJson: true) int get skip`); freezed then needs
+`const UsersParams._();` declared after the factory.
 
 **6 — Cubit** (`pages/**/cubit/`): cubit and its freezed sealed state in the *same file* — the one
 place in the UI layer where two classes share a file (§7); states named `<Name>StateLoading` /
@@ -416,6 +432,12 @@ Navigate by name (`context.pushNamed(Routes.itemDetail.name, extra: ...)`), pass
   client supports it (`isIsolate: true` by default — pass `false` when the payload is not a `Map`).
 - Transport errors are converted to a `Failure` carrying the server's message when present, and
   reported to crash reporting as non-fatals. Cubits handle failures by type, never by string matching.
+- The primary API wraps every response in a `diagnostic` envelope; errors look like
+  `{"diagnostic": {"status": "404 Not Found", "message": "User does not exist."}}`.
+  `DioClient.errorMessage` reads `diagnostic.message`, falls back to a top-level `message`
+  (DummyJSON), then to Dio's own message. A new backend with another error shape extends that one
+  function — never parse error bodies in a datasource.
+- Only `200`/`201` count as success; anything else becomes a `ServerFailure`.
 
 ---
 
@@ -485,12 +507,12 @@ DecoratedBox(
 ```
 
 - **A size/weight combination that does not exist yet becomes a getter on the `TextTheme`
-  extension** (`CustomTextTheme`), never an inline `TextStyle(...)` or a `.copyWith(fontSize:)` at the
+  extension** (`TextThemeExtension`), never an inline `TextStyle(...)` or a `.copyWith(fontSize:)` at the
   call site. One name per combination, defined once:
 
 ```dart
 // lib/utils/ext/text_theme.dart
-extension CustomTextTheme on TextTheme {
+extension TextThemeExtension on TextTheme {
   TextStyle? get bodyMedium700 => bodyMedium?.copyWith(fontWeight: FontWeight.w700);
 }
 ```
@@ -650,6 +672,60 @@ A page whose only state is a `ValueNotifier` often does not need to be a `Statef
 but a notifier created in a `StatelessWidget` is never disposed, so keep it in a `State` (or hoist it
 into the cubit).
 
+### Reacting to state: `BlocListener` and the loading dialog
+
+Side effects (dialog, toast, navigation) go in a `BlocListener`/`BlocConsumer` `listener`, never in
+`builder`. Switch exhaustively over the sealed state; a branch that does several things uses an
+immediately invoked closure, the existing pattern:
+
+```dart
+listener: (_, state) => switch (state) {
+  LoginStateLoading() => context.show(),
+  LoginStateSuccess() => (() {
+    context.dismiss();
+    Strings.of(context)!.loginSuccess.toToastSuccess(context);
+    context.goNamed(Routes.root.name);
+  })(),
+  LoginStateFailure(:final message) => (() {
+    context.dismiss();
+    message.toToastError(context);
+  })(),
+},
+```
+
+- `context.show()` opens the blocking loading dialog, `context.dismiss()` closes it (safe to call when
+  none is open). Content areas use a `Skeletonizer` loading widget instead.
+- Toasts go through the `String` extensions `toToastSuccess` / `toToastError` / `toToastLoading`
+  (`utils/ext/string.dart`). They render the core `Toast` widget via `toastification.showCustom`
+  (top-center, 3 s, one at a time); `ToastificationWrapper` wraps the app in `lzyct_app.dart`. Don't
+  call `toastification` directly from a page. In widget tests a shown toast is "offstage" to the
+  finder — use `skipOffstage: false` (see `test/core/widgets/toast_test.dart`).
+- Never put a token, id or raw payload in a toast — toast copy comes from the ARB file or the server's
+  `diagnostic.message`.
+- A failure state must always render something actionable (message + retry), never a dead end — see
+  `SplashScreenPage`.
+
+### Where a cubit is provided
+
+- **App-wide** (`MultiBlocProvider` in `lzyct_app.dart`): cubits whose state outlives one route or
+  drives the router — `SettingsCubit` (theme/locale), `LoginCubit` and `LogoutCubit` (their streams
+  feed `GoRouterRefreshStream`).
+- **Per route** (`BlocProvider` in `app_route.dart`): everything else, created with `sl<T>()` and the
+  first fetch kicked off by a cascade.
+
+### Pagination
+
+Follow `UsersCubit`: keep `currentPage`/`lastPage` on the cubit, `refresh()` resets them, `nextPage()`
+guards on `currentPage < lastPage`, and only page 1 emits loading. Always emit a **new** list
+(`users = [...users, ...?r.users]`) — mutating the list in place makes the next state equal to the
+previous one, so the cubit never emits it.
+
+### Menus and other fixed UI vocabularies
+
+A fixed set of UI choices (drawer entries, tabs) is an enhanced enum carrying its icon and route
+(`MainMenu`), with the label resolved from `Strings` at build time. Never branch on a localized
+label — it breaks the moment the language changes.
+
 ### Shared page logic
 
 Behaviour shared by several pages of a feature — route resolution, confirmation dialogs, common
@@ -692,14 +768,19 @@ Boilerplate every test needs — reset DI and give storage an isolated namespace
 setUp(() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   PathProviderPlatform.instance = FakePathProvider();
-  await serviceLocator(isUnitTest: true, prefix: 'get_item_detail_test_');
+  await serviceLocator(isUnitTest: true, prefixBox: 'get_item_detail_test_');
 });
 ```
 
-- The `prefix` must be unique per test file (convention: `<file_name>_`); shared prefixes cause
-  cross-test storage corruption that looks like flakiness.
-- The unit-test flag on the service locator resets GetIt, skips interceptors/inspectors, and swaps in
-  fakes for platform plugins.
+- The `prefixBox` must be unique per test file (convention: `<file_name>_`); shared prefixes cause
+  cross-test storage corruption that looks like flakiness. Widget tests that never touch storage pass
+  `isHiveEnable: false` instead.
+- The unit-test flag on the service locator resets GetIt and makes `DioClient` keep one static `Dio`
+  without interceptors, so `DioAdapter(dio: sl<DioClient>().dio)` can intercept it.
+- Test files must end in `_test.dart` — anything else is silently skipped by `flutter test`.
+- `test/flutter_test_config.dart` registers a mockito dummy for every `Either<Failure, T>` a mock
+  returns (`either_dart`'s `Either` is sealed, so mockito cannot fake it). A new return type `T` →
+  add a `dummy<T>()` line there, or the test fails with `MissingDummyValueError`.
 - **API response stubs sit next to the model test that parses them**, inside the model folder of the
   test tree, named `<response>_<httpStatus>.json`:
 
@@ -714,9 +795,11 @@ test/features/<feature>/data/models/
   reaching across the tree, and the success and error payloads of one endpoint stay visible together.
   A fixture genuinely shared by several features (a common `meta` envelope) is the exception and lives
   in a shared stub folder.
-- Shared repository/datasource mocks come from one central `@GenerateMocks` file; per-test mocks
-  (usually usecases) use a local `@GenerateMocks` and import `<test_file>.mocks.dart`. Both require
-  `build_runner`.
+- Shared repository/datasource mocks come from one central `@GenerateMocks` file
+  (`test/helpers/test_mock.dart`); per-test mocks (usually usecases) use a local `@GenerateMocks` and
+  import `<test_file>.mocks.dart`. Both require `build_runner`.
+- Widget tests stub cubits with `bloc_test`'s `MockCubit`, which is **mocktail**-based — use
+  mocktail's `when(() => …)` there and mockito everywhere else. Don't mix both in one file.
 - Cubit tests assert the full emission list: `[loading, success]` / `[loading, failure]`.
 - E2E flows (Maestro / `integration_test`), if present, stay tagged with shared navigation factored
   into reusable sub-flows.
@@ -737,9 +820,9 @@ test/features/<feature>/data/models/
 
 ### Logging and error handling
 
-- Log through the shared `logger`, never `print(`. Pick the level by severity: `logger.d` for tracing
-  a flow, **`logger.w` for a recoverable problem** (a fallback kicked in, a response field was
-  missing), **`logger.e` for a real failure**, always with the `error:` and `stackTrace:` arguments so
+- Log through the shared `log` (`utils/helper/common.dart`), never `print(`/`debugPrint(`. Pick the
+  level by severity: `log.d` for tracing a flow, **`log.w` for a recoverable problem** (a fallback
+  kicked in, a response field was missing), **`log.e` for a real failure**, always with the `error:` and `stackTrace:` arguments so
   crash reporting gets the full frame.
 - **Never swallow an exception silently.** An empty `catch (_) {}` hides the next bug.
 
@@ -753,13 +836,14 @@ try {
 try {
   await doWork();
 } catch (error, stackTrace) {
-  logger.e('Failed to do work', error: error, stackTrace: stackTrace);
-  return Left(ErrorFailure(error.toString()));
+  log.e('Failed to do work', error: error, stackTrace: stackTrace);
+  return Left(ServerFailure(error.toString()));
 }
 ```
 
 - A `catch` that deliberately ignores an error needs a comment saying why, and still logs at
-  `logger.w` if anything user-visible changed as a result.
+  `log.w` if anything user-visible changed as a result. Prefer an API that cannot throw
+  (`DateTime.tryParse`, a nullable `Box?`) over a `try` around one that can.
 - In the data layer the transport errors are already converted to `Failure` and reported as
   non-fatals (§6) — don't add a second silent `try/catch` around a call that already returns
   `Either`.
@@ -789,7 +873,9 @@ PR title:  feat: yot-123 add new feature
   analyzer errors — re-run codegen before investigating.
 - A new file that is not exported from its barrel is invisible to the rest of the app.
 - Only one functional-types package may be used; mixing `either_dart` and `dartz` breaks the `Either`
-  type in confusing ways.
+  type in confusing ways. Note `either_dart` exposes `isLeft`/`isRight` as getters, not methods.
+- Import Material/Cupertino from `package:material_ui/material_ui.dart` and
+  `package:cupertino_ui/cupertino_ui.dart`, not `package:flutter/material.dart`.
 - Calling the wrong Dio client compiles fine and fails at runtime against the wrong host — see §6.
 - Scratch directories and task-scoped reports (design QA notes, migration write-ups) describe one past
   change; they are not standing specifications and must not be built upon.
@@ -798,5 +884,25 @@ PR title:  feat: yot-123 add new feature
 
 ## 11. Project-specific notes
 
-<Anything true for this repo only: secrets handling, release/distribution scripts, flavor quirks,
-platform setup, feature flags, versioning rules, known-bad areas, committed generated files.>
+- **Run a flavor:**
+  `flutter run --flavor stg -t lib/main.dart --dart-define-from-file .env.stg.json` (or `prd`).
+- **Env files:** `.env.stg.json` / `.env.prd.json` are committed on purpose (public demo backend) and
+  listed in `.gitignore`. Changes to the tracked copies still show up in git, so never commit real
+  private credentials to them. Keep those local and run `git rm --cached` if needed.
+- **Committed generated files:** `*.mocks.dart` are tracked. `*.g.dart`, `*.freezed.dart` and
+  `lib/core/localization/generated/` are gitignored. Regenerate mocks after changing a `@GenerateMocks`
+  list and commit them.
+- **Hive:** one box, `MainBoxMixin` (`utils/services/hive/main_box.dart`), keys in `MainBoxKeys`.
+  `MainBoxMixin.mainBox` is nullable — reads return `null` before init. Test boxes land in `.docs/`
+  (gitignored).
+- **Users list:** comes from DummyJSON (`DioClientDummyJson`, no auth header), so pagination is
+  `limit`/`skip` and `User.isVerified` / `updatedAt` are always `null` there. The signed-in user
+  (`GET /api/user`) comes from the primary API.
+- **Crash reporting:** `FirebaseServices.init()` routes `FlutterError.onError`, the zone and isolate
+  errors to Crashlytics. `nonFatalError` is skipped when `isUnitTest` is true.
+- **CI:** `pull_request-ci.yml` runs on every PR. Formatting is checked, not auto-applied, so run
+  `dart format lib test` before pushing. `merge-ci.yml` runs only for merged PRs (tests, coverage
+  upload, branch delete).
+- **Maestro:** flows live in `maestro-stg/` and `maestro-prd/`. They tap on visible text and on the
+  `semantic:` labels of `TextF` (`password`, `repeat_password`), so keep those labels when editing
+  forms.

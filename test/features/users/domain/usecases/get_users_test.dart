@@ -42,7 +42,7 @@ void main() {
   test('parse UsersParams to json', () {
     /// act
     final result = usersParams.toJson();
-    final expected = {'page': 1};
+    final expected = {'skip': 0, 'limit': 20};
 
     /// assert
     expect(result, equals(expected));
@@ -50,7 +50,7 @@ void main() {
 
   test('parse UsersParams from json', () {
     /// act
-    final params = UsersParams.fromJson({'page': 1});
+    final params = UsersParams.fromJson({'limit': 20});
 
     /// assert
     expect(params, equals(usersParams));

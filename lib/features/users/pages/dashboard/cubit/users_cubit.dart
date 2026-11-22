@@ -6,17 +6,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'users_cubit.freezed.dart';
 
 class UsersCubit extends Cubit<UsersState> {
-  UsersCubit(this._getUser) : super(const UsersStateLoading());
+  UsersCubit(this._getUsers) : super(const UsersStateLoading());
 
   int currentPage = 1;
   int lastPage = 1;
-  final List<User> users = [];
+  List<User> users = [];
 
-  final GetUsers _getUser;
+  final GetUsers _getUsers;
 
   Future<void> refresh() async {
     /// reset data
-    users.clear();
+    users = [];
 
     /// reset page
     currentPage = 1;
@@ -33,12 +33,12 @@ class UsersCubit extends Cubit<UsersState> {
     }
   }
 
-  Future<void> fetchUsers(UsersParams usersParams) async {
+  Future<void> fetchUsers(UsersParams params) async {
     if (currentPage == 1) {
       emit(const UsersStateLoading());
     }
 
-    final data = await _getUser.call(usersParams);
+    final data = await _getUsers.call(params);
     data.fold(
       (l) {
         if (l is ServerFailure) {
@@ -48,20 +48,16 @@ class UsersCubit extends Cubit<UsersState> {
         }
       },
       (r) {
-        users.addAll(r.users ?? []);
+        /// New list instance so the success state differs from the last one
+        users = [...users, ...?r.users];
         currentPage = r.currentPage ?? 1;
         lastPage = r.lastPage ?? 1;
 
-        final updatedUsers = Users(
-          currentPage: currentPage,
-          lastPage: lastPage,
-          users: users,
+        emit(
+          UsersStateSuccess(
+            Users(currentPage: currentPage, lastPage: lastPage, users: users),
+          ),
         );
-
-        if (currentPage != 1) {
-          emit(const UsersStateInitial());
-        }
-        emit(UsersStateSuccess(updatedUsers));
       },
     );
   }
@@ -70,8 +66,6 @@ class UsersCubit extends Cubit<UsersState> {
 @freezed
 sealed class UsersState with _$UsersState {
   const factory UsersState.loading() = UsersStateLoading;
-
-  const factory UsersState.initial() = UsersStateInitial;
 
   const factory UsersState.success(Users data) = UsersStateSuccess;
 

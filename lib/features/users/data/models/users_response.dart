@@ -1,64 +1,32 @@
-import 'package:flutter_auth_app/features/general/general.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'users_response.freezed.dart';
 part 'users_response.g.dart';
 
+/// DummyJSON `GET /users` payload.
 @freezed
 sealed class UsersResponse with _$UsersResponse {
   const factory UsersResponse({
-    @JsonKey(name: 'diagnostic') Diagnostic? diagnostic,
-    @JsonKey(name: 'data') List<DataUser>? data,
-    @JsonKey(name: 'page') Page? page,
+    @JsonKey(name: 'users') List<DataUsersItem>? users,
+    @JsonKey(name: 'total') int? total,
+    @JsonKey(name: 'skip') int? skip,
+    @JsonKey(name: 'limit') int? limit,
   }) = _UsersResponse;
 
   factory UsersResponse.fromJson(Map<String, dynamic> json) =>
       _$UsersResponseFromJson(json);
-
-  factory UsersResponse.fromDummyJson(
-    Map<String, dynamic> json, {
-    required int currentPage,
-  }) {
-    final limit = (json['limit'] as num?)?.toInt() ?? 20;
-    final total = (json['total'] as num?)?.toInt() ?? 0;
-    final rawUsers = json['users'] as List<dynamic>? ?? const [];
-
-    return UsersResponse(
-      data: rawUsers.map((rawUser) {
-        final user = rawUser as Map<String, dynamic>;
-        final firstName = user['firstName'] as String? ?? '';
-        final lastName = user['lastName'] as String? ?? '';
-
-        return DataUser(
-          id: user['id']?.toString(),
-          name: '$firstName $lastName'.trim(),
-          email: user['email'] as String?,
-          photo: user['image'] as String?,
-          verified: true,
-        );
-      }).toList(),
-      page: Page(
-        currentPage: currentPage,
-        perPage: limit,
-        lastPage: limit == 0 ? 1 : (total / limit).ceil(),
-        total: total,
-      ),
-    );
-  }
 }
 
 @freezed
-sealed class DataUser with _$DataUser {
-  const factory DataUser({
-    @JsonKey(name: 'id') String? id,
-    @JsonKey(name: 'name') String? name,
+sealed class DataUsersItem with _$DataUsersItem {
+  const factory DataUsersItem({
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'firstName') String? firstName,
+    @JsonKey(name: 'lastName') String? lastName,
     @JsonKey(name: 'email') String? email,
-    @JsonKey(name: 'photo') String? photo,
-    @JsonKey(name: 'verified') bool? verified,
-    @JsonKey(name: 'createdAt') String? createdAt,
-    @JsonKey(name: 'updatedAt') String? updatedAt,
-  }) = _DataUser;
+    @JsonKey(name: 'image') String? image,
+  }) = _DataUsersItem;
 
-  factory DataUser.fromJson(Map<String, dynamic> json) =>
-      _$DataUserFromJson(json);
+  factory DataUsersItem.fromJson(Map<String, dynamic> json) =>
+      _$DataUsersItemFromJson(json);
 }

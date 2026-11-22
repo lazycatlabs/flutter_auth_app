@@ -51,7 +51,6 @@ class _DashboardPageState extends State<DashboardPage> {
             key: ValueKey(state is UsersStateLoading),
             child: switch (state) {
               UsersStateLoading() => const _DashboardLoading(),
-              UsersStateInitial() => const SizedBox.shrink(),
               UsersStateSuccess(:final data) => ListView.builder(
                 controller: _scrollController,
                 physics: const AlwaysScrollableScrollPhysics(),

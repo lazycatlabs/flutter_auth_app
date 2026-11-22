@@ -32,8 +32,10 @@ class PostGeneralToken extends UseCase<GeneralToken, GeneralTokenParams>
 
 @freezed
 sealed class GeneralTokenParams with _$GeneralTokenParams {
-  const factory GeneralTokenParams({String? clientId, String? clientSecret}) =
-      _GeneralTokenParams;
+  const factory GeneralTokenParams({
+    @JsonKey(name: 'clientId') String? clientId,
+    @JsonKey(name: 'clientSecret') String? clientSecret,
+  }) = _GeneralTokenParams;
 
   const GeneralTokenParams._();
 

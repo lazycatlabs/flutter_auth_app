@@ -27,12 +27,12 @@ class PostLogin extends UseCase<Login, LoginParams> with MainBoxMixin {
 @freezed
 sealed class LoginParams with _$LoginParams {
   const factory LoginParams({
-    @Default('') String email,
-    @Default('') String password,
-    String? osInfo,
-    String? deviceInfo,
-    @Default('GeneratedFCMToken') String fcmToken,
-    @Default('email') String loginType,
+    @JsonKey(name: 'email') @Default('') String email,
+    @JsonKey(name: 'password') @Default('') String password,
+    @JsonKey(name: 'osInfo') String? osInfo,
+    @JsonKey(name: 'deviceInfo') String? deviceInfo,
+    @JsonKey(name: 'fcmToken') @Default('GeneratedFCMToken') String fcmToken,
+    @JsonKey(name: 'loginType') @Default('email') String loginType,
   }) = _LoginParams;
 
   factory LoginParams.fromJson(Map<String, dynamic> json) =>

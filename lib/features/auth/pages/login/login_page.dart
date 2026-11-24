@@ -24,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
   final _isValid = ValueNotifier(false);
-  final _isPasswordVisible = ValueNotifier(false);
 
   /// Focus Node
   final _fnEmail = FocusNode();
@@ -32,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _isPasswordVisible.dispose();
     _isValid.dispose();
     _conEmail.dispose();
     _conPassword.dispose();
@@ -43,17 +41,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) => Parent(
-    child: BlocListener<AuthCubit, AuthState>(
+    child: BlocListener<LoginCubit, LoginState>(
       listener: (_, state) => switch (state) {
-        AuthStateLoading() => context.show(),
-        AuthStateSuccess(:final data) => (() {
+        LoginStateLoading() => context.show(),
+        LoginStateSuccess() => (() {
           context.dismiss();
-          data.toString().toToastSuccess(context);
+          Strings.of(context)!.loginSuccess.toToastSuccess(context);
 
           TextInput.finishAutofillContext();
           context.goNamed(Routes.root.name);
         })(),
-        AuthStateFailure(:final message) => (() {
+        LoginStateFailure(:final message) => (() {
           context.dismiss();
           message.toToastError(context);
         })(),
@@ -74,7 +72,6 @@ class _LoginPageState extends State<LoginPage> {
                   _LoginForm(
                     formKey: _formKey,
                     isValid: _isValid,
-                    isPasswordVisible: _isPasswordVisible,
                     emailController: _conEmail,
                     passwordController: _conPassword,
                     emailFocusNode: _fnEmail,

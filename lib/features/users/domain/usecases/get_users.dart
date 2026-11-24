@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/users/users.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,8 +18,17 @@ class GetUsers extends UseCase<Users, UsersParams> {
 
 @freezed
 sealed class UsersParams with _$UsersParams {
-  const factory UsersParams({@Default(1) int page}) = _UsersParams;
+  const factory UsersParams({
+    /// UI-only, 1-based; sent to DummyJSON as `skip`
+    @JsonKey(includeToJson: false, includeFromJson: false) @Default(1) int page,
+    @JsonKey(name: 'limit') @Default(20) int limit,
+  }) = _UsersParams;
+
+  const UsersParams._();
 
   factory UsersParams.fromJson(Map<String, dynamic> json) =>
       _$UsersParamsFromJson(json);
+
+  @JsonKey(name: 'skip', includeToJson: true)
+  int get skip => (page - 1) * limit;
 }

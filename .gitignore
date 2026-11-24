@@ -51,3 +51,7 @@ app.*.map.json
 
 .metadata
 pubspec.lock
+
+# Local flavor config (see AGENTS.md §11). Already-tracked copies stay in the
+# repo as defaults; untrack with `git rm --cached` if you keep private values.
+.env.*.json

@@ -9,6 +9,8 @@ on:
 
 jobs:
   build:
+    # Only for merged PRs, not PRs closed without merging
+    if: github.event.pull_request.merged == true
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
     steps:
@@ -28,31 +30,8 @@ jobs:
 
       # Get flutter dependencies.
       - name: Run initialize flutter project
-        run: flutter pub get ;flutter gen-l10n;flutter pub run build_runner build --delete-conflicting-outputs
+        run: flutter pub get && flutter gen-l10n && dart run build_runner build --delete-conflicting-outputs
 
-      # Formatting code
-      - name: Running flutter format
-        run: dart format lib/
-      # Get current branch
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v5
-
-      # Check modified files
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
-      # Push code changes
-      - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git config --global user.name 'Lzyct-Bot'
-          git config --global user.email 'lazycatlabs@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git fetch
-          git checkout ${{ steps.branch-name.outputs.current_branch }}
-          git commit -am "clean: apply formatting changes"
-          git push
       # Run widget tests for our flutter project.
       - name: Run flutter test --machine --coverage
         run: flutter test --machine --coverage

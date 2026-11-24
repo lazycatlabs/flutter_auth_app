@@ -32,17 +32,17 @@ dependencies:
   cupertino_icons: ^2.0.0
 
   # Use as default SVG image loader, prefer use SVG as image asset
-  flutter_svg: ^2.3.2
+  flutter_svg: ^2.5.0
 
-  # Functional programming thingies
-  dartz: ^0.10.1
+  # Functional programming thingies (Either)
+  either_dart: ^1.0.0
 
   # Use as Network Client
   dio: ^5.11.1
 
   # Use hive to save local data
-  hive_ce: ^2.23.3
-  hive_ce_flutter: ^2.5.0
+  hive_ce: ^2.24.0
+  hive_ce_flutter: ^2.6.0
 
   # Use for Dependencies Injection
   get_it: ^9.3.0
@@ -52,7 +52,7 @@ dependencies:
 
 
   # Use for custom toast with Status, ex:Loading,Success,Failed
-  oktoast: ^3.4.0
+  toastification: ^3.2.2
 
   # Use for responsive UI, set default size base on Mock Up
   flutter_screenutil: ^5.9.3
@@ -63,9 +63,9 @@ dependencies:
   logger: ^2.8.0
 
   # Firebase
-  firebase_core: ^5.1.0
-  firebase_analytics: ^13.0.1
-  firebase_crashlytics: ^6.0.1
+  firebase_core: ^5.2.0
+  firebase_analytics: ^13.1.0
+  firebase_crashlytics: ^6.1.0
 
   # router
   go_router: ^18.1.4
@@ -81,16 +81,16 @@ dependencies:
   # Use for skeleton loading placeholders
   skeletonizer: ^3.0.0
 
-  material_ui: ^1.11.0
-  cupertino_ui: ^1.1.6
+  material_ui: ^1.11.1
+  cupertino_ui: ^1.1.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
   lint: ^2.14.0
-  flutter_lints: ^6.0.0
   bloc_test: ^10.0.0
-  build_runner: ^2.15.1
+  build_runner: ^2.16.2
   http_mock_adapter: ^0.6.1
 
   # Pinned until Freezed supports Analyzer 13.
@@ -102,13 +102,9 @@ dev_dependencies:
 
   # Pinned until freezed support latest hive_ce_generator
   hive_ce_generator: ^1.12.0
-
-# TODO: Remove these overrides after packages are updated
   path_provider_platform_interface: ^2.1.3
+  # bloc_test's MockCubit is mocktail-based; widget tests stub cubits with it
   mocktail: ^1.0.5
-dependency_overrides:
-#  intl: ^0.20.2
-#  meta: ^1.18.3
 
 
 # For information on the generic Dart part of this file, see the

@@ -12,13 +12,9 @@ class _MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) => AppBar(
     automaticallyImplyLeading: false,
     centerTitle: true,
-    title: BlocBuilder<MainCubit, MainState>(
-      buildWhen: (_, current) => current is MainStateSuccess,
-      builder: (_, state) {
-        final title = switch (state) {
-          MainStateLoading() => '-',
-          MainStateSuccess(:final data) => data?.title ?? '-',
-        };
+    title: BlocBuilder<MainCubit, MainMenu>(
+      builder: (_, menu) {
+        final title = menu.title(context);
 
         return AnimatedSwitcher(
           duration: Motion.medium,

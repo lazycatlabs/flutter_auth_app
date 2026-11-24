@@ -38,13 +38,9 @@ class AppRoute {
         path: Routes.splashScreen.path,
         name: Routes.splashScreen.name,
         builder: (_, _) => BlocProvider(
-          create: (_) => sl<GeneralTokenCubit>()
-            ..generalToken(
-              const GeneralTokenParams(
-                clientId: String.fromEnvironment('CLIENT_ID'),
-                clientSecret: String.fromEnvironment('CLIENT_SECRET'),
-              ),
-            ),
+          create: (_) =>
+              sl<GeneralTokenCubit>()
+                ..generalToken(GeneralTokenParams.fromEnvironment),
           child: const SplashScreenPage(),
         ),
       ),
@@ -61,8 +57,8 @@ class AppRoute {
       GoRoute(
         path: Routes.register.path,
         name: Routes.register.name,
-        builder: (_, _) => MultiBlocProvider(
-          providers: [BlocProvider(create: (_) => sl<RegisterCubit>())],
+        builder: (_, _) => BlocProvider(
+          create: (_) => sl<RegisterCubit>(),
           child: const RegisterPage(),
         ),
       ),
@@ -95,7 +91,7 @@ class AppRoute {
         ? null
         //coverage:ignore-start
         : GoRouterRefreshStream([
-            context.read<AuthCubit>().stream,
+            context.read<LoginCubit>().stream,
             context.read<LogoutCubit>().stream,
           ]),
     //coverage:ignore-end
@@ -108,17 +104,17 @@ class AppRoute {
       ///  Check if not login
       ///  if current page is login page we don't need to direct user
       ///  but if not we must direct user to login page
-      if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
-          false)) {
+      final isLogin =
+          (MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
+          false;
+      if (!isLogin) {
         return isAllowedPages ? null : Routes.login.path; //coverage:ignore-line
       }
 
       /// Check if already login and in login page
       /// we should direct user to main page
 
-      if (isAllowedPages &&
-          ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
-              false)) {
+      if (isAllowedPages) {
         return Routes.root.path;
       }
 

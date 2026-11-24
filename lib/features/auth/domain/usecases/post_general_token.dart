@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
@@ -16,7 +16,7 @@ class PostGeneralToken extends UseCase<GeneralToken, GeneralTokenParams>
   @override
   Future<Either<Failure, GeneralToken>> call(GeneralTokenParams params) async {
     final result = await _repo.generalToken(params);
-    return result.fold((failure) => Left(failure), (token) async {
+    return await result.thenAsync((token) async {
       final storedClientId = getData<String?>(MainBoxKeys.apiClientId);
       if (storedClientId != params.clientId) {
         await removeData(MainBoxKeys.isLogin);
@@ -32,8 +32,18 @@ class PostGeneralToken extends UseCase<GeneralToken, GeneralTokenParams>
 
 @freezed
 sealed class GeneralTokenParams with _$GeneralTokenParams {
-  const factory GeneralTokenParams({String? clientId, String? clientSecret}) =
-      _GeneralTokenParams;
+  const factory GeneralTokenParams({
+    @JsonKey(name: 'clientId') String? clientId,
+    @JsonKey(name: 'clientSecret') String? clientSecret,
+  }) = _GeneralTokenParams;
+
+  const GeneralTokenParams._();
+
+  /// Client credentials from `--dart-define-from-file .env.<flavor>.json`
+  static const fromEnvironment = GeneralTokenParams(
+    clientId: String.fromEnvironment('CLIENT_ID'),
+    clientSecret: String.fromEnvironment('CLIENT_SECRET'),
+  );
 
   factory GeneralTokenParams.fromJson(Map<String, dynamic> json) =>
       _$GeneralTokenParamsFromJson(json);

@@ -11,7 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -140,7 +139,11 @@ void main() {
     for (int i = 0; i < 5; i++) {
       await tester.pump(const Duration(milliseconds: 100));
     }
-    await tester.fling(find.text('Mudassir'), const Offset(0.0, 500.0), 1000.0);
+    await tester.fling(
+      find.text('Emily Johnson'),
+      const Offset(0.0, 500.0),
+      1000.0,
+    );
 
     /// Do loops to waiting refresh indicator showing
     /// instead using tester.pumpAndSettle it's will result time out error

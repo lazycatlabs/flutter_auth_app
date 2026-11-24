@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -42,7 +42,7 @@ void main() {
   test('parse UsersParams to json', () {
     /// act
     final result = usersParams.toJson();
-    final expected = {'page': 1};
+    final expected = {'skip': 0, 'limit': 20};
 
     /// assert
     expect(result, equals(expected));
@@ -50,7 +50,7 @@ void main() {
 
   test('parse UsersParams from json', () {
     /// act
-    final params = UsersParams.fromJson({'page': 1});
+    final params = UsersParams.fromJson({'limit': 20});
 
     /// assert
     expect(params, equals(usersParams));

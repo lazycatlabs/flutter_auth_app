@@ -5,8 +5,8 @@ import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:toastification/toastification.dart';
 
 class LzyctApp extends StatelessWidget {
   @override
@@ -19,10 +19,13 @@ class LzyctApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..loadSettings()),
-        BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<LoginCubit>()),
         BlocProvider(create: (_) => sl<LogoutCubit>()),
       ],
-      child: OKToast(
+      child: ToastificationWrapper(
+        /// toastification defaults to a fixed 400px width, which overflows
+        /// narrow phones; span the screen and let Toast center itself.
+        config: const ToastificationConfig(itemWidth: double.infinity),
         child: ScreenUtilInit(
           /// Set screen size to make responsive
           /// Almost all device
@@ -37,8 +40,7 @@ class LzyctApp extends StatelessWidget {
               builder: (_, state) {
                 final data = switch (state) {
                   SettingsStateSuccess(:final data) => data,
-                  SettingsStateLoading() ||
-                  SettingsStateFailure() => const DataHelper(
+                  SettingsStateLoading() => const DataHelper(
                     type: 'en',
                     activeTheme: ActiveTheme.system,
                   ),

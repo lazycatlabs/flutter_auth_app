@@ -5,12 +5,11 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
-import '../../../../../helpers/fake_path_provider_platform.dart';
-import '../../../../../helpers/json_reader.dart';
-import '../../../../../helpers/paths.dart';
+import '../../../../helpers/fake_path_provider_platform.dart';
+import '../../../../helpers/json_reader.dart';
+import '../../../../helpers/paths.dart';
 
 void main() {
   late DioAdapter dioAdapter;
@@ -209,7 +208,29 @@ void main() {
       final result = await dataSource.generalToken(generalTokenParams);
 
       /// assert
-      expect(result.isRight(), isTrue);
+      expect(result.isRight, isTrue);
+    });
+  });
+
+  group('logout', () {
+    test('should return the diagnostic when response code is 200', () async {
+      dioAdapter.onPost(
+        ListAPI.logout,
+        (server) => server.reply(
+          200,
+          json.decode(jsonReader(pathDiagnosticResponse200)),
+        ),
+      );
+
+      final result = await dataSource.logout();
+
+      expect(
+        result.right,
+        DiagnosticResponse.fromJson(
+          json.decode(jsonReader(pathDiagnosticResponse200))
+              as Map<String, dynamic>,
+        ),
+      );
     });
   });
 }

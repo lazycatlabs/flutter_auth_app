@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,9 +19,9 @@ class PostRegister extends UseCase<Register, RegisterParams> {
 @freezed
 sealed class RegisterParams with _$RegisterParams {
   const factory RegisterParams({
-    String? name,
-    String? email,
-    String? password,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'email') String? email,
+    @JsonKey(name: 'password') String? password,
   }) = _RegisterParams;
 
   factory RegisterParams.fromJson(Map<String, dynamic> json) =>

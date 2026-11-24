@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../helpers/entity_fixtures.dart';
@@ -205,5 +204,29 @@ void main() {
         expect(result, const Left(ServerFailure('')));
       },
     );
+  });
+
+  group('logout', () {
+    test('should return the server message', () async {
+      final response = DiagnosticResponse.fromJson(
+        json.decode(jsonReader(pathDiagnosticResponse200))
+            as Map<String, dynamic>,
+      );
+      when(
+        mockAuthRemoteDatasource.logout(),
+      ).thenAnswer((_) async => Right(response));
+
+      final result = await authRepositoryImpl.logout();
+
+      expect(result, Right(response.diagnostic?.message ?? ''));
+    });
+
+    test('should forward a server failure', () async {
+      when(
+        mockAuthRemoteDatasource.logout(),
+      ).thenAnswer((_) async => const Left(ServerFailure('')));
+
+      expect(await authRepositoryImpl.logout(), const Left(ServerFailure('')));
+    });
   });
 }

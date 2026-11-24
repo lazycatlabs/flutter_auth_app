@@ -12,19 +12,17 @@ Register buildRegisterFixture(RegisterResponse response) =>
     Register(message: response.diagnostic?.message ?? '');
 
 Users buildUsersFixture(UsersResponse response) => Users(
-  users: response.data
+  users: response.users
       ?.map(
         (data) => User(
-          name: data.name,
+          name: '${data.firstName ?? ''} ${data.lastName ?? ''}'.trim(),
           email: data.email,
-          avatar: data.photo,
-          isVerified: data.verified,
-          updatedAt: data.updatedAt,
+          avatar: data.image,
         ),
       )
       .toList(),
-  currentPage: response.page?.currentPage,
-  lastPage: response.page?.lastPage,
+  currentPage: (response.skip ?? 0) ~/ (response.limit ?? 20) + 1,
+  lastPage: ((response.total ?? 0) / (response.limit ?? 20)).ceil(),
 );
 
 User buildUserFixture(UserResponse response) => User(

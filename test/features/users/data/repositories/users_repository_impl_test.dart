@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../helpers/entity_fixtures.dart';
@@ -98,6 +97,20 @@ void main() {
         expect(result, equals(const Left(ServerFailure(''))));
       },
     );
+  });
+
+  test('users should return NoDataFailure for an empty page', () async {
+    const params = UsersParams();
+    when(mockUsersRemoteDatasource.users(params)).thenAnswer(
+      (_) async => Right(
+        UsersResponse.fromJson(
+          json.decode(jsonReader(pathUsersEmptyResponse200))
+              as Map<String, dynamic>,
+        ),
+      ),
+    );
+
+    expect(await authRepositoryImpl.users(params), Left(NoDataFailure()));
   });
 
   group('user', () {

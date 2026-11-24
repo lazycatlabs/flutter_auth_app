@@ -1,25 +1,24 @@
 import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../../helpers/entity_fixtures.dart';
 import '../../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../../helpers/json_reader.dart';
 import '../../../../../helpers/paths.dart';
-import 'auth_cubit_test.mocks.dart';
+import 'login_cubit_test.mocks.dart';
 
 @GenerateMocks([PostLogin])
 void main() {
-  late AuthCubit authCubit;
+  late LoginCubit loginCubit;
   late Login login;
   late MockPostLogin mockPostLogin;
 
@@ -33,49 +32,52 @@ void main() {
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     PathProviderPlatform.instance = FakePathProvider();
-    await serviceLocator(isUnitTest: true, prefixBox: 'auth_cubit_test_');
+    await serviceLocator(isUnitTest: true, prefixBox: 'login_cubit_test_');
     login = buildLoginFixture(
       LoginResponse.fromJson(
         json.decode(jsonReader(pathLoginResponse200)) as Map<String, dynamic>,
       ),
     );
     mockPostLogin = MockPostLogin();
-    authCubit = AuthCubit(mockPostLogin);
+    loginCubit = LoginCubit(mockPostLogin);
   });
 
   /// Dispose bloc
-  tearDown(() => authCubit.close());
+  tearDown(() => loginCubit.close());
 
   ///  Initial data should be loading
   test('Initial data should be AuthStatus.loading', () {
-    expect(authCubit.state, const AuthState.loading());
+    expect(loginCubit.state, const LoginState.loading());
   });
 
-  blocTest<AuthCubit, AuthState>(
-    'When repo success get data should be return AuthState',
+  blocTest<LoginCubit, LoginState>(
+    'When repo success get data should be return LoginState',
     build: () {
       when(
         mockPostLogin.call(loginParams),
       ).thenAnswer((_) async => Right(login));
 
-      return authCubit;
+      return loginCubit;
     },
     act: (cubit) => cubit.login(loginParams),
     wait: const Duration(milliseconds: 100),
-    expect: () => [const AuthState.loading(), AuthState.success(login.token)],
+    expect: () => [const LoginState.loading(), LoginState.success(login.token)],
   );
 
-  blocTest<AuthCubit, AuthState>(
+  blocTest<LoginCubit, LoginState>(
     'When user input wrong credential should be return ServerFailure',
     build: () {
       when(
         mockPostLogin.call(loginParams),
       ).thenAnswer((_) async => const Left(ServerFailure(errorMessage)));
 
-      return authCubit;
+      return loginCubit;
     },
-    act: (AuthCubit authCubit) => authCubit.login(loginParams),
+    act: (LoginCubit loginCubit) => loginCubit.login(loginParams),
     wait: const Duration(milliseconds: 100),
-    expect: () => const [AuthState.loading(), AuthState.failure(errorMessage)],
+    expect: () => const [
+      LoginState.loading(),
+      LoginState.failure(errorMessage),
+    ],
   );
 }

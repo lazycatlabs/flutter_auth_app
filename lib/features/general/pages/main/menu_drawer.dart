@@ -11,14 +11,14 @@ part 'menu_drawer_item.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
-    required this.dataMenu,
-    required this.currentIndex,
+    required this.selected,
+    required this.onSelected,
     required this.onLogoutPressed,
     super.key,
   });
 
-  final List<DataHelper> dataMenu;
-  final ValueChanged<int> currentIndex;
+  final MainMenu selected;
+  final ValueChanged<MainMenu> onSelected;
   final VoidCallback onLogoutPressed;
 
   @override
@@ -59,18 +59,14 @@ class MenuDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.all(Dimens.space12),
               children: [
-                for (final (index, value) in dataMenu.indexed)
+                for (final (index, menu) in MainMenu.values.indexed)
                   FadeSlideIn(
                     delay: Motion.stagger * index,
                     offset: Dimens.space12,
                     child: _MenuDrawerItem(
-                      menu: value,
-                      onTap: () {
-                        if (value.title != null) {
-                          currentIndex(index);
-                        }
-                        _selectedPage(context, value.title!);
-                      },
+                      menu: menu,
+                      isSelected: menu == selected,
+                      onTap: () => _onTap(context, menu),
                     ),
                   ),
               ],
@@ -81,14 +77,13 @@ class MenuDrawer extends StatelessWidget {
     ),
   );
 
-  void _selectedPage(BuildContext context, String title) {
-    //Update page from selected Page
-    if (title == Strings.of(context)!.settings) {
-      context.goNamed(Routes.settings.name);
-    } else if (title == Strings.of(context)!.dashboard) {
-      context.goNamed(Routes.dashboard.name);
-    } else if (title == Strings.of(context)!.logout) {
-      onLogoutPressed.call();
+  void _onTap(BuildContext context, MainMenu menu) {
+    onSelected(menu);
+    final route = menu.route;
+    if (route == null) {
+      onLogoutPressed();
+    } else {
+      context.goNamed(route.name);
     }
   }
 }

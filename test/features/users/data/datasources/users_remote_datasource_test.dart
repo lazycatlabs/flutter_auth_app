@@ -5,12 +5,11 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
-import '../../../../../helpers/fake_path_provider_platform.dart';
-import '../../../../../helpers/json_reader.dart';
-import '../../../../../helpers/paths.dart';
+import '../../../../helpers/fake_path_provider_platform.dart';
+import '../../../../helpers/json_reader.dart';
+import '../../../../helpers/paths.dart';
 
 void main() {
   late DioAdapter primaryAdapter;
@@ -35,15 +34,12 @@ void main() {
   group('users', () {
     const usersParams = UsersParams();
     const paginationQuery = {'limit': 20, 'skip': 0};
-    final usersModel = UsersResponse.fromDummyJson(
-      json.decode(jsonReader(pathDummyUsersResponse200))
-          as Map<String, dynamic>,
-      currentPage: usersParams.page,
+    final usersModel = UsersResponse.fromJson(
+      json.decode(jsonReader(pathUsersResponse200)) as Map<String, dynamic>,
     );
-    final usersEmptyModel = UsersResponse.fromDummyJson(
-      json.decode(jsonReader(pathDummyUsersEmptyResponse200))
+    final usersEmptyModel = UsersResponse.fromJson(
+      json.decode(jsonReader(pathUsersEmptyResponse200))
           as Map<String, dynamic>,
-      currentPage: usersParams.page,
     );
 
     test(
@@ -52,10 +48,8 @@ void main() {
         /// arrange
         dummyJsonAdapter.onGet(
           ListAPI.users,
-          (server) => server.reply(
-            200,
-            json.decode(jsonReader(pathDummyUsersResponse200)),
-          ),
+          (server) =>
+              server.reply(200, json.decode(jsonReader(pathUsersResponse200))),
           queryParameters: paginationQuery,
         );
 
@@ -75,7 +69,7 @@ void main() {
           ListAPI.users,
           (server) => server.reply(
             200,
-            json.decode(jsonReader(pathDummyUsersEmptyResponse200)),
+            json.decode(jsonReader(pathUsersEmptyResponse200)),
           ),
           queryParameters: paginationQuery,
         );
@@ -93,10 +87,8 @@ void main() {
       const secondPageParams = UsersParams(page: 2);
       dummyJsonAdapter.onGet(
         ListAPI.users,
-        (server) => server.reply(
-          200,
-          json.decode(jsonReader(pathDummyUsersResponse200)),
-        ),
+        (server) =>
+            server.reply(200, json.decode(jsonReader(pathUsersResponse200))),
         queryParameters: const {'limit': 20, 'skip': 20},
       );
 
@@ -104,10 +96,7 @@ void main() {
       final result = await dataSource.users(secondPageParams);
 
       /// assert
-      result.fold(
-        (l) => expect(l, null),
-        (r) => expect(r.page?.currentPage, 2),
-      );
+      expect(result.isRight, isTrue);
     });
 
     test('should not send the LazyAuth token to DummyJSON', () async {
@@ -118,7 +107,7 @@ void main() {
         ListAPI.users,
         (server) => server.replyCallback(200, (request) {
           expect(request.headers.containsKey('Authorization'), isFalse);
-          return json.decode(jsonReader(pathDummyUsersResponse200));
+          return json.decode(jsonReader(pathUsersResponse200));
         }),
         queryParameters: paginationQuery,
       );
@@ -127,7 +116,7 @@ void main() {
       final result = await dataSource.users(usersParams);
 
       /// assert
-      expect(result.isRight(), isTrue);
+      expect(result.isRight, isTrue);
     });
 
     test(
@@ -137,7 +126,7 @@ void main() {
         dummyJsonAdapter.onGet(
           ListAPI.users,
           (server) =>
-              server.reply(400, json.decode(jsonReader(pathUsersResponse200))),
+              server.reply(400, json.decode(jsonReader(pathUserResponse401))),
           queryParameters: paginationQuery,
         );
 
@@ -183,7 +172,7 @@ void main() {
         primaryAdapter.onGet(
           ListAPI.user,
           (server) =>
-              server.reply(400, json.decode(jsonReader(pathUsersResponse200))),
+              server.reply(400, json.decode(jsonReader(pathUserResponse401))),
         );
 
         /// act

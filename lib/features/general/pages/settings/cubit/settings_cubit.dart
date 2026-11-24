@@ -16,20 +16,20 @@ class SettingsCubit extends Cubit<SettingsState> with MainBoxMixin {
     emit(SettingsStateSuccess(_settings));
   }
 
+  /// Update locale code
   void updateLanguage(String type) {
-    /// Update locale code
     addData(MainBoxKeys.locale, type);
     emit(SettingsStateSuccess(_settings));
   }
 
-  ActiveTheme getActiveTheme() => ActiveTheme.values.singleWhere(
-    (element) =>
-        element.name == (getData(MainBoxKeys.theme) ?? ActiveTheme.system.name),
+  ActiveTheme getActiveTheme() => ActiveTheme.values.firstWhere(
+    (element) => element.name == getData<String?>(MainBoxKeys.theme),
+    orElse: () => ActiveTheme.system,
   );
 
   DataHelper get _settings => DataHelper(
     activeTheme: getActiveTheme(),
-    type: getData(MainBoxKeys.locale) ?? 'en',
+    type: getData<String?>(MainBoxKeys.locale) ?? 'en',
   );
 }
 
@@ -37,5 +37,4 @@ class SettingsCubit extends Cubit<SettingsState> with MainBoxMixin {
 sealed class SettingsState with _$SettingsState {
   const factory SettingsState.loading() = SettingsStateLoading;
   const factory SettingsState.success(DataHelper data) = SettingsStateSuccess;
-  const factory SettingsState.failure(String message) = SettingsStateFailure;
 }

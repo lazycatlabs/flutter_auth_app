@@ -3,16 +3,14 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -66,8 +64,8 @@ void main() {
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: const [],
-            currentIndex: (_) {},
+            selected: MainMenu.dashboard,
+            onSelected: (_) {},
             onLogoutPressed: () {},
           ),
         ),
@@ -81,24 +79,18 @@ void main() {
 
       when(() => userCubit.getUser()).thenAnswer((_) async {});
 
-      const dataMenu = [
-        DataHelper(title: 'Dashboard'),
-        DataHelper(title: 'Settings'),
-        DataHelper(title: 'Logout'),
-      ];
-
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: dataMenu,
-            currentIndex: (_) {},
+            selected: MainMenu.dashboard,
+            onSelected: (_) {},
             onLogoutPressed: () {},
           ),
         ),
       );
 
-      for (final item in dataMenu) {
-        expect(find.text(item.title!), findsOneWidget);
+      for (final title in ['Dashboard', 'Settings', 'Logout']) {
+        expect(find.text(title), findsOneWidget);
       }
     });
 
@@ -108,8 +100,8 @@ void main() {
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: const [],
-            currentIndex: (_) {},
+            selected: MainMenu.dashboard,
+            onSelected: (_) {},
             onLogoutPressed: () {},
           ),
         ),
@@ -127,8 +119,8 @@ void main() {
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: const [],
-            currentIndex: (_) {},
+            selected: MainMenu.dashboard,
+            onSelected: (_) {},
             onLogoutPressed: () {},
           ),
         ),
@@ -137,19 +129,15 @@ void main() {
       expect(find.text('Failed'), findsOneWidget);
     });
 
-    testWidgets('updates selected menu index when menu is tapped', (
-      WidgetTester tester,
-    ) async {
-      int? selectedIndex;
+    testWidgets('reports the tapped menu', (WidgetTester tester) async {
+      MainMenu? selectedMenu;
       when(() => userCubit.state).thenReturn(const UserState.success(null));
-
-      const dataMenu = [DataHelper(title: 'Logout')];
 
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: dataMenu,
-            currentIndex: (index) => selectedIndex = index,
+            selected: MainMenu.dashboard,
+            onSelected: (menu) => selectedMenu = menu,
             onLogoutPressed: () {},
           ),
         ),
@@ -158,7 +146,7 @@ void main() {
       await tester.tap(find.text('Logout'));
       await tester.pump();
 
-      expect(selectedIndex, 0);
+      expect(selectedMenu, MainMenu.logout);
     });
 
     testWidgets('calls onLogoutPressed when logout is tapped', (
@@ -172,8 +160,8 @@ void main() {
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: const [DataHelper(title: 'Logout')],
-            currentIndex: (_) {},
+            selected: MainMenu.dashboard,
+            onSelected: (_) {},
             onLogoutPressed: () {
               logoutCalled = true;
             },
@@ -197,14 +185,8 @@ void main() {
       await tester.pumpWidget(
         rootWidget(
           MenuDrawer(
-            dataMenu: const [
-              DataHelper(
-                title: 'Dashboard',
-                icon: Icons.space_dashboard_outlined,
-                isSelected: true,
-              ),
-            ],
-            currentIndex: (_) {},
+            selected: MainMenu.dashboard,
+            onSelected: (_) {},
             onLogoutPressed: () {},
           ),
         ),
@@ -214,5 +196,56 @@ void main() {
       expect(find.byIcon(Icons.verified_rounded), findsOneWidget);
       expect(find.byIcon(Icons.space_dashboard_outlined), findsOneWidget);
     });
+  });
+
+  testWidgets('navigates to the tapped menu route', (tester) async {
+    MainMenu? selected;
+    when(() => userCubit.state).thenReturn(const UserState.success(null));
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (_, _) => MenuDrawer(
+            selected: MainMenu.dashboard,
+            onSelected: (menu) => selected = menu,
+            onLogoutPressed: () {},
+          ),
+        ),
+        GoRoute(
+          path: Routes.settings.path,
+          name: Routes.settings.name,
+          builder: (_, _) => const Text('settings route'),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      BlocProvider.value(
+        value: userCubit,
+        child: ScreenUtilInit(
+          designSize: const Size(375, 667),
+          builder: (_, _) => MaterialApp.router(
+            routerConfig: router,
+            localizationsDelegates: const [
+              Strings.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            locale: const Locale('en'),
+            supportedLocales: L10n.all,
+            theme: themeLight(MockBuildContext()),
+          ),
+        ),
+      ),
+    );
+
+    /// The avatar placeholder shimmers forever, so pump a fixed time
+    await tester.pump(const Duration(seconds: 1));
+    await tester.tap(find.text('Settings'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(selected, MainMenu.settings);
+    expect(find.text('settings route'), findsOneWidget);
   });
 }

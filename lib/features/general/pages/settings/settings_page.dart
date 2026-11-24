@@ -114,13 +114,10 @@ class _SettingsPageState extends State<SettingsPage> {
     ),
   );
 
-  String _getThemeName(ActiveTheme activeTheme, BuildContext context) {
-    if (activeTheme == ActiveTheme.system) {
-      return Strings.of(context)!.themeSystem;
-    } else if (activeTheme == ActiveTheme.dark) {
-      return Strings.of(context)!.themeDark;
-    } else {
-      return Strings.of(context)!.themeLight;
-    }
-  }
+  String _getThemeName(ActiveTheme activeTheme, BuildContext context) =>
+      switch (activeTheme) {
+        ActiveTheme.system => Strings.of(context)!.themeSystem,
+        ActiveTheme.dark => Strings.of(context)!.themeDark,
+        ActiveTheme.light => Strings.of(context)!.themeLight,
+      };
 }

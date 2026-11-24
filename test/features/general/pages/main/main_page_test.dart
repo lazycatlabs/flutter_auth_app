@@ -3,23 +3,20 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
-import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:mocktail/mocktail.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/test_mock.mocks.dart';
 
-class MockMainCubit extends MockCubit<MainState> implements MainCubit {}
+class MockMainCubit extends MockCubit<MainMenu> implements MainCubit {}
 
 class FakeMainCubit extends Fake implements MainCubit {}
 
@@ -102,20 +99,7 @@ void main() {
   );
 
   testWidgets('MainPage displays correctly', (WidgetTester tester) async {
-    when(() => mainCubit.state).thenReturn(
-      MainState.success(
-        DataHelper(
-          title: Strings.of(MockBuildContext())?.settings ?? 'Settings',
-        ),
-      ),
-    );
-    when(() => mainCubit.currentIndex).thenReturn(1);
-    when(() => mainCubit.dataMenus).thenReturn(const [
-      DataHelper(title: 'Dashboard'),
-      DataHelper(title: 'Settings', isSelected: true),
-      DataHelper(title: 'Logout'),
-    ]);
-    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
+    when(() => mainCubit.state).thenReturn(MainMenu.settings);
 
     when(() => userCubit.state).thenReturn(const UserState.success(null));
     when(() => userCubit.getUser()).thenAnswer((_) async {});
@@ -126,7 +110,6 @@ void main() {
       rootWidget(const MainPage(child: Text('Page content'))),
     );
 
-    verify(() => mainCubit.initMenu(any())).called(1);
     verifyNever(() => userCubit.getUser()).called(0);
 
     expect(find.text('Settings'), findsOneWidget);
@@ -135,16 +118,7 @@ void main() {
   });
 
   testWidgets('menu button opens the drawer', (tester) async {
-    when(
-      () => mainCubit.state,
-    ).thenReturn(const MainState.success(DataHelper(title: 'Dashboard')));
-    when(() => mainCubit.currentIndex).thenReturn(0);
-    when(() => mainCubit.dataMenus).thenReturn(const [
-      DataHelper(title: 'Dashboard', isSelected: true),
-      DataHelper(title: 'Settings'),
-      DataHelper(title: 'Logout'),
-    ]);
-    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
+    when(() => mainCubit.state).thenReturn(MainMenu.dashboard);
     when(() => userCubit.state).thenReturn(const UserState.success(null));
     when(() => userCubit.getUser()).thenAnswer((_) async {});
     when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
@@ -161,13 +135,8 @@ void main() {
   });
 
   testWidgets('back navigation returns to dashboard', (tester) async {
-    when(
-      () => mainCubit.state,
-    ).thenReturn(const MainState.success(DataHelper(title: 'Settings')));
-    when(() => mainCubit.currentIndex).thenReturn(1);
-    when(() => mainCubit.dataMenus).thenReturn(const []);
-    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
-    when(() => mainCubit.updateIndex(0)).thenAnswer((_) {});
+    when(() => mainCubit.state).thenReturn(MainMenu.settings);
+    when(() => mainCubit.select(MainMenu.dashboard)).thenAnswer((_) {});
     when(() => userCubit.state).thenReturn(const UserState.success(null));
     when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
 
@@ -197,30 +166,19 @@ void main() {
     popScope.onPopInvokedWithResult?.call(false, null);
     await tester.pump();
 
-    verify(() => mainCubit.updateIndex(0)).called(1);
+    verify(() => mainCubit.select(MainMenu.dashboard)).called(1);
     expect(
       router.routeInformationProvider.value.uri.path,
       Routes.dashboard.path,
     );
   });
 
-  testWidgets('app bar keeps the last title while the menu reloads', (
-    tester,
-  ) async {
-    when(
-      () => mainCubit.state,
-    ).thenReturn(const MainState.success(DataHelper(title: 'Dashboard')));
+  testWidgets('app bar follows the selected menu', (tester) async {
     whenListen(
       mainCubit,
-      Stream<MainState>.fromIterable(const [
-        MainState.loading(),
-        MainState.success(DataHelper(title: 'Settings')),
-      ]),
-      initialState: const MainState.success(DataHelper(title: 'Dashboard')),
+      Stream<MainMenu>.value(MainMenu.settings),
+      initialState: MainMenu.dashboard,
     );
-    when(() => mainCubit.currentIndex).thenReturn(0);
-    when(() => mainCubit.dataMenus).thenReturn(const []);
-    when(() => mainCubit.initMenu(any())).thenAnswer((_) {});
     when(() => userCubit.state).thenReturn(const UserState.success(null));
     when(() => logoutCubit.state).thenReturn(const LogoutState.loading());
 
@@ -230,6 +188,5 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Settings'), findsOneWidget);
-    expect(find.text('-'), findsNothing);
   });
 }

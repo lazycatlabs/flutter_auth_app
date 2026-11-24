@@ -69,7 +69,7 @@ class _DashboardUserItem extends StatelessWidget {
                       ),
                       Text(
                         '${Strings.of(context)!.lastUpdate}'
-                        '${(user.updatedAt ?? '').toStringDateAlt()}',
+                        '${(user.updatedAt ?? '').toStringDateAlt(locale: Localizations.localeOf(context).languageCode)}',
                         style: TextTheme.of(context).labelSmall?.copyWith(
                           color: ColorScheme.of(context).onSurfaceVariant,
                         ),

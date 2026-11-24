@@ -2,6 +2,7 @@ import 'dart:isolate';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 
 mixin FirebaseServices {
@@ -11,7 +12,7 @@ mixin FirebaseServices {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     // Pass all uncaught errors from the framework to Crashlytics.
-    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
     /// Catch errors that happen outside of the Flutter context,

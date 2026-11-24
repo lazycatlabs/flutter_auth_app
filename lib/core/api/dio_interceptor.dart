@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/auth/auth.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
-import 'package:material_ui/material_ui.dart';
 
 // coverage:ignore-start
 class DioInterceptor extends Interceptor
@@ -28,10 +27,9 @@ class DioInterceptor extends Interceptor
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     String headerMessage = '';
     options.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
+    String queryMessage = '';
+    options.queryParameters.forEach((k, v) => queryMessage += '► $k: $v\n');
 
-    try {
-      options.queryParameters.forEach((k, v) => debugPrint('► $k: $v'));
-    } catch (_) {}
     try {
       const JsonEncoder encoder = JsonEncoder.withIndent('  ');
       final String prettyJson = encoder.convert(options.data);
@@ -40,10 +38,11 @@ class DioInterceptor extends Interceptor
         'Headers:\n'
         '$headerMessage\n'
         '❖ QueryParameters : \n'
+        '$queryMessage\n'
         'Body: $prettyJson',
       );
     } catch (e, stackTrace) {
-      log.e('Failed to extract json request $e');
+      log.e('Failed to extract json request', error: e, stackTrace: stackTrace);
       nonFatalError(error: e, stackTrace: stackTrace);
     }
 
@@ -201,13 +200,7 @@ class DioInterceptor extends Interceptor
     }
   }
 
-  String? _storedString(MainBoxKeys key) {
-    try {
-      return getData<String?>(key);
-    } catch (_) {
-      return null;
-    }
-  }
+  String? _storedString(MainBoxKeys key) => getData<String?>(key);
 
   Future<void> _logout() => _onLogout?.call() ?? logoutBox();
 

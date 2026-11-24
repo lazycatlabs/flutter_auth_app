@@ -4,7 +4,6 @@ import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// ignore: depend_on_referenced_packages
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import '../../../../../helpers/fake_path_provider_platform.dart';
@@ -41,4 +40,10 @@ void main() {
     expect: () => [isA<SettingsStateSuccess>()],
     verify: (cubit) => expect(cubit.settings, isA<DataHelper>()),
   );
+
+  test('falls back to the system theme for an unknown stored value', () async {
+    await settingsCubit.addData(MainBoxKeys.theme, 'neon');
+
+    expect(settingsCubit.getActiveTheme(), ActiveTheme.system);
+  });
 }

@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:either_dart/either.dart';
 import 'package:flutter_auth_app/core/core.dart';
 import 'package:flutter_auth_app/features/features.dart';
 import 'package:flutter_auth_app/utils/utils.dart';
@@ -15,10 +15,10 @@ class PostLogin extends UseCase<Login, LoginParams> with MainBoxMixin {
   @override
   Future<Either<Failure, Login>> call(LoginParams params) async {
     final result = await _repo.login(params);
-    return result.fold((failure) => Left(failure), (login) {
-      addData(MainBoxKeys.isLogin, true);
-      addData(MainBoxKeys.authToken, login.token);
-      addData(MainBoxKeys.refreshToken, login.refreshToken);
+    return await result.thenAsync((login) async {
+      await addData(MainBoxKeys.isLogin, true);
+      await addData(MainBoxKeys.authToken, login.token);
+      await addData(MainBoxKeys.refreshToken, login.refreshToken);
       return Right(login);
     });
   }
@@ -27,12 +27,12 @@ class PostLogin extends UseCase<Login, LoginParams> with MainBoxMixin {
 @freezed
 sealed class LoginParams with _$LoginParams {
   const factory LoginParams({
-    @Default('') String email,
-    @Default('') String password,
-    String? osInfo,
-    String? deviceInfo,
-    @Default('GeneratedFCMToken') String fcmToken,
-    @Default('email') String loginType,
+    @JsonKey(name: 'email') @Default('') String email,
+    @JsonKey(name: 'password') @Default('') String password,
+    @JsonKey(name: 'osInfo') String? osInfo,
+    @JsonKey(name: 'deviceInfo') String? deviceInfo,
+    @JsonKey(name: 'fcmToken') @Default('GeneratedFCMToken') String fcmToken,
+    @JsonKey(name: 'loginType') @Default('email') String loginType,
   }) = _LoginParams;
 
   factory LoginParams.fromJson(Map<String, dynamic> json) =>

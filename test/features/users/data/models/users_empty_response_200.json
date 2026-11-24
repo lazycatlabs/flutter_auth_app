@@ -1,13 +1,6 @@
 {
-  "diagnostic": {
-    "status": "200",
-    "message": "Success"
-  },
-  "data": [],
-  "page": {
-    "currentPage": 1,
-    "perPage": 0,
-    "lastPage": 1,
-    "total": 0
-  }
+  "users": [],
+  "total": 0,
+  "skip": 0,
+  "limit": 20
 }

@@ -9,15 +9,15 @@ import PackageDescription
 let package = Package(
     name: "FlutterGeneratedPluginSwiftPackage",
     platforms: [
-        .iOS("15.6")
+        .iOS("15.0")
     ],
     products: [
         .library(name: "FlutterGeneratedPluginSwiftPackage", type: .static, targets: ["FlutterGeneratedPluginSwiftPackage"])
     ],
     dependencies: [
         .package(name: "firebase_core", path: "../.packages/firebase_core"),
-        .package(name: "firebase_analytics", path: "../.packages/firebase_analytics-13.0.1"),
-        .package(name: "firebase_crashlytics", path: "../.packages/firebase_crashlytics-6.0.1"),
+        .package(name: "firebase_analytics", path: "../.packages/firebase_analytics-13.1.0"),
+        .package(name: "firebase_crashlytics", path: "../.packages/firebase_crashlytics-6.1.0"),
         .package(name: "sqflite_darwin", path: "../.packages/sqflite_darwin-2.4.6"),
         .package(name: "FlutterFramework", path: "../.packages/FlutterFramework")
     ],

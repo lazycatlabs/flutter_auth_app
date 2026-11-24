@@ -37,5 +37,9 @@
   "welcomeBack": "Selamat datang kembali",
   "loginSubtitle": "Masuk untuk melanjutkan ke akun anda",
   "createAccount": "Buat akun",
-  "registerSubtitle": "Hanya butuh satu menit untuk memulai"
+  "registerSubtitle": "Hanya butuh satu menit untuk memulai",
+  "loginSuccess": "Berhasil masuk",
+  "retry": "Coba lagi",
+  "errorGeneric": "Terjadi kesalahan",
+  "success": "Berhasil"
 }
